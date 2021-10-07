@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block contenido %}
+  <div>
+    <form class="formulario-login">
+      <div>
+        <h1 style="text-align: center;">Bienvenidos</h1>
+      <div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Correo</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresa tu email">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu contraseña">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Acepta términos y condiciones</label>
+      </div>
+      <div class="btn-login">
+        <button id="iniciar" type="submit" class="btn btn-outline-login">INICIAR SESIÓN</button>
+        <button id="registrarse" type="submit" class="btn btn-outline-login">REGÍSTRATE</button>
+      </div>
+      <p><a href="#">¿olvidaste tu contraseña?</a></p>
+    </form>
+  </div>
+{% endblock %}

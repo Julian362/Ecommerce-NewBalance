@@ -1,0 +1,29 @@
+.formulario-login{
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-login{
+    display: inline;
+}
+
+.btn-login #registrarse{
+    float: right;
+}
+
+.btn-outline-login {
+    color: #0a0a0a;
+    background-color: transparent;
+    background-image: none;
+    border-width: 1px!important;
+    border-color: #E74236!important
+}
+
+.btn-outline-login:hover {
+    color: #222;
+    background-color: #E74236;
+    border-color: rgb(0, 0, 0);
+    color:white
+}
