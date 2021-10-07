@@ -1,3 +1,12 @@
+.material-icons-outlined.md-18 { font-size: 18px; }
+.material-icons-outlined.md-24 { font-size: 24px; }
+.material-icons-outlined.md-36 { font-size: 36px; }
+.material-icons-outlined.md-48 { font-size: 48px; }
+
+body{
+    margin-right: 0%;
+}
+
 #LogoPrincipal{
     height: 33px;
     width: auto;
@@ -6,7 +15,8 @@
     background-color: white;
     border-bottom: #cccccc;
     border-style: solid;
-    border-width: 1px;  
+    border-width: 1px;
+    width: 100%;
 }
 
 .BarraNav a{
@@ -17,32 +27,81 @@
 h3{
     padding-left: 15px;
 }
-.ContenedorInformacion{
-    height: 70vh;
+
+.btn-outline-one {
+    color: #0a0a0a;
+    background-color: transparent;
+    background-image: none;
+    border-color: #E74236
+}
+
+.btn-outline-one:hover {
+    color: #222;
+    background-color: #E74236;
+    border-color: rgb(0, 0, 0);
+    color:white
+}
+
+.cuenta{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer{
-    height: 330px;
     width: 100%;
     background-color: #232323;
-    
 }
 
+.footer .row{
+    margin-left: 0!important;
+    margin-right: 0!important;
+}
 .footer img{
     color: white;
     padding: 15px 15px;
     cursor: pointer;
 }
 
+.ContenedorInformacion{
+    height: 70vh;
+}
+
 .ContenedorSuperior{
+    margin-top: 10px;
     margin: auto;
     width: 260px;
 }
 
 .ContenedorCentral{
-    border: white;
+    border-top: white;
     border-style: solid;
-    border-width: 1px;    
+    border-width: 1px;
     height: 160px;
     width: 100%;
+}
+
+.card-title{
+    color:white
+}
+
+.card-central{
+    background-color: #232323;
+    border-color: #232323;
+    margin-left: 80px!important;
+    margin-right: 8px!important;
+}
+
+.card-central > ul> li> a{
+    text-align: center!important;
+    text-decoration: none;
+    list-style:none;
+    color: white
+}
+
+.card-central > ul{
+    padding-left: 0%;
 }
