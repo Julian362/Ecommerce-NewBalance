@@ -1,0 +1,86 @@
+.imgSuperior{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.imgSuperior a img{
+    width: 100%;
+}
+
+
+.imgBarra{
+    width: 100%;
+    background-color: #eeeeee;
+    margin: none;
+    padding: 15px 10px;
+}
+
+.selecHombre a{
+    text-decoration: none;
+    color: black;
+}
+
+.selecMujer a{
+    text-decoration: none;
+    color: black;
+}
+
+.selecHombre{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
+
+/* :hover{
+    background-color: black;
+    width: 50px;
+} */
+
+.selecHombre a:hover{
+    color: #b80a2e;
+    text-shadow: 2px 2px 3px #6c6c6c;
+    transition: 1s;
+}
+
+.selecMujer a:hover{
+    color: rgb(0, 89, 255);
+    text-shadow: 2px 2px 3px #6c6c6c;
+    transition: 1s;
+}
+
+
+.selecHombre p{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.selecMujer{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
+
+.selecMujer p{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.imgCentral{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.imgCentral a img{
+    width: 100%;
+}
+.imgInferior{
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.imgInferior a img{
+    width: 100%;
+
+}
