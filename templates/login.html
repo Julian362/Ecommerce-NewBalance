@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block contenido %}
-  <div>
+  <div class="ContenedorFormulario">
     <form class="formulario-login">
       <div>
-        <h1 style="text-align: center;">Bienvenidos</h1>
+        <h1 style="text-align: center;">Iniciar Sesión</h1>
       <div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Correo</label>
@@ -24,9 +24,10 @@
       </div>
       <div class="btn-login">
         <button id="iniciar" type="submit" class="btn btn-outline-login">INICIAR SESIÓN</button>
-        <button id="registrarse" type="submit" class="btn btn-outline-login">REGÍSTRATE</button>
+        <a href="{{url_for('registro')}}"  id="registrarse" class="btn btn-outline-login"> REGISTRATE </a>
       </div>
-      <p><a href="#">¿olvidaste tu contraseña?</a></p>
+      <p><a href="">¿olvidaste tu contraseña?</a></p>
     </form>
+  </div>
   </div>
 {% endblock %}

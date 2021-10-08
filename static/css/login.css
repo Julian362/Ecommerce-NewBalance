@@ -2,12 +2,15 @@
     width: 40%;
     margin: auto;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    padding:20px;
+    background-color: #eeeeee;
 }
 
 .btn-login{
     display: inline;
 }
+
 
 .btn-login #registrarse{
     float: right;
@@ -26,4 +29,10 @@
     background-color: #E74236;
     border-color: rgb(0, 0, 0);
     color:white
+}
+
+.ContenedorFormulario{
+    margin-top: 60px;
+    margin-bottom: 60px;
+    min-height: 45vh;
 }

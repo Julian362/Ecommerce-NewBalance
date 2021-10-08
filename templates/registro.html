@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>Registro</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
+{% endblock %}
+
+{% block contenido %}
+<div class="ContenedorFomulario">
+    <form class="FormularioRegistro"> 
+        <div>
+            <h1 style="text-align: center;">Registro de Nuevo Usuario.</h1>            
+         <div>  
+        <div class="ContenedorDP">
+            <h4>Datos Personales.</h4>
+            <hr>
+            <div class="row">                  
+                <div class="col">                    
+                    <input type="text" class="form-DatosP" placeholder="Nombre" required>  
+                </div>
+                <div class="col">
+                    <input type="text" class="form-DatosP"  placeholder="Apellido" required>  
+                </div>
+            </div>
+            <div class="row">                  
+                <div class="col">                    
+                    <input type="email" class="form-DatosP" placeholder="Correo" required>  
+                </div>
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Hombre</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                      </div>                      
+                </div>
+            </div>
+            <div class="row">                  
+                <div class="col">                    
+                    <input type="number" class="form-DatosP" placeholder="CC/CE/NIT" required>  
+                </div>
+                <div class="col">
+                    <input type="number" class="form-DatosP" placeholder="Telefono Celular" required> 
+                </div>
+            </div>
+            <div class="row">                  
+                <div class="col">                    
+                    <input type="password" class="form-DatosP" placeholder="Contraseña" required>  
+                </div>
+                <div class="col">
+                    <input type="password" class="form-DatosP" placeholder="Confirmar Contraseña" required> 
+                </div>
+            </div>
+            <h4>Detalles de Dirección de Entrega.</h4>
+            <hr>
+            <div class="row">                  
+                <div class="col">                    
+                    <input type="text" class="form-DatosP" placeholder="Pais" required>  
+                </div>
+                <div class="col">
+                    <input type="text" class="form-DatosP" placeholder="Departamento" required> 
+                </div>
+            </div>
+            <div class="row">                  
+                <div class="col">                    
+                    <input type="text" class="form-DatosP" placeholder="Ciudad" required>  
+                </div>
+                <div class="col">
+                    <input type="text" class="form-DatosP" placeholder="Dirección" required> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit"  id="registrarse" class="btn btn-outline-registro" value="Registro"> 
+                </div>
+                <div class="col">
+                    <a href=""  id="registrarse" class="btn btn-outline-registro"> Ya Tengo Cuenta </a>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

@@ -44,7 +44,7 @@
           <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
           <button class="btn btn-outline-one my-2 my-sm-0"  submit>Buscar</button>
         </form>
-        <a class="cuenta" href="#">
+        <a class="cuenta" href="{{url_for ('login')}}">
           <span class="material-icons-outlined">account_circle</span>
           <span>Mi cuenta</span>
         </a>
@@ -54,6 +54,9 @@
   {% endblock %}
   <div>
   {% block contenido %}
+  <div class="ContainerCentral">
+
+  </div>
   {% endblock %}
   </div>
   {% block footer %}
