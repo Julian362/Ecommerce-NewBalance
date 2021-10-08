@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='Js/ControlPrincipal.js') }}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined">
+  <!-- https://logodownload.org/wp-content/uploads/2017/07/new-balance-logo-16.png -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='imagenes/favicon.png') }}" type="image/x-icon">
+  {% block head %}
+
+  {% endblock %}
+</head>
+
+<body>
+  {% block header %}
+    <nav class="navbar navbar-expand-lg BarraNav">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <img id="LogoPrincipal"
+        src="{{ url_for('static', filename='imagenes/LogoNB.png') }}"
+        href="">
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <strong><a class="nav-link" href="#"> HOMBRE <span class="sr-only">(current)</span></a></strong>
+          </li>
+          <li class="nav-item">
+            <strong><a class="nav-link" href="#">MUJER</a></strong>
+          </li>
+          <li class="nav-item">
+            <strong><a class="nav-link" href="#">CONTACTOS</a></strong>
+          </li>
+        </ul>
+        <form id=" " class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-one my-2 my-sm-0"  submit>Buscar</button>
+        </form>
+        <a class="cuenta" href="{{url_for ('login')}}">
+          <span class="material-icons-outlined">account_circle</span>
+          <span>Mi cuenta</span>
+        </a>
+        <span class="material-icons-outlined">shopping_cart</span>
+      </div>
+    </nav>
+  {% endblock %}
+  <div>
+  {% block contenido %}
+  <div class="ContainerCentral">
+
+  </div>
+  {% endblock %}
+  </div>
+  {% block footer %}
+  <div class="footer">
+    <div class="row">
+      <div class="ContenedorSuperior">
+        <img src="{{ url_for('static', filename='imagenes/newbalancecofacebook.png') }}" href="#">
+        <img src="{{ url_for('static', filename='imagenes/newbalancecoig.png') }}" href="#">
+        <img src="{{ url_for('static', filename='imagenes/newbalancecotwitter.png') }}" href="#">
+      </div>
+    </div>
+    <div class="row">
+      <div class="ContenedorCentral">
+        <div class="row row-cols-1 row-cols-md-3 g-4" >
+          <div class="col" >
+            <div>
+              <div class=" card-central">
+                <h5 class="card-title">ATENCIÓN AL CLIENTE</h5>
+                <ul>
+                  <li><a href="#">Preguntas Frecuentes</a></li>
+                  <li><a href="#">Tabla de tallas calzado</a></li>
+                  <li><a href="#">Encuentra tu tienda</a></li>
+                  <li><a href="#">Guía de pisada</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col" >
+            <div>
+              <div class=" card-central">
+                <h5 class="card-title">SOBRE NEW BALANCE</h5>
+                <ul>
+                  <li><a href="#">¿Cómo Comprar?</a></li>
+                  <li><a href="#">Información sobre Envío</a></li>
+                  <li><a href="#">Garantía Compra Perfecta</a></li>
+                  <li><a href="#">Términos y Condiciones</a></li>
+                  <li><a href="#">Cambios y Devoluciones</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col" >
+            <div>
+              <div class=" card-central">
+                <h5 class="card-title">MODELOS MAS BUSCADOS</h5>
+                <ul>
+                  <li><a href="#">Clásicos</a></li>
+                  <li><a href="#">Nuevos</a></li>
+                  <li><a href="#">Deportivos</a></li>
+                  <li><a href="#">Elegantes</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="background-color: white;">
+      <span style="margin:auto"> Copyright 2021 Equipo 3 / E-commerce / New Balance</span>
+    </div>
+  </div>
+  {% endblock %}
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
