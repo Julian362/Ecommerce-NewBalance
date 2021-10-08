@@ -17,6 +17,7 @@ def registro():
 @app.route('/gestioncomentario/')
 def gestioncomentario():
     return render_template('gestion_comentario.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')
