@@ -18,6 +18,10 @@ def registro():
 def gestioncomentario():
     return render_template('gestion_comentario.html')
 
+@app.route('/administrador/')
+def administrador():
+    return render_template('administrador.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')
