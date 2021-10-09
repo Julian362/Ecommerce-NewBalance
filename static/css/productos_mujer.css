@@ -1,0 +1,58 @@
+/* Sección del filtrado */
+.filtros a h4{
+    margin-top: 75px;
+    font-size: small;    
+}
+
+.filtros a {
+    text-decoration: none;
+    color: black;  
+}
+
+/* Para centrar las imágenes */
+.filas a img{
+    display:block;
+    margin:auto;
+    width: 100%;
+}
+
+/* Características a las filas */
+.filas {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+.filas a{
+    text-decoration: none;
+    color: black;
+}
+
+.filas a h4{
+    width: 100%;
+    margin: auto;
+    font-size: medium;
+    text-align: center;
+}
+
+.filas a p{
+    width: 100%;
+    margin: auto;
+    font-size: small;
+    text-align: center;
+}
+
+.filas a h4:hover{
+    color: #b80a2e;
+    text-shadow: 2px 2px 15px white;
+    
+}
+
+ .filas >:hover{
+    width: 100%;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 0.01px;
+    border-color: black;
+} 

@@ -1,0 +1,165 @@
+<!-- Se hace la herencia desde el archivo template.html -->
+{% extends 'template.html' %}
+<!-- Se hereda el head de template.html -->
+{% block head %}
+<title>New Balance | Hombre</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/lista_de_productos.css') }}">
+<!-- Finaliza el bloque head -->
+{% endblock %}
+
+<!-- Se hereda el bloque contenido -->
+{% block contenido %}
+
+<!-- Se agrega el cuerpo de la pantalla -->
+<div class="row pantalla">
+    <div class="col filtros">
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>
+        <a href="#">
+            <h4>ORDENAR / CANTIDAD</h4>
+        </a>    
+    </div>
+
+    <!-- Primera columna de productos -->
+
+    <div class="col productos">
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}" alt="producto_1">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_2.png') }}" alt="producto_2">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_3.png') }}" alt="producto_3">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        
+    </div>
+
+    <!-- Segunda columna de productos -->
+    <div class="col productos">
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_4.png') }}" alt="producto_4">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_5.png') }}" alt="producto_5">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_6.png') }}" alt="producto_6">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        
+    </div>
+
+    <!-- Tercera columna de productos -->
+    <div class="col productos">
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_7.png') }}" alt="producto_7">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_8.png') }}" alt="producto_8">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_9.png') }}" alt="producto_9">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        
+    </div>
+
+    <!-- Cuarta columna de productos -->
+    <div class="col productos">
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_10.png') }}" alt="producto_10">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_11.png') }}" alt="producto_11">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+
+        <div class="row filas">
+            <a href="#">
+                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_12.png') }}" alt="producto_12">
+                <h4>Men's Fresh Foam More V3</h4>
+                <p>$ 839.900</p>
+            </a>    
+        </div>
+    </div>
+
+            
+</div>
+
+        
+<!-- Finaliza el bloque -->
+{% endblock %}
