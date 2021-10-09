@@ -1,12 +1,56 @@
 /* Sección del filtrado */
-.filtros a h4{
+
+/* Título Filtro */
+.titulo_1 h4 {
+    margin-left: 15%;
+    text-decoration: none;
     margin-top: 75px;
-    font-size: small;    
+    color: black;   
+    font-size:large;  
+    text-align: center!important;
 }
 
-.filtros a {
-    text-decoration: none;
-    color: black;  
+/* Títulos: color, talla, refinar por, ordenar */
+.titulo h4{
+    margin-left: 15%;
+    text-align: none;
+    margin-top: 30px;
+    color: black;   
+    font-size:small;  
+    text-align:center !important;
+}
+
+/* Formato de las casillas del check box */
+.form{
+    display: block;
+    margin-left: 15%;
+    width: 100%;
+    padding-left: 10px;
+}
+
+/* Formato de la selección del orden */
+.orden{
+    display: block;
+    margin-left: 1%;
+    width: 80%;
+    padding-left: 10px;
+}
+
+/* Formato de la selección de la talla */
+.talla{
+    display: block;
+    margin-left: 1%;
+    width: 80%;
+    padding-left: 10px;
+}
+
+
+/* Formato de la selección del color */
+.color{
+    display: block;
+    margin-left: 1%;
+    width: 80%;
+    padding-left: 10px;
 }
 
 /* Para centrar las imágenes */
@@ -23,12 +67,13 @@
     padding-bottom: 30px;
 }
 
-
+/* Propiedades de las "a" de las filas */
 .filas a{
     text-decoration: none;
     color: black;
 }
 
+/* Propiedades de las "h4" de las "a" de las filas */
 .filas a h4{
     width: 100%;
     margin: auto;
@@ -36,6 +81,7 @@
     text-align: center;
 }
 
+/* Propiedades de las "p" de las "a" de las filas */
 .filas a p{
     width: 100%;
     margin: auto;
@@ -43,12 +89,13 @@
     text-align: center;
 }
 
+/* Para que se ilumine de tojo los títulos de los productos */
 .filas a h4:hover{
     color: #b80a2e;
     text-shadow: 2px 2px 15px white;
-    
 }
 
+/* Para que salga el recuadro negro de los productos al pasar el mouse por encima de ellos */
  .filas >:hover{
     width: 100%;
     border-radius: 3px;
