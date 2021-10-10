@@ -119,3 +119,8 @@ input:focus {
 .ContainerCentral{
     height: 60vh;
 }
+
+.row{
+    margin-left: 0%!important;
+    margin-right: 0%!important;
+}
