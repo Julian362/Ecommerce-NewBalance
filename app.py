@@ -35,3 +35,8 @@ def lista_de_productos_hombre():
 @app.route('/productos_mujer/')
 def lista_de_productos_mujer():
     return render_template('productos_mujer.html')
+
+"""Ruta para la gestión de perfil (Mi Cuenta)"""
+@app.route('/gestion_micuenta/')
+def gestion_micuenta():
+    return render_template('gestion_micuenta.html')
