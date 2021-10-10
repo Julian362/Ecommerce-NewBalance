@@ -1,0 +1,113 @@
+/* Sección del filtrado */
+
+/* Título Filtro */
+.titulo_1 h4 {
+    margin-left: 15%;
+    text-decoration: none;
+    margin-top: 75px;
+    color: black;   
+    font-size:large;  
+    text-align: center!important;
+}
+
+/* Títulos: color, talla, refinar por, ordenar */
+.titulo h4{
+    margin-left: 15%;
+    text-align: none;
+    margin-top: 30px;
+    color: black;   
+    font-size:small;  
+    text-align:center !important;
+}
+
+/* Formato de las casillas del check box */
+.form{
+    display: block;
+    margin-left: 15%;
+    width: 100%;
+    padding-left: 10px;
+}
+
+/* Formato de la selección del orden */
+.orden{
+    display: block;
+    margin-left: 1%;
+    width: 80%;
+    padding-left: 10px;
+}
+
+/* Formato de la selección de la talla */
+.talla{
+    display: block;
+    margin-left: 1%;
+    width: 80%;
+    padding-left: 10px;
+}
+
+
+/* Formato de la selección del color */
+.color{
+    display: block;
+    margin-left: 1%;
+    width: 80%;
+    padding-left: 10px;
+}
+
+/* Para centrar las imágenes */
+.filas a img{
+    display:block;
+    margin:auto;
+    width: 100%;
+}
+
+/* Características a las filas */
+.filas {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 0.01px;
+    border-color: rgba(255, 255, 255, 0);
+}
+.row{
+    margin-left: 0%!important;
+    margin-right: 0%!important;
+}
+
+/* Propiedades de las "a" de las filas */
+.filas a{
+    text-decoration: none;
+    color: black;
+}
+
+/* Propiedades de las "h4" de las "a" de las filas */
+.filas a h4{
+    width: 100%;
+    margin: auto;
+    font-size: medium;
+    text-align: center;
+}
+
+/* Propiedades de las "p" de las "a" de las filas */
+.filas a p{
+    width: 100%;
+    margin: auto;
+    font-size: small;
+    text-align: center;
+}
+
+/* Para que se ilumine de tojo los títulos de los productos */
+.filas a h4:hover{
+    color: #b80a2e;
+    text-shadow: 2px 2px 15px white;
+}
+
+/* Para que salga el recuadro negro de los productos al pasar el mouse por encima de ellos */
+ .filas:hover{
+    width: 100%;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 0.01px;
+    border-color: black;
+} 
