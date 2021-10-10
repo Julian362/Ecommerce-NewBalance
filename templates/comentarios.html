@@ -1,0 +1,18 @@
+<!-- Se hace la herencia desde el archivo template.html -->
+{% extends 'template.html' %}
+<!-- Se hereda el head de template.html -->
+{% block head %}
+<title>New Balance</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comentarios.css') }}">
+<!-- Finaliza el bloque head -->
+{% endblock %}
+
+
+<!-- Se hereda el bloque contenido -->
+{% block contenido %}
+
+<!-- Se agrega el cuerpo de la pantalla -->
+
+
+<!-- Finaliza el bloque -->
+{% endblock %}
