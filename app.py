@@ -40,3 +40,8 @@ def lista_de_productos_mujer():
 @app.route('/gestion_micuenta/')
 def gestion_micuenta():
     return render_template('gestion_micuenta.html')
+
+"""Ruta para la gestión de Superadministrador"""
+@app.route('/superadministrador/')
+def superadministrador():
+    return render_template('superadministrador.html')

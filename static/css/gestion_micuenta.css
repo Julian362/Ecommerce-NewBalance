@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #B0BFB2;
+    background-color: #d4d4d4;
     margin-top: 45px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -35,7 +35,7 @@
 .SubtituloPedidos{
     display: flex;
     align-items: center;
-    background-color: #B0BFB2;
+    background-color: #d4d4d4;
     padding-top: 5px;
     padding-bottom: 5px; 
     height: 70px;  
@@ -70,7 +70,7 @@
 .SubtituloMiCuenta{
     display: flex;
     align-items: center;
-    background-color: #B0BFB2;
+    background-color: #d4d4d4;
     padding-top: 5px;
     padding-bottom: 5px;
     height: 70px;   
