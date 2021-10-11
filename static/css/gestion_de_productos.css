@@ -1,19 +1,23 @@
-.cProducto {
-    float: right;
-}
-
-.baBuscar {
-    display: inline;
-}
-
 .form-inlines {
     padding: 0px 10px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.form-inlines .cBuscar {
+.baBuscar {
     display: inline;
+}
+
+.cProducto {
+    float: right;
+}
+
+
+
+.bProductor {
+    display: inline;
+    margin: auto;
+    padding: 0px auto 0px 0px;
 }
 
 .FormularioProducto {
@@ -25,21 +29,19 @@
     margin-bottom: 20px;
 }
 
-
-
-.ContenedorDP{
+.ContenedorDP {
     width: 100%;
 }
 
-.FormularioProducto h2{
+.FormularioProducto h2 {
     margin-bottom: 20px;
 }
 
- .ContenedorDP >.col {
+.ContenedorDP>.col {
     margin: 10px;
 }
 
-.FormularioProducto col{
+.FormularioProducto col {
     padding: 0%;
 }
 
@@ -65,13 +67,25 @@ hr {
 .form-DatosP {
     width: 100%;
     margin: 10px 0px;
-
+    outline: none;
+    padding: 3px 8px;
+    border-width: 0.5px;
+    border-color:#cccccc;
+    border-radius: 5px;
 }
 
-.btnImg{
+.form-DatosP:focus {
+    border-color:#cccccc ;
+    box-shadow:0 0 2px #3f3f3f;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.btnImg {
     margin: auto;
     width: 100%;
     padding: 10px 0px;
+    content: 'Seleccionar Archivo 1'
 }
 
 .contenedor-todos-productos {
