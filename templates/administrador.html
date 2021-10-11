@@ -20,120 +20,116 @@
         <button style="margin-left: 8px;" class="btn btn-outline-one my-2 my-sm-0" submit>Crear Nuevo Usuario</button>
     </form>
     {% if mensaje %}
-        <h1 style="text-align: center; color: #30494A; margin-top: 10px">{{ mensaje }}</h1>
+        <h1 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h1>
     {% endif %}
     {% if error %}
-        <h1 style="text-align: center; color: #E74236; margin-top: 10px">{{ mensaje }}</h1>
+        <h1 style="text-align: center; color: #970c02; margin-top: 10px">{{ mensaje }}</h1>
     {% endif %}
     {% if form %}
-    
-            <div class="ContenedorFomulario">
-                <form class="FormularioRegistro" action="{{ url_for('edit_usuario', nickname = usuario.nickname) }}" method="POST">
-                    {{ form.hidden_tag() }}
+        <div class="ContenedorFomulario">
+            <form class="FormularioRegistro" action="{{ url_for('edit_usuario', nickname = usuario.nickname) }}" method="POST">
+                <!-- linea para el token  -->
+                {{ form.hidden_tag() }}
+                <div>
+                    <h1 style="text-align: center;">Editar usuario</h1>
                     <div>
-                        <h1 style="text-align: center;">Editar usuario</h1>
-                        <div>
-                            <div class="ContenedorDP">
-                                <h4>Datos del usuario</h4>
-                                <hr>
-                                <div class="row">
-                                    <div class="col">
-                                        <!-- <input type="text" class="form-DatosP" placeholder="Nombre" value="{{usuario.nombre}}"> -->
-                                        {{ form.nombre(type="text", class="form-DatosP", placeholder="Nombre") }}
+                        <div class="ContenedorDP">
+                            <h4>Datos del usuario</h4>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- <input type="text" class="form-DatosP" placeholder="Nombre" value="{{usuario.nombre}}"> -->
+                                    {{ form.nombre(type="text", class="form-DatosP", placeholder="Nombre") }}
+                                </div>
+                                <div class="col">
+                                    <!-- <input type="text" class="form-DatosP" placeholder="Apellido" value="{{usuario.apellidos}}"> -->
+                                    {{ form.apellidos(type="text", class="form-DatosP", placeholder="Apellidos") }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- <input type="email" class="form-DatosP" placeholder="Correo" value="{{usuario.correo}}"> -->
+                                    {{ form.correo(type="email", class="form-DatosP", placeholder="Correo") }}
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" readonly="" value="option1"
+                                        <!-- si el sexo del usuario es macho o masculino chekea uno de los dos -->
+                                        {% if usuario.sexo == 'M' %}
+                                        checked
+                                        {% endif %}
+                                        disabled>
+                                        <label class="form-check-label" for="inlineRadio1">Hombre</label>
                                     </div>
-                                    <div class="col">
-                                        <!-- <input type="text" class="form-DatosP" placeholder="Apellido" value="{{usuario.apellidos}}"> -->
-                                        {{ form.apellidos(type="text", class="form-DatosP", placeholder="Apellidos") }}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexo" readonly="" value="option2"
+                                        {% if usuario.sexo == 'F' %}
+                                        checked
+                                        {% endif %}
+                                        disabled>
+                                        <label class="form-check-label" for="inlineRadio2">Mujer</label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <!-- <input type="email" class="form-DatosP" placeholder="Correo" value="{{usuario.correo}}"> -->
-                                        {{ form.correo(type="email", class="form-DatosP", placeholder="Correo") }}
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" readonly="" value="option1"
-                                            {% if usuario.sexo == 'M' %}
-                                            checked
-                                            {% endif %}
-                                            disabled>
-                                            <label class="form-check-label" for="inlineRadio1">Hombre</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexo" readonly="" value="option2"
-                                            {% if usuario.sexo == 'F' %}
-                                            checked
-                                            {% endif %}
-                                            disabled>
-                                            <label class="form-check-label" for="inlineRadio2">Mujer</label>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" value="{{usuario.documento}}"> -->
+                                    {{ form.documento(type="text", class="form-DatosP", placeholder="CC/CE/NIT") }}
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <!-- <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" value="{{usuario.documento}}"> -->
-                                        {{ form.documento(type="text", class="form-DatosP", placeholder="CC/CE/NIT") }}
-                                    </div>
-                                    <div class="col">
-                                        <!-- <input type="text" class="form-DatosP" placeholder="Telefono Celular" value="{{usuario.celular}}"> -->
-                                        {{ form.celular(type="text", class="form-DatosP", placeholder="Telefono Celular") }}
-                                    </div>
+                                <div class="col">
+                                    <!-- <input type="text" class="form-DatosP" placeholder="Telefono Celular" value="{{usuario.celular}}"> -->
+                                    {{ form.celular(type="text", class="form-DatosP", placeholder="Telefono Celular") }}
                                 </div>
-                                <div class="row">
-                                    <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"value="{{opcion}}">
-                                </div>
+                            </div>
+                            <div class="row">
+                                <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"value="{{opcion}}">
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        {% endif %}
-    <div class="contenedor-todos-usuarios">
-        <h3 style="text-align: left;">Todos los usuarios</h1>
-        <div class="container" style="padding: 0%;">
-            <div class="row row-titulos">
-                <div class="col-sm">
-                    <h4>Estado</h4>
                 </div>
-                <div class="col-sm">
-                    <h4>Usuario</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Email</h4>
-                </div>
-                <div class="col-sm">
-                    <h4>Acciones</h4>
-                </div>
-            </div>
-            {% if lista_usuarios %}
-                {% for usuario in lista_usuarios %}
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm estado-circulo">
-                                {% if usuario.estado == 'T' %}
-                                    <span value="green" >🟢</span>
-                                {% endif %}
-                                {% if usuario.estado == 'F' %}
-                                    <span value="red" >🔴</span>
-                                {% endif %}
-                        </div>
-                        <div class="col-sm">
-                            <h5>{{ usuario.nickname}}</h5>
-                        </div>
-                        <div class="col-sm">
-                            <h5>{{ usuario.correo }}</h5>
-                        </div>
-                        <div class="col-sm">
-                            <div class="row">
-                                <div class="col-sm icon-derecha">
-                                    <a class="icon-edit" href="{{ url_for('edit_usuario', nickname = usuario.nickname) }}">
-                                        <span class="material-icons-outlined"  >edit</span>
+            </form>
+        </div>
+    {% endif %}
+    
+    {% if lista_usuarios %}
+            <div class="contenedor-todos-usuarios">
+                <h3>TODOS LOS USUARIOS</h1>
+                    <table class="table table-striped table-hover nuevo-usuario">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Nickname</th>
+                            <th scope="col">correo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    {% for usuario in lista_usuarios %}
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                {{ loop.index }}
+                            </th>
+                            <td class="conEstado">
+                                    {% if usuario.estado == 'T' %}
+                                    <div class="circulo-green"></div>
+                                    {% endif %}
+                                    {% if usuario.estado == 'F' %}
+                                    <div class="circulo-red"></div>
+                                    {% endif %}
+                            </td>
+                            <td>{{ usuario.nickname}}</td>
+                            <td>{{ usuario.correo }}</td>
+                            <td>
+                                <div class="icon-derecha">
+                                    <a  href="{{ url_for('edit_usuario', nickname = usuario.nickname) }} ">
+                                        <span class="material-icons-outlined iconoPosicion"  >edit</span>
                                     </a>
                                 </div>
-                                <div class="col-sm icon-centro">
-                                    <a class="icon-block" href="{{ url_for('block_usuario', nickname = usuario.nickname, estado = usuario.estado) }}">
-                                        <span class="material-icons-outlined" id="icon_block">
+                                <div class="icon-centro">
+                                    <a href="{{ url_for('block_usuario', nickname = usuario.nickname, estado = usuario.estado) }}">
+                                        <span class="material-icons-outlined iconoPosicion" id="icon_block">
+                                            <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
                                             {% if usuario.estado == 'F' %}
                                                 lock_open
                                             {% endif %}
@@ -143,17 +139,16 @@
                                         </span>
                                     </a>
                                 </div>
-                                <div class="col-sm icon-izquierda">
-                                    <a class="icon-delete" href="{{ url_for('delete_usuario', nickname = usuario.nickname) }}">
-                                        <span class="material-icons-outlined">cancel</span>
+                                <div class="icon-izquierda">
+                                    <a href="{{ url_for('delete_usuario', nickname = usuario.nickname) }}">
+                                        <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-
+                            </td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+    {% endif %}
 {% endblock %}

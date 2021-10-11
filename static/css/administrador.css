@@ -47,47 +47,85 @@ hr{
     border-width: 90%;
 }
 
-h4{
-    padding-top:10px
+
+
+.contenedor-todos-usuarios {
+    width: 90%;
+    margin: auto;
+    background-color: #eeeeee;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 20px;
 }
 
-ul, li{
-    list-style:none;
-    margin: 0%;
-    padding: 0%;
+
+.contenedor-todos-usuarios th, td {
+    margin: auto;
+    text-align: center;
 }
 
-.contenedor-todos-usuarios{
+.nuevo-usuario {
     width: 95%;
     margin: auto;
-    margin-top: 50px;
-    background-color: #eeeeee;
-    margin-bottom: 20px;
 }
 
-.col-sm{
-    padding: 0%;
+.conEstado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.icon-izquierda, .icon-centro, .icon-derecha{
-    text-align: center;
-    width: fit-content;
-    margin-left: 1rem;
+.circulo-green {
+    width: 17px;
+    height: 17px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-color: #3f3f3f;
+    border-style: solid;
+    border-width: 1px;
+    background: #0ba913;
+    margin: auto;
 }
 
-.estado-circulo{
-    padding-left: 1rem;
+.circulo-red {
+    width: 17px;
+    height: 17px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-color: #3f3f3f;
+    border-style: solid;
+    border-width: 1px;
+    background: #a90b0b;
+    margin: auto;
 }
 
-.icon-edit,
-.icon-delete,
-.icon-block{
-    color: #242942;
+.conEstado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-izquierda, .icon-centro, .icon-derecha {
+    display: inline;
+    margin: 5px 0px 5px 0px;
+}
+
+.icon-izquierda a, .icon-centro a, .icon-derecha a {
     text-decoration: none;
+    color: #E74236;
 }
 
-.icon-edit:hover,
-.icon-delete:hover,
-.icon-block:hover{
-    color: red;
+.icon-izquierda a:hover, .icon-centro a:hover, .icon-derecha a:hover {
+    color: #0ba913;
+    margin: 5px 0px 5px 0px;
+}
+
+.iconoPosicion {
+    margin: 0px 5px 0px 5px;
+}
+
+.text-left{
+    text-align: left;
 }

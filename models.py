@@ -39,7 +39,7 @@ class usuario():
             if obj>0:
                 return "Borrado corectamente el usuario "
 
-        return "No se pudo borrar el usuario "
+        return None
 
     @classmethod
     def block(cls, p_nickname, p_estado):
