@@ -5,7 +5,7 @@
 .FormularioRegistro{
     margin-top: 60px;
     margin-bottom: 60px;
-    width: 725px;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
     background-color: #eeeeee;
@@ -24,7 +24,7 @@
     margin-right: 25px;
 }
 .form-DatosP{
-    width: 325px;
+    width: 100%;
     margin-bottom: 20px;
 }
 
