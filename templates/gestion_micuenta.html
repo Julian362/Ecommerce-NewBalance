@@ -1,0 +1,128 @@
+{% extends 'template.html' %}
+
+{% block head %}
+<title>Mi Cuenta</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gestion_micuenta.css') }}">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="ContenedorPrincipal">
+
+    <div class="subtitulo">
+        <span class="material-icons-outlined iconoSubtitulo">account_circle</span>
+        <span class="subtituloTexto">DATOS DE MI CUENTA</span>
+    </div>
+
+
+    <div class="ContenedorPedidos">
+        <div class="SubtituloPedidos">
+            <span class="material-icons-outlined Icono">watch_later</span>
+            <span class="SubtituloTexto2">Pedidos</span>
+        </div>
+        <div class="ListaPedidos"></div>
+    </div>
+
+    <div class="ContenedorMiCuenta">
+        <div class="SubtituloMiCuenta">
+            <span class="material-icons-outlined Icono">person</span>
+            <span class="SubtituloTexto2">Mi Cuenta</span>
+        </div>
+
+        <form class="FormularioMiCuenta" action="#">
+
+            <div class="ContenedorForm">
+                <h5 class="SubtituloTexto3">Datos Personales</h5>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="Nombre" name="Nombre" required>
+                    </div>
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="Apellido" name="Apellido" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="CC/CE/NIT" name="ID" required>
+                    </div>
+                    <div class="col">
+                        <input class="inputform" type="email" placeholder="Email" name="Email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="Télefono" name="Telefono" required>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Sexo" value="H">
+                            <label class="form-check-label" for="inlineRadio1">Hombre</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Sexo" value="M">
+                            <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar Cambios</button>
+                </div>
+            </div>
+
+
+            <div class="ContenedorForm">
+                <h5 class="SubtituloTexto3">Detalles de la Dirección de Entrega</h5>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="País" name="Pais" required>
+                    </div>
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="Departamento" name="Departamento" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="Ciudad" name="Ciudad" required>
+                    </div>
+                    <div class="col">
+                        <input class="inputform" type="text" placeholder="Dirección" name="Direccion" required>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar Cambios</button>
+                </div>
+            </div>
+
+            <div class="ContenedorForm">
+                <h5 class="SubtituloTexto3">Actualización Contraseña</h5>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform ContrasenaActual" type="password" placeholder="Contraseña Actual" name="ContrasenaActual"
+                            required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input class="inputform" type="password" placeholder="Nueva Contraseña" name="NuevaContraseña"
+                            required>
+                    </div>
+                    <div class="col">
+                        <input class="inputform" type="password" placeholder="Confirmar Contraseña"
+                            name="ConfirmarContraseña" required>
+                    </div>
+                </div>
+                <div class>
+                    <button class="btn btn-primary btn-miCuenta"  type="submit">Cambiar Contraseña</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

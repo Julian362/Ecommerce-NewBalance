@@ -39,3 +39,17 @@ def lista_de_productos_mujer():
 @app.route('/gestion_productos/')
 def gestion_productos():
     return render_template('gestion_productos.html')
+"""Ruta para la gestión de perfil (Mi Cuenta)"""
+@app.route('/gestion_micuenta/')
+def gestion_micuenta():
+    return render_template('gestion_micuenta.html')
+
+"""Ruta para la gestión de Superadministrador"""
+@app.route('/superadministrador/')
+def superadministrador():
+    return render_template('superadministrador.html')
+
+"""Ruta para todos los comentarios de un producto"""
+@app.route('/todos_los_comentario/')
+def todos_los_comentarios():
+    return render_template('todos_los_comentarios.html')
