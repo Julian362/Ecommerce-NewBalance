@@ -1,0 +1,101 @@
+/* Título de la sección que se despliega*/
+.modal-header h5 {
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    font-size: 30px;
+}
+
+/* Calificación */
+.puntuacion_promedio h4 {
+    margin: auto;
+    padding-top: 50px;
+    width: 150;
+    text-align: center;
+    font-size: 65px;
+}
+
+/* Sombra de la calificación */
+.puntuacion_promedio h4:hover {
+    color: #b80a2e;
+    text-shadow: 2px 2px 15px white;
+}
+
+/* Estrellas de la calificación */
+.estrellas p {
+    margin: auto;
+    width: 150;
+    font-size: 35px;
+    text-align: center;
+    color: #b80a2e;
+}
+
+/* Mensaje del promedio de la calificación */
+.puntuacion_promedio h5 {
+    width: 150;
+    font-size: medium;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Columna de los detalles de la puntuación */
+.puntuacion_detallada {
+    margin-top: 30px;
+    width: 800px;
+    text-align: center;
+}
+
+/* Puntuación cantidad de estrellas /lado izquierdo */
+.las_estrellas h4 {
+    padding-right: 25px;
+    font-size: medium;
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Ancho de las barras de progreso */
+.progress {
+    width: 100px;
+    height: 5px;
+    margin-top: 20px;
+}
+
+/* Puntuación cantidad de estrellas /lado derecho */
+.las_estrellas p {
+    padding-left: 25px;
+    font-size: small;
+    text-align: left;
+    margin-top: 10px;
+}
+
+/* Propiedades de la primera calificación */
+.estrellas {
+    font-size: 35px;
+    text-align: left;
+    color: #b80a2e;
+    padding-top: 30px;
+}
+
+/* Estrellas de las demás */
+.estrella {
+    font-size: 35px;
+    text-align: left;
+    color: #b80a2e;
+    padding: auto;
+    padding-bottom: 0px;
+}
+
+/* Título de los comentarios */
+.calificacion h4 {
+    text-align: left;
+    padding-left: 25px;
+}
+
+/* Contenido de los comentarios */
+.calificacion p {
+    text-align: justify;
+    padding-left: 25px;
+    padding-right: 25px;
+}

@@ -2,7 +2,7 @@
 
 /* Título Filtro */
 .titulo_1 h4 {
-    margin-left: 15%;
+    margin-left: 5%;
     text-decoration: none;
     margin-top: 75px;
     color: black;   
@@ -12,7 +12,7 @@
 
 /* Títulos: color, talla, refinar por, ordenar */
 .titulo h4{
-    margin-left: 15%;
+    margin-left: 5%;
     text-align: none;
     margin-top: 30px;
     color: black;   
@@ -23,7 +23,7 @@
 /* Formato de las casillas del check box */
 .form{
     display: block;
-    margin-left: 15%;
+    margin-left: 10%;
     width: 100%;
     padding-left: 10px;
 }
@@ -70,6 +70,10 @@
     border-width: 0.01px;
     border-color: rgba(255, 255, 255, 0);
 }
+.row{
+    margin-left: 0%!important;
+    margin-right: 0%!important;
+}
 
 /* Propiedades de las "a" de las filas */
 .filas a{
@@ -100,15 +104,10 @@
 }
 
 /* Para que salga el recuadro negro de los productos al pasar el mouse por encima de ellos */
-.filas:hover{
+ .filas:hover{
     width: 100%;
     border-radius: 3px;
     border-style: solid;
     border-width: 0.01px;
     border-color: black;
-}
-
-.row{
-    margin-left: 0%!important;
-    margin-right: 0%!important;
-}
+} 
