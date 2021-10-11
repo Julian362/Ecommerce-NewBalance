@@ -1,5 +1,6 @@
 .ContenedorFomulario{
     min-height: 60vh;
+    margin-top: 15;
 }
 
 .FormularioRegistro{
@@ -56,9 +57,10 @@ ul, li{
     padding: 0%;
 }
 
-.contenedor-todos-administradores{
-    width: 90%;
+.contenedor-todos-usuarios{
+    width: 95%;
     margin: auto;
+    margin-top: 50px;
     background-color: #eeeeee;
     margin-bottom: 20px;
 }
@@ -68,7 +70,6 @@ ul, li{
 }
 
 .icon-izquierda, .icon-centro, .icon-derecha{
-    color: red;
     text-align: center;
     width: fit-content;
     margin-left: 1rem;
@@ -76,4 +77,17 @@ ul, li{
 
 .estado-circulo{
     padding-left: 1rem;
+}
+
+.icon-edit,
+.icon-delete,
+.icon-block{
+    color: #242942;
+    text-decoration: none;
+}
+
+.icon-edit:hover,
+.icon-delete:hover,
+.icon-block:hover{
+    color: red;
 }
