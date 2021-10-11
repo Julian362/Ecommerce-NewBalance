@@ -45,3 +45,8 @@ def gestion_micuenta():
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html')
+
+"""Ruta para todos los comentarios de un producto"""
+@app.route('/todos_los_comentario/')
+def todos_los_comentarios():
+    return render_template('todos_los_comentarios.html')
