@@ -76,7 +76,7 @@ def edit_usuario(nickname):
                 # retorno el administrador.html y le mando el usuario,, la lista de usuarios, la opcion por si quiere seguir editando, el formulario para que cargue los input y tambien le mando el mensaje 
                 return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="editar",form=FormEditUsuario(), mensaje="Editado correctamente")
         # si  el validate_on_submit no es verificado osea el token es incorrecto le mando el listado de usuarios, el formulario, la lisatd e usuarios y un error
-        return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario(),lista_usuarios=usuario.listado())
+        return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario())
 
 
 # @app.route('/administrador/gestionar/GetNickname=<nickname>')
