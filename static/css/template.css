@@ -4,7 +4,7 @@
 .material-icons-outlined.md-48 { font-size: 48px; }
 
 body{
-    margin-right: 0%;
+    margin-left: 15px;
 }
 
 #LogoPrincipal{
@@ -65,8 +65,18 @@ h3{
 
 .footer{
     width: 100%;
+    margin: auto!important;
     background-color: #232323;
+    margin-right: 0px!important;
+    margin-left: 0px!important;
 }
+
+.footer .row{
+    margin-right: 0px!important;
+    margin-left: 0px!important;
+}
+
+
 
 /* .footer .row{
     margin-left: 0!important;
@@ -86,17 +96,43 @@ h3{
 
 .tFooter th{
    color: white;
-   text-align: center;
+   text-align: center!important;
+   border-bottom: #000000!important;
+   border-top: #000000!important;
+   font-size: 25px;
+   padding: 0%!important;
+
 }
 
 .tFooter a{
     text-decoration: none!important;
     color: white;
-}
-.tFooter td{
-    text-align: left;
+    margin: 0px 10px!important;
+    font-size: 150%;
 }
 
+.tFooter a:hover{
+    text-decoration: none!important;
+    color: #E74236;
+    margin: 3px 10px!important;
+    font-size: 150%;
+}
+
+.tFooter td{
+    text-align: center;
+    border-top: #0a0a0a!important;
+    padding: 0%!important;
+    margin: 0%!important;
+    
+
+}
+
+.tFooter{
+    width: 90%!important;
+    margin: auto!important;
+    background-color: #232323!important;
+    margin-bottom: 15px!important;
+}
 
 
 .card-title{
@@ -129,3 +165,5 @@ input:focus {
 .ContainerCentral{
     height: 60vh;
 }
+
+
