@@ -17,3 +17,11 @@ def registro():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/producto/')
+def productoind():
+    return render_template('ProductoIndividual.html')
+
+@app.route('/carrito/')
+def carrito():
+    return render_template('Carrito.html')
