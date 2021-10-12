@@ -131,7 +131,7 @@ def lista_de_productos_mujer():
 @app.route('/gestion_productos/')
 def gestion_productos():
     return render_template('gestion_productos.html')
-    
+
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion_micuenta/')
 def gestion_micuenta():

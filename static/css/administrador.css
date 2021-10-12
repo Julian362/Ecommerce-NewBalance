@@ -4,8 +4,8 @@
 }
 
 .FormularioRegistro{
-    margin-top: 60px;
-    margin-bottom: 60px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 65%;
     margin-left: auto;
     margin-right: auto;
@@ -43,10 +43,20 @@
 }
 
 hr{
-    border-color:red;
+    border-color:#E74236;
     border-width: 90%;
 }
 
+.titulo-gestionar-usuario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 
 
 .contenedor-todos-usuarios {
@@ -114,11 +124,11 @@ hr{
 
 .icon-izquierda a, .icon-centro a, .icon-derecha a {
     text-decoration: none;
-    color: #E74236;
+    color: #000000;
 }
 
 .icon-izquierda a:hover, .icon-centro a:hover, .icon-derecha a:hover {
-    color: #0ba913;
+    color: #E74236;
     margin: 5px 0px 5px 0px;
 }
 
