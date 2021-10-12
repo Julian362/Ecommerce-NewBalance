@@ -5,47 +5,47 @@
 {% endblock %}
 
 {% block contenido %}
-    <!-- Button ejemplo -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-  </button>
+<!-- Button ejemplo -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
 
-  <!-- Modal -->
-  <div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Gestionar Comentario</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <a class="cuenta-modal">
-                      <span class="material-icons-outlined md-48">person</span>
-                      <span>Los comentarios son públicos y contien información de tu cuenta y el producto comprado</span>
-                  </a>
-                  <div class="rating">
-                      <span class="estrella">☆</span>
-                      <span class="estrella">☆</span>
-                      <span class="estrella">☆</span>
-                      <span class="estrella">☆</span>
-                      <span class="estrella">☆</span>
-                      </div>
-                  <h3 style="padding: 0%;">Nickname</h3>
-                  <h3 style="padding: 0%;">Opinion</h3>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                  <!-- <input style="height: 300px;" type="text" class="form-control" id="" placeholder="ingresa tu opinión"> -->
-              </div>
-              <div class="modal-footer">
-                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-              <button type="button" class="btn btn-outline-one">Eliminar</button>
-              <button type="button" class="btn btn-outline-one">Publicar</button>
-              </div>
-          </div>
-      </div>
-  </div>
+<!-- Modal -->
+<div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Gestionar Comentario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a class="cuenta-modal">
+                    <span class="material-icons-outlined md-48">person</span>
+                    <span>Los comentarios son públicos y contien información de tu cuenta y el producto comprado</span>
+                </a>
+                <div class="rating">
+                    <span class="estrella">☆</span>
+                    <span class="estrella">☆</span>
+                    <span class="estrella">☆</span>
+                    <span class="estrella">☆</span>
+                    <span class="estrella">☆</span>
+                </div>
+                <h3 style="padding: 0%;">Nickname</h3>
+                <h3 style="padding: 0%;">Opinion</h3>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <!-- <input style="height: 300px;" type="text" class="form-control" id="" placeholder="ingresa tu opinión"> -->
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-outline-one">Eliminar</button>
+                <button type="button" class="btn btn-outline-one">Publicar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #d4d4d4;
+    background-color: #eeeeee;
     margin-top: 45px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -99,7 +99,7 @@ hr{
 .inputform{
     width: 100%;
     margin: 10px 0px 10px 0px;
-    border-color: rgba(0, 0, 0, 0.863);
+    /* border-color: rgba(0, 0, 0, 0.863); */
     padding-left: 5px;
 }
 
