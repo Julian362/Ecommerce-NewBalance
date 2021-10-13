@@ -51,7 +51,7 @@ def edit_usuario(nickname):
             formulario.documento.data = obj_mensaje.documento
             formulario.celular.data = obj_mensaje.celular
             # retorno el admniistrador.html, con el usuario, el listado de usuario, la opcion que es editar, y le envio el formulario ya editado
-            return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="editar", form=formulario)
+            return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar", form=formulario)
         # si el objeto obj_mensaje no tiene nada se le manda un error al administrador.html
         return render_template('administrador.html',error="No existe el usuario",lista_usuarios=usuario.listado())
     # si el metodo no es GEt, es POST
@@ -74,9 +74,43 @@ def edit_usuario(nickname):
                 # llamo al editar y le mando todos los atributos que traje de el formulario, el cual ejecuta el update para la bd
                 obj_mensaje.editar(obj_mensaje.nombre, obj_mensaje.apellidos, obj_mensaje.correo, obj_mensaje.documento, obj_mensaje.celular, obj_mensaje.nickname)
                 # retorno el administrador.html y le mando el usuario,, la lista de usuarios, la opcion por si quiere seguir editando, el formulario para que cargue los input y tambien le mando el mensaje 
-                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="editar",form=FormEditUsuario(), mensaje="Editado correctamente")
+                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente")
         # si  el validate_on_submit no es verificado osea el token es incorrecto le mando el listado de usuarios, el formulario, la lisatd e usuarios y un error
         return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario())
+
+# ruta para crear usuarios por parte del administrador, acepta GET Y POST
+@app.route('/administrador/gestionar/crear', methods=["GET", "POST"])
+def crear_usuario():
+    # si el metodo  es GET entra al if
+    if request.method == "GET":
+        # se instancia el formulario de forms.py
+        formulario = FormEditUsuario()
+        # retorno el admniistrador.html, con el usuario, el listado de usuario, la opcion que es editar, y le envio el formulario ya editado
+        return render_template('administrador.html',lista_usuarios=usuario.listado(), opcion="Crear", form=formulario)
+    # si el metodo no es GEt, es POST
+    else:
+        # Si es es POST trae todo lo que tiene el formulario, osea lo que esta en los input
+        formulario = FormEditUsuario(request.form)
+        # se valida que tenga el mismo token CSRF
+        if formulario.validate_on_submit():
+            # si ya se valido el token, se carga al usuario que esta en la base de datos y se guarda en obj_mensaje
+            obj_mensaje = usuario()
+            # se carga al obj_mensaje que es un usuario todos los atributos del formulario osea lo que esta en los input se trae para aca
+            obj_mensaje.nombre = formulario.nombre.data
+            obj_mensaje.apellidos = formulario.apellidos.data
+            obj_mensaje.correo = formulario.correo.data
+            obj_mensaje.documento = formulario.documento.data
+            obj_mensaje.celular = formulario.celular.data
+            obj_mensaje.nickname = formulario.nickname.data
+            obj_mensaje.sexo = "M"
+            # llamo al crear y le mando todos los atributos que traje de el formulario, el cual ejecuta el update para la bd
+            if (obj_mensaje.crear(obj_mensaje.nombre, obj_mensaje.apellidos, obj_mensaje.correo, obj_mensaje.documento, obj_mensaje.celular, obj_mensaje.nickname)):
+                # retorno el administrador.html y le mando el usuario,, la lista de usuarios, la opcion por si quiere seguir editando, el formulario para que cargue los input y tambien le mando el mensaje
+                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente")
+
+            return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",form=FormEditUsuario())
+        # si  el validate_on_submit no es verificado osea el token es incorrecto le mando el listado de usuarios, el formulario, la lisatd e usuarios y un error
+        return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",form=FormEditUsuario())
 
 
 # @app.route('/administrador/gestionar/GetNickname=<nickname>')
@@ -131,9 +165,9 @@ def lista_de_productos_mujer():
 @app.route('/gestion/productos/')
 def gestion_productos():
     return render_template('gestion_productos.html')
-    
+
 """Ruta para la gestión de perfil (Mi Cuenta)"""
-@app.route('/gestion_micuenta/')
+@app.route('/gestion/micuenta/')
 def gestion_micuenta():
     return render_template('gestion_micuenta.html')
 

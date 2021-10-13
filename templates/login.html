@@ -5,29 +5,31 @@
 {% endblock %}
 
 {% block contenido %}
-  <div class="ContenedorFormulario">
+<div class="ContenedorFormulario">
     <form class="formulario-login">
-      <div>
-        <h1 style="text-align: center;">Iniciar Sesión</h1>
-      <div>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Correo</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresa tu email">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu contraseña">
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Acepta términos y condiciones</label>
-      </div>
-      <div class="btn-login">
-        <button id="iniciar" type="submit" class="btn btn-outline-login">INICIAR SESIÓN</button>
-        <a href="{{url_for('registro')}}"  id="registrarse" class="btn btn-outline-login"> REGISTRATE </a>
-      </div>
-      <p><a href="">¿olvidaste tu contraseña?</a></p>
+        <div>
+            <h1 style="text-align: center;">Iniciar sesión</h1>
+            <div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        placeholder="Ingresa tu email">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1"
+                        placeholder="Ingresa tu contraseña">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Acepta términos y condiciones</label>
+                </div>
+                <div class="btn-login">
+                    <button id="iniciar" type="submit" class="btn btn-outline-login">Iniciar Sesión</button>
+                    <a href="{{url_for('registro')}}" id="registrarse" class="btn btn-outline-login"> Registrate </a>
+                </div>
+                <p><a href="">¿olvidaste tu contraseña?</a></p>
     </form>
-  </div>
-  </div>
+</div>
+</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 
 {% block head %}
-<title>Mi Cuenta</title>
+<title>New Balance | Mi Cuenta</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/gestion_micuenta.css') }}">
 {% endblock %}
 
@@ -11,14 +11,14 @@
 
     <div class="subtitulo">
         <span class="material-icons-outlined iconoSubtitulo">account_circle</span>
-        <span class="subtituloTexto">DATOS DE MI CUENTA</span>
+        <h1 class="subtituloTexto">DATOS DE MI CUENTA</h1>
     </div>
 
 
     <div class="ContenedorPedidos">
         <div class="SubtituloPedidos">
             <span class="material-icons-outlined Icono">watch_later</span>
-            <span class="SubtituloTexto2">Pedidos</span>
+            <h2 class="SubtituloTexto2">Pedidos</h2>
         </div>
         <div class="ListaPedidos"></div>
     </div>
@@ -26,13 +26,13 @@
     <div class="ContenedorMiCuenta">
         <div class="SubtituloMiCuenta">
             <span class="material-icons-outlined Icono">person</span>
-            <span class="SubtituloTexto2">Mi Cuenta</span>
+            <h2 class="SubtituloTexto2">Mi cuenta</h2>
         </div>
 
         <form class="FormularioMiCuenta" action="#">
 
             <div class="ContenedorForm">
-                <h5 class="SubtituloTexto3">Datos Personales</h5>
+                <h4 class="SubtituloTexto3">Datos personales</h4>
                 <hr>
                 <div class="row">
                     <div class="col">
@@ -67,13 +67,13 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar Cambios</button>
+                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar cambios</button>
                 </div>
             </div>
 
 
             <div class="ContenedorForm">
-                <h5 class="SubtituloTexto3">Detalles de la Dirección de Entrega</h5>
+                <h4 class="SubtituloTexto3">Detalles de la dirección de entrega</h4>
                 <hr>
                 <div class="row">
                     <div class="col">
@@ -93,31 +93,31 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar Cambios</button>
+                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar cambios</button>
                 </div>
             </div>
 
             <div class="ContenedorForm">
-                <h5 class="SubtituloTexto3">Actualización Contraseña</h5>
+                <h4 class="SubtituloTexto3">Actualización contraseña</h4>
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform ContrasenaActual" type="password" placeholder="Contraseña Actual" name="ContrasenaActual"
+                        <input class="inputform ContrasenaActual" type="password" placeholder="Contraseña actual" name="ContrasenaActual"
                             required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="password" placeholder="Nueva Contraseña" name="NuevaContraseña"
+                        <input class="inputform" type="password" placeholder="Nueva contraseña" name="NuevaContrasena"
                             required>
                     </div>
                     <div class="col">
-                        <input class="inputform" type="password" placeholder="Confirmar Contraseña"
-                            name="ConfirmarContraseña" required>
+                        <input class="inputform" type="password" placeholder="Confirmar contraseña"
+                            name="ConfirmarContrasena" required>
                     </div>
                 </div>
                 <div class>
-                    <button class="btn btn-primary btn-miCuenta"  type="submit">Cambiar Contraseña</button>
+                    <button class="btn btn-primary btn-miCuenta"  type="submit">Cambiar contraseña</button>
                 </div>
             </div>
         </form>
