@@ -1,15 +1,27 @@
-.form-inlines {
+.baProducto {
     padding: 0px 10px;
+    margin:auto;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.baBuscar {
-    display: inline;
+.material-icons-outlined{
+    font-size: 35px;
+    margin: 20px;
+}
+
+.baPrincipal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    margin-top: 45px;
+    margin-bottom: 25px;
 }
 
 .cProducto {
     float: right;
+    margin-right: 3%;
 }
 
 
@@ -76,7 +88,7 @@ hr {
 
 .form-DatosP:focus {
     border-color:#cccccc ;
-    box-shadow:0 0 2px #3f3f3f;
+    box-shadow:0 0 1px #6c6c6c64!important;
     border-width: 1px;
     border-radius: 5px;
 }
@@ -94,15 +106,17 @@ hr {
     background-color: #eeeeee;
     margin-top: 15px;
     margin-bottom: 15px;
+    padding-top: 3px;
     padding-bottom: 20px;
 }
 
 .contenedor-todos-productos p {
-    text-align: center;
+    display: inline;
     font-size: 20px;
     font-weight: bold;
     margin: auto;
-    padding: 10px;
+    padding: 0% 3%;
+    
 }
 
 .contenedor-todos-productos th, td {
@@ -140,11 +154,11 @@ hr {
 }
 
 .icon-izquierda a, .icon-centro a, .icon-derecha a {
-    color: #E74236;
+    color: #000000;
 }
 
 .icon-izquierda a:hover, .icon-centro a:hover, .icon-derecha a:hover {
-    color: #0ba913;
+    color: #e74236;
     margin: 5px 0px 5px 0px;
 }
 

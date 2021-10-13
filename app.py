@@ -128,7 +128,7 @@ def lista_de_productos_hombre():
 def lista_de_productos_mujer():
     return render_template('productos_mujer.html')
 
-@app.route('/gestion_productos/')
+@app.route('/gestion/productos/')
 def gestion_productos():
     return render_template('gestion_productos.html')
     
@@ -143,7 +143,7 @@ def superadministrador():
     return render_template('superadministrador.html')
 
 """Ruta para todos los comentarios de un producto"""
-@app.route('/todos_los_comentario/')
+@app.route('/todos_los_comentarios/')
 def todos_los_comentarios():
     return render_template('todos_los_comentarios.html')
 
