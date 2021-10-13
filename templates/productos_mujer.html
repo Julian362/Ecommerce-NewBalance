@@ -2,13 +2,22 @@
 {% extends 'template.html' %}
 <!-- Se hereda el head de template.html -->
 {% block head %}
-<title>New Balance | mujer</title>
+<title>New Balance | Mujer</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/productos_mujer.css') }}">
 <!-- Finaliza el bloque head -->
 {% endblock %}
 
 <!-- Se hereda el bloque contenido -->
 {% block contenido %}
+
+<!-- Header para el subtítulo -->
+
+<div class="row encabezado">
+    <span class="material-icons-outlined icon">
+        storefront
+    </span>
+    <h1 class="subtituloTexto"> ZAPATOS PARA MUJER</h1>
+</div>
 
 <!-- Se agrega el cuerpo de la pantalla -->
 <div class="row pantalla">
