@@ -3,27 +3,32 @@
 }
 
 .FormularioRegistro{
-    margin-top: 60px;
-    margin-bottom: 60px;
-    width: 725px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
     background-color: #eeeeee;
     padding-bottom: 20px;
 }
 
-.FormularioRegistro h1{
-    padding-top:15px;
-}
-
 .ContenedorDP {
-    margin-top: 25px;
     margin-left: 20px;
     margin-right: 25px;
 }
 .form-DatosP{
-    width: 325px;
+    width: 100%;
     margin-bottom: 20px;
+    border-width: 0.5px;
+    padding: 3px 8px 3px 8px;
+    border-color:#cccccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-DatosP:focus{
+    border-color: #cccccc !important;
+    box-shadow: 0 0 0 1px #6c6c6c64 !important;
 }
 
 .btn-outline-registro {
@@ -41,30 +46,50 @@
     color:white
 }
 
-hr{
+.hr-form{
     border-color:red;
-    border-width: 90%;
-}
-
-h4{
-    padding-top:10px
+    border-width: 100%;
 }
 
 .contenedor-todos-administradores{
     width: 90%;
     margin: auto;
     background-color: #eeeeee;
-    margin-bottom: 60px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.col-sm{
-    padding: 0%;
+.contenedor-todos-administradores th, td {
+    margin: auto;
+    text-align: center;
+}
+
+.circulo {
+    width: 17px;
+    height: 17px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-color: #3f3f3f;
+    border-style: solid;
+    border-width: 1px;
+    background: #0ba913;
+    margin: auto;
 }
 
 .icon-izquierda, .icon-centro, .icon-derecha{
-    color: #e74236;
-    width: fit-content;
-    
+    display: inline;
+    margin: 5px 0px 5px 0px;
+}
+
+.icon-izquierda a, .icon-centro a, .icon-derecha a {
+    color: black;
+}
+
+.icon-izquierda a:hover, .icon-centro a:hover, .icon-derecha a:hover{
+    color: #E74236;
 }
 
 .estado-circulo{

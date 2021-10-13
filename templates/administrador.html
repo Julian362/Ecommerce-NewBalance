@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block head %}
-    <title>Administrador</title>
+    <title>New Balance | Administrador</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/administrador.css') }}">
     {% if block %}
         {% if block== "T" %}
@@ -13,17 +13,20 @@
 {% endblock %}
 
 {% block contenido %}
-    <h1 style="text-align: center;">Gestion usuario</h1>
-    <form class="form-inline" style="margin: auto;">
-        <input style="width: 50%; margin-left: 15%;" class="form-control mr-sm-2" type="search" placeholder="Buscar usuario" aria-label="Search">
-        <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
-        <button style="margin-left: 8px;" class="btn btn-outline-one my-2 my-sm-0" submit>Crear Nuevo Usuario</button>
+    <div class="titulo-gestionar-usuario">
+        <h1 style="text-align: center;">Gestionar usuario</h1>
+    </div>
+    <form class="form-inline">
+        <div style="width:65%; margin:auto;">
+            <input style="width: 91%;" class="form-control " type="search" placeholder="Buscar usuario" aria-label="Search">
+            <button class="btn btn-outline-one">Buscar</button>
+        </div>
     </form>
     {% if mensaje %}
-        <h1 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h1>
+        <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
     {% endif %}
     {% if error %}
-        <h1 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h1>
+        <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
     {% endif %}
     {% if form %}
         <div class="ContenedorFomulario">
@@ -39,45 +42,51 @@
                             <div class="row">
                                 <div class="col">
                                     <!-- <input type="text" class="form-DatosP" placeholder="Nombre" value="{{usuario.nombre}}"> -->
-                                    {{ form.nombre(type="text", class="form-DatosP", placeholder="Nombre") }}
+                                    {{ form.nombre(type="text", class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
                                 </div>
                                 <div class="col">
                                     <!-- <input type="text" class="form-DatosP" placeholder="Apellido" value="{{usuario.apellidos}}"> -->
-                                    {{ form.apellidos(type="text", class="form-DatosP", placeholder="Apellidos") }}
+                                    {{ form.apellidos(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Apellidos") }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <!-- <input type="email" class="form-DatosP" placeholder="Correo" value="{{usuario.correo}}"> -->
-                                    {{ form.correo(type="email", class="form-DatosP", placeholder="Correo") }}
+                                    {{ form.correo(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo") }}
                                 </div>
                                 <div class="col">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" readonly="" value="option1"
-                                        {% if usuario.sexo == 'M' %}
-                                        checked
-                                        {% endif %}
-                                        disabled>
-                                        <label class="form-check-label" for="inlineRadio1">Hombre</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexo" readonly="" value="option2"
-                                        {% if usuario.sexo == 'F' %}
-                                        checked
-                                        {% endif %}
-                                        disabled>
-                                        <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                                    <div style="margin-top: 1%;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" readonly="" value="option1"
+                                            {% if usuario %}
+                                                {% if usuario.sexo == "M" %}
+                                                    checked
+                                                {% endif %}
+                                            {% endif %}
+                                            disabled>
+                                            <label class="form-check-label" for="inlineRadio1">Hombre</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexo" readonly="" value="option2"
+                                            {% if usuario %}
+                                                {% if usuario.sexo == "F" %}
+                                                    checked
+                                                {% endif %}
+                                            {% endif %}
+                                            disabled>
+                                            <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <!-- <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" value="{{usuario.documento}}"> -->
-                                    {{ form.documento(type="text", class="form-DatosP", placeholder="CC/CE/NIT") }}
+                                    {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
                                 </div>
                                 <div class="col">
                                     <!-- <input type="text" class="form-DatosP" placeholder="Telefono Celular" value="{{usuario.celular}}"> -->
-                                    {{ form.celular(type="text", class="form-DatosP", placeholder="Telefono Celular") }}
+                                    {{ form.celular(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular") }}
                                 </div>
                             </div>
                             <div class="row">
@@ -89,10 +98,15 @@
             </form>
         </div>
     {% endif %}
-    
+
     {% if lista_usuarios %}
             <div class="contenedor-todos-usuarios">
-                <h3>TODOS LOS USUARIOS</h3>
+                    <div  class="titulo-boton-usuarios">
+                        <h2 style="display: inline; float:left;">Todos los usuarios</h2>
+                        <a href="{{ url_for('crear_usuario') }}" style="text-decoration: none;" >
+                            <button class="btn btn-outline-one" style="display: inline; float:right;">Crear nuevo usuario</button>
+                        </a>
+                    </div>
                     <table class="table table-striped table-hover nuevo-usuario">
                     <thead>
                         <tr>
@@ -103,50 +117,50 @@
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
-                    {% for usuario in lista_usuarios %}
                     <tbody>
+                    {% for item in lista_usuarios %}
                         <tr>
                             <th scope="row">
                                 {{ loop.index }}
                             </th>
                             <td class="conEstado">
-                                    {% if usuario.estado == 'T' %}
+                                    {% if item.estado == 'T' %}
                                     <div class="circulo-green"></div>
                                     {% endif %}
-                                    {% if usuario.estado == 'F' %}
+                                    {% if item.estado == 'F' %}
                                     <div class="circulo-red"></div>
                                     {% endif %}
                             </td>
-                            <td>{{ usuario.nickname}}</td>
-                            <td>{{ usuario.correo }}</td>
+                            <td>{{ item.nickname}}</td>
+                            <td>{{ item.correo }}</td>
                             <td>
                                 <div class="icon-derecha">
-                                    <a  href="{{ url_for('edit_usuario', nickname = usuario.nickname) }} ">
+                                    <a  href="{{ url_for('edit_usuario', nickname = item.nickname) }} ">
                                         <span class="material-icons-outlined iconoPosicion"  >edit</span>
                                     </a>
                                 </div>
                                 <div class="icon-centro">
-                                    <a href="{{ url_for('block_usuario', nickname = usuario.nickname, estado = usuario.estado) }}">
+                                    <a href="{{ url_for('block_usuario', nickname = item.nickname, estado = item.estado) }}">
                                         <span class="material-icons-outlined iconoPosicion" id="icon_block">
                                             <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
-                                            {% if usuario.estado == 'F' %}
+                                            {% if item.estado == 'F' %}
                                                 lock_open
                                             {% endif %}
-                                            {% if usuario.estado == 'T' %}
+                                            {% if item.estado == 'T' %}
                                                 lock
                                             {% endif %}
                                         </span>
                                     </a>
                                 </div>
                                 <div class="icon-izquierda">
-                                    <a href="{{ url_for('delete_usuario', nickname = usuario.nickname) }}">
+                                    <a href="{{ url_for('delete_usuario', nickname = item.nickname) }}">
                                         <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
                                 </div>
                             </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
-                    {% endfor %}
                 </table>
             </div>
     {% endif %}
