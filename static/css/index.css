@@ -12,7 +12,7 @@
 .imgBarra{
     width: 100%;
     background-color: #eeeeee;
-    margin: none;
+    margin: 0%;
     padding: 15px 10px;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .selecMujer a:hover{
-    color: rgb(0, 89, 255);
+    color: #b80a2e;
     text-shadow: 2px 2px 3px #6c6c6c;
     transition: 1s;
 }

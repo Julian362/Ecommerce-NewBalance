@@ -1,0 +1,34 @@
+.estrella {
+  font-size: 40px;
+  color: #B0BFB2
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+  content: "\2605";
+  position: absolute;
+  color: #242942;
+}
+
+.cuenta-modal{
+  font-size: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+textarea:focus {
+  border-color:#E74236!important ;
+  box-shadow:0 0 0 .2rem rgba(255, 38, 0, 0.25)!important
+}

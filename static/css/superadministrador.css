@@ -5,17 +5,15 @@
 .FormularioRegistro{
     margin-top: 60px;
     margin-bottom: 60px;
-    width: 70%;
+    width: 725px;
     margin-left: auto;
     margin-right: auto;
     background-color: #eeeeee;
     padding-bottom: 20px;
-    
 }
 
 .FormularioRegistro h1{
-    padding-top:15px;  
-    
+    padding-top:15px;
 }
 
 .ContenedorDP {
@@ -24,7 +22,7 @@
     margin-right: 25px;
 }
 .form-DatosP{
-    width: 100%;
+    width: 325px;
     margin-bottom: 20px;
 }
 
@@ -50,4 +48,25 @@ hr{
 
 h4{
     padding-top:10px
+}
+
+.contenedor-todos-administradores{
+    width: 90%;
+    margin: auto;
+    background-color: #eeeeee;
+    margin-bottom: 60px;
+}
+
+.col-sm{
+    padding: 0%;
+}
+
+.icon-izquierda, .icon-centro, .icon-derecha{
+    color: #e74236;
+    width: fit-content;
+    
+}
+
+.estado-circulo{
+    padding-left: 1rem;
 }

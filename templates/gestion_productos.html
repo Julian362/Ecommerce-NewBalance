@@ -1,0 +1,130 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Administrador | Producto</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gestion_de_productos.css') }}">
+{% endblock %}
+
+{% block contenido %}
+<h1 style="text-align: center;" class="">Gestion de Productos</h1>
+<form class="form-inlines" style=" width: 100%;">
+    <input style="width: 40%;" class="form-control baBuscar mr-sm-2" type="search" placeholder="Buscar producto"
+        aria-label="Search">
+    <button class="bProductor btn btn-outline-one" type="submit">Buscar</button>
+    <button style="margin-left: 8px;" class="cProducto btn btn-outline-one" type="submit">Crear Nuevo Producto</button>
+</form>
+<div class="ContenedorFomulario">
+    <form class="FormularioProducto">
+        <div>
+            <h2 style="text-align: center;">Editar producto</h2>
+            <div>
+                <div class="ContenedorDP">
+                    <h4>Datos del producto</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-DatosP" placeholder="Nombre del Producto" required>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-DatosP" placeholder="Referencia" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" class="form-DatosP" placeholder="Talla" required>
+                        </div>
+
+                        <div class="col">
+                            <input type="number" class="form-DatosP" placeholder="Precio" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" class="form-DatosP" placeholder="Stock" required>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-DatosP" placeholder="Descuento Comercial" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-DatosP" placeholder="Color" required>
+                        </div>
+                        <div class="col">
+                            <input type="file" class="btnImg" value="Cargar Imagen" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"
+                            value="Agregar">
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+
+<div class="contenedor-todos-productos">
+    <p>TODOS LOS PRODUCTOS</p>
+    <table class="table table-striped table-hover tNuevoProducto">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Nombre/Producto</th>
+                <th scope="col">Referencia</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Talla</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td class="conEstado">
+                    <div class="circulo"></div>
+                </td>
+                <td>Men'500</td>
+                <td>GM500TM1</td>
+                <td>11</td>
+                <td>8.5</td>
+                <td>
+                    <div class="">
+                        <div class="icon-derecha">
+                            <a href="#"><span class="material-icons-outlined iconoPosicion">edit</span></a>
+                        </div>
+                        <div class="icon-centro">
+                            <a href="#"><span class="material-icons-outlined iconoPosicion">lock_open</span></a>
+                        </div>
+                        <div class="icon-izquierda">
+                            <a href="#"><span class="material-icons-outlined iconoPosicion">cancel</span></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td class="conEstado">
+                    <div class="circulo"></div>
+                </td>
+                <td>Men'500</td>
+                <td>GM500TM1</td>
+                <td>11</td>
+                <td>8.5</td>
+                <td>
+                    <div class="">
+                        <div class="icon-derecha">
+                            <a href="#"><span class="material-icons-outlined iconoPosicion">edit</span></a>
+                        </div>
+                        <div class="icon-centro">
+                            <a href="#"><span class="material-icons-outlined iconoPosicion">lock_open</span></a>
+                        </div>
+                        <div class="icon-izquierda">
+                            <a href="#"><span class="material-icons-outlined iconoPosicion">cancel</span></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

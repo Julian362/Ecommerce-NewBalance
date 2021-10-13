@@ -1,0 +1,132 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Superadministrador</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/superadministrador.css') }}">
+{% endblock %}
+
+{% block contenido %} 
+<h1 style="text-align: center; margin-top: 60px; margin-bottom: 20px;">Gestión Administrativa</h1>
+<form class="form-inline" style="margin: auto;">
+    <input style="width: 50%; margin-left: 15%;" class="form-control mr-sm-2" type="search" placeholder="Buscar Administrador" aria-label="Search">
+    <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
+    <button style="margin-left: 8px;" class="btn btn-outline-one my-2 my-sm-0" submit>Crear Nuevo Administrador</button>
+</form>
+<div class="ContenedorFomulario">
+    <form class="FormularioRegistro">
+        <div>
+            <h1 style="text-align: center;">Administrador</h1>
+            <div>
+                <div class="ContenedorDP">
+                    <h4>Datos del Administrador</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-DatosP" placeholder="Nombre" name="Nombre" required>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-DatosP" placeholder="Apellido" name="Apellido" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="email" class="form-DatosP" placeholder="Correo" name="Correo" required>
+                        </div>
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
+                                    value="H">
+                                <label class="form-check-label" for="inlineRadio1">Hombre</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
+                                    value="M">
+                                <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" class="form-DatosP" placeholder="CC/CE/NIT" name="ID" required>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-DatosP" placeholder="Telefono Celular" name="Telefono" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input style="margin: auto;" type="submit" class="btn btn-outline-registro"
+                            value="Agregar/editar">
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+<div class="contenedor-todos-administradores">
+    <h3 style="text-align: left;">Todos los Administradores</h1>
+    <div class="container" style="padding: 0%;">
+        <div class="row row-titulos">
+            <div class="col-sm">
+                <h4>Estado</h4>
+            </div>
+            <div class="col-sm">
+                <h4>Administrador</h4>
+            </div>
+            <div class="col-sm">
+                <h4>Email</h4>
+            </div>
+            <div class="col-sm">
+                <h4>Acciones</h4>
+            </div>
+        </div>
+        <hr class="hr-tabla">
+        <div class="row">
+            <div class="col-sm estado-circulo">
+                <span>🔴</span>
+            </div>
+            <div class="col-sm">
+                <p>Julian362</p>
+            </div>
+            <div class="col-sm">
+                <p>Julianarenas@uninorte.edu.co</p>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm icon-derecha">
+                        <span class="material-icons-outlined">edit</span>
+                    </div>
+                    <div class="col-sm icon-centro">
+                        <span class="material-icons-outlined">lock_open</span>
+                    </div>
+                    <div class="col-sm icon-izquierda">
+                        <span class="material-icons-outlined">cancel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm estado-circulo">
+                <span>🟢</span>
+            </div>
+            <div class="col-sm">
+                <p>DavdH</p>
+            </div>
+            <div class="col-sm">
+                <p>davdh@uninorte.edu.co</p>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm icon-derecha">
+                        <span class="material-icons-outlined">edit</span>
+                    </div>
+                    <div class="col-sm icon-centro">
+                        <span class="material-icons-outlined">lock_open</span>
+                    </div>
+                    <div class="col-sm icon-izquierda">
+                        <span class="material-icons-outlined">cancel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

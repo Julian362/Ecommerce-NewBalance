@@ -1,0 +1,136 @@
+.material-icons-outlined.iconoSubtitulo{ font-size: 40px;}
+.material-icons-outlined.Icono{ font-size: 26px;}
+
+.subtitulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d4d4d4;
+    margin-top: 45px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.iconoSubtitulo{
+    width: auto;
+    color: #e74236;
+    padding-right: 7px;   
+}
+
+.subtituloTexto{
+    font-size: 30px;
+    color: black;
+    font-weight: bold;
+}
+
+.ContenedorPedidos{
+    width: 90%;
+    margin: auto;
+    border-style: solid;
+    border-color: #cccccc;
+    border-width: 1px;
+    margin-top: 55px;  
+}
+
+.SubtituloPedidos{
+    display: flex;
+    align-items: center;
+    background-color: #d4d4d4;
+    padding-top: 5px;
+    padding-bottom: 5px; 
+    height: 70px;  
+}
+
+.Icono{
+    padding: 20px;
+    color: #e74236;
+}
+
+.SubtituloTexto2{
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.ListaPedidos{
+    height: 70px;
+    background-color: white;
+}
+
+.ContenedorMiCuenta{
+    width: 90%;
+    margin: auto;
+    border-style: solid;
+    border-color: #cccccc;
+    border-width: 1px;
+    margin-top: 40px;
+    margin-bottom: 55px;
+}
+
+.SubtituloMiCuenta{
+    display: flex;
+    align-items: center;
+    background-color: #d4d4d4;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 70px;   
+}
+
+.ContenedorForm {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+
+.SubtituloTexto3{
+    margin-top: 30px;
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+
+hr{
+    width: 50%;
+    border-width: 2px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.inputform{
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+    border-color: rgba(0, 0, 0, 0.863);
+    padding-left: 5px;
+}
+
+.form-check{
+    padding-top: 12px;
+}
+
+.ContrasenaActual{
+    width: 47.96%;
+    margin: 10px 0px 10px 0px;
+}
+
+.btn-miCuenta {
+    width: 25%;
+    margin-left: 37.5%;
+    margin-top: 10px;
+    height: 40px;
+    background-color: white;
+    border-color: #e74236;
+    font-weight: bold;
+    color: #e74236;
+}
+
+.btn-miCuenta:hover {
+    width: 25%;
+    margin-left: 37.5%;
+    margin-top: 10px;
+    height: 40px;
+    background-color: #e74236;
+    border-color: #e74236;
+    font-weight: bold;
+    color: white;
+}
+
