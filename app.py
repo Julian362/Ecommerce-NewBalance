@@ -133,7 +133,7 @@ def gestion_productos():
     return render_template('gestion_productos.html')
 
 """Ruta para la gestión de perfil (Mi Cuenta)"""
-@app.route('/gestion_micuenta/')
+@app.route('/gestion/micuenta/')
 def gestion_micuenta():
     return render_template('gestion_micuenta.html')
 
