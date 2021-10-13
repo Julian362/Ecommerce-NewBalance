@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW 2018 (64 Bit Versión de evaluación) -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="119.075mm" height="114.709mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 1784.76 1719.31"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="156.634mm" height="156.634mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 4205 4205"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
-  <font id="FontID0" horiz-adv-x="770" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+  <font id="FontID0" horiz-adv-x="770" font-variant="normal" style="fill-rule:nonzero" font-style="normal" font-weight="400">
 	<font-face 
 		font-family="BankGothic RUSS">
 		<font-face-src>
@@ -23,64 +23,65 @@ viewBox="0 0 1784.76 1719.31"
   </font>
   <style type="text/css">
    <![CDATA[
-    @font-face { font-family:"BankGothic RUSS";font-variant:normal;font-weight:normal;src:url("#FontID0") format(svg)}
-    .str0 {stroke:#242942;stroke-width:3;stroke-miterlimit:22.9256}
-    .fil7 {fill:url(#id0)}
-    .fil10 {fill:url(#id1)}
-    .fil5 {fill:url(#id2)}
-    .fil3 {fill:url(#id3)}
-    .fil12 {fill:url(#id4)}
-    .fil9 {fill:url(#id5)}
-    .fil1 {fill:url(#id6)}
-    .fil11 {fill:url(#id7)}
-    .fil4 {fill:url(#id8)}
-    .fil13 {fill:url(#id9)}
-    .fil6 {fill:url(#id10)}
+    @font-face { font-family:"BankGothic RUSS";font-variant:normal;font-style:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+    .str0 {stroke:#242942;stroke-width:5.37;stroke-miterlimit:22.9256}
+    .fil14 {fill:none}
+    .fil5 {fill:url(#id0)}
+    .fil3 {fill:url(#id1)}
+    .fil12 {fill:url(#id2)}
+    .fil13 {fill:url(#id3)}
+    .fil1 {fill:url(#id4)}
+    .fil11 {fill:url(#id5)}
+    .fil4 {fill:url(#id6)}
+    .fil10 {fill:url(#id7)}
+    .fil9 {fill:url(#id8)}
+    .fil6 {fill:url(#id9)}
+    .fil7 {fill:url(#id10)}
     .fil0 {fill:url(#id11)}
     .fil2 {fill:url(#id12);fill-rule:nonzero}
     .fil8 {fill:url(#id13);fill-rule:nonzero}
-    .fnt0 {font-weight:normal;font-size:200.95px;font-family:'BankGothic RUSS'}
+    .fnt0 {font-weight:normal;font-size:359.92px;font-family:'BankGothic RUSS'}
    ]]>
   </style>
-  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="345.86" y1="1380.36" x2="347.32" y2="1410.18">
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="1290.51" y1="2205.67" x2="1293.1" y2="2258.53">
    <stop offset="0" style="stop-opacity:1; stop-color:#E74236"/>
    <stop offset="0.839216" style="stop-opacity:1; stop-color:#B63329"/>
    <stop offset="1" style="stop-opacity:1; stop-color:#85231C"/>
   </linearGradient>
-  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="1288.84" y1="971.65" x2="1288.92" y2="983.62">
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="1417.48" y1="1424.28" x2="1420.07" y2="1477.26">
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="2709.19" y1="2846.73" x2="2709.32" y2="2868.17">
    <stop offset="0" style="stop-opacity:1; stop-color:#242942"/>
    <stop offset="0.988235" style="stop-opacity:1; stop-color:#121521"/>
    <stop offset="1" style="stop-opacity:1; stop-color:black"/>
   </linearGradient>
-  <linearGradient id="id2" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="439.03" y1="918.01" x2="440.48" y2="947.52">
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="2662.12" y1="3142.98" x2="2662.25" y2="3164.4">
   </linearGradient>
-  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="509.92" y1="481.75" x2="511.37" y2="511.33">
-  </linearGradient>
-  <linearGradient id="id4" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="1231.1" y1="1275.92" x2="1231.17" y2="1287.89">
-  </linearGradient>
-  <linearGradient id="id5" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="1317.22" y1="822.11" x2="1317.29" y2="834.08">
-  </linearGradient>
-  <linearGradient id="id6" gradientUnits="userSpaceOnUse" x1="833.36" y1="1621.36" x2="832.5" y2="1718.25">
+  <linearGradient id="id4" gradientUnits="userSpaceOnUse" x1="1996.79" y1="3465.44" x2="1995.24" y2="3639">
    <stop offset="0" style="stop-opacity:1; stop-color:#242942"/>
    <stop offset="0.658824" style="stop-opacity:1; stop-color:#121521"/>
    <stop offset="1" style="stop-opacity:1; stop-color:black"/>
   </linearGradient>
-  <linearGradient id="id7" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="1262.72" y1="1109.31" x2="1262.79" y2="1121.28">
+  <linearGradient id="id5" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="2765.82" y1="2548.31" x2="2765.95" y2="2569.76">
   </linearGradient>
-  <linearGradient id="id8" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="467.8" y1="702.58" x2="469.24" y2="732.1">
+  <linearGradient id="id6" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="1342.02" y1="1819.82" x2="1344.61" y2="1872.69">
   </linearGradient>
-  <linearGradient id="id9" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="1204.82" y1="1441.32" x2="1204.9" y2="1453.28">
+  <linearGradient id="id7" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="2812.61" y1="2301.74" x2="2812.74" y2="2323.19">
   </linearGradient>
-  <linearGradient id="id10" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="398.71" y1="1160.38" x2="400.16" y2="1189.9">
+  <linearGradient id="id8" gradientUnits="userSpaceOnUse" xlink:href="#id2" x1="2863.44" y1="2033.91" x2="2863.57" y2="2055.35">
   </linearGradient>
-  <radialGradient id="id11" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0579061 0.996676 -2.01819 -0.0217149 752 -777)" cx="785.37" cy="5.84" r="399.75" fx="785.37" fy="5.84">
+  <linearGradient id="id9" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="1218.29" y1="2639.79" x2="1220.88" y2="2692.65">
+  </linearGradient>
+  <linearGradient id="id10" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="1123.63" y1="3033.8" x2="1126.25" y2="3087.21">
+  </linearGradient>
+  <radialGradient id="id11" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0579061 0.996676 -2.01819 -0.0217149 2954 -1320)" cx="1910.83" cy="571.88" r="716" fx="1910.83" fy="571.88">
    <stop offset="0" style="stop-opacity:1; stop-color:#242942"/>
    <stop offset="0.811765" style="stop-opacity:1; stop-color:#121421"/>
    <stop offset="1" style="stop-opacity:1; stop-color:black"/>
   </radialGradient>
-  <linearGradient id="id12" gradientUnits="userSpaceOnUse" xlink:href="#id6" x1="678.74" y1="432.7" x2="585.02" y2="1532.25">
+  <linearGradient id="id12" gradientUnits="userSpaceOnUse" xlink:href="#id4" x1="1719.84" y1="1336.43" x2="1551.99" y2="3305.84">
   </linearGradient>
-  <linearGradient id="id13" gradientUnits="userSpaceOnUse" x1="1291.14" y1="924.41" x2="1294.45" y2="1473.22">
+  <linearGradient id="id13" gradientUnits="userSpaceOnUse" x1="2816.72" y1="2217.14" x2="2822.64" y2="3200.11">
    <stop offset="0" style="stop-opacity:1; stop-color:#E74236"/>
    <stop offset="0.65098" style="stop-opacity:1; stop-color:#A92D24"/>
    <stop offset="1" style="stop-opacity:1; stop-color:#6B1812"/>
@@ -88,19 +89,22 @@ viewBox="0 0 1784.76 1719.31"
  </defs>
  <g id="Capa_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <path class="fil0 str0" d="M368.91 390.01c35.71,-167.27 143.81,-357.1 413.8,-385.37 325.01,-34.04 488.4,215.97 421.73,423.62l-10.61 -45.63c-27.95,-138.32 -96.56,-314.15 -337.89,-318.37 -249.54,-4.37 -343.85,184.78 -366.23,330.35 -3.28,23.9 -32.98,42.24 -66.34,40.97 -33.36,-1.27 -57.74,-21.67 -54.45,-45.57z"/>
-  <text x="253.13" y="1719.31"  class="fil1 fnt0">COLOMBIA</text>
-  <path class="fil2" d="M-0 1548.3l16.97 -92.06 274.38 -49.26 -254.69 -56.25 20.89 -113.43 278.29 -48.96 -258.32 -59.46 24.67 -133.95 273.98 -48.97 -254.44 -57.12 20.62 -111.97 264.47 -46.74 -245.6 -55.79 21.55 -117.01 269.11 -47.84 -249.72 -57.43 16.36 -88.84 434.52 0c61.53,170.45 173.01,436.02 208.84,616.84l114.09 -616.84 429.55 0 -219.33 1185.06 -433.69 0 -219.33 -611.87c-5.94,170.59 -67.59,442.49 -98.62,611.87l-434.52 0z"/>
-  <polygon class="fil3" points="202.09,452.37 1156.55,509.51 182.82,557.01 451.87,509.51 "/>
-  <polygon class="fil4" points="161.41,673.26 1111.49,730.14 142.18,777.69 406.81,730.14 "/>
-  <polygon class="fil5" points="124.14,888.69 1080.84,945.97 114.38,993.11 376.16,945.97 "/>
-  <polygon class="fil6" points="83.82,1131.07 1040.52,1188.34 74.06,1235.48 335.83,1188.35 "/>
-  <polygon class="fil7" points="36.66,1350.74 996.03,1406.99 16.97,1456.25 291.35,1406.99 "/>
-  <path class="fil8" d="M1344.8 1216l-26.32 130.18 49.29 0c29.31,0 52.92,-5.71 70.99,-16.94 18.1,-11.42 29.14,-27.41 33.33,-48.15 4.27,-21.12 -0.26,-37.3 -13.83,-48.34 -13.53,-11.23 -34.87,-16.75 -64.18,-16.75l-49.29 0zm58.63 -290.05l-23.08 114.19 38.64 0c23.79,0 43.06,-4.95 57.62,-14.84 14.33,-9.71 23.5,-23.98 27.27,-42.63 3.73,-18.46 0.3,-32.54 -10.11,-42.25 -10.6,-9.71 -27.91,-14.47 -51.7,-14.47l-38.64 0zm-401.01 622.36l11.59 -58.01 145.83 -37.46 -130.36 -38.39 18.15 -89.78 145.64 -37.23 -130.56 -37.37 18.48 -91.41 145.76 -37.83 -130.41 -38.12 12.44 -61.56 145.79 -37.98 -130.49 -37.72 15.03 -74.37 145.69 -37.45 -130.4 -38.16 12.87 -63.65 390.92 0c83.55,0 144.68,19.6 183.58,58.81 38.89,39.2 51.26,93.83 37.14,163.68 -9.04,44.73 -27.55,81.65 -55.63,111.34 -28.23,29.5 -63.33,48.72 -105.68,57.67 53.04,11.61 90.14,33.31 110.9,65.28 20.75,31.97 25.57,74.99 14.68,128.85 -15.39,76.13 -52.74,133.8 -112.17,172.62 -59.24,38.82 -138.91,58.24 -239.02,58.24l-389.78 0z"/>
-  <polygon class="fil9" points="1145.26,795.85 1617.81,833.62 1131.52,871.08 1268.42,833.62 "/>
-  <polygon class="fil10" points="1116.88,945.39 1589.44,983.16 1103.14,1020.62 1240.04,983.16 "/>
-  <polygon class="fil11" points="1090.76,1083.05 1563.31,1120.82 1077.02,1158.28 1213.92,1120.82 "/>
-  <polygon class="fil12" points="1059.14,1249.66 1531.69,1287.43 1045.4,1324.89 1182.3,1287.43 "/>
-  <polygon class="fil13" points="1027.75,1415.06 1500.31,1452.83 1014.01,1490.29 1150.91,1452.83 "/>
+  <g id="_2311315132688">
+   <path class="fil0 str0" d="M1164.9 1259.96c63.95,-299.59 257.59,-639.6 741.16,-690.25 582.12,-60.97 874.77,386.82 755.37,758.76l-19 -81.74c-50.06,-247.75 -172.96,-562.67 -605.2,-570.23 -446.96,-7.82 -615.87,330.97 -655.97,591.7 -5.88,42.8 -59.08,75.66 -118.82,73.38 -59.74,-2.27 -103.41,-38.82 -97.53,-81.62z"/>
+   <text x="957.54" y="3640.89"  class="fil1 fnt0">COLOMBIA</text>
+   <path class="fil2" d="M504.15 3334.59l30.4 -164.88 491.44 -88.23 -456.18 -100.75 37.42 -203.17 498.45 -87.69 -462.68 -106.5 44.18 -239.92 490.73 -87.7 -455.74 -102.32 36.93 -200.55 473.7 -83.71 -439.89 -99.92 38.59 -209.57 482.01 -85.68 -447.28 -102.87 29.3 -159.12 778.28 0c110.2,305.3 309.87,780.96 374.05,1104.83l204.34 -1104.83 769.37 0 -392.85 2122.57 -776.79 0 -392.85 -1095.92c-10.64,305.55 -121.06,792.54 -176.63,1095.92l-778.28 0z"/>
+   <polygon class="fil3" points="866.11,1371.66 2575.66,1474.01 831.6,1559.08 1313.49,1474.01 "/>
+   <polygon class="fil4" points="793.26,1767.3 2494.95,1869.18 758.82,1954.34 1232.79,1869.18 "/>
+   <polygon class="fil5" points="726.5,2153.16 2440.05,2255.75 709.02,2340.18 1177.89,2255.76 "/>
+   <polygon class="fil6" points="654.28,2587.28 2367.83,2689.87 636.79,2774.3 1105.67,2689.88 "/>
+   <polygon class="fil7" points="569.81,2980.74 2288.15,3081.48 534.55,3169.71 1025.99,3081.49 "/>
+   <path class="fil8" d="M2912.84 2739.4l-47.13 233.17 88.29 0c52.5,0 94.79,-10.23 127.15,-30.34 32.43,-20.45 52.19,-49.09 59.71,-86.25 7.65,-37.84 -0.47,-66.81 -24.77,-86.58 -24.23,-20.11 -62.45,-30 -114.95,-30l-88.29 0zm105.02 -519.52l-41.34 204.53 69.2 0c42.61,0 77.13,-8.86 103.21,-26.59 25.67,-17.39 42.09,-42.95 48.85,-76.36 6.68,-33.07 0.53,-58.29 -18.11,-75.68 -18.98,-17.39 -49.98,-25.91 -92.59,-25.91l-69.2 0zm-718.26 1114.71l20.76 -103.91 261.19 -67.1 -233.48 -68.76 32.51 -160.81 260.86 -66.67 -233.85 -66.93 33.1 -163.72 261.08 -67.76 -233.58 -68.27 22.29 -110.26 261.13 -68.03 -233.73 -67.55 26.93 -133.2 260.94 -67.08 -233.57 -68.35 23.04 -114 700.19 0c149.65,0 259.14,35.11 328.8,105.34 69.66,70.22 91.82,168.06 66.53,293.16 -16.19,80.11 -49.34,146.24 -99.63,199.42 -50.56,52.84 -113.43,87.27 -189.28,103.29 95,20.79 161.46,59.65 198.63,116.92 37.17,57.27 45.8,134.31 26.3,230.78 -27.57,136.36 -94.47,239.65 -200.91,309.19 -106.1,69.54 -248.8,104.31 -428.11,104.31l-698.14 0z"/>
+   <polygon class="fil9" points="2555.44,1986.87 3401.83,2054.52 2530.83,2121.62 2776.03,2054.52 "/>
+   <polygon class="fil10" points="2504.61,2254.71 3351,2322.36 2480,2389.46 2725.2,2322.36 "/>
+   <polygon class="fil11" points="2457.82,2501.28 3304.21,2568.93 2433.21,2636.03 2678.41,2568.93 "/>
+   <polygon class="fil12" points="2401.18,2799.69 3247.58,2867.34 2376.58,2934.44 2621.78,2867.34 "/>
+   <polygon class="fil13" points="2344.97,3095.94 3191.36,3163.59 2320.36,3230.69 2565.56,3163.59 "/>
+  </g>
+  <path class="fil14" d="M2102.5 0c1161.18,0 2102.5,941.32 2102.5,2102.5 0,1161.18 -941.32,2102.5 -2102.5,2102.5 -1161.18,0 -2102.5,-941.32 -2102.5,-2102.5 0,-1161.18 941.32,-2102.5 2102.5,-2102.5z"/>
  </g>
 </svg>

@@ -4,7 +4,7 @@
 .material-icons-outlined.md-48 { font-size: 48px; }
 
 body{
-    margin-left: 15px;
+    margin:0px;
 }
 
 #LogoPrincipal{
@@ -97,12 +97,12 @@ h3{
 }
 
 .tFooter th{
-    color: white;
-    text-align: center!important;
-    border-bottom: #000000!important;
-    border-top: #000000!important;
-    font-size: 150%;
-    padding: 0%!important;
+   color: #CCC;
+   text-align: center!important;
+   border-bottom: #000000!important;
+   border-top: #000000!important;
+   font-size: 150%;
+   padding: 0%!important;
 
 }
 
