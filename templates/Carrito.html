@@ -1,0 +1,101 @@
+{% extends 'template.html' %}
+{% block head %}
+<title>Carrito</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Carrito.css') }}">
+
+{% endblock %}
+
+{% block contenido %}
+<div class="ContenedorGlobal">
+    <div class="Titulo">
+        <span class="material-icons-outlined" id="IconoCarrito">shopping_cart</span> <h2> CARRITO DE COMPRA </h2>
+    </div>
+    <div class="ContenedorProductos">
+        <div class="ProductoSeleccionado">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{{ url_for('static',filename='imagenes/Producto_Zapatillas/M680LR7_1.jpg') }}">
+                </div>
+                <div class="col-9">
+                    <br>
+                    <ul>
+                        <li><strong> Nombre del producto: </strong></li>
+                        <li><strong> Detalles: </strong></li>
+                        <li><strong> Talla: </strong></li>
+                        <li><strong>  Precio: </strong></li>
+                    </ul>
+                    <div class="row">
+                        <div class="col">
+                            <select class="custom-select custom-select-sm Numero">
+                                <option selected>Seleccionar unidades</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>    
+                        </div>
+                        <div class="col">
+                            <button class="eliminar">Quitar</button> 
+                        </div>
+                        <div class="col">
+                            <h6 class="valor">Subtotal=$60.000</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="ProductoSeleccionado">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{{ url_for('static',filename='imagenes/Producto_Zapatillas/ML574PU2_1.jpg') }}">
+                </div>
+                <div class="col-9">
+                    <br>
+                    <ul>
+                        <li><strong> Nombre del producto: </strong></li>
+                        <li><strong> Detalles: </strong></li>
+                        <li><strong> Talla: </strong></li>
+                        <li><strong>  Precio: </strong></li>
+                    </ul>
+                    <div class="row">
+                        <div class="col">
+                            <select class="custom-select custom-select-sm Numero">
+                                <option selected>Seleccionar unidades</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>    
+                        </div>
+                        <div class="col">
+                            <button class="eliminar">Quitar</button> 
+                        </div>
+                        <div class="col">
+                            <h6 class="valor">Subtotal=$80.000</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>      
+
+    </div>
+
+    <div class="Titulo2">
+        <h2> Total de su pedido </h2>
+    </div>
+
+    <div class="Pagototal">
+        <h6 class="valortotal">Total=$140.000</h6>
+        <button class="btnvtotal" id="CtnCompra"><strong> CONTINUAR </strong></button>
+        <button class="btnvtotal" id="SgrComprando"><strong> SEGUIR COMPRANDO </strong></button>
+        
+    </div>
+
+</div>
+
+{% endblock %}

@@ -24,6 +24,13 @@ def login():
 def registro():
     return render_template('registro.html')
 
+@app.route('/producto/')
+def productoind():
+    return render_template('ProductoIndividual.html')
+
+@app.route('/carrito/')
+def carrito():
+    return render_template('Carrito.html')
 @app.route('/gestioncomentario/')
 def gestioncomentario():
     return render_template('gestion_comentario.html')
@@ -153,12 +160,12 @@ def block_usuario(nickname, estado):
     return render_template('administrador.html',error="No se pudo bloquear al usuario",lista_usuarios=usuario.listado())
 
 """Ruta para llamar a los productos de hombre"""
-@app.route('/productos_hombre/')
+@app.route('/productos/hombre/')
 def lista_de_productos_hombre():
     return render_template('productos_hombre.html')
 
 """Ruta para llamar a los productos de mujer"""
-@app.route('/productos_mujer/')
+@app.route('/productos/mujer/')
 def lista_de_productos_mujer():
     return render_template('productos_mujer.html')
 
@@ -177,7 +184,7 @@ def superadministrador():
     return render_template('superadministrador.html')
 
 """Ruta para todos los comentarios de un producto"""
-@app.route('/todos_los_comentarios/')
+@app.route('/comentarios/')
 def todos_los_comentarios():
     return render_template('todos_los_comentarios.html')
 
