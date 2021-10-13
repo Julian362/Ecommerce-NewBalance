@@ -14,11 +14,12 @@
     width: 150;
     text-align: center;
     font-size: 65px;
+    color:#E74236;
 }
 
 /* Sombra de la calificación */
 .puntuacion_promedio h4:hover {
-    color: #242942;
+    color: #E74236;
     text-shadow: 2px 2px 15px white;
 }
 
@@ -106,6 +107,7 @@
     text-align: left;
     padding-top: 25px;
     padding-left: 10px;
+    color:#E74236;
 }
 
 .comentarios{
@@ -113,4 +115,7 @@
     padding-top: 0px;
     padding-left: 25px;
     padding-right: 25px;
+}
+.h4{
+    color:#E74236;
 }
