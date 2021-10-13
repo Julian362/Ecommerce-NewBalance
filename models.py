@@ -62,6 +62,13 @@ class usuario():
             if obj > 0:
                 return True
 
+    def crear(cls,nombre, apellidos, correo, documento, celular, nickname):
+        sql="INSERT INTO usuario (estado,nickname,nombre,apellidos,documento,sexo,correo,celular) VALUES ('?','?','?','?','?','?','?','?');"
+        obj = db.ejecutar_insert(sql,["T",nickname,nombre, apellidos, documento,"M", correo, celular])
+        if obj:
+            if obj > 0:
+                return True
+
         return False
 
     @staticmethod
