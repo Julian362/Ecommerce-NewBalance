@@ -14,14 +14,19 @@
 
 {% block contenido %}
     <div class="titulo-gestionar-usuario">
+        <span class="material-icons-outlined md-40">account_circle</span>
         <h1 style="text-align: center;">Gestionar usuario</h1>
     </div>
-    <form class="form-inline">
-        <div style="width:65%; margin:auto;">
-            <input style="width: 91%;" class="form-control " type="search" placeholder="Buscar usuario" aria-label="Search">
-            <button class="btn btn-outline-one">Buscar</button>
-        </div>
-    </form>
+    {% if formBuscar %}
+    <div style="width:65%; margin:auto;">
+        <form action="{{ url_for('buscar_usuario') }}" method="POST" class="form-inline">
+            {{ formBuscar.hidden_tag() }}
+            <!-- <input style="width: 91%;" class="form-control " type="submit" placeholder="Buscar usuario" aria-label="Search"> -->
+            {{ formBuscar.buscar(style="width: 90%;", class="form-control ", placeholder="Buscar usuario") }}
+            <button class="btn btn-outline-one" style="width: 10%;" type="submit">Buscar</button>
+        </form>
+    </div>
+    {% endif %}
     {% if mensaje %}
         <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
     {% endif %}
@@ -30,8 +35,13 @@
     {% endif %}
     {% if form %}
         <div class="ContenedorFomulario">
-            <form class="FormularioRegistro" action="{{ url_for('edit_usuario', nickname = usuario.nickname) }}" method="POST">
-                <!-- linea para el token  -->
+            <form class="FormularioRegistro"
+            {% if usuario %}
+                action="{{ url_for('edit_usuario', nickname = usuario.nickname) }}"
+            {% else %}
+                action="{{ url_for('crear_usuario') }}"
+            {% endif %}
+            method="POST">
                 {{ form.hidden_tag() }}
                 <div>
                     <h1 style="text-align: center;">Editar usuario</h1>
@@ -41,54 +51,72 @@
                             <hr>
                             <div class="row">
                                 <div class="col">
-                                    <!-- <input type="text" class="form-DatosP" placeholder="Nombre" value="{{usuario.nombre}}"> -->
                                     {{ form.nombre(type="text", class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
                                 </div>
                                 <div class="col">
-                                    <!-- <input type="text" class="form-DatosP" placeholder="Apellido" value="{{usuario.apellidos}}"> -->
                                     {{ form.apellidos(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Apellidos") }}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <!-- <input type="email" class="form-DatosP" placeholder="Correo" value="{{usuario.correo}}"> -->
                                     {{ form.correo(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo") }}
                                 </div>
                                 <div class="col">
-                                    <div style="margin-top: 1%;">
+                                    <div style="margin-top: 6px;">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" readonly="" value="option1"
                                             {% if usuario %}
                                                 {% if usuario.sexo == "M" %}
-                                                    checked
+                                                    {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="M", checked="true")}}
+                                                {% else %}
+                                                    {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="M")}}
                                                 {% endif %}
+                                            {% else %}
+                                                {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="M")}}
                                             {% endif %}
-                                            disabled>
                                             <label class="form-check-label" for="inlineRadio1">Hombre</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexo" readonly="" value="option2"
                                             {% if usuario %}
                                                 {% if usuario.sexo == "F" %}
-                                                    checked
+                                                    {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="F", checked="true")}}
+                                                {% else %}
+                                                    {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="F")}}
                                                 {% endif %}
+                                            {% else %}
+                                                {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="F")}}
                                             {% endif %}
-                                            disabled>
                                             <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                        {% if usuario %}
+                                                {% if usuario.sexo == "O" %}
+                                                    {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="O", checked="true")}}
+                                                {% else %}
+                                                    {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="O")}}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ form.sexo(class="form-check-input", type="radio", id="inlineRadio1", value="O")}}
+                                        {% endif %}
+                                            <label class="form-check-label" for="inlineRadio2">Otro</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <!-- <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" value="{{usuario.documento}}"> -->
                                     {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
                                 </div>
                                 <div class="col">
-                                    <!-- <input type="text" class="form-DatosP" placeholder="Telefono Celular" value="{{usuario.celular}}"> -->
                                     {{ form.celular(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular") }}
                                 </div>
                             </div>
+                            {% if opcion == "Crear" %}
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form.nickname(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Nickname") }}
+                                    </div>
+                                </div>
+                            {% endif %}
                             <div class="row">
                                 <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"value="{{opcion}}">
                             </div>
