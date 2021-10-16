@@ -126,7 +126,7 @@ h6{
 
 .Visual h1{
     margin-top: 15px;
-    color:red;
+    color:#E74236;
     font-size: 80px;
     padding-left: 30%;
 }
@@ -151,7 +151,7 @@ h6{
 
 .Visual h6{
     margin-top: 0;
-    color:red;
+    color:#E74236;
     margin-left: 13%;
 }
 
@@ -186,7 +186,7 @@ label h6{
 
 #pri{
     background-color:#cccccc;
-    color:red;
+    color:#E74236;
 }
 
 .barra{
@@ -194,6 +194,7 @@ label h6{
     height: 7px ;
     text-align: left;
     padding: 0%;
+    
 }
 
 .progress-bar{
@@ -202,8 +203,16 @@ label h6{
 }
 
 .col-6{
+    margin-top: 0px;
     padding-left: 0%;
 }
+.col-4{
+    margin-top: 5px;
+}
+.col-2{
+    margin-top:5px;
+}
+
 .Calificacion{
     margin-top: 20px;
 }

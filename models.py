@@ -55,16 +55,16 @@ class usuario():
         return False
 
     @classmethod
-    def editar(cls,nombre, apellidos, correo, documento, celular, nickname):
-        sql="UPDATE usuario set nombre = ?,apellidos = ?, correo= ? ,documento= ? ,celular= ? where nickname= ?"
-        obj = db.ejecutar_insert(sql,[nombre, apellidos, correo, documento, celular, nickname])
+    def editar(cls,nombre, apellidos, correo, documento, celular, nickname, sexo):
+        sql="UPDATE usuario set nombre = ?,apellidos = ?, correo= ? ,documento= ? , celular= ?, sexo= ? where nickname= ?"
+        obj = db.ejecutar_insert(sql,[nombre, apellidos, correo, documento, celular,  sexo, nickname])
         if obj:
             if obj > 0:
                 return True
 
-    def crear(cls,nombre, apellidos, correo, documento, celular, nickname):
-        sql="INSERT INTO usuario (estado,nickname,nombre,apellidos,documento,sexo,correo,celular) VALUES ('?','?','?','?','?','?','?','?');"
-        obj = db.ejecutar_insert(sql,["T",nickname,nombre, apellidos, documento,"M", correo, celular])
+    def crear(cls,nombre, apellidos, correo, documento, celular, nickname, sexo):
+        sql="INSERT INTO usuario (estado,nickname,nombre,apellidos,documento,sexo,correo,celular) VALUES (?,?,?,?,?,?,?,?);"
+        obj = db.ejecutar_insert(sql,["T",nickname,nombre, apellidos, documento,sexo, correo, celular])
         if obj:
             if obj > 0:
                 return True
