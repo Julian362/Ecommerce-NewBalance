@@ -1,0 +1,103 @@
+{% extends 'template.html' %}
+{% block head %}
+<title>New Balance</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contactos.css') }}">
+<script src="{{ url_for ('static', filename='Js/contactos.js') }}"></script>
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="imgHead">
+    <img class="col logo" src="{{ url_for('static', filename='imagenes/New_Balance.svg') }}" alt="">
+    <p><strong>Proyecto Ciclo3:</strong></p>
+    <p>E-comerce New Balance</p>
+    <p><strong> Agradecimientos a: </strong></p>
+
+    <div class="Creditos">
+        <img src="{{ url_for('static', filename='imagenes/MisionTic.png') }}" alt="Uninorte">
+        <img src="{{ url_for('static', filename='imagenes/Uninorte.png') }}" alt="Uninorte">
+    </div>
+</div>
+
+
+
+
+
+<!-- Creadores del proyecto -->
+
+<p class="headCreadores"> Creadores: </p>
+<div class="row contactos">
+
+
+    <div class="col dataPersona">
+
+        <a href="{{url_for('linkedinDavid')}}" target="_blank"><img
+                src="{{ url_for('static', filename='imagenes/pruebaRostro.jpg') }}" alt=""></a>
+        <div class="expandir">
+            <p><i> David D. Hernández M. </i> </p>
+            <p><Strong>Nickname:</Strong></p>
+            <p>DavHD</p>
+            <p><strong>Campo Laboral:</strong></p>
+            <p>Ingeniería Electrónica</p>
+            <p><strong>davidhdz99@hotmail.com</strong></p>
+        </div>
+    </div>
+    <div class="col dataPersona">
+        <a href="{{url_for('linkedinJulian')}}" target="_blank">
+            <img src="{{ url_for('static', filename='imagenes/pruebaRostro.jpg') }}" alt=""></a>
+        <div class="expandir">
+            <p><i> Julian Garcia A. </i> </p>
+            <p><Strong>Nickname:</Strong></p>
+            <p>Julian362</p>
+            <p><strong>Campo Laboral:</strong></p>
+            <p>Ingeniería Informática </p>
+            <p><strong>Julianga362@gmail.com </strong></p>
+        </div>
+    </div>
+
+    <div class="col dataPersona">
+
+        <a href="{{url_for('linkedinMajo')}}" target="_blank"><img
+                src="{{ url_for('static', filename='imagenes/pruebaRostro.jpg') }}" alt=""></a>
+        <div class="expandir">
+            <p><i> María J. Sierra J. </i> </p>
+            <p><Strong>Nickname:</Strong></p>
+            <p>MjSierra</p>
+            <p><strong>Campo Laboral:</strong></p>
+            <p>Ingeniería Química </p>
+            <p><strong>mjsierra319@gmail.com </strong></p>
+        </div>
+    </div>
+
+    <div class="col dataPersona">
+        <a href="{{url_for('linkedinRaul')}}" target="_blank"><img
+                src="{{ url_for('static', filename='imagenes/pruebaRostro.jpg') }}" alt=""></a>
+        <div class="expandir">
+            <p><i>Raúl A. Castaño C.</i> </p>
+            <p><Strong>Nickname:</Strong></p>
+            <p>Racastaño</p>
+            <p><strong>Campo Laboral:</strong></p>
+            <p>Ingeniero Mecánico</p>
+            <p><strong>raulkastano1@gmail.com</strong></p>
+        </div>
+    </div>
+
+    <div class="col dataPersona">
+        <a href="{{url_for('linkedinInri')}}" target="_blank"><img
+                src="{{ url_for('static', filename='imagenes/FotoContactosInri.jpg') }}" alt=""></a>
+        <div class="expandir">
+            <p><i>Jesús S. Álvarez S.</i></p>
+            <p><Strong>Nickname:</Strong></p>
+            <p>INRIAs</p>
+            <p><strong>Campo Laboral:</strong></p>
+            <p>Productor Multimedia</p>
+            <p><strong>Inrialva@gmail.com</strong></p>
+        </div>
+    </div>
+
+
+
+
+</div>
+{% endblock %}

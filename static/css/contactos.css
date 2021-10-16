@@ -1,0 +1,183 @@
+.imgHead {
+    width: 50%;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+.imgHead p {
+    color: #fff;
+    font-size: 0px;
+    text-align: center;
+    margin: 5px;
+}
+
+
+
+.logo {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo:hover{
+    width: 60%;
+    transition: 2s;
+}
+
+.logo:not(:hover){
+    width: 50%;
+    transition: 2s;
+}
+
+.Creditos {
+    width: 10%;
+    height: 0px;
+    overflow: hidden;
+}
+
+.Creditos img {
+    width: 30%;
+    margin: 0px 15px;
+}
+
+.imgHead:hover .Creditos {
+    width: 30%;
+    height: 50px;
+    overflow: hidden;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.imgHead:hover p {
+    color: #000000;
+    font-size: 15px;
+    transition: 2s;
+}
+
+.imgHead:not(:hover ) p {
+    color: #ffffff;
+    font-size: 0px;
+    transition: 1s;
+}
+
+.imgHead:not(:hover) .Creditos {
+    width: 10%;
+    height: 0px;
+    overflow: hidden;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+/* ------------------Creadores---------------------- */
+.headCreadores{
+    display: block;
+    text-align: center;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.contactos {
+    width: 95%;
+    padding: 10px;
+    margin: auto;
+}
+
+/* ------------------------------------------ */
+.dataPersona{
+    width: 18%;
+}
+
+.dataPersona:hover{
+    border-radius: 5%;
+    box-shadow: 0 0 4px 4px #b5b5b5;
+    transition: 2s;
+
+}
+
+
+
+.expandir{
+    width: 100%!important;
+    height: 0;
+    overflow: hidden;
+}
+
+.dataPersona:hover>.expandir{
+    width: 100%;
+    height: 230px;
+    color: #000000;
+    opacity: 1;
+
+    transition: 1s;
+
+}
+
+.dataPersona:not(:hover)>.expandir{
+    width: 100%;
+    height: 0px;
+    color: #ffffff;
+    opacity: 0;
+    transition: 1s;
+}
+
+.expandir p{
+
+    text-align: center;
+    font-size: 0%;
+    margin: 5px 0px;
+}
+
+.dataPersona img {
+    width: 80%;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 3px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px 2px rgb(255, 255, 255);
+}
+
+.dataPersona img:hover {
+    box-shadow: 1px 1px 6px 3px rgb(176, 191, 178);
+    width: 90%;
+    transition: 2s;
+}
+
+.dataPersona img:not(:hover) {
+    box-shadow: 0 0 2px 2px rgb(255, 255, 255);
+    transition: 1s;
+}
+
+.dataPersona:hover>.expandir p{
+    font-size: 100%;
+    transition: 1s;
+}
+
+.dataPersona:not(:hover)>.expandir p{
+    font-size: 0%;
+    transition: 1s;
+}
+
+.expandir p i {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+

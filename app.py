@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template,  request
+from flask import Flask, render_template,  request, redirect
 from models import usuario
 from forms import FormEditUsuario
 
@@ -191,3 +191,23 @@ def todos_los_comentarios():
 @app.route('/contactos/')
 def contactos():
     return render_template('contactos.html')
+
+@app.route('/linkedinInri')
+def linkedinInri():
+    return redirect('https://www.linkedin.com/in/stivenas')
+
+@app.route('/linkedinJulian')
+def linkedinJulian():
+    return redirect('https://www.linkedin.com/in/julianga/')
+
+@app.route('/linkedinRau')
+def linkedinRaul():
+    return redirect('https://www.linkedin.com/in/raúl-andres-castaño-castellar-41b75bb3/')
+
+@app.route('/linkedinDavid')
+def linkedinDavid():
+    return redirect('https://www.linkedin.com/in/david-daniel-hernandez-molina-98aab920a/')
+
+@app.route('/linkedinMajo')
+def linkedinMajo():
+    return redirect('https://www.linkedin.com/in/mar%C3%ADa-jos%C3%A9-sierra-jim%C3%A9nez-3582a99a/')
