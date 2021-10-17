@@ -1,12 +1,9 @@
 .imgHead {
     width: 50%;
-    margin-left: 1px;
-    margin-right: 1px;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
 }
-
 
 .imgHead p {
     color: #fff;
@@ -18,7 +15,7 @@
 
 
 .logo {
-    width: 50%;
+    width: 60%;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -26,12 +23,12 @@
 }
 
 .logo:hover{
-    width: 60%;
+    width: 70%;
     transition: 2s;
 }
 
 .logo:not(:hover){
-    width: 50%;
+    width: 60%;
     transition: 2s;
 }
 
@@ -42,13 +39,13 @@
 }
 
 .Creditos img {
-    width: 30%;
+    width: 40%;
     margin: 0px 15px;
 }
 
 .imgHead:hover .Creditos {
     width: 30%;
-    height: 50px;
+    height: 70px;
     overflow: hidden;
     margin: auto;
     display: flex;
