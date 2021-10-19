@@ -8,10 +8,6 @@ app = Flask(__name__)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-""" @app.route('/template')
-def hola_mundo():
-    return render_template('template.html') """
-
 @app.route('/')
 def index():
     return render_template('index.html')

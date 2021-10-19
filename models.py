@@ -1,6 +1,7 @@
 import db
 
-class usuario():
+#Clase usuario, para la respectiva pantalla.
+class usuario(): 
 
     estado = 'F'
     nickname = ''
@@ -11,6 +12,7 @@ class usuario():
     sexo = ''
     correo = ''
 
+    #Se establece el método constructor
     def __init__(self, p_nickname, p_estado, p_nombre, p_apellidos, p_documento, p_celular, p_sexo, p_correo) -> None:
         self.estado = p_estado
         self.nickname = p_nickname
@@ -21,6 +23,7 @@ class usuario():
         self.correo = p_correo
         self.celular = p_celular
 
+    #Función para cargar los datos
     @classmethod
     def cargar(cls, p_nickname):
         sql = 'SELECT * FROM usuario Where nickname = ?;'
@@ -31,6 +34,7 @@ class usuario():
 
         return None
 
+    #Función para eliminar
     @classmethod
     def delete(cls, p_nickname):
         sql = 'DELETE FROM usuario Where nickname = ?;'
@@ -41,6 +45,7 @@ class usuario():
 
         return None
 
+    #Función para el bloquear o desbloquear al usuario
     @classmethod
     def block(cls, p_nickname, p_estado):
         if p_estado == "T":
@@ -54,6 +59,7 @@ class usuario():
 
         return False
 
+    #Función para editar los datos de usuario
     @classmethod
     def editar(cls,nombre, apellidos, correo, documento, celular, nickname, sexo):
         sql="UPDATE usuario set nombre = ?,apellidos = ?, correo= ? ,documento= ? , celular= ?, sexo= ? where nickname= ?"
@@ -62,6 +68,7 @@ class usuario():
             if obj > 0:
                 return True
 
+    #Función para crear al usuario
     def crear(cls,nombre, apellidos, correo, documento, celular, nickname, sexo):
         sql="INSERT INTO usuario (estado,nickname,nombre,apellidos,documento,sexo,correo,celular) VALUES (?,?,?,?,?,?,?,?);"
         obj = db.ejecutar_insert(sql,["T",nickname,nombre, apellidos, documento,sexo, correo, celular])
@@ -71,6 +78,7 @@ class usuario():
 
         return False
 
+    #Función para obtener el listado de los usuarios
     @staticmethod
     def listado():
         sql = "SELECT * FROM usuario ORDER BY nickname;"
