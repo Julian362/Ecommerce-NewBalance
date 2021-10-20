@@ -38,3 +38,6 @@ class FormRegistro(FlaskForm):
     ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
     direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
     registro = SubmitField('Registro')
+
+class FormGestionarComentario(FlaskForm):
+    opinion = StringField('opinión',validators.length(max=300))
