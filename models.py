@@ -81,5 +81,25 @@ class usuario():
     #Función para obtener el listado de los usuarios
     @staticmethod
     def listado():
-        sql = 'SELECT persona.* FROM persona inner join rol on persona.tipo_rol = "user" ORDER BY documento;'
+        sql = 'SELECT DISTINCT persona.* FROM persona inner join rol on persona.tipo_rol = "user" ORDER BY documento;'
         return db.ejecutar_select(sql, None)
+
+class calificacion:
+    id = 0
+    puntuacion = 0
+    comentario = ''
+    nickname = ''
+
+    def __init__(self, p_puntuacion, p_comentario) -> None:
+        self.puntuacion = p_puntuacion
+        self.comentario = p_comentario
+
+    @classmethod
+    def cargar(cls, p_documento):
+        sql = 'SELECT DISTINCT calificacion.* persona.nickname FROM calificacion inner join producto on producto.referencia = calificacion.referencia_producto inner join carrito  on  carrito.referencia_producto = producto.referencia inner join persona on persona.documento = carrito.documento_persona where persona.documento = ?;'
+        obj = db.ejecutar_select(sql,[ p_documento ])
+        if obj:
+            if len(obj)>0:
+                return cls(obj[0]["puntuacion"],obj[0]["comentario"],obj[0]["nickname"])
+
+        return None
