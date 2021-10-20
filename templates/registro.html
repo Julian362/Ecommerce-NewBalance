@@ -7,7 +7,9 @@
 
 {% block contenido %}
 <div class="ContenedorFomulario">
+    {% if form %}
     <form class="FormularioRegistro">
+        
         <div>
             <h1 style="text-align: center;">Registro de nuevo usuario</h1>
             <div>
@@ -16,71 +18,71 @@
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Nombre" required>
+                            {{form.nombre(class="form-DatosP form-control mr-sm-1", placeholder="Nombre")}}
                         </div>
                         <div class="col">
-                            <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Apellido" required>
+                            {{form.apellido(class="form-DatosP form-control mr-sm-1", placeholder="Apellidos")}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="email" class="form-DatosP form-control mr-sm-1" placeholder="Correo" required>
+                            {{form.correo(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo")}}
                         </div>
                         <div class="col" style="margin-top: 5px;">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                    value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Hombre</label>
+                                {{form.sexo(class="form-check-input", type="radio", id="inlineRadio1",
+                                value="M")}}
+                                <label class="form-check-label" for="inlineRadio1">Masculino</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
-                                <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                                {{form.sexo(class="form-check-input", type="radio", id="inlineRadio2",
+                                value="F")}}
+                                <label class="form-check-label" for="inlineRadio2">Femenino</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
+                                {{form.sexo(class="form-check-input", type="radio", id="inlineRadio2",
+                                value="O")}}
                                 <label class="form-check-label" for="inlineRadio2">Otro</label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="number" class="form-DatosP form-control mr-sm-1" placeholder="CC/CE/NIT" required>
+                            {{form.documento(class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT")}}
                         </div>
                         <div class="col">
-                            <input type="number" class="form-DatosP form-control mr-sm-1" placeholder="Telefono celular" required>
+                            {{form.telefono(type="number", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular")}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="password" class="form-DatosP form-control mr-sm-1" placeholder="Contraseña" required>
+                            {{form.contrasena(class="form-DatosP form-control mr-sm-1", placeholder="Contraseña")}}
                         </div>
                         <div class="col">
-                            <input type="password" class="form-DatosP form-control mr-sm-1" placeholder="Confirmar contraseña" required>
+                            {{form.confirmarContraseña(class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña")}}
                         </div>
                     </div>
                     <h4>Detalles de dirección de entrega</h4>
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="País" required>
+                            {{form.pais(class="form-DatosP form-control mr-sm-1", placeholder="País")}}
                         </div>
                         <div class="col">
-                            <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Departamento" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Ciudad" required>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Dirección" required>
+                            {{form.departamento(class="form-DatosP form-control mr-sm-1", placeholder="Departamento")}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="submit" id="registrarse" class="btn btn-outline-registro" value="Registro">
+                            {{form.ciudad(class="form-DatosP form-control mr-sm-1", placeholder="Ciudad")}}
+                        </div>
+                        <div class="col">
+                            {{form.direccion(class="form-DatosP form-control mr-sm-1", placeholder="Dirección")}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{form.registro(id="registrarse", class="btn btn-outline-registro")}}
                         </div>
                         <div class="col">
                             <a href="{{url_for('login') }}" id="registrarse" class="btn btn-outline-registro"> Ya tengo cuenta </a>
@@ -89,5 +91,6 @@
                 </div>
 
     </form>
+    {% endif %}
 </div>
 {% endblock %}
