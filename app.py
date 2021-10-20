@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template,  request, redirect
 from models import usuario
-from forms import FormEditUsuario, FormCrearUsuario, FormBuscar
+from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormRegistro
 
 app = Flask(__name__)
 
@@ -18,7 +18,7 @@ def login():
 
 @app.route('/registro/')
 def registro():
-    return render_template('registro.html')
+    return render_template('registro.html', form=FormRegistro())
 
 @app.route('/producto/')
 def productoind():
