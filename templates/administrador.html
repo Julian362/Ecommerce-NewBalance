@@ -15,7 +15,7 @@
 {% block contenido %}
     <div class="titulo-gestionar-usuario">
         <span class="material-icons-outlined md-40">account_circle</span>
-        <h1 style="text-align: center;">Gestionar usuario</h1>
+        <h1 style="text-align: center;">GESTIONAR USUARIOS</h1>
     </div>
     {% if formBuscar %}
     <div style="width:65%; margin:auto;">
@@ -44,7 +44,7 @@
             method="POST">
                 {{ form.hidden_tag() }}
                 <div>
-                    <h1 style="text-align: center;">Editar usuario</h1>
+                    <h1 style="text-align: center;">Usuario</h1>
                     <div>
                         <div class="ContenedorDP">
                             <h4>Datos del usuario</h4>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    {{ form.correo(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo") }}
+                                    {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
                                 </div>
                                 <div class="col">
                                     <div style="margin-top: 6px;">
@@ -104,19 +104,42 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                    {{ form.nickname(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Nickname") }}
                                 </div>
                                 <div class="col">
                                     {{ form.celular(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular") }}
+                                </div>                             
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.correo(class="form-DatosP form-control mr-sm-1", placeholder="Correo") }}
+                                </div>
+                                <div class="col">
+                                    {{ form.pais(class="form-DatosP form-control mr-sm-1", placeholder="País") }}
                                 </div>
                             </div>
-                            {% if opcion == "Crear" %}
-                                <div class="row">
-                                    <div class="col">
-                                        {{ form.nickname(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Nickname") }}
-                                    </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.departamento(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Departamento") }}
                                 </div>
-                            {% endif %}
+                                <div class="col">
+                                    {{ form.ciudad(class="form-DatosP form-control mr-sm-1", placeholder="Ciudad") }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.direccion(class="form-DatosP form-control mr-sm-1", placeholder="Dirección") }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.contrasena(class="form-DatosP form-control mr-sm-1", placeholder="Contraseña") }}
+                                </div>
+                                <div class="col">
+                                    {{ form.confirmarcontrasena(class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña") }}
+                                </div>
+                            </div>
                             <div class="row">
                                 <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"value="{{opcion}}">
                             </div>

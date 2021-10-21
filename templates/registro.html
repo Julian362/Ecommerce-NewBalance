@@ -9,7 +9,7 @@
 <div class="ContenedorFomulario">
     {% if form %}
     <form class="FormularioRegistro">
-        
+        {{form.hidden_tag()}}
         <div>
             <h1 style="text-align: center;">Registro de nuevo usuario</h1>
             <div>
@@ -28,6 +28,33 @@
                         <div class="col">
                             {{form.correo(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo")}}
                         </div>
+                        <div class="col">
+                            {{form.nickname(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Nickname")}}
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{form.documento(class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT")}}
+                        </div>
+                        <div class="col">
+                            {{form.telefono(type="number", class="form-DatosP form-control mr-sm-1",
+                            placeholder="Teléfono celular")}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{form.contrasena(class="form-DatosP form-control mr-sm-1", placeholder="Contraseña")}}
+                        </div>
+                        <div class="col">
+                            {{form.confirmarContraseña(class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña")}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="checkbox" class="" id="exampleCheck1">
+                            <label class="" for="exampleCheck1">Acepta términos y condiciones</label>
+                        </div>
                         <div class="col" style="margin-top: 5px;">
                             <div class="form-check form-check-inline">
                                 {{form.sexo(class="form-check-input", type="radio", id="inlineRadio1",
@@ -44,22 +71,6 @@
                                 value="O")}}
                                 <label class="form-check-label" for="inlineRadio2">Otro</label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{form.documento(class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT")}}
-                        </div>
-                        <div class="col">
-                            {{form.telefono(type="number", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular")}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{form.contrasena(class="form-DatosP form-control mr-sm-1", placeholder="Contraseña")}}
-                        </div>
-                        <div class="col">
-                            {{form.confirmarContraseña(class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña")}}
                         </div>
                     </div>
                     <h4>Detalles de dirección de entrega</h4>
@@ -80,13 +91,11 @@
                             {{form.direccion(class="form-DatosP form-control mr-sm-1", placeholder="Dirección")}}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            {{form.registro(id="registrarse", class="btn btn-outline-registro")}}
-                        </div>
-                        <div class="col">
-                            <a href="{{url_for('login') }}" id="registrarse" class="btn btn-outline-registro"> Ya tengo cuenta </a>
-                        </div>
+                    <div class="terminos2">
+                        {{form.registro(id="registrarse", class="btn btn-outline-registro")}}
+                    </div>
+                    <div class="terminos2">
+                        <a href="{{url_for('login')}}" id="registrarse" class="registro"> Ya tengo cuenta </a>
                     </div>
                 </div>
 

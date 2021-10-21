@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template,  request, redirect
 from models import usuario
-from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormRegistro, FormMiCuenta, FormAdministrador, FormBuscarAdministrador
+from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormRegistro, FormMiCuenta, FormAdministrador, FormBuscarAdministrador,FormGestionProducto, FormLogin, FormGestionarComentario
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def index():
 
 @app.route('/login/')
 def login():
-    return render_template('login.html')
+    return render_template('login.html', form=FormLogin())
 
 @app.route('/registro/')
 def registro():
@@ -29,7 +29,7 @@ def carrito():
     return render_template('Carrito.html')
 @app.route('/gestioncomentario/')
 def gestioncomentario():
-    return render_template('gestion_comentario.html')
+    return render_template('gestion_comentario.html', form=FormGestionarComentario())
 
 @app.route('/administrador/')
 def administrador():
@@ -134,7 +134,7 @@ def lista_de_productos_mujer():
 
 @app.route('/gestion/productos/')
 def gestion_productos():
-    return render_template('gestion_productos.html')
+    return render_template('gestion_productos.html',form=FormGestionProducto(), )
 
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion/micuenta/')
