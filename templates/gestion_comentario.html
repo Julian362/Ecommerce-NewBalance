@@ -35,7 +35,10 @@
                 </div>
                 <h3 style="padding: 0%;">Nickname</h3>
                 <h3 style="padding: 0%;">Opinión</h3>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                {% if form %}
+                {{ form.opinion(class="form-control") }}
+                <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                {% endif %}
                 <!-- <input style="height: 300px;" type="text" class="form-control" id="" placeholder="ingresa tu opinión"> -->
             </div>
             <div class="modal-footer">

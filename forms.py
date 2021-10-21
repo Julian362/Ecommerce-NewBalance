@@ -40,4 +40,4 @@ class FormRegistro(FlaskForm):
     registro = SubmitField('Registro')
 
 class FormGestionarComentario(FlaskForm):
-    opinion = StringField('opinión',validators.length(max=300))
+    opinion = TextAreaField('opinión',[validators.length(max=300)])
