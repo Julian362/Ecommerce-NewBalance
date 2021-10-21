@@ -51,6 +51,7 @@
 
 .ContenedorDP>.col {
     margin: 10px;
+    margin: auto;
 }
 
 .FormularioProducto col {
@@ -104,20 +105,10 @@ hr {
     width: 90%;
     margin: auto;
     background-color: #eeeeee;
-    margin-top: 15px;
     margin-bottom: 15px;
-    padding-top: 3px;
     padding-bottom: 20px;
 }
 
-.contenedor-todos-productos p {
-    display: inline;
-    font-size: 20px;
-    font-weight: bold;
-    margin: auto;
-    padding: 0% 3%;
-    
-}
 
 .contenedor-todos-productos th, td {
     margin: auto;
@@ -164,4 +155,24 @@ hr {
 
 .iconoPosicion {
     margin: 0px 5px 0px 5px;
+}
+.definir{
+    font-weight: bold;
+    display: inline;
+    padding: 0px 5px 0px 0px;
+}
+
+
+.titulo-boton-usuarios{
+    align-items: center;
+    width:95%;
+    margin-left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.titulo-boton-usuarios h2, .titulo-boton-usuarios button{
+    margin-left: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
