@@ -114,7 +114,7 @@ hr{
 .btn-miCuenta {
     width: 25%;
     margin-left: 37.5%;
-    margin-top: 10px;
+    margin-top: 30px;
     height: 40px;
     background-color: white;
     border-color: #e74236;
@@ -125,7 +125,7 @@ hr{
 .btn-miCuenta:hover {
     width: 25%;
     margin-left: 37.5%;
-    margin-top: 10px;
+    margin-top: 30px;
     height: 40px;
     background-color: #e74236;
     border-color: #e74236;

@@ -29,49 +29,51 @@
             <h2 class="SubtituloTexto2">Mi cuenta</h2>
         </div>
 
+        {% if form %}
         <form class="FormularioMiCuenta" action="#">
-
+            {{ form.hidden_tag() }}
             <div class="ContenedorForm">
                 <h4 class="SubtituloTexto3">Datos personales</h4>
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="Nombre" name="Nombre" required>
+                        {{form.nombre(class="inputform form-control mr-sm-1", placeholder="Nombre")}}
                     </div>
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="Apellido" name="Apellido" required>
+                        {{form.apellido(class="inputform form-control mr-sm-1", placeholder="Apellidos")}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="CC/CE/NIT" name="ID" required>
+                        {{form.documento(class="inputform form-control mr-sm-1", placeholder="CC/CE/NIT")}}
                     </div>
                     <div class="col">
-                        <input class="inputform" type="email" placeholder="Email" name="Email" required>
+                        {{form.nickname(class="inputform form-control mr-sm-1", placeholder="Nickname")}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="Télefono" name="Telefono" required>
+                        {{form.telefono(class="inputform form-control mr-sm-1", type="number", placeholder="Télefono")}}
                     </div>
                     <div class="col">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="Sexo" value="H">
-                            <label class="form-check-label" for="inlineRadio1">Hombre</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="Sexo" value="M">
-                            <label class="form-check-label" for="inlineRadio2">Mujer</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="Sexo" value="O">
-                            <label class="form-check-label" for="inlineRadio2">Otro</label>
-                        </div>
+                        {{form.correo(class="inputform form-control mr-sm-1", type="email", placeholder="Correo")}}
                     </div>
                 </div>
-
-                <div>
-                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar cambios</button>
+                <div class="row">
+                    <div class="col" style="margin-left:35%;">
+                        <div class="form-check form-check-inline">
+                            {{form.sexo(class="form-check-input", type="radio", value="M")}}
+                            <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            {{form.sexo(class="form-check-input", type="radio", value="F")}}
+                            <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            {{form.sexo(class="form-check-input", type="radio", value="O")}}
+                            <label class="form-check-label" for="inlineRadio3">Otro</label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -81,23 +83,19 @@
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="País" name="Pais" required>
+                        {{form.pais(class="inputform form-control mr-sm-1", placeholder="País")}}
                     </div>
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="Departamento" name="Departamento" required>
+                        {{form.departamento(class="inputform form-control mr-sm-1", placeholder="Departamento")}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="Ciudad" name="Ciudad" required>
+                        {{form.ciudad(class="inputform form-control mr-sm-1", placeholder="Ciudad")}}
                     </div>
                     <div class="col">
-                        <input class="inputform" type="text" placeholder="Dirección" name="Direccion" required>
+                        {{form.direccion(class="inputform form-control mr-sm-1", placeholder="Dirección")}}
                     </div>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary btn-miCuenta" type="submit">Guardar cambios</button>
                 </div>
             </div>
 
@@ -106,25 +104,23 @@
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform ContrasenaActual" type="password" placeholder="Contraseña actual" name="ContrasenaActual"
-                            required>
+                        {{form.contrasena(class="inputform form-control mr-sm-1 ContrasenaActual", placeholder="Contraseña actual")}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input class="inputform" type="password" placeholder="Nueva contraseña" name="NuevaContrasena"
-                            required>
+                        {{form.contrasenaNueva(class="inputform form-control mr-sm-1", placeholder="Nueva contraseña")}}
                     </div>
                     <div class="col">
-                        <input class="inputform" type="password" placeholder="Confirmar contraseña"
-                            name="ConfirmarContrasena" required>
+                        {{form.confirmarContrasenaNueva(class="inputform form-control mr-sm-1", placeholder="Confirmar contraseña")}}
                     </div>
                 </div>
                 <div class>
-                    <button class="btn btn-primary btn-miCuenta"  type="submit">Cambiar contraseña</button>
+                    {{form.guardarCambios(class="btn btn-primary btn-miCuenta")}}
                 </div>
             </div>
         </form>
+        {% endif %}
     </div>
 </div>
 

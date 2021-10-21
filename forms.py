@@ -41,3 +41,39 @@ class FormRegistro(FlaskForm):
 
 class FormGestionarComentario(FlaskForm):
     opinion = StringField('opinión',validators.length(max=300))
+
+class FormMiCuenta(FlaskForm):
+    nombre = StringField('Nombre', validators=[validators.required(),validators.length(max=150)])
+    apellido = StringField('Apellidos', validators=[validators.required(),validators.length(max=150)])
+    documento = StringField('Documento', validators=[validators.required(),validators.length(max=20)])
+    nickname = StringField('Nickname', validators=[validators.required(),validators.length(max=20)])
+    telefono = StringField('Teléfono Celular', validators=[validators.required(),validators.length(max=20)])
+    correo = StringField('Correo', validators=[validators.required(),validators.length(max=150)])
+    sexo = StringField('Sexo', validators=[validators.required(),validators.length(max=1)])
+    pais = StringField('País', validators=[validators.required(),validators.length(max=50)])
+    departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
+    ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
+    direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
+    contrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
+    contrasenaNueva = PasswordField('Confirmar Contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarContrasenaNueva = PasswordField('Confirmar Contraseña', validators=[validators.required(),validators.length(max=150)])
+    guardarCambios = SubmitField('Guardar cambios')
+
+class FormBuscarAdministrador(FlaskForm):
+    buscar = StringField('Buscar')
+
+class FormAdministrador(FlaskForm):
+    nombre = StringField('Nombre', validators=[validators.required(),validators.length(max=150)])
+    apellido = StringField('Apellidos', validators=[validators.required(),validators.length(max=150)])
+    documento = StringField('Documento', validators=[validators.required(),validators.length(max=20)])
+    nickname = StringField('Nickname', validators=[validators.required(),validators.length(max=20)])
+    telefono = StringField('Teléfono Celular', validators=[validators.required(),validators.length(max=20)])
+    correo = StringField('Correo', validators=[validators.required(),validators.length(max=150)])
+    sexo = StringField('Sexo', validators=[validators.required(),validators.length(max=1)])
+    pais = StringField('País', validators=[validators.required(),validators.length(max=50)])
+    departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
+    ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
+    direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
+    contrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarCcontrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
+    editar = SubmitField('Editar')

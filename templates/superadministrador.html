@@ -1,17 +1,24 @@
 {% extends 'index.html' %}
 {% block head %}
-<title>New Balance | | Superadministrador</title>
+<title>New Balance | Superadministrador</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/superadministrador.css') }}">
 {% endblock %}
 
 {% block contenido %} 
-<h1 style="text-align: center; margin-top: 10px; margin-bottom: 20px;">Gestión Administrativa</h1>
+<h1 style="text-align: center; margin-top: 10px; margin-bottom: 20px;">GESTIÓN ADMINISTRATIVA</h1>
+{% if formBuscar %}
 <form class="form-inline" style="margin: auto; width: 65%;">
-    <input style="width: 90%;" class="form-control mr-sm-2" type="search" placeholder="Buscar Administrador" aria-label="Search">
+    {{ formBuscar.hidden_tag() }}
+    {{ formBuscar.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
+    <!-- <input style="width: 90%;" class="form-control mr-sm-2" type="search" placeholder="Buscar Administrador" aria-label="Search"> -->
     <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
 </form>
+{% endif %}
+
 <div class="ContenedorFomulario">
+    {% if form %}
     <form class="FormularioRegistro">
+        {{ form.hidden_tag() }}
         <div>
             <h2 style="text-align: center; margin-bottom: 10px; padding-top:20px;">Administrador</h2>
             <div>
@@ -20,44 +27,96 @@
                     <hr class="hr-form">
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-DatosP" placeholder="Nombre" name="Nombre" required>
+                            {{ form.nombre(class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
+                            <!-- <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Nombre" name="Nombre" required> -->
                         </div>
                         <div class="col">
-                            <input type="text" class="form-DatosP" placeholder="Apellido" name="Apellido" required>
+                            {{ form.apellido(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="Apellido" name="Apellido" required> -->
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="email" class="form-DatosP" placeholder="Correo" name="Correo" required>
+                            {{ form.documento(class="form-control mr-sm-1 form-DatosP", placeholder="CC/CE/NIT") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" name="ID" required> -->
                         </div>
                         <div class="col">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
-                                    value="H">
-                                <label class="form-check-label" for="inlineRadio1">Hombre</label>
+                                <strong>Sexo:</strong>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
-                                    value="M">
-                                <label class="form-check-label" for="inlineRadio2">Mujer</label>
+                                {{form.sexo(class="form-check-input", type="radio", value="M")}}
+                                <!-- <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
+                                    value="H"> -->
+                                <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                {{form.sexo(class="form-check-input", type="radio", value="F")}}
+                                <!-- <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
+                                    value="M"> -->
+                                <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                {{form.sexo(class="form-check-input", type="radio", value="O")}}
+                                <!-- <input class="form-check-input" type="radio" name="sexo" id="inlineRadio3"
+                                    value="O"> -->
+                                <label class="form-check-label" for="inlineRadio2">Otro</label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" name="ID" required>
+                            {{ form.nickname(class="form-control mr-sm-1 form-DatosP", placeholder="Nickname") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="Nickname" required -->                            
                         </div>
                         <div class="col">
-                            <input type="text" class="form-DatosP" placeholder="Teléfono Celular" name="Telefono" required>
+                            {{ form.telefono(type="number", class="form-control mr-sm-1 form-DatosP", placeholder="Teléfono") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="Teléfono" name="Telefono" required> -->
                         </div>
                     </div>
                     <div class="row">
-                        <input style="margin: auto;" type="submit" class="btn btn-outline-registro"
-                            value="Agregar">
+                        <div class="col">
+                            {{ form.correo(type="email", class="form-control mr-sm-1 form-DatosP", placeholder="Correo") }}
+                            <!-- <input type="email" class="form-DatosP" placeholder="Correo" name="Correo" required> -->
+                        </div>
+                        <div class="col">
+                            {{ form.pais(class="form-control mr-sm-1 form-DatosP", placeholder="País") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="País" required> -->
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ form.departamento(class="form-control mr-sm-1 form-DatosP", placeholder="Departamento") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="Departamento" required> -->
+                        </div>
+                        <div class="col">
+                            {{ form.ciudad(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="Ciudad" required> -->
+                        </div>
+                    </div>                    
+                    <div class="row">
+                        <div class="col">
+                            {{ form.direccion(class="form-control mr-sm-1 form-DatosP", placeholder="Dirección") }}
+                            <!-- <input type="text" class="form-DatosP" placeholder="Dirección" required> -->
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ form.contrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña") }}                            
+                        </div>
+                        <div class="col">
+                            {{ form.confirmarCcontrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
+                        </div>
+                    </div> 
+                    <div class="row">
+                        {{form.editar(class="btn btn-outline-registro", style="margin: auto;")}}
+                        <!-- <input style="margin: auto;" type="submit" class="btn btn-outline-registro" value="Agregar"> -->
+                    </div>
+                                        
                 </div>
             </div>
     </form>
+    {% endif %}
 </div>
 <div class="contenedor-todos-administradores">
     <div class="titulo-tabla" style="width: 90%; margin: auto;">
@@ -90,27 +149,6 @@
                     </td>
                     <td>Pedro Perez</td>
                     <td>12345@gmail.com</td>
-                    <td>
-                        <div class="">
-                            <div class="icon-derecha">
-                                <a href="#"><span class="material-icons-outlined iconoPosicion">edit</span></a>
-                            </div>
-                            <div class="icon-centro">
-                                <a href="#"><span class="material-icons-outlined iconoPosicion">lock_open</span></a>
-                            </div>
-                            <div class="icon-izquierda">
-                                <a href="#"><span class="material-icons-outlined iconoPosicion">cancel</span></a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td class="conEstado">
-                        <div class="circulo"></div>
-                    </td>
-                    <td>Juan Gonzalez</td>
-                    <td>56789@gmail.com</td>
                     <td>
                         <div class="">
                             <div class="icon-derecha">

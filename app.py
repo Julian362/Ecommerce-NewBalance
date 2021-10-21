@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template,  request, redirect
 from models import usuario
-from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormRegistro
+from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormRegistro, FormMiCuenta, FormAdministrador, FormBuscarAdministrador
 
 app = Flask(__name__)
 
@@ -139,12 +139,12 @@ def gestion_productos():
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion/micuenta/')
 def gestion_micuenta():
-    return render_template('gestion_micuenta.html')
+    return render_template('gestion_micuenta.html', form=FormMiCuenta())
 
 """Ruta para la gestión de Superadministrador"""
 @app.route('/superadministrador/')
 def superadministrador():
-    return render_template('superadministrador.html')
+    return render_template('superadministrador.html', form=FormAdministrador(), formBuscar=FormBuscarAdministrador())
 
 """Ruta para todos los comentarios de un producto"""
 @app.route('/comentarios/')
