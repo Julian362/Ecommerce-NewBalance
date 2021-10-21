@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template,  request, redirect
-from models import usuario
-from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormRegistro, FormMiCuenta, FormAdministrador, FormBuscarAdministrador,FormGestionProducto, FormLogin, FormGestionarComentario
+from flask import Flask, render_template,  request, redirect, url_for
+from models import *
+from forms import *
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -16,10 +17,26 @@ def index():
 def login():
     return render_template('login.html', form=FormLogin())
 
-@app.route('/registro/')
+@app.route('/registro/', methods=['GET', 'POST'])
 def registro():
-    return render_template('registro.html', form=FormRegistro())
+    if request.method=='GET':
+        return render_template('registro.html', form=FormRegistro())
+    else:
+        #Formulario de ingreso para el método POST
+        #Lo que el usuario escribió en Jinja lo trae para esta clase
+        form_ingreso=FormRegistro(request.form)
+        #Para validad los campos del formulario con el wtf
+        if form_ingreso.validate_on_submit:
+            #Se crea el objeto registro y se instancia en el orden del constructor, pero con el nombre del forms.py
+            obj_registro=persona(form_ingreso.documento.data,form_ingreso.nickname.data,form_ingreso.nombre.data,form_ingreso.apellido.data,form_ingreso.correo.data,form_ingreso.telefono.data,form_ingreso.sexo.data,form_ingreso.direccion.data,form_ingreso.pais.data,form_ingreso.departamento.data,form_ingreso.ciudad.data,form_ingreso.contrasena.data,"user","T")
+            if obj_registro.insertar_registro():
+                return redirect(url_for('login'))
+            return render_template('registro.html', form=FormRegistro(),error="Algo falló al intentar registrar sus datos, intente nuevamente")
+        return render_template('registro.html', form=FormRegistro(),error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
+            
+ 
 
+                
 @app.route('/producto/')
 def productoind():
     return render_template('ProductoIndividual.html')

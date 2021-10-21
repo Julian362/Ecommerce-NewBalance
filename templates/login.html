@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block contenido %}
+
+{% if mensaje %}
+    <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
+{% endif %}
+{% if error %}
+    <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
+{% endif %}
+
 <div class="ContenedorFormulario">
     {% if form %}
     <form class="formulario-login">

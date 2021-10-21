@@ -103,3 +103,50 @@ class calificacion:
                 return cls(obj[0]["puntuacion"],obj[0]["comentario"],obj[0]["nickname"])
 
         return None
+
+class persona():
+
+    #Se crean las variables de la clase
+    documento=''
+    nickname=''
+    nombre =''
+    apellidos=''
+    correo=''
+    telefono =0
+    sexo=''
+    direccion=''
+    pais=''
+    departamento=''
+    ciudad=''
+    contrasena=''
+    tipo_rol=''
+    estado=''
+
+#Se establece el método constructor
+    def __init__(self,p_documento, p_nickname,p_nombre, p_apellidos, p_correo, p_telefono, p_sexo, p_direccion, p_pais, p_departamento, p_ciudad, p_contrasena, p_tipo_rol, p_estado) -> None:
+
+        self.documento = p_documento
+        self.nickname = p_nickname
+        self.nombre = p_nombre
+        self.apellidos = p_apellidos
+        self.correo = p_correo
+        self.telefono = p_telefono
+        self.sexo = p_sexo
+        self.direccion = p_direccion
+        self.pais =p_pais
+        self.departamento =p_departamento
+        self.ciudad =p_ciudad
+        self.contrasena =p_contrasena
+        self.tipo_rol =p_tipo_rol
+        self.estado =p_estado
+
+    #Se crea la función para insertar los datos del registro
+    def insertar_registro(self):
+        #Se hace la consulta con la base de datos.
+        sql='INSERT INTO persona (documento, nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,tipo_rol,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);'
+        #Ejecuta el SQL que está arriba (insert en este caso)
+        obj=db.ejecutar_insert(sql,[self.documento,self.nickname,self.nombre,self.apellidos,self.correo,self.telefono,self.sexo,self.direccion,self.pais,self.departamento,self.ciudad,self.contrasena,self.tipo_rol,self.estado])
+        #Validación de la existencia del objeto
+        return (obj>0)
+
+
