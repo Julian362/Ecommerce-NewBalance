@@ -67,10 +67,11 @@ class FormGestionProducto(FlaskForm):
     agregar = SubmitField('Agregar')
 
 class FormGestionarComentario(FlaskForm):
-    opinion = StringField('opinión',validators.length(max=300))
+    opinion = TextAreaField('opinión',[validators.length(max=300)])
 
 
 class FormLogin(FlaskForm):
     correo = StringField('Correo', validators=[validators.required()])
     contrasena = PasswordField('Contraseña', validators=[validators.required()])
     login = SubmitField('Iniciar sesión')
+

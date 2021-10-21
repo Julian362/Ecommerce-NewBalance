@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template,  request, redirect
 from models import usuario
-from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormGestionProducto, FormRegistro, FormLogin
+from forms import FormEditUsuario, FormCrearUsuario, FormBuscar, FormGestionProducto, FormRegistro, FormLogin,FormGestionarComentario
 
 app = Flask(__name__)
 
@@ -29,7 +29,7 @@ def carrito():
     return render_template('Carrito.html')
 @app.route('/gestioncomentario/')
 def gestioncomentario():
-    return render_template('gestion_comentario.html')
+    return render_template('gestion_comentario.html', form=FormGestionarComentario())
 
 @app.route('/administrador/')
 def administrador():
