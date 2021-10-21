@@ -43,7 +43,8 @@ def fabricar_diccionario(cursor, row):
 
     return diccionario
 
-#Función para seleccionar, editar y eliminar --> No confundir en el nombre
+#Función para seleccionar, editar y eliminar --> No confundir en el nombre que tiene la función
+#La función recibe dos parámetro, el 1 es _sql y el 2 es la lista de parámetros que se le mandan a la función
 def ejecutar_insert(_sql,lista_parametros):
     try:
         conexion = conectar()
