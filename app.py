@@ -41,28 +41,28 @@ def administrador():
 def edit_usuario(nickname):
     if request.method == "GET":
         formulario = FormCrearUsuario()
-        obj_mensaje =usuario.cargar(nickname)
-        if obj_mensaje:
-            formulario.nombre.data = obj_mensaje.nombre
-            formulario.apellidos.data = obj_mensaje.apellidos
-            formulario.correo.data = obj_mensaje.correo
-            formulario.documento.data = obj_mensaje.documento
-            formulario.celular.data = obj_mensaje.telefono
-            formulario.sexo.data = obj_mensaje.telefono
-            return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar", form=formulario, formBuscar=FormBuscar())
+        obj_usuario =usuario.cargar(nickname)
+        if obj_usuario:
+            formulario.nombre.data = obj_usuario.nombre
+            formulario.apellidos.data = obj_usuario.apellidos
+            formulario.correo.data = obj_usuario.correo
+            formulario.documento.data = obj_usuario.documento
+            formulario.celular.data = obj_usuario.telefono
+            formulario.sexo.data = obj_usuario.telefono
+            return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar", form=formulario, formBuscar=FormBuscar())
         return render_template('administrador.html',error="No existe el usuario",lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
     else:
         formulario = FormEditUsuario(request.form)
         if formulario.validate_on_submit():
-            obj_mensaje = usuario.cargar(nickname)
-            if obj_mensaje:
-                obj_mensaje.nombre = formulario.nombre.data
-                obj_mensaje.correo = formulario.correo.data
-                obj_mensaje.documento = formulario.documento.data
-                obj_mensaje.telefono = formulario.celular.data
-                obj_mensaje.sexo = formulario.sexo.data
-                obj_mensaje.editar(obj_mensaje.nombre, obj_mensaje.apellidos, obj_mensaje.correo, obj_mensaje.documento, obj_mensaje.telefono, obj_mensaje.nickname, obj_mensaje.sexo)
-                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente", formBuscar=FormBuscar())
+            obj_usuario = usuario.cargar(nickname)
+            if obj_usuario:
+                obj_usuario.nombre = formulario.nombre.data
+                obj_usuario.correo = formulario.correo.data
+                obj_usuario.documento = formulario.documento.data
+                obj_usuario.telefono = formulario.celular.data
+                obj_usuario.sexo = formulario.sexo.data
+                obj_usuario.editar(obj_usuario.nombre, obj_usuario.apellidos, obj_usuario.correo, obj_usuario.documento, obj_usuario.telefono, obj_usuario.nickname, obj_usuario.sexo)
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente", formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/buscar', methods=["GET", "POST"])
@@ -75,15 +75,15 @@ def buscar_usuario():
         form = FormBuscar(request.form)
         formulario = FormEditUsuario()
         if form.validate_on_submit() or formulario.validate_on_submit():
-            obj_mensaje = usuario.cargar(form.buscar.data)
-            if obj_mensaje:
-                formulario.nombre.data = obj_mensaje.nombre
-                formulario.apellidos.data = obj_mensaje.apellidos
-                formulario.correo.data = obj_mensaje.correo
-                formulario.documento.data = obj_mensaje.documento
-                formulario.celular.data = obj_mensaje.telefono
-                formulario.sexo.data = obj_mensaje.sexo
-                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
+            obj_usuario = usuario.cargar(form.buscar.data)
+            if obj_usuario:
+                formulario.nombre.data = obj_usuario.nombre
+                formulario.apellidos.data = obj_usuario.apellidos
+                formulario.correo.data = obj_usuario.correo
+                formulario.documento.data = obj_usuario.documento
+                formulario.celular.data = obj_usuario.telefono
+                formulario.sexo.data = obj_usuario.sexo
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
             return render_template('administrador.html',lista_usuarios=usuario.listado(), error="No existe el usuario, puede crearlo",opcion="crear",form=FormCrearUsuario(), formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",opcion="Editar",form=FormCrearUsuario(), formBuscar=FormBuscar())
 
@@ -95,9 +95,9 @@ def crear_usuario():
     else:
         formulario = FormCrearUsuario(request.form)
         if formulario.validate_on_submit():
-            obj_mensaje = usuario(formulario.nickname.data,"T",formulario.nombre.data,formulario.apellidos.data,formulario.documento.data,formulario.celular.data,formulario.sexo.data,formulario.correo.data)
-            if (obj_mensaje.crear(obj_mensaje.nombre, obj_mensaje.apellidos, obj_mensaje.correo, obj_mensaje.documento, obj_mensaje.telefono, obj_mensaje.nickname,obj_mensaje.sexo)):
-                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Creado correctamente el usuario "+ formulario.nickname.data, formBuscar=FormBuscar())
+            obj_usuario = usuario(formulario.nickname.data,"T",formulario.nombre.data,formulario.apellidos.data,formulario.documento.data,formulario.celular.data,formulario.sexo.data,formulario.correo.data)
+            if (obj_usuario.crear(obj_usuario.nombre, obj_usuario.apellidos, obj_usuario.correo, obj_usuario.documento, obj_usuario.telefono, obj_usuario.nickname,obj_usuario.sexo)):
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Creado correctamente el usuario "+ formulario.nickname.data, formBuscar=FormBuscar())
 
             return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",opcion="Editar",form=FormEditUsuario(), formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",opcion="Editar",form=FormEditUsuario(), formBuscar=FormBuscar())
@@ -105,21 +105,21 @@ def crear_usuario():
 
 @app.route('/administrador/gestionar/DeleteNickname=<nickname>')
 def delete_usuario(nickname):
-    obj_mensaje =usuario.delete(nickname)
-    if obj_mensaje:
-        obj_mensaje+= nickname
-        return render_template('administrador.html',mensaje=obj_mensaje,lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
+    obj_usuario =usuario.delete(nickname)
+    if obj_usuario:
+        obj_usuario+= nickname
+        return render_template('administrador.html',mensaje=obj_usuario,lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
     return render_template('administrador.html',error="No se pudo eliminar al usuario "+nickname,lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/BlockNickname=<nickname><estado>')
 def block_usuario(nickname, estado):
-    obj_mensaje =usuario.block(nickname, estado)
-    if obj_mensaje:
+    obj_usuario =usuario.block(nickname, estado)
+    if obj_usuario:
         if estado == "T":
-            obj_mensaje="Usuario "+ nickname+" bloqueado "
+            obj_usuario="Usuario "+ nickname+" bloqueado "
         elif estado == "F":
-            obj_mensaje="Usuario "+ nickname+" desbloqueado "
-        return render_template('administrador.html',mensaje=obj_mensaje,lista_usuarios=usuario.listado(), block=estado, formBuscar=FormBuscar())
+            obj_usuario="Usuario "+ nickname+" desbloqueado "
+        return render_template('administrador.html',mensaje=obj_usuario,lista_usuarios=usuario.listado(), block=estado, formBuscar=FormBuscar())
     return render_template('administrador.html',error="No se pudo bloquear al usuario",lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
 
 """Ruta para llamar a los productos de hombre"""
