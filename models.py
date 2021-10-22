@@ -172,6 +172,7 @@ class producto():
         self.descripcion = gp_descripcion
         self.sexo = gp_sexo
  
+     # MetodoBloque para camabiar el estado
     @classmethod
     def block(cls, gp_referencia, gp_estado):
         if gp_estado == "T":
@@ -185,6 +186,7 @@ class producto():
 
         return False
 
+    # Metodo de insercion a la base de datos
     def crear(self):
         sql="INSERT INTO producto (referencia,nombre,precio,descripcion,estado) VALUES (?,?,?,?,?);"
         sql2="INSERT INTO inventario (talla,referencia_producto,color,cantidad,sexo) VALUES (?,?,?,?,?);"
@@ -195,7 +197,16 @@ class producto():
                 return True
         return False
 
+    #Función para editar los datos de usuario
+    @classmethod
+    def editar(cls,nombre, apellidos, correo, documento, telefono, nickname, sexo):
+        sql="UPDATE persona set nombre = ?,apellidos = ?, correo= ? ,documento= ? , telefono= ?, sexo= ? where documento= ?"
+        obj = db.ejecutar_insert(sql,[nombre, apellidos, correo, documento, telefono,  sexo, nickname])
+        if obj:
+            if obj > 0:
+                return True
 
+    # Metodo de estatico para llamar la lista
     @staticmethod
     def listado():
         sql = 'select producto.estado, producto.nombre, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla from producto inner join inventario on inventario.referencia_producto=producto.referencia order by nombre asc;'

@@ -149,10 +149,15 @@ def lista_de_productos_hombre():
 def lista_de_productos_mujer():
     return render_template('productos_mujer.html')
 
+
+# ----------------------------------------------------------------------------------------------
+# Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
     return render_template('gestion_productos.html', lista_productos=producto.listado(), form=FormGestionProducto())
 
+
+# Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/edit/BlockProducto=<referencia><estado>')
 def block_producto(referencia, estado):
     obj_proEstado =producto.block(referencia, estado)
@@ -164,6 +169,36 @@ def block_producto(referencia, estado):
         return render_template('gestion_productos.html',mensaje=obj_proEstado,lista_productos=producto.listado(), block=estado)
     return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado())
 
+# Medtodo de actualizar datos STIVEN
+@app.route('/administrador/gestionar/<referencia>', methods=["GET", "POST"])
+def ediatr_producto(referencia):
+    if request.method == "GET":
+        formulario = FormCrearUsuario()
+        obj_mensaje =producto.cargar(nickname)
+        if obj_mensaje:
+            formulario.nombre.data = obj_mensaje.nombre
+            formulario.apellidos.data = obj_mensaje.apellidos
+            formulario.correo.data = obj_mensaje.correo
+            formulario.documento.data = obj_mensaje.documento
+            formulario.celular.data = obj_mensaje.telefono
+            formulario.sexo.data = obj_mensaje.telefono
+            return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=producto.listado(), opcion="Editar", form=formulario, formBuscar=FormBuscar())
+        return render_template('administrador.html',error="No existe el usuario",lista_usuarios=producto.listado(), formBuscar=FormBuscar())
+    else:
+        formulario = FormEditUsuario(request.form)
+        if formulario.validate_on_submit():
+            obj_mensaje = producto.cargar(nickname)
+            if obj_mensaje:
+                obj_mensaje.nombre = formulario.nombre.data
+                obj_mensaje.correo = formulario.correo.data
+                obj_mensaje.documento = formulario.documento.data
+                obj_mensaje.telefono = formulario.celular.data
+                obj_mensaje.sexo = formulario.sexo.data
+                obj_mensaje.editar(obj_mensaje.nombre, obj_mensaje.apellidos, obj_mensaje.correo, obj_mensaje.documento, obj_mensaje.telefono, obj_mensaje.nickname, obj_mensaje.sexo)
+                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=producto.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente", formBuscar=FormBuscar())
+        return render_template('administrador.html',lista_usuarios=producto.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario(), formBuscar=FormBuscar())
+
+# Crear productos, plantilla gestion STIVEN
 @app.route('/productos/gestion/crear', methods=["GET", "POST"])
 def crear_producto():
     if request.method == "GET":
@@ -178,6 +213,9 @@ def crear_producto():
 
             return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto())
         return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear usuario",opcion="Crear",form=FormGestionProducto())
+# ------------------------------------------------------------------------------------------------------
+
+
 
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion/micuenta/')
