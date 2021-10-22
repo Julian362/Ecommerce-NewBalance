@@ -166,3 +166,30 @@ input:focus {
     height: 60vh;
 }
 
+.circulo-green {
+    width: 17px;
+    height: 17px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-color: #3f3f3f;
+    border-style: solid;
+    border-width: 1px;
+    background: #0ba913;
+    margin: auto;
+}
+
+.circulo-red {
+    width: 17px;
+    height: 17px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border-color: #3f3f3f;
+    border-style: solid;
+    border-width: 1px;
+    background: #a90b0b;
+    margin: auto;
+}
+
+
