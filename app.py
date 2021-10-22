@@ -148,7 +148,7 @@ def block_usuario(documento, estado):
 """Ruta para llamar a los productos de hombre"""
 @app.route('/productos/hombre/')
 def lista_de_productos_hombre():
-    return render_template('productos_hombre.html')
+    return render_template('productos_hombre.html', lista_productos_totales=producto.listado())
 
 """Ruta para llamar a los productos de mujer"""
 @app.route('/productos/mujer/')
