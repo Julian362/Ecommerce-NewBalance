@@ -128,4 +128,54 @@ class calificacion:
         return None
 
 
+class producto():
+    nombre = ""
+    referencia = ""
+    talla = ""
+    precio= ""
+    cantidad = ""
+    descuento = ""
+    color = ""
+    descripcion = ""
+    sexo = ""
 
+    # cosntructor
+    def __init__(self,gp_nombre,gp_referencia, gp_talla, gp_precio, gp_cantidad, gp_descuento, gp_color, gp_descripcion, gp_sexo):
+        self.nombre = gp_nombre
+        self.referencia = gp_referencia
+        self.talla = gp_talla
+        self.precio= gp_precio
+        self.cantidad = gp_cantidad
+        self.descuento = gp_descuento
+        self.color = gp_color
+        self.descripcion = gp_descripcion
+        self.sexo = gp_sexo
+ 
+    @classmethod
+    def block(cls, gp_referencia, gp_estado):
+        if gp_estado == "T":
+            sql = 'UPDATE producto set estado = "F" Where referencia = ?;'
+        elif gp_estado == "F":
+            sql = 'UPDATE producto set estado = "T" Where referencia = ?;'
+        obj = db.ejecutar_insert(sql,[ gp_referencia ])
+        if obj:
+            if obj > 0:
+                return True
+
+        return False
+
+    def crear(self):
+        sql="INSERT INTO producto (referencia,nombre,precio,descripcion,estado) VALUES (?,?,?,?,?);"
+        sql2="INSERT INTO inventario (talla,referencia_producto,color,cantidad,sexo) VALUES (?,?,?,?,?);"
+        obj = db.ejecutar_insert(sql,[self.referencia,self.nombre,self.precio,self.descripcion,'T'])
+        obj2 = db.ejecutar_insert(sql2,[self.talla,self.referencia,self.color,self.cantidad,self.sexo])
+        if obj and obj2:
+            if obj > 0 and obj2>0:
+                return True
+        return False
+
+
+    @staticmethod
+    def listado():
+        sql = 'select producto.estado, producto.nombre, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla from producto inner join inventario on inventario.referencia_producto=producto.referencia order by nombre asc;'
+        return db.ejecutar_select(sql, None)

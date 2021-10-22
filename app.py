@@ -155,9 +155,35 @@ def lista_de_productos_hombre():
 def lista_de_productos_mujer():
     return render_template('productos_mujer.html')
 
-@app.route('/gestion/productos/')
+@app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
-    return render_template('gestion_productos.html',form=FormGestionProducto(), )
+    return render_template('gestion_productos.html', lista_productos=producto.listado(), form=FormGestionProducto())
+
+@app.route('/productos/gestion/edit/BlockProducto=<referencia><estado>')
+def block_producto(referencia, estado):
+    obj_proEstado =producto.block(referencia, estado)
+    if obj_proEstado:
+        if estado == "T":
+            obj_proEstado="Producto con "+ referencia+" bloqueado "
+        elif estado == "F":
+            obj_proEstado="Producto con "+ referencia+" desbloqueado "
+        return render_template('gestion_productos.html',mensaje=obj_proEstado,lista_productos=producto.listado(), block=estado)
+    return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado())
+
+@app.route('/productos/gestion/crear', methods=["GET", "POST"])
+def crear_producto():
+    if request.method == "GET":
+        formulario = FormGestionProducto()
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), opcion="Crear", form=formulario)
+    else:
+        formulario = FormGestionProducto(request.form)
+        if formulario.validate_on_submit():
+            obj_crearProducto = producto(formulario.nombre.data, formulario.referencia.data, formulario.talla.data, formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data, formulario.descripcion.data, formulario.sexo.data)
+            if (obj_crearProducto.crear()):
+                return render_template('gestion_productos.html',producto=obj_crearProducto,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Creado correctamente el producto "+ formulario.nombre.data)
+
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear usuario",opcion="Crear",form=FormGestionProducto())
 
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion/micuenta/')
