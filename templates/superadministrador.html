@@ -5,167 +5,204 @@
 {% endblock %}
 
 {% block contenido %} 
-<h1 style="text-align: center; margin-top: 10px; margin-bottom: 20px;">GESTIÓN ADMINISTRATIVA</h1>
-{% if formBuscar %}
-<form class="form-inline" style="margin: auto; width: 65%;">
-    {{ formBuscar.hidden_tag() }}
-    {{ formBuscar.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
-    <!-- <input style="width: 90%;" class="form-control mr-sm-2" type="search" placeholder="Buscar Administrador" aria-label="Search"> -->
-    <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
-</form>
-{% endif %}
-
-<div class="ContenedorFomulario">
-    {% if form %}
-    <form class="FormularioRegistro">
-        {{ form.hidden_tag() }}
-        <div>
-            <h2 style="text-align: center; margin-bottom: 10px; padding-top:20px;">Administrador</h2>
-            <div>
-                <div class="ContenedorDP">
-                    <h4>Datos del administrador</h4>
-                    <hr class="hr-form">
-                    <div class="row">
-                        <div class="col">
-                            {{ form.nombre(class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
-                            <!-- <input type="text" class="form-DatosP form-control mr-sm-1" placeholder="Nombre" name="Nombre" required> -->
-                        </div>
-                        <div class="col">
-                            {{ form.apellido(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="Apellido" name="Apellido" required> -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{ form.documento(class="form-control mr-sm-1 form-DatosP", placeholder="CC/CE/NIT") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="CC/CE/NIT" name="ID" required> -->
-                        </div>
-                        <div class="col">
-                            <div class="form-check form-check-inline">
-                                <strong>Sexo:</strong>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                {{form.sexo(class="form-check-input", type="radio", value="M")}}
-                                <!-- <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
-                                    value="H"> -->
-                                <label class="form-check-label" for="inlineRadio1">Masculino</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                {{form.sexo(class="form-check-input", type="radio", value="F")}}
-                                <!-- <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
-                                    value="M"> -->
-                                <label class="form-check-label" for="inlineRadio2">Femenino</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                {{form.sexo(class="form-check-input", type="radio", value="O")}}
-                                <!-- <input class="form-check-input" type="radio" name="sexo" id="inlineRadio3"
-                                    value="O"> -->
-                                <label class="form-check-label" for="inlineRadio2">Otro</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{ form.nickname(class="form-control mr-sm-1 form-DatosP", placeholder="Nickname") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="Nickname" required -->                            
-                        </div>
-                        <div class="col">
-                            {{ form.telefono(type="number", class="form-control mr-sm-1 form-DatosP", placeholder="Teléfono") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="Teléfono" name="Telefono" required> -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{ form.correo(type="email", class="form-control mr-sm-1 form-DatosP", placeholder="Correo") }}
-                            <!-- <input type="email" class="form-DatosP" placeholder="Correo" name="Correo" required> -->
-                        </div>
-                        <div class="col">
-                            {{ form.pais(class="form-control mr-sm-1 form-DatosP", placeholder="País") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="País" required> -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{ form.departamento(class="form-control mr-sm-1 form-DatosP", placeholder="Departamento") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="Departamento" required> -->
-                        </div>
-                        <div class="col">
-                            {{ form.ciudad(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="Ciudad" required> -->
-                        </div>
-                    </div>                    
-                    <div class="row">
-                        <div class="col">
-                            {{ form.direccion(class="form-control mr-sm-1 form-DatosP", placeholder="Dirección") }}
-                            <!-- <input type="text" class="form-DatosP" placeholder="Dirección" required> -->
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{ form.contrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña") }}                            
-                        </div>
-                        <div class="col">
-                            {{ form.confirmarCcontrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
-                        </div>
-                    </div> 
-                    <div class="row">
-                        {{form.editar(class="btn btn-outline-registro", style="margin: auto;")}}
-                        <!-- <input style="margin: auto;" type="submit" class="btn btn-outline-registro" value="Agregar"> -->
-                    </div>
-                                        
-                </div>
-            </div>
+    <h1 style="text-align: center; margin-top: 10px; margin-bottom: 20px;">GESTIÓN ADMINISTRATIVA</h1>
+    {% if formBuscar %}
+    <form class="form-inline" style="margin: auto; width: 65%;">
+        {{ formBuscar.hidden_tag() }}
+        {{ formBuscar.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
+        <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
     </form>
     {% endif %}
-</div>
-<div class="contenedor-todos-administradores">
-    <div class="titulo-tabla" style="width: 90%; margin: auto;">
-        <div class="row">
-            <div class="col" style="padding: 0%;">
-                <h4 style="text-align: left; padding: 0px; margin: 0px;">Todos los Administradores</h4>
-            </div>
-            <div class="col"style="padding: 0%;">
-                <button style="width: 40%; margin-left: 60%;" class="btn btn-outline-one my-2 my-sm-0" submit>Crear Nuevo Administrador</button>
-            </div>
-        </div>
-    </div>
-    <hr style="border-color:#e74236; width: 90%;">    
-    <div class="tabla" style="width: 90%; margin: auto;">
-        <table class="table table-striped table-hover tNuevoProducto">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Administrador</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td class="conEstado">
-                        <div class="circulo"></div>
-                    </td>
-                    <td>Pedro Perez</td>
-                    <td>12345@gmail.com</td>
-                    <td>
-                        <div class="">
-                            <div class="icon-derecha">
-                                <a href="#"><span class="material-icons-outlined iconoPosicion">edit</span></a>
+
+    <div class="ContenedorFomulario">
+        {% if form %}
+        <form class="FormularioRegistro" 
+        {% if datosAdministrador %}
+        action="{{ url_for('edit_administrador', documento = datosAdministrador.documento) }}"
+        {% else %}
+            action=#
+        {% endif %}
+        method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                <h2 style="text-align: center; margin-bottom: 10px; padding-top:20px;">Administrador</h2>
+                <div>
+                    <div class="ContenedorDP">
+                        <h4>Datos del administrador</h4>
+                        <hr class="hr-form">
+                        <div class="row">
+                            <div class="col">
+                                {{ form.nombre(class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
                             </div>
-                            <div class="icon-centro">
-                                <a href="#"><span class="material-icons-outlined iconoPosicion">lock_open</span></a>
-                            </div>
-                            <div class="icon-izquierda">
-                                <a href="#"><span class="material-icons-outlined iconoPosicion">cancel</span></a>
+                            <div class="col">
+                                {{ form.apellido(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
                             </div>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.documento(class="form-control mr-sm-1 form-DatosP", placeholder="CC/CE/NIT") }}
+                            </div>
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <strong>Sexo:</strong>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    {% if datosAdministrador %}
+                                        {% if datosAdministrador.sexo == "M" %}
+                                            {{ form.sexo(class="form-check-input", type="radio", value="M", checked="true")}}
+                                        {% else %}
+                                            {{ form.sexo(class="form-check-input", type="radio", value="M")}}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ form.sexo(class="form-check-input", type="radio", value="M")}}
+                                    {% endif %}
+                                    <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    {% if datosAdministrador %}
+                                        {% if datosAdministrador.sexo == "F" %}
+                                            {{ form.sexo(class="form-check-input", type="radio", value="F", checked="true")}}
+                                        {% else %}
+                                            {{ form.sexo(class="form-check-input", type="radio", value="F")}}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ form.sexo(class="form-check-input", type="radio", value="F")}}
+                                    {% endif %}
+                                    <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    {% if datosAdministrador %}
+                                        {% if datosAdministrador.sexo == "O" %}
+                                            {{ form.sexo(class="form-check-input", type="radio", value="O", checked="true")}}
+                                        {% else %}
+                                            {{ form.sexo(class="form-check-input", type="radio", value="O")}}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ form.sexo(class="form-check-input", type="radio", value="O")}}
+                                    {% endif %}
+                                    <label class="form-check-label" for="inlineRadio2">Otro</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.nickname(class="form-control mr-sm-1 form-DatosP", placeholder="Nickname") }}                 
+                            </div>
+                            <div class="col">
+                                {{ form.telefono(type="number", class="form-control mr-sm-1 form-DatosP", placeholder="Teléfono") }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.correo(type="email", class="form-control mr-sm-1 form-DatosP", placeholder="Correo") }}
+                            </div>
+                            <div class="col">
+                                {{ form.pais(class="form-control mr-sm-1 form-DatosP", placeholder="País") }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.departamento(class="form-control mr-sm-1 form-DatosP", placeholder="Departamento") }}
+                            </div>
+                            <div class="col">
+                                {{ form.ciudad(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
+                            </div>
+                        </div>                    
+                        <div class="row">
+                            <div class="col">
+                                {{ form.direccion(class="form-control mr-sm-1 form-DatosP", placeholder="Dirección") }}
+                            </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.contrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña") }}                            
+                            </div>
+                            <div class="col"> 
+                                {{ form.confirmarContrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
+                            </div>
+                        </div> 
+                        <div class="row">
+                            {{form.editar(class="btn btn-outline-registro", style="margin: auto;")}}
+                        </div>
+                                            
+                    </div>
+                </div>
+        </form>
+        {% endif %}
     </div>
-</div>
 
+    {% if listaAdmin %}
+        <div class="contenedor-todos-administradores">
+            <div class="titulo-tabla" style="width: 90%; margin: auto;">
+                <div class="row">
+                    <div class="col" style="padding: 0%;">
+                        <h4 style="text-align: left; padding: 0px; margin: 0px;">Todos los Administradores</h4>
+                    </div>
+                    <div class="col"style="padding: 0%;">
+                        <button style="width: 40%; margin-left: 60%;" class="btn btn-outline-one my-2 my-sm-0" submit>Crear Nuevo Administrador</button>
+                    </div>
+                </div>
+            </div>
+            <hr style="border-color:#e74236; width: 90%;">    
+            <div class="tabla" style="width: 90%; margin: auto;">
+                <table class="table table-striped table-hover tNuevoProducto">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in listaAdmin %}
+                        <tr>
+                            <th scope="row">
+                                {{ loop.index }}
+                            </th>
+                            <td class="conEstado">
+                                    {% if item.estado == 'T' %}
+                                    <div class="circulo-green"></div>
+                                    {% endif %}
+                                    {% if item.estado == 'F' %}
+                                    <div class="circulo-red"></div>
+                                    {% endif %}
+                            </td>
+                            <td>{{ item.nombre}}</td>
+                            <td>{{ item.apellidos}}</td>
+                            <td>{{ item.correo}}</td>
+                            <td>
+                                <div class="icon-derecha">
+                                    <a  href="{{ url_for('edit_administrador', documento = item.documento) }} ">
+                                        <span class="material-icons-outlined iconoPosicion" >edit</span>
+                                    </a>
+                                </div>
+                                <div class="icon-centro">
+                                    <a href="{{ url_for('block_usuario', nickname = item.nickname, estado = item.estado) }}">
+                                        <span class="material-icons-outlined iconoPosicion" id="icon_block">
+                                            <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
+                                            {% if item.estado == 'F' %}
+                                                lock_open
+                                            {% endif %}
+                                            {% if item.estado == 'T' %}
+                                                lock
+                                            {% endif %}
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="icon-izquierda">
+                                    <a href="{{ url_for('delete_usuario', nickname = item.nickname) }}">
+                                        <span class="material-icons-outlined iconoPosicion">cancel</span>
+                                    </a>
+                                </div> 
+                            </td>
+                        </tr>
+                    {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

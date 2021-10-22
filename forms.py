@@ -100,7 +100,7 @@ class FormAdministrador(FlaskForm):
     departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
     ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
     direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
-    contrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
+    contrasena = StringField('Contraseña', validators=[validators.required(),validators.length(max=150)])
     confirmarContrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
     editar = SubmitField('Editar')
     

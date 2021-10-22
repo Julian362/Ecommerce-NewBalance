@@ -160,7 +160,30 @@ def gestion_micuenta():
 
 """Ruta para la gestión de Superadministrador"""
 @app.route('/superadministrador/')
-def superadministrador():
+def gsuperadministrador___():
+    return render_template('superadministrador.html', form=FormAdministrador(), formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
+
+@app.route('/superadministrador/gestionar/<documento>')
+def edit_administrador(documento):
+    if request.method == "GET":
+        formulario = FormAdministrador()
+        obj_carga = gestionAdministrador.cargar_datos(documento)
+        if obj_carga:
+            formulario.nombre.data = obj_carga.nombre
+            formulario.apellido.data = obj_carga.apellido
+            formulario.documento.data = obj_carga.documento
+            formulario.sexo.data = obj_carga.sexo
+            formulario.nickname.data = obj_carga.nickname
+            formulario.telefono.data = obj_carga.telefono
+            formulario.correo.data = obj_carga.correo
+            formulario.pais.data = obj_carga.pais
+            formulario.departamento.data = obj_carga.departamento
+            formulario.ciudad.data = obj_carga.ciudad
+            formulario.direccion.data = obj_carga.direccion
+            formulario.contrasena.data = obj_carga.contrasena
+            return render_template('superadministrador.html', datosAdministrador=obj_carga, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
+
+
     return render_template('superadministrador.html', form=FormAdministrador(), formBuscar=FormBuscarAdministrador())
 
 """Ruta para todos los comentarios de un producto"""
