@@ -152,6 +152,11 @@
 .contenedorindividual{
     padding-top: 15px;
     padding-bottom: 15px;
+    width: 100%;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 0.0001px;
+    border-color: rgb(255, 255, 255);
 }
 
 .contenedorindividual h4 {
@@ -170,6 +175,8 @@
 
 }
 .contenedorindividual:hover {
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 100%;
     border-radius: 3px;
     border-style: solid;

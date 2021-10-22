@@ -20,9 +20,9 @@
 </div>
 
 <!-- Se agrega el cuerpo de la pantalla -->
-<div class="wrap">    
+<div class="wrap">
     <div class="store-wrapper">
-      <div class="category_list">
+        <div class="category_list">
         <h4>FILTROS</h4>
         <h4>ORDENAR</h4>
         <select class="form-control mb-1">
@@ -71,93 +71,25 @@
             <option value="10">Blanco</option>
             <option value="11">Multicolor</option>
         </select>
-      </div>
-      <section class="products-list">
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        <div class="product-item">
-            <div class="contenedorindividual">
-                <a href="{{url_for('productoind')}}">
-                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                        alt="producto_1">
-                    <h4>Men's Fresh Foam More V3</h4>
-                    <p>$ 489.900</p>
-                </a>
-            </div>            
-        </div>
-        
-
-      </section>
     </div>
-  </div>
+        {% if lista_productos_totales %}
+            <section class="products-list">
+                {% for item in lista_productos_totales %}
+                <div class="product-item">
+                    <div class="contenedorindividual">
+                        <a href="{{url_for('productoind')}}">
+                            <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
+                                alt="producto_{{item.referencia}}">
+                            <h4>{{ item.nombre }}</h4>
+                            <p>$ {{ item.precio }}</p>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </div>
+</div>
 
 
 
