@@ -36,10 +36,10 @@
 {% endif %}
 <div class="ContenedorFomulario">
     {% if form %}
-    <form class="FormularioProducto">
+    <form class="FormularioProducto" action="{{url_for('crear_producto')}}" method="POST">
         {{form.hidden_tag()}}
         <div>
-            <h2 style="text-align: center;">Editar producto</h2>
+            <h2 style="text-align: center;">Producto</h2>
             <div>
                 <div class="ContenedorDP">
                     <h4>Datos del producto</h4>
@@ -88,7 +88,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <input type="file" class="btnImg" value="Cargar imagen" required>
+                            <input type="file" class="btnImg" value="Cargar imagen">
                         </div>
                         <div class="col" style="margin-top: 5px;"><p class="definir">Producto: </p>
                             <div class="form-check form-check-inline">
@@ -121,8 +121,7 @@
                     </div>
                     <div class="row">
                         <!-- <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro" value="Agregar"> -->
-                        {{form.agregar(style="margin: auto;", id="registrarse", class="btn btn-outline-registro",
-                        value="Agregar")}}
+                        {{form.agregar(style="margin: auto;", class="btn btn-outline-registro", value=opcion)}}
                     </div>
                 </div>
             </div>
@@ -133,8 +132,9 @@
 <div class="contenedor-todos-productos">
     <div class="titulo-boton-usuarios">
         <h2 style="display: inline; float:left;">Todos los productos</h2>
+        <a href="{{ url_for('crear_producto') }}" style="text-decoration: none;" >
         <button style="margin-left: 8px;" class="cProducto btn btn-outline-one" type="submit">Crear nuevo
-            producto</button>
+            producto</button></a>
     </div>
     <table class="table table-striped table-hover tNuevoProducto">
         <thead>
@@ -149,7 +149,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in lista_nuevo_producto %}
+            {% for item in lista_productos %}
             <tr>
                 <th scope="row">
                     {{ loop.index }}
@@ -165,14 +165,14 @@
                 <td>{{ item.nombre}}</td>
                 <td>{{ item.referencia}}</td>
                 <td>{{ item.cantidad}}</td>
-                <td>{ item.talla}}</td>
+                <td>{{ item.talla}}</td>
                 <td>
                     <div class="">
                         <div class="icon-derecha">
                             <a href="#"><span class="material-icons-outlined iconoPosicion">edit</span></a>
                         </div>
                         <div class="icon-centro">
-                            <a href="{{ url_for('block_usuario', nickname = item.nickname, estado = item.estado) }}">
+                            <a href="{{ url_for('block_producto', referencia = item.referencia, estado = item.estado) }}">
                                 <span class="material-icons-outlined iconoPosicion" id="icon_block">
                                     <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
                                     {% if item.estado == 'F' %}
