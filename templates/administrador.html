@@ -153,9 +153,13 @@
                                 <div class="col">
                                     <input type="checkbox" onclick="mostrarContrasena()"> Mostrar contraseña
                                 </div>
-                                <div class="col">
-                                    <p style="color: #970c02;">Para editar el documento contacte a soporte</p>
-                                </div>
+                                {% if opcion %}
+                                    {% if opcion == "Editar" %}
+                                        <div class="col">
+                                            <p style="color: #970c02;">Para editar el documento contacte a soporte</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                             <div class="row">
                                 <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"value="{{opcion}}">
