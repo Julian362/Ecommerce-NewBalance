@@ -198,5 +198,6 @@ class producto():
 
     @staticmethod
     def listado():
-        sql = 'select producto.estado, producto.nombre, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla from producto inner join inventario on inventario.referencia_producto=producto.referencia order by nombre asc;'
+        sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla from producto inner join inventario on inventario.referencia_producto=producto.referencia order by nombre asc;'
         return db.ejecutar_select(sql, None)
+

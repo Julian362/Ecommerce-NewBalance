@@ -20,225 +20,146 @@
 </div>
 
 <!-- Se agrega el cuerpo de la pantalla -->
-<div class="row pantalla">
-
-    <!-- Filtros -->
-    <div class="col filtros">
-
-        <!-- Nombre de la columna de filtros -->
-        <div class="row titulo_1">
-            <h4>FILTROS</h4>
-        </div>
-
-        <!-- Nombre de la categoría ordenar -->
-        <div class="row titulo">
-            <h4>ORDENAR</h4>
-        </div>
-
-        <!-- Filtrar por relevancia -->
-        <div class="row orden">
-            <select class="form-control mb-1">
-                <option selected>Más populares</option>
-                <option value="1">Más recientes</option>
-                <option value="2">Alfabético A-Z</option>
-                <option value="3">Alfabético Z-A</option>
-                <option value="4">Menor precio</option>
-                <option value="5">Mayor precio</option>
-            </select>
-        </div>
-
-        <!-- Nombre de la categoría refinar -->
-        <div class="row titulo">
-            <h4>REFINAR POR</h4>
-        </div>
-
-        <!-- Filtrar por descuento -->
+<div class="wrap">    
+    <div class="store-wrapper">
+      <div class="category_list">
+        <h4>FILTROS</h4>
+        <h4>ORDENAR</h4>
+        <select class="form-control mb-1">
+            <option selected>Más populares</option>
+            <option value="1">Más recientes</option>
+            <option value="2">Alfabético A-Z</option>
+            <option value="3">Alfabético Z-A</option>
+            <option value="4">Menor precio</option>
+            <option value="5">Mayor precio</option>
+        </select>
+        <h4>REFINAR POR</h4>
         <div class="form-check form">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
                 Con descuento
             </label>
         </div>
-
-        <!-- Nombre de la categoría talla -->
-        <div class="row titulo">
-            <h4>TALLA</h4>
+        <h4>TALLA</h4>
+        <select class="form-control mb-1 ">
+            <option selected>Seleccionar talla</option>
+            <option value="1">37</option>
+            <option value="2">37 ½</option>
+            <option value="3">38</option>
+            <option value="4">38 ½</option>
+            <option value="5">39</option>
+            <option value="6">39 ½</option>
+            <option value="7">40</option>
+            <option value="8">40 ½</option>
+            <option value="9">41</option>
+            <option value="10">41 ½</option>
+            <option value="11">42</option>
+            <option value="12">42 ½</option>
+        </select>
+        <h4>COLOR</h4>
+        <select class="form-control mb-1">
+            <option selected>Seleccionar color</option>
+            <option value="1">Negro</option>
+            <option value="2">Naranja</option>
+            <option value="3">Amarillo</option>
+            <option value="4">Azul</option>
+            <option value="5">Rojo</option>
+            <option value="6">Café</option>
+            <option value="7">Gris</option>
+            <option value="8">Rosa</option>
+            <option value="9">Verde</option>
+            <option value="10">Blanco</option>
+            <option value="11">Multicolor</option>
+        </select>
+      </div>
+      <section class="products-list">
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
         </div>
-
-        <!-- Filtrar por talla -->
-        <div class="row talla">
-            <select class="form-control mb-1 ">
-                <option selected>Seleccionar talla</option>
-                <option value="1">37</option>
-                <option value="2">37 ½</option>
-                <option value="3">38</option>
-                <option value="4">38 ½</option>
-                <option value="5">39</option>
-                <option value="6">39 ½</option>
-                <option value="7">40</option>
-                <option value="8">40 ½</option>
-                <option value="9">41</option>
-                <option value="10">41 ½</option>
-                <option value="11">42</option>
-                <option value="12">42 ½</option>
-            </select>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
         </div>
-
-        <!-- Nombre de la categoría color -->
-        <div class="row titulo">
-            <h4>COLOR</h4>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
         </div>
-
-        <!-- Filtrar por color -->
-        <div class="row color">
-            <select class="form-control mb-1">
-                <option selected>Seleccionar color</option>
-                <option value="1">Negro</option>
-                <option value="2">Naranja</option>
-                <option value="3">Amarillo</option>
-                <option value="4">Azul</option>
-                <option value="5">Rojo</option>
-                <option value="6">Café</option>
-                <option value="7">Gris</option>
-                <option value="8">Rosa</option>
-                <option value="9">Verde</option>
-                <option value="10">Blanco</option>
-                <option value="11">Multicolor</option>
-            </select>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
         </div>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
+        </div>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
+        </div>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
+        </div>
+        <div class="product-item">
+            <div class="contenedorindividual">
+                <a href="{{url_for('productoind')}}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
+                        alt="producto_1">
+                    <h4>Men's Fresh Foam More V3</h4>
+                    <p>$ 489.900</p>
+                </a>
+            </div>            
+        </div>
+        
+
+      </section>
     </div>
-
-    <!-- Primera columna de productos -->
-    <div class="col productos">
-
-        <div class="row filas">
-            <a href="{{url_for('productoind')}}">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_1.png') }}"
-                    alt="producto_1">
-                <h4>Men's Fresh Foam More V3</h4>
-                <p>$ 489.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_2.png') }}"
-                    alt="producto_2">
-                <h4>Men's FreshFoam 680 V7</h4>
-                <p>$ 437.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_3.png') }}"
-                    alt="producto_3">
-                <h4>Men's FuelCell Propel V3</h4>
-                <p>$ 577.900</p>
-            </a>
-        </div>
+  </div>
 
 
-    </div>
-
-    <!-- Segunda columna de productos -->
-    <div class="col productos">
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_4.png') }}"
-                    alt="producto_4">
-                <h4>Men's FuelCell Propel V3</h4>
-                <p>$ 577.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_5.png') }}"
-                    alt="producto_5">
-                <h4>Men's Fresh Foam More V3</h4>
-                <p>$ 839.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_6.png') }}"
-                    alt="producto_6">
-                <h4>Men's FuelCell Propel RMX</h4>
-                <p>$ 612.900</p>
-            </a>
-        </div>
-
-
-    </div>
-
-    <!-- Tercera columna de productos -->
-    <div class="col productos">
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_7.png') }}"
-                    alt="producto_7">
-                <h4>Men's FuelCell Propel RMX</h4>
-                <p>$ 612.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_8.png') }}"
-                    alt="producto_8">
-                <h4>Men's Fresh Foam Roav V2</h4>
-                <p>$ 472.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_9.png') }}"
-                    alt="producto_9">
-                <h4>Men's Fresh Foam Roav V2</h4>
-                <p>$ 472.900</p>
-            </a>
-        </div>
-
-
-    </div>
-
-    <!-- Cuarta columna de productos -->
-    <div class="col productos">
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_10.png') }}"
-                    alt="producto_10">
-                <h4>Men's Fresh Foam Roav V2</h4>
-                <p>$ 472.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_11.png') }}"
-                    alt="producto_11">
-                <h4>Men's Fresh Foam 880 V11</h4>
-                <p>$ 735.900</p>
-            </a>
-        </div>
-
-        <div class="row filas">
-            <a href="#">
-                <img src="{{ url_for('static', filename='imagenes/lista_de_productos/producto_12.png') }}"
-                    alt="producto_12">
-                <h4>Men's Fresh Foam 880 V11</h4>
-                <p>$ 735.900</p>
-            </a>
-        </div>
-    </div>
-
-
-</div>
 
 
 <!-- Finaliza el bloque -->
