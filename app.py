@@ -15,28 +15,28 @@ def index():
 
 @app.route('/login/')
 def login():
-    return render_template('login.html', form=FormLogin())
+    return render_template('login.html', form=FormGestionar())
 
 @app.route('/registro/', methods=['GET', 'POST'])
 def registro():
     if request.method=='GET':
-        return render_template('registro.html', form=FormRegistro())
+        return render_template('registro.html', form=FormGestionar())
     else:
         #Formulario de ingreso para el método POST
         #Lo que el usuario escribió en Jinja lo trae para esta clase
-        form_ingreso=FormRegistro(request.form)
+        form_ingreso=FormGestionar(request.form)
         #Para validad los campos del formulario con el wtf
         if form_ingreso.validate_on_submit:
             #Se crea el objeto registro y se instancia en el orden del constructor, pero con el nombre del forms.py
             obj_registro=persona(form_ingreso.documento.data,form_ingreso.nickname.data,form_ingreso.nombre.data,form_ingreso.apellido.data,form_ingreso.correo.data,form_ingreso.telefono.data,form_ingreso.sexo.data,form_ingreso.direccion.data,form_ingreso.pais.data,form_ingreso.departamento.data,form_ingreso.ciudad.data,form_ingreso.contrasena.data,"user","T")
             if obj_registro.insertar_registro():
                 return redirect(url_for('login'))
-            return render_template('registro.html', form=FormRegistro(),error="Algo falló al intentar registrar sus datos, intente nuevamente")
-        return render_template('registro.html', form=FormRegistro(),error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
-            
- 
+            return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
+        return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
 
-                
+
+
+
 @app.route('/producto/')
 def productoind():
     return render_template('ProductoIndividual.html')
@@ -48,96 +48,102 @@ def carrito():
 def gestioncomentario():
     return render_template('gestion_comentario.html', form=FormGestionarComentario())
 
+"""-----------------------------INICIO ADMINISTRADOR-----------------------------"""
 @app.route('/administrador/')
 def administrador():
     if request.method == "POST":
         crear_usuario()
-    return render_template('administrador.html',lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
+    return render_template('administrador.html',lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
 
-@app.route('/administrador/gestionar/EditNickname=<nickname>', methods=["GET", "POST"])
-def edit_usuario(nickname):
+@app.route('/administrador/gestion/Edit/<documento>', methods=["GET", "POST"])
+def edit_usuario(documento):
     if request.method == "GET":
-        formulario = FormCrearUsuario()
-        obj_usuario =usuario.cargar(nickname)
+        formulario = FormGestionar()
+        obj_usuario =persona.cargar(documento)
         if obj_usuario:
+            formulario.documento.data = obj_usuario.documento
+            formulario.nickname.data = obj_usuario.nickname
             formulario.nombre.data = obj_usuario.nombre
             formulario.apellidos.data = obj_usuario.apellidos
             formulario.correo.data = obj_usuario.correo
-            formulario.documento.data = obj_usuario.documento
-            formulario.celular.data = obj_usuario.telefono
-            formulario.sexo.data = obj_usuario.telefono
-            return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar", form=formulario, formBuscar=FormBuscar())
-        return render_template('administrador.html',error="No existe el usuario",lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
+            formulario.telefono.data = obj_usuario.telefono
+            formulario.sexo.data = obj_usuario.sexo
+            formulario.direccion.data = obj_usuario.direccion
+            formulario.pais.data = obj_usuario.pais
+            formulario.departamento.data = obj_usuario.departamento
+            formulario.ciudad.data = obj_usuario.ciudad
+            formulario.contrasena.data = obj_usuario.contrasena
+            return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar", form=formulario, formBuscar=FormBuscar())
+        return render_template('administrador.html',error="No existe el usuario",lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
     else:
-        formulario = FormEditUsuario(request.form)
+        formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
-            obj_usuario = usuario.cargar(nickname)
+            obj_usuario = persona.editar(formulario.documento.data,formulario.nickname.data,formulario.nombre.data,formulario.apellidos.data,formulario.correo.data,formulario.telefono.data,formulario.sexo.data,formulario.direccion.data,formulario.pais.data,formulario.departamento.data,formulario.ciudad.data,formulario.contrasena.data,"user")
             if obj_usuario:
-                obj_usuario.nombre = formulario.nombre.data
-                obj_usuario.correo = formulario.correo.data
-                obj_usuario.documento = formulario.documento.data
-                obj_usuario.telefono = formulario.celular.data
-                obj_usuario.sexo = formulario.sexo.data
-                obj_usuario.editar(obj_usuario.nombre, obj_usuario.apellidos, obj_usuario.correo, obj_usuario.documento, obj_usuario.telefono, obj_usuario.nickname, obj_usuario.sexo)
-                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente", formBuscar=FormBuscar())
-        return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario(), formBuscar=FormBuscar())
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Editado correctamente", formBuscar=FormBuscar())
+        return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Verifique los datos ingresados",form=FormGestionar(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/buscar', methods=["GET", "POST"])
 def buscar_usuario():
     if request.method == "GET":
-        formulario = FormCrearUsuario()
-        form = FormBuscar
-        return render_template('administrador.html',lista_usuarios=usuario.listado(), opcion="Editar", form=formulario, formBuscar=FormBuscar())
+        return render_template('administrador.html',lista_usuarios=persona.listado("user"), opcion="Editar", form=FormGestionar(), formBuscar=FormBuscar())
     else:
         form = FormBuscar(request.form)
-        formulario = FormEditUsuario()
+        formulario = FormGestionar()
         if form.validate_on_submit() or formulario.validate_on_submit():
-            obj_usuario = usuario.cargar(form.buscar.data)
+            obj_usuario = persona.cargar("user",form.buscar.data)
             if obj_usuario:
+                formulario.documento.data = obj_usuario.documento
+                formulario.nickname.data = obj_usuario.nickname
                 formulario.nombre.data = obj_usuario.nombre
                 formulario.apellidos.data = obj_usuario.apellidos
                 formulario.correo.data = obj_usuario.correo
-                formulario.documento.data = obj_usuario.documento
-                formulario.celular.data = obj_usuario.telefono
+                formulario.telefono.data = obj_usuario.telefono
                 formulario.sexo.data = obj_usuario.sexo
-                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
-            return render_template('administrador.html',lista_usuarios=usuario.listado(), error="No existe el usuario, puede crearlo",opcion="crear",form=FormCrearUsuario(), formBuscar=FormBuscar())
-        return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",opcion="Editar",form=FormCrearUsuario(), formBuscar=FormBuscar())
+                formulario.direccion.data = obj_usuario.direccion
+                formulario.pais.data = obj_usuario.pais
+                formulario.departamento.data = obj_usuario.departamento
+                formulario.ciudad.data = obj_usuario.ciudad
+                formulario.contrasena.data = obj_usuario.contrasena
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=formulario, formBuscar=FormBuscar())
+            return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="No existe el usuario, puede crearlo",opcion="crear",form=FormGestionar(), formBuscar=FormBuscar())
+        return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Error en el proceso de buscar usuario",opcion="Crear",form=FormGestionar(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/crear', methods=["GET", "POST"])
 def crear_usuario():
     if request.method == "GET":
-        formulario = FormCrearUsuario()
-        return render_template('administrador.html',lista_usuarios=usuario.listado(), opcion="Crear", form=formulario, formBuscar=FormBuscar())
+        return render_template('administrador.html',lista_usuarios=persona.listado("user"), opcion="Crear", form=FormGestionar(), formBuscar=FormBuscar())
     else:
-        formulario = FormCrearUsuario(request.form)
+        formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
-            obj_usuario = usuario(formulario.nickname.data,"T",formulario.nombre.data,formulario.apellidos.data,formulario.documento.data,formulario.celular.data,formulario.sexo.data,formulario.correo.data)
-            if (obj_usuario.crear(obj_usuario.nombre, obj_usuario.apellidos, obj_usuario.correo, obj_usuario.documento, obj_usuario.telefono, obj_usuario.nickname,obj_usuario.sexo)):
-                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=usuario.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Creado correctamente el usuario "+ formulario.nickname.data, formBuscar=FormBuscar())
+            obj_usuario = persona(formulario.documento.data, formulario.nickname.data,formulario.nombre.data, formulario.apellidos.data, formulario.correo.data, formulario.telefono.data, formulario.sexo.data, formulario.direccion.data, formulario.pais.data, formulario.departamento.data, formulario.ciudad.data, formulario.contrasena.data, "user", "T")
+            if obj_usuario.crear():
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Creado correctamente el usuario "+ formulario.nickname.data, formBuscar=FormBuscar())
+            return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="El usuario on documento "+formulario.documento.data +" ya existe, o ingreso un campo erroneo",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
+        return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Error en el proceso de crear usuario, valide los campos ingresados",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
 
-            return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",opcion="Editar",form=FormEditUsuario(), formBuscar=FormBuscar())
-        return render_template('administrador.html',lista_usuarios=usuario.listado(), error="Error en el proceso de crear usuario",opcion="Editar",form=FormEditUsuario(), formBuscar=FormBuscar())
 
-
-@app.route('/administrador/gestionar/DeleteNickname=<nickname>')
-def delete_usuario(nickname):
-    obj_usuario =usuario.delete(nickname)
+@app.route('/administrador/gestionar/Delete/<documento>')
+def delete_usuario(documento):
+    obj_usuario =persona.delete("user",documento)
     if obj_usuario:
-        obj_usuario+= nickname
-        return render_template('administrador.html',mensaje=obj_usuario,lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
-    return render_template('administrador.html',error="No se pudo eliminar al usuario "+nickname,lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
+        obj_usuario+= documento
+        return render_template('administrador.html',mensaje=obj_usuario,lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
+    return render_template('administrador.html',error="No se pudo eliminar al usuario "+documento,lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
 
-@app.route('/administrador/gestionar/BlockNickname=<nickname><estado>')
-def block_usuario(nickname, estado):
-    obj_usuario =usuario.block(nickname, estado)
+@app.route('/administrador/gestionar/Block/<documento><estado>')
+def block_usuario(documento, estado):
+    obj_usuario =persona.block(documento, estado)
     if obj_usuario:
         if estado == "T":
-            obj_usuario="Usuario "+ nickname+" bloqueado "
+            obj_usuario="Usuario "+ documento+" bloqueado "
         elif estado == "F":
-            obj_usuario="Usuario "+ nickname+" desbloqueado "
-        return render_template('administrador.html',mensaje=obj_usuario,lista_usuarios=usuario.listado(), block=estado, formBuscar=FormBuscar())
-    return render_template('administrador.html',error="No se pudo bloquear al usuario",lista_usuarios=usuario.listado(), formBuscar=FormBuscar())
+            obj_usuario="Usuario "+ documento+" desbloqueado "
+        return render_template('administrador.html',mensaje=obj_usuario,lista_usuarios=persona.listado("user"), block=estado, formBuscar=FormBuscar())
+    return render_template('administrador.html',error="No se pudo bloquear al usuario",lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
+
+
+"""-----------------------------FIN ADMINISTRADOR-----------------------------"""
 
 """Ruta para llamar a los productos de hombre"""
 @app.route('/productos/hombre/')
@@ -156,12 +162,12 @@ def gestion_productos():
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion/micuenta/')
 def gestion_micuenta():
-    return render_template('gestion_micuenta.html', form=FormMiCuenta())
+    return render_template('gestion_micuenta.html', form=FormGestionar())
 
 """Ruta para la gestión de Superadministrador"""
 @app.route('/superadministrador/')
 def superadministrador():
-    return render_template('superadministrador.html', form=FormAdministrador(), formBuscar=FormBuscarAdministrador())
+    return render_template('superadministrador.html', form=FormGestionar(), formBuscar=FormBuscarAdministrador())
 
 """Ruta para todos los comentarios de un producto"""
 @app.route('/comentarios/')
