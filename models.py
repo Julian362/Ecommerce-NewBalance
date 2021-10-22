@@ -48,18 +48,18 @@ class persona():
 
     @classmethod
     def cargar(cls, p_rol, p_documento):
-        sql = 'SELECT * FROM persona WHERE tipo_rol = "?" and documento="?";'
+        sql = 'SELECT * FROM persona WHERE tipo_rol = ? and documento=?;'
         obj = db.ejecutar_select(sql,[ p_rol, p_documento])
         if obj:
             if len(obj)>0:
-                return cls(obj[0]["nickname"],obj[0]["estado"],obj[0]["nombre"],obj[0]["apellidos"],obj[0]["documento"],obj[0]["telefono"],obj[0]["sexo"],obj[0]["correo"])
+                return cls(obj[0]["documento"],obj[0]["nickname"],obj[0]["nombre"], obj[0]["apellidos"], obj[0]["correo"], obj[0]["telefono"], obj[0]["sexo"], obj[0]["direccion"], obj[0]["pais"], obj[0]["departamento"], obj[0]["ciudad"], obj[0]["contrasena"], obj[0]["tipo_rol"], obj[0]["estado"])
 
         return None
 
     #Función para eliminar
     @classmethod
     def delete(cls, p_rol, p_documento):
-        sql = 'DELETE FROM persona WHERE tipo_rol = "?" and documento="?";'
+        sql = 'DELETE FROM persona WHERE tipo_rol = ? and documento=?;'
         obj = db.ejecutar_insert(sql,[ p_rol, p_documento ])
         if obj:
             if obj>0:
@@ -84,8 +84,8 @@ class persona():
     #Función para editar los datos de usuario
     @classmethod
     def editar(cls,documento,nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,rol):
-        sql="UPDATE persona set documento=?,nickname=?,nombre=?,apellidos=?,correo=?,telefono=?,sexo=?,direccion=?,pais=?,departamento=?,ciudad=?,contrasena=?,tipo_rol=?"
-        obj = db.ejecutar_insert(sql,[documento,nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,rol])
+        sql="UPDATE persona set nickname=?,nombre=?,apellidos=?,correo=?,telefono=?,sexo=?,direccion=?,pais=?,departamento=?,ciudad=?,contrasena=?,tipo_rol=? WHERE documento=?"
+        obj = db.ejecutar_insert(sql,[nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,rol,documento])
         if obj:
             if obj > 0:
                 return True

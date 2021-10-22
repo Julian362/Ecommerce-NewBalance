@@ -55,11 +55,11 @@ def administrador():
         crear_usuario()
     return render_template('administrador.html',lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
 
-@app.route('/administrador/gestion/Edit/<documento>', methods=["GET", "POST"])
+@app.route('/administrador/gestionar/Edit/<documento>', methods=["GET", "POST"])
 def edit_usuario(documento):
     if request.method == "GET":
         formulario = FormGestionar()
-        obj_usuario =persona.cargar(documento)
+        obj_usuario =persona.cargar("user",documento)
         if obj_usuario:
             formulario.documento.data = obj_usuario.documento
             formulario.nickname.data = obj_usuario.nickname
@@ -80,6 +80,7 @@ def edit_usuario(documento):
         if formulario.validate_on_submit():
             obj_usuario = persona.editar(formulario.documento.data,formulario.nickname.data,formulario.nombre.data,formulario.apellidos.data,formulario.correo.data,formulario.telefono.data,formulario.sexo.data,formulario.direccion.data,formulario.pais.data,formulario.departamento.data,formulario.ciudad.data,formulario.contrasena.data,"user")
             if obj_usuario:
+                obj_usuario= obj_usuario =persona.cargar("user",documento)
                 return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Editado correctamente", formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Verifique los datos ingresados",form=FormGestionar(), formBuscar=FormBuscar())
 
@@ -121,7 +122,6 @@ def crear_usuario():
                 return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Creado correctamente el usuario "+ formulario.nickname.data, formBuscar=FormBuscar())
             return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="El usuario on documento "+formulario.documento.data +" ya existe, o ingreso un campo erroneo",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Error en el proceso de crear usuario, valide los campos ingresados",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
-
 
 @app.route('/administrador/gestionar/Delete/<documento>')
 def delete_usuario(documento):
