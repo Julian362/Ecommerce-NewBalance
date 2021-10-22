@@ -2,6 +2,7 @@
 {% block head %}
     <title>New Balance | Administrador</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/administrador.css') }}">
+    <script src="{{ url_for ('static', filename='Js/administrador.js') }}"></script>
     {% if block %}
         {% if block== "T" %}
             <script> document.getElementById("icon_block").innerHTML = "lock_open"; </script>
@@ -15,7 +16,7 @@
 {% block contenido %}
     <div class="titulo-gestionar-usuario">
         <span class="material-icons-outlined md-40">account_circle</span>
-        <h1 style="text-align: center;">GESTIONAR USUARIOS</h1>
+        <h1 style="text-align: center;">USUARIOS</h1>
     </div>
     {% if formBuscar %}
     <div style="width:65%; margin:auto;">
@@ -37,7 +38,7 @@
         <div class="ContenedorFomulario">
             <form class="FormularioRegistro"
             {% if usuario %}
-                action="{{ url_for('edit_usuario', nickname = usuario.nickname) }}"
+                action="{{ url_for('edit_usuario', documento = usuario.documento) }}"
             {% else %}
                 action="{{ url_for('crear_usuario') }}"
             {% endif %}
@@ -59,7 +60,15 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                    {% if opcion %}
+                                        {% if opcion == "Editar" %}
+                                        {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT", disabled=True) }}
+                                        {% else %}
+                                            {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                        {% endif %}
+                                    {%else %}
+                                        {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                    {% endif %}
                                 </div>
                                 <div class="col">
                                     <div style="margin-top: 6px;">
@@ -107,13 +116,13 @@
                                     {{ form.nickname(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Nickname") }}
                                 </div>
                                 <div class="col">
-                                    {{ form.celular(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular") }}
-                                </div>                             
+                                    {{ form.telefono(type="text", class="form-DatosP form-control mr-sm-1", placeholder="Teléfono celular") }}
+                                </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    {{ form.correo(class="form-DatosP form-control mr-sm-1", placeholder="Correo") }}
+                                    {{ form.correo(type="email",class="form-DatosP form-control mr-sm-1", placeholder="Correo") }}
                                 </div>
                                 <div class="col">
                                     {{ form.pais(class="form-DatosP form-control mr-sm-1", placeholder="País") }}
@@ -121,7 +130,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    {{ form.departamento(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Departamento") }}
+                                    {{ form.departamento( class="form-DatosP form-control mr-sm-1", placeholder="Departamento") }}
                                 </div>
                                 <div class="col">
                                     {{ form.ciudad(class="form-DatosP form-control mr-sm-1", placeholder="Ciudad") }}
@@ -134,11 +143,23 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    {{ form.contrasena(class="form-DatosP form-control mr-sm-1", placeholder="Contraseña") }}
+                                    {{ form.contrasena(type="password",class="form-DatosP form-control mr-sm-1", placeholder="Contraseña", id="contrasena") }}
                                 </div>
                                 <div class="col">
-                                    {{ form.confirmarcontrasena(class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña") }}
+                                    {{ form.confirmarcontrasena(type="password",class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña", id="confirmarContrasena") }}
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="checkbox" onclick="mostrarContrasena()"> Mostrar contraseña
+                                </div>
+                                {% if opcion %}
+                                    {% if opcion == "Editar" %}
+                                        <div class="col">
+                                            <p style="color: #970c02;">Para editar el documento contacte a soporte</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                             <div class="row">
                                 <input style="margin: auto;" type="submit" id="registrarse" class="btn btn-outline-registro"value="{{opcion}}">
@@ -154,7 +175,7 @@
             <div class="contenedor-todos-usuarios">
                     <div  class="titulo-boton-usuarios">
                         <h2 style="display: inline; float:left;">Todos los usuarios</h2>
-                        <a href="{{ url_for('crear_producto') }}" style="text-decoration: none;" >
+                        <a href="{{ url_for('crear_usuario') }}" style="text-decoration: none;" >
                             <button class="btn btn-outline-one" style="display: inline; float:right;">Crear nuevo usuario</button>
                         </a>
                     </div>
@@ -186,12 +207,12 @@
                             <td>{{ item.correo }}</td>
                             <td>
                                 <div class="icon-derecha">
-                                    <a  href="{{ url_for('edit_usuario', nickname = item.nickname) }} ">
+                                    <a  href="{{ url_for('edit_usuario', documento = item.documento) }} ">
                                         <span class="material-icons-outlined iconoPosicion"  >edit</span>
                                     </a>
                                 </div>
                                 <div class="icon-centro">
-                                    <a href="{{ url_for('block_usuario', nickname = item.nickname, estado = item.estado) }}">
+                                    <a href="{{ url_for('block_usuario', documento = item.documento, estado = item.estado) }}">
                                         <span class="material-icons-outlined iconoPosicion" id="icon_block">
                                             <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
                                             {% if item.estado == 'F' %}
@@ -204,7 +225,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-izquierda">
-                                    <a href="{{ url_for('delete_usuario', nickname = item.nickname) }}">
+                                    <a href="{{ url_for('delete_usuario', documento = item.documento) }}">
                                         <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
                                 </div>
