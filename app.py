@@ -205,7 +205,7 @@ def lista_de_productos_mujer():
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
-    return render_template('gestion_productos.html', lista_productos=producto.listado(), form=FormGestionProducto())
+    return render_template('gestion_productos.html', lista_productos=producto.listado())
 
 
 # Cambia de estado bloqueo STIVEN
@@ -221,8 +221,8 @@ def block_producto(referencia, estado):
     return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado())
 
 # Medtodo de actualizar datos STIVEN
-@app.route('/administrador/gestionar/<id>', methods=["GET", "POST"])
-def ediatr_producto(id):
+@app.route('/productos/gestion/<id>', methods=["GET", "POST"])
+def editar_producto(id):
     if request.method == "GET":
         formulario = FormGestionProducto()
         obj_mensaje =producto.cargar(id)
@@ -241,19 +241,11 @@ def ediatr_producto(id):
     else:
         formulario = FormGestionProducto(request.form)
         if formulario.validate_on_submit():
-            obj_mensaje = producto.cargar(id)
-            if obj_mensaje:
-                obj_mensaje.nombre = formulario.nombre.data
-                obj_mensaje.referencia = formulario.referencia.data
-                obj_mensaje.talla = formulario.talla.data
-                obj_mensaje.precio = formulario.precio.data
-                obj_mensaje.cantidad = formulario.cantidad.data
-                obj_mensaje.descuento = formulario.descuento.data
-                obj_mensaje.color = formulario.color.data
-                obj_mensaje.descripcion = formulario.descripcion.data
-                obj_mensaje.sexo = formulario.sexo.data
-                return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente",)
-        return render_template('gestion_productos.html',lista_prodctos=producto.listado(), error="Error en el proceso de editar usuario",form=FormGestionProducto())
+            obj_usuario = producto.editar(id,formulario.nombre.data,formulario.referencia.data,formulario.talla.data,formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data,formulario.descripcion.data,formulario.sexo.data)
+            if obj_usuario:
+                obj_usuario =producto.cargar(id)
+                return render_template('gestion_productos.html',producto=obj_usuario,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente")
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Verifique los datos ingresados",form=FormGestionProducto())
 
 # Crear productos, plantilla gestion STIVEN
 @app.route('/productos/gestion/crear', methods=["GET", "POST"])
@@ -264,12 +256,20 @@ def crear_producto():
     else:
         formulario = FormGestionProducto(request.form)
         if formulario.validate_on_submit():
-            obj_crearProducto = producto(formulario.nombre.data, formulario.referencia.data, formulario.talla.data, formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data, formulario.descripcion.data, formulario.sexo.data)
+            obj_crearProducto = producto('',formulario.nombre.data, formulario.referencia.data, formulario.talla.data, formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data, formulario.descripcion.data, formulario.sexo.data)
             if (obj_crearProducto.crear()):
                 return render_template('gestion_productos.html',producto=obj_crearProducto,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Creado correctamente el producto "+ formulario.nombre.data)
 
             return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto())
         return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear usuario",opcion="Crear",form=FormGestionProducto())
+
+@app.route('/productos/gestion/Delete/<id>')
+def delete_producto(id):
+    obj_usuario =producto.delete(id)
+    if obj_usuario:
+        obj_usuario+= id
+        return render_template('gestion_productos.html',mensaje=obj_usuario,lista_productos=producto.listado())
+    return render_template('gestion_productos.html',error="No se pudo eliminar al usuario "+id,lista_productos=producto.listado())
 # ------------------------------------------------------------------------------------------------------
 
 
