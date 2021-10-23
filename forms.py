@@ -62,7 +62,7 @@ class FormGestionProducto(FlaskForm):
     cantidad = StringField('Stock', validators=[validators.required(),validators.length(max=1)])
     descuento = StringField('Descuento Comercial', validators=[validators.required(),validators.length(max=20)])
     color = StringField('Color', validators=[validators.required(),validators.length(max=20)])
-    descripcion = PasswordField('Descripción', validators=[validators.required(),validators.length(max=150)])
+    descripcion = StringField('Descripción', validators=[validators.required(),validators.length(max=150)])
     sexo = StringField('Sexo', validators=[validators.required(),validators.length(max=1)])
     agregar = SubmitField('Agregar')
 
