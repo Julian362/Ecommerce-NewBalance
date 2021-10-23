@@ -151,7 +151,7 @@ class producto():
         self.descripcion = gp_descripcion
         self.sexo = gp_sexo
  
-     # MetodoBloque para camabiar el estado
+     # Metodo Bloque para camabiar el estado
     @classmethod
     def block(cls, gp_referencia, gp_estado):
         if gp_estado == "T":
@@ -165,24 +165,41 @@ class producto():
 
         return False
 
+
     # Metodo de insercion a la base de datos
     def crear(self):
-        sql="INSERT INTO producto (referencia,nombre,precio,descripcion,estado) VALUES (?,?,?,?,?);"
+        sql="INSERT INTO producto (referencia,nombre,precio,descripcion,estado,descuento) VALUES (?,?,?,?,?,?);"
         sql2="INSERT INTO inventario (talla,referencia_producto,color,cantidad,sexo) VALUES (?,?,?,?,?);"
-        obj = db.ejecutar_insert(sql,[self.referencia,self.nombre,self.precio,self.descripcion,'T'])
+        obj = db.ejecutar_insert(sql,[self.referencia,self.nombre,self.precio,self.descripcion,'T', self.descuento])
         obj2 = db.ejecutar_insert(sql2,[self.talla,self.referencia,self.color,self.cantidad,self.sexo])
         if obj and obj2:
             if obj > 0 and obj2>0:
                 return True
         return False
 
+
+    #  Metodo de cargar datos al formulario
+    @classmethod
+    def cargar(cls,id):
+        sql = 'select producto.nombre, producto.referencia, inventario.talla, producto.precio, inventario.cantidad, producto.descuento, inventario.color, producto.descripcion, inventario.sexo from producto inner join inventario on inventario.referencia_producto=producto.referencia WHERE id= ?;'
+        obj = db.ejecutar_select(sql,[id])
+        if obj:
+            if len(obj)>0:
+                # orden del constructor
+                return cls(obj[0]["nombre"],obj[0]["referencia"],obj[0]["talla"], obj[0]["precio"], obj[0]["cantidad"], obj[0]["descuento"], obj[0]["color"], obj[0]["descripcion"], obj[0]["sexo"])
+
+        return None
+
+
     #Función para editar los datos de usuario
     @classmethod
-    def editar(cls,nombre, apellidos, correo, documento, telefono, nickname, sexo):
-        sql="UPDATE persona set nombre = ?,apellidos = ?, correo= ? ,documento= ? , telefono= ?, sexo= ? where documento= ?"
-        obj = db.ejecutar_insert(sql,[nombre, apellidos, correo, documento, telefono,  sexo, nickname])
-        if obj:
-            if obj > 0:
+    def editar(cls,nombre,referencia,talla,precio,cantidad,descuento,color,descripcion,sexo):
+        sql="UPDATE producto SET referencia = 'referencia',nombre = 'nombre',precio = 'precio',descripcion = 'descripcion',estado = 'estado',descuento = 'descuento'WHERE id=?"
+        sql2="UPDATE inventario SET id = 'id', talla = 'talla', referencia_producto = 'referencia_producto', color = 'color', cantidad = 'cantidad', sexo = 'sexo' WHERE id = ?"
+        obj = db.ejecutar_insert(sql,[referencia, nombre, precio, descripcion, 'T', descuento])
+        obj2 = db.ejecutar_insert(sql2,[talla, referencia, color, cantidad,sexo,])
+        if obj and obj2:
+            if obj > 0 and obj>2:
                 return True
 
     # Metodo de estatico para llamar la lista

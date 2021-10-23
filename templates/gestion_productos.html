@@ -36,6 +36,7 @@
 {% endif %}
 <div class="ContenedorFomulario">
     {% if form %} 
+    
     <form class="FormularioProducto"
     {% if producto%}
     action="{{url_for('editar_producto', referencia = producto.referencia )}}"
@@ -175,7 +176,7 @@
                 <td>
                     <div class="">
                         <div class="icon-derecha">
-                            <a href="{{ url_for('editar_producto',referencia = item.referencia ) }}"><span class="material-icons-outlined iconoPosicion">edit</span></a>
+                            <a href="{{ url_for('editar_producto',id = item.id ) }}"><span class="material-icons-outlined iconoPosicion">edit</span></a>
                         </div>
                         <div class="icon-centro">
                             <a href="{{ url_for('block_producto', referencia = item.referencia, estado = item.estado) }}">

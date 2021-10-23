@@ -176,33 +176,39 @@ def block_producto(referencia, estado):
     return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado())
 
 # Medtodo de actualizar datos STIVEN
-@app.route('/administrador/gestionar/<referencia>', methods=["GET", "POST"])
-def ediatr_producto(referencia):
+@app.route('/administrador/gestionar/<id>', methods=["GET", "POST"])
+def ediatr_producto(id):
     if request.method == "GET":
-        formulario = FormCrearUsuario()
-        obj_mensaje =producto.cargar(nickname)
+        formulario = FormGestionProducto()
+        obj_mensaje =producto.cargar(id)
         if obj_mensaje:
             formulario.nombre.data = obj_mensaje.nombre
-            formulario.apellidos.data = obj_mensaje.apellidos
-            formulario.correo.data = obj_mensaje.correo
-            formulario.documento.data = obj_mensaje.documento
-            formulario.celular.data = obj_mensaje.telefono
-            formulario.sexo.data = obj_mensaje.telefono
-            return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=producto.listado(), opcion="Editar", form=formulario, formBuscar=FormBuscar())
-        return render_template('administrador.html',error="No existe el usuario",lista_usuarios=producto.listado(), formBuscar=FormBuscar())
+            formulario.referencia.data = obj_mensaje.referencia
+            formulario.talla.data = obj_mensaje.talla
+            formulario.precio.data = obj_mensaje.precio
+            formulario.cantidad.data = obj_mensaje.cantidad
+            formulario.descuento.data = obj_mensaje.descuento
+            formulario.color.data = obj_mensaje.color
+            formulario.descripcion.data = obj_mensaje.descripcion
+            formulario.sexo.data = obj_mensaje.sexo
+            return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar", form=formulario)
+        return render_template('gestion_productos.html',error="No existe el usuario",lista_productos=producto.listado())
     else:
-        formulario = FormEditUsuario(request.form)
+        formulario = FormGestionProducto(request.form)
         if formulario.validate_on_submit():
-            obj_mensaje = producto.cargar(nickname)
+            obj_mensaje = producto.cargar(id)
             if obj_mensaje:
                 obj_mensaje.nombre = formulario.nombre.data
-                obj_mensaje.correo = formulario.correo.data
-                obj_mensaje.documento = formulario.documento.data
-                obj_mensaje.telefono = formulario.celular.data
+                obj_mensaje.referencia = formulario.referencia.data
+                obj_mensaje.talla = formulario.talla.data
+                obj_mensaje.precio = formulario.precio.data
+                obj_mensaje.cantidad = formulario.cantidad.data
+                obj_mensaje.descuento = formulario.descuento.data
+                obj_mensaje.color = formulario.color.data
+                obj_mensaje.descripcion = formulario.descripcion.data
                 obj_mensaje.sexo = formulario.sexo.data
-                obj_mensaje.editar(obj_mensaje.nombre, obj_mensaje.apellidos, obj_mensaje.correo, obj_mensaje.documento, obj_mensaje.telefono, obj_mensaje.nickname, obj_mensaje.sexo)
-                return render_template('administrador.html',usuario=obj_mensaje,lista_usuarios=producto.listado(), opcion="Editar",form=FormEditUsuario(), mensaje="Editado correctamente", formBuscar=FormBuscar())
-        return render_template('administrador.html',lista_usuarios=producto.listado(), error="Error en el proceso de editar usuario",form=FormEditUsuario(), formBuscar=FormBuscar())
+                return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente",)
+        return render_template('gestion_productos.html',lista_prodctos=producto.listado(), error="Error en el proceso de editar usuario",form=FormGestionProducto())
 
 # Crear productos, plantilla gestion STIVEN
 @app.route('/productos/gestion/crear', methods=["GET", "POST"])
