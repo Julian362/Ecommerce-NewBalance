@@ -197,10 +197,29 @@ class gestionAdministrador():
             if len(obj) > 0:
                 return cls(obj[0]["nombre"], obj[0]["apellidos"], obj[0]["documento"], obj[0]["sexo"], obj[0]["nickname"], obj[0]["telefono"], obj[0]["correo"], obj[0]["pais"], obj[0]["departamento"], obj[0]["ciudad"], obj[0]["direccion"], obj[0]["contrasena"], obj[0]["tipo_rol"], obj[0]["estado"])
         return None
+    
+    def editar_datos(self):
+        sql = "UPDATE persona SET nickname = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, sexo = ?, direccion = ?, pais = ?, departamento = ?, ciudad = ?, contrasena = ?, tipo_rol = ?, estado = ? WHERE documento = ? AND tipo_rol = 'admin';"
+        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado, self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    def crear_admin(self):
+        sql="INSERT INTO persona (documento, nickname, nombre, apellidos, correo, telefono, sexo, direccion, pais, departamento, ciudad, contrasena, tipo_rol, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        obj = db.ejecutar_insert(sql, [self.documento, self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    
+           
 
     @staticmethod
     def listado_administrador():
-        sql = "SELECT estado, nombre, apellidos, correo FROM persona WHERE tipo_rol='admin';"
+        sql = "SELECT estado, documento, nombre, apellidos, correo FROM persona WHERE tipo_rol='admin';"
         return db.ejecutar_select(sql, None)
 
 class producto():

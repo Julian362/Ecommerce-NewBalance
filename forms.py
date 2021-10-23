@@ -103,7 +103,8 @@ class FormAdministrador(FlaskForm):
     contrasena = StringField('Contraseña', validators=[validators.required(),validators.length(max=150)])
     confirmarContrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
     editar = SubmitField('Editar')
-    
+    crear = SubmitField('Crear')
+
 class FormLogin(FlaskForm):
     correo = StringField('Correo', validators=[validators.required()])
     contrasena = PasswordField('Contraseña', validators=[validators.required()])
