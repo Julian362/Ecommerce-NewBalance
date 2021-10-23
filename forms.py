@@ -39,7 +39,6 @@ class FormGestionProducto(FlaskForm):
     sexo = StringField('Sexo', validators=[validators.required(),validators.length(max=1)])
     agregar = SubmitField('Agregar')
 
-
 class FormGestionarComentario(FlaskForm):
     comentario = TextAreaField('opinión',[validators.length(max=300)])
 
