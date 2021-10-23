@@ -21,6 +21,7 @@ class FormGestionar(FlaskForm):
     registro = SubmitField('Registro')
     guardarCambios = SubmitField('Guardar cambios')
     editar = SubmitField('Editar')
+    crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
 
 class FormBuscar(FlaskForm):
@@ -30,19 +31,17 @@ class FormGestionProducto(FlaskForm):
     nombre = StringField('Nombre del Producto', validators=[validators.required(),validators.length(max=150)])
     referencia = StringField('Referencia', validators=[validators.required(),validators.length(max=150)])
     talla = StringField('Talla', validators=[validators.required(),validators.length(max=150)])
-    precio=StringField('Precio', validators=[validators.required(),validators.length(max=10)])
-    cantidad = StringField('Stock', validators=[validators.required(),validators.length(max=1)])
+    precio=StringField('Precio', validators=[validators.required()])
+    cantidad = StringField('Stock', validators=[validators.required(),validators.length(max=100)])
     descuento = StringField('Descuento Comercial', validators=[validators.required(),validators.length(max=20)])
     color = StringField('Color', validators=[validators.required(),validators.length(max=20)])
-    descripcion = StringField('Descripción', validators=[validators.required(),validators.length(max=150)])
+    descripcion = StringField('Descripción', validators=[validators.required(),validators.length(max=1000)])
     sexo = StringField('Sexo', validators=[validators.required(),validators.length(max=1)])
     agregar = SubmitField('Agregar')
-
 
 class FormGestionarComentario(FlaskForm):
     comentario = TextAreaField('opinión',[validators.length(max=300)])
 
 class FormBuscarAdministrador(FlaskForm):
     buscar = StringField('Buscar')
-
 
