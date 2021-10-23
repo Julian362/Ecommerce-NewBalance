@@ -40,7 +40,7 @@ def registro():
 
 @app.route('/producto/')
 def productoind():
-    return render_template('ProductoIndividual.html')
+    return render_template('Producto_individual.html')
 
 @app.route('/carrito/')
 def carrito():
@@ -195,7 +195,13 @@ def block_usuario(documento, estado):
 """Ruta para llamar a los productos de hombre"""
 @app.route('/productos/<sexo>/')
 def lista_de_productos(sexo):
-    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(), sexo=sexo)
+    #Variable para obtener el sexo de la base de datos por la letra M = Masculino y F = Femenino 
+    s=""
+    if sexo=="HOMBRE":
+        s="M"
+    if sexo=="MUJER":
+        s="F"
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
 
 
 # ----------------------------------------------------------------------------------------------
