@@ -19,7 +19,7 @@ class persona():
     tipo_rol=''
     estado=''
 
-#Se establece el método constructor
+    #Se establece el método constructor
     def __init__(self,p_documento, p_nickname,p_nombre, p_apellidos, p_correo, p_telefono, p_sexo, p_direccion, p_pais, p_departamento, p_ciudad, p_contrasena, p_tipo_rol, p_estado) -> None:
 
         self.documento = p_documento
@@ -111,22 +111,52 @@ class calificacion:
     id = 0
     puntuacion = 0
     comentario = ''
+    referencia_producto = ''
     nickname = ''
+    documento = ''
 
-    def __init__(self, p_puntuacion, p_comentario) -> None:
+    def __init__(self,p_id, p_puntuacion, p_comentario,p_referencia_producto, p_nickname, p_documento) -> None:
+        self.id = p_id
         self.puntuacion = p_puntuacion
         self.comentario = p_comentario
+        self.referencia_producto = p_referencia_producto
+        self.nickname = p_nickname
+        self.documento = p_documento
 
     @classmethod
-    def cargar(cls, p_documento):
-        sql = 'SELECT DISTINCT calificacion.* persona.nickname FROM calificacion inner join producto on producto.referencia = calificacion.referencia_producto inner join carrito  on  carrito.referencia_producto = producto.referencia inner join persona on persona.documento = carrito.documento_persona where persona.documento = ?;'
-        obj = db.ejecutar_select(sql,[ p_documento ])
+    def cargar(cls, p_documento,p_referencia_producto):
+        sql = 'SELECT persona.documento, persona.nickname, calificacion.*  FROM calificacion inner join producto on producto.referencia = calificacion.referencia_producto inner join inventario on inventario.referencia_producto = producto.referencia inner join carrito_inventario on carrito_inventario.id_inventario = inventario.id inner join carrito on carrito.id = carrito_inventario.id_carrito inner join persona on persona.documento = carrito.documento_persona where persona.documento = ? and producto.referencia=?;'
+        obj = db.ejecutar_select(sql,[ p_documento, p_referencia_producto ])
         if obj:
             if len(obj)>0:
-                return cls(obj[0]["puntuacion"],obj[0]["comentario"],obj[0]["nickname"])
+                return cls(obj[0]["id"],obj[0]["puntuacion"],obj[0]["comentario"],obj[0]["referencia_producto"],obj[0]["nickname"],obj[0]["documento"])
 
         return None
 
+    def crear(self):
+        sql="INSERT INTO calificacion (puntuacion,comentario,referencia_producto)VALUES (?,?,?);"
+        obj = db.ejecutar_insert(sql,[self.puntuacion,self.comentario,self.referencia_producto])
+        if obj:
+            if obj > 0:
+                return True
+
+    @classmethod
+    def editar(cls,puntuacion,comentario,referencia,id):
+        sql="UPDATE calificacion SET puntuacion = ?,  comentario = ?, referencia_producto = ? WHERE id = ? ;"
+        obj = db.ejecutar_insert(sql,[puntuacion,comentario,referencia,id])
+        if obj:
+            if obj > 0:
+                return True
+
+    @classmethod
+    def delete(cls,id):
+        sql = 'DELETE FROM calificacion WHERE id = ? ;'
+        obj = db.ejecutar_insert(sql,[ id ])
+        if obj:
+            if obj>0:
+                return "Borrado corectamente el comentario "
+
+        return None
 
 class producto():
     nombre = ""
@@ -150,7 +180,7 @@ class producto():
         self.color = gp_color
         self.descripcion = gp_descripcion
         self.sexo = gp_sexo
- 
+
     @classmethod
     def block(cls, gp_referencia, gp_estado):
         if gp_estado == "T":

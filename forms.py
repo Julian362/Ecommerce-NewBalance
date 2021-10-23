@@ -21,6 +21,7 @@ class FormGestionar(FlaskForm):
     registro = SubmitField('Registro')
     guardarCambios = SubmitField('Guardar cambios')
     editar = SubmitField('Editar')
+    login = SubmitField('Iniciar sesión')
 
 class FormBuscar(FlaskForm):
     buscar = StringField('buscar')
@@ -36,10 +37,10 @@ class FormGestionProducto(FlaskForm):
     descripcion = StringField('Descripción', validators=[validators.required(),validators.length(max=150)])
     sexo = StringField('Sexo', validators=[validators.required(),validators.length(max=1)])
     agregar = SubmitField('Agregar')
-    login = SubmitField('Iniciar sesión')
+
 
 class FormGestionarComentario(FlaskForm):
-    opinion = TextAreaField('opinión',[validators.length(max=300)])
+    comentario = TextAreaField('opinión',[validators.length(max=300)])
 
 class FormBuscarAdministrador(FlaskForm):
     buscar = StringField('Buscar')

@@ -2,53 +2,104 @@
 {% block head %}
 <title>Modal</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/gestion_comentario.css') }}">
+<script src="{{ url_for ('static', filename='Js/gestion_comentario.js') }}"></script>
 {% endblock %}
 
 {% block contenido %}
 <!-- Button ejemplo -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
+    {% if mensaje %}
+    <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
+    {% endif %}
+    {% if error %}
+    <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
+    {% endif %}
+    <a data-toggle="modal" href="#exampleModal">
+        Launch demo modal
+    </a>
 
-<!-- Modal -->
-<div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Gestionar Comentario</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <a class="cuenta-modal">
-                    <span class="material-icons-outlined md-48">person</span>
-                    <p style="margin-top: 1rem;">Los comentarios son públicos y contienen información de tu cuenta y el producto comprado.</p>
-                </a>
-                <div class="rating">
-                    <span class="estrella">☆</span>
-                    <span class="estrella">☆</span>
-                    <span class="estrella">☆</span>
-                    <span class="estrella">☆</span>
-                    <span class="estrella">☆</span>
+    <!-- Modal -->
+
+{% if form %}
+    <div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Comentario</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <h3 style="padding: 0%;">Nickname</h3>
-                <h3 style="padding: 0%;">Opinión</h3>
-                {% if form %}
-                {{ form.opinion(class="form-control") }}
-                <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                <form
+                {% if opcion=="Editar" %}
+                    action="{{ url_for('editar_comentario', referencia='WL574BP2' ,puntuacion=0,documento=2582059439) }}"
+                {% else %}
+                    action="{{ url_for('crear_comentario', referencia=WL574BP2 ,puntuacion = 0, documento=8793272928) }}"
                 {% endif %}
-                <!-- <input style="height: 300px;" type="text" class="form-control" id="" placeholder="ingresa tu opinión"> -->
-            </div>
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-outline-one">Eliminar</button>
-                <button type="button" class="btn btn-outline-one">Publicar</button>
+                id="gestionarComentario" method="POST">
+                {{ form.hidden_tag() }}
+                    <div class="modal-body">
+                        <a class="cuenta-modal">
+                            <span class="material-icons-outlined md-48">person</span>
+                            <p style="margin-top: 1rem;">Los comentarios son públicos y contienen información de tu cuenta y el producto comprado.</p>
+                        </a>
+                        {% if calificacion %}
+                            <div class="rating">
+                                <span class="estrella" id="estrella5" onclick="puntuacionEstrella(5,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
+                                    {% if calificacion.puntuacion < 5 %}☆
+                                    {% else %}★
+                                    {% endif %}
+                                </span>
+                                <span class="estrella" id="estrella4" onclick="puntuacionEstrella(4,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
+                                    {% if calificacion.puntuacion < 4 %}☆
+                                    {% else %}★
+                                    {% endif %}
+                                </span>
+                                <span class="estrella" id="estrella3" onclick="puntuacionEstrella(3,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
+                                    {% if calificacion.puntuacion < 3 %}☆
+                                    {% else %}★
+                                    {% endif %}
+                                </span>
+                                <span class="estrella" id="estrella2" onclick="puntuacionEstrella(2,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
+                                    {% if calificacion.puntuacion < 2 %}☆
+                                    {% else %}★
+                                    {% endif %}
+                                </span>
+                                <span class="estrella" id="estrella1" onclick="puntuacionEstrella(1,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
+                                    {% if calificacion.puntuacion < 1 %}☆
+                                    {% else %}★
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% else %}
+                            {% if calificacionCrear %}
+                                <div class="rating">
+                                    <span class="estrella" id="estrella5" onclick="puntuacionEstrella(5,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
+                                    <span class="estrella" id="estrella4" onclick="puntuacionEstrella(4,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
+                                    <span class="estrella" id="estrella3" onclick="puntuacionEstrella(3,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
+                                    <span class="estrella" id="estrella2" onclick="puntuacionEstrella(2,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
+                                    <span class="estrella" id="estrella1" onclick="puntuacionEstrella(1,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
+                                </div>
+                                <h3 style="padding: 0%;">{{calificacionCrear.nickname}}</h3>
+                            {% endif %}
+                            {% if calificacion %}
+                                <h3 style="padding: 0%;">{{calificacion.nickname}}</h3>
+                            {% endif %}
+                            <h3 style="padding: 0%;">Opinión</h3>
+                            {{ form.comentario(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                        {% if calificacion %}
+                        <a href="{{ url_for('delete_comentario', id=calificacion.id) }}">
+                            <button type="button" class="btn btn-outline-one">Eliminar</button>
+                        </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-outline-one">{{opcion}}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-
+{% endif %}
 
 {% endblock %}
