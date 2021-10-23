@@ -154,6 +154,7 @@
 
 .contenedorindividual h4:hover {
     color:#f44336;
+    text-decoration: underline;
 }
 
 .productos{
