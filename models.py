@@ -217,6 +217,28 @@ class gestionAdministrador():
                 return True
         return False
 
+    def eliminar_admin(self):
+        sql="DELETE FROM persona WHERE documento = ? AND tipo_rol = 'admin';"
+        obj = db.ejecutar_insert(sql, [self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    def bloquear_admin(self):
+        if self.estado=="T":
+            sql="UPDATE persona set estado = 'F' Where documento = ? AND tipo_rol = 'admin';"
+        elif self.estado=="F":
+            sql="UPDATE persona set estado = 'T' Where documento = ? AND tipo_rol = 'admin';"
+        obj=db.ejecutar_insert(sql, [self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    
+
+        
 
     @staticmethod
     def listado_administrador():
