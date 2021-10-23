@@ -192,14 +192,9 @@ def block_usuario(documento, estado):
 """ -----------------------------INICIO PRODUCTOS-----------------------------"""
 
 """Ruta para llamar a los productos de hombre"""
-@app.route('/productos/hombre/')
-def lista_de_productos_hombre():
-    return render_template('productos_hombre.html', lista_productos_totales=producto.listado_referencia())
-
-"""Ruta para llamar a los productos de mujer"""
-@app.route('/productos/mujer/')
-def lista_de_productos_mujer():
-    return render_template('productos_mujer.html')
+@app.route('/productos/<sexo>/')
+def lista_de_productos(sexo):
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(), sexo=sexo)
 
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
