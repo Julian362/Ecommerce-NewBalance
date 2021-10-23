@@ -44,9 +44,53 @@ def productoind():
 @app.route('/carrito/')
 def carrito():
     return render_template('Carrito.html')
-@app.route('/gestioncomentario/')
-def gestioncomentario():
-    return render_template('gestion_comentario.html', form=FormGestionarComentario())
+
+"""-----------------------------INICIO COMENTARIO-----------------------------"""
+
+
+@app.route('/comentario/gestionar/crear/<referencia>-<puntuacion>-<documento>', methods=["GET", "POST"])
+def crear_comentario(referencia,puntuacion,documento):
+    if request.method == "GET":
+        form=FormGestionarComentario()
+        obj_calificacion = calificacion("",0,"",referencia,persona.cargar("user",documento).nickname,documento)
+        return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion)
+    else:
+        form=FormGestionarComentario(request.form)
+        obj_calificacion = calificacion("",puntuacion,form.comentario.data,referencia,persona.cargar("user",documento).nickname,documento)
+        if form.validate_on_submit():
+            if obj_calificacion.crear():
+                return redirect(url_for('editar_comentario',referencia=referencia,puntuacion=puntuacion,documento=documento))
+            return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo crear el comentario ")
+        return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo validar el crear el comentario ")
+
+
+@app.route('/comentario/gestionar/editar/<referencia>-<puntuacion>-<documento>', methods=["GET", "POST"])
+def editar_comentario(referencia,puntuacion,documento):
+
+    if request.method == "GET":
+        obj_calificacion=calificacion.cargar(documento,referencia)
+        form=FormGestionarComentario()
+        form.comentario.data = obj_calificacion.comentario
+        return render_template('gestion_comentario.html', opcion="Editar", form=form, calificacion=obj_calificacion )
+    else:
+        form=FormGestionarComentario(request.form)
+        obj_calificacion=calificacion.cargar(documento,referencia)
+        obj_calificacion_validar=calificacion.editar(puntuacion,form.comentario.data,referencia,obj_calificacion.id)
+        obj_calificacion=calificacion.cargar(documento,referencia)
+        if obj_calificacion_validar:
+            return render_template('gestion_comentario.html', form=FormGestionarComentario(), opcion="Editar",calificacion=obj_calificacion, mensaje="Editado correctamente")
+        return render_template('gestion_comentario.html', form=FormGestionarComentario(), opcion="Crear", error="No se pudo editar el comentario")
+
+@app.route('/comentario/gestionar/eliminar/<id>')
+def delete_comentario(id):
+    obj_calificacion =calificacion.delete(id)
+    if obj_calificacion:
+        obj_calificacion+= id
+        return render_template('gestion_comentario.html', opcion="Crear", mensaje="Borrado correctamente")
+    return render_template('gestion_comentario.html', form=FormGestionarComentario(), opcion="Crear", error="No se pudo editar el comentario")
+
+"""-----------------------------FIN COMENTARIO-----------------------------"""
+
 
 """-----------------------------INICIO ADMINISTRADOR-----------------------------"""
 @app.route('/administrador/')
