@@ -35,8 +35,15 @@
 <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
 {% endif %}
 <div class="ContenedorFomulario">
-    {% if form %}
-    <form class="FormularioProducto" action="{{url_for('crear_producto')}}" method="POST">
+    {% if form %} 
+    
+    <form class="FormularioProducto"
+    {% if producto%}
+    action="{{url_for('editar_producto', referencia = producto.referencia )}}"
+    {% else %}
+    action="{{url_for('crear_producto')}}" 
+    {% endif %}
+    method="POST">
         {{form.hidden_tag()}}
         <div>
             <h2 style="text-align: center;">Producto</h2>
@@ -169,7 +176,7 @@
                 <td>
                     <div class="">
                         <div class="icon-derecha">
-                            <a href="#"><span class="material-icons-outlined iconoPosicion">edit</span></a>
+                            <a href="{{ url_for('editar_producto',id = item.id ) }}"><span class="material-icons-outlined iconoPosicion">edit</span></a>
                         </div>
                         <div class="icon-centro">
                             <a href="{{ url_for('block_producto', referencia = item.referencia, estado = item.estado) }}">
