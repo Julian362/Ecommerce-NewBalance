@@ -2,8 +2,8 @@
 {% extends 'template.html' %}
 <!-- Se hereda el head de template.html -->
 {% block head %}
-<title>New Balance | Hombre</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/productos_hombre.css') }}">
+<title>New Balance | {{ sexo }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
 <!-- Finaliza el bloque head -->
 {% endblock %}
 
@@ -16,22 +16,21 @@
     <span class="material-icons-outlined icon">
         storefront
     </span>
-    <h1 class="subtituloTexto"> ZAPATOS PARA HOMBRE</h1>
+    <h1 class="subtituloTexto"> ZAPATOS PARA {{ sexo }}</h1>
 </div>
 
 <!-- Se agrega el cuerpo de la pantalla -->
+<!-- wrap es propiedad para "mejorar" el contenedor -->
 <div class="wrap">
     <div class="store-wrapper">
-        <div class="category_list">
+        <div class="category_list titulos">
         <h4>FILTROS</h4>
-        <h4>ORDENAR</h4>
-        <select class="form-control mb-1">
-            <option selected>Más populares</option>
-            <option value="1">Más recientes</option>
-            <option value="2">Alfabético A-Z</option>
-            <option value="3">Alfabético Z-A</option>
-            <option value="4">Menor precio</option>
-            <option value="5">Mayor precio</option>
+        <h4>ORDENAR POR</h4>
+        <select class="form-control mb-1 casillas">
+            <option selected>Alfabético A-Z</option>
+            <option value="1">Alfabético Z-A</option>
+            <option value="2">Menor precio</option>
+            <option value="3">Mayor precio</option>
         </select>
         <h4>REFINAR POR</h4>
         <div class="form-check form">
@@ -40,8 +39,9 @@
                 Con descuento
             </label>
         </div>
+        <!-- Filtro de talla -->
         <h4>TALLA</h4>
-        <select class="form-control mb-1 ">
+        <select class="form-control mb-1 casillas">
             <option selected>Seleccionar talla</option>
             <option value="1">37</option>
             <option value="2">37 ½</option>
@@ -56,8 +56,9 @@
             <option value="11">42</option>
             <option value="12">42 ½</option>
         </select>
+        <!-- Filtro de color -->
         <h4>COLOR</h4>
-        <select class="form-control mb-1">
+        <select class="form-control mb-1 casillas">
             <option selected>Seleccionar color</option>
             <option value="1">Negro</option>
             <option value="2">Naranja</option>
@@ -71,13 +72,14 @@
             <option value="10">Blanco</option>
             <option value="11">Multicolor</option>
         </select>
+    <!--Todos los productos  -->
     </div>
         {% if lista_productos_totales %}
-            <section class="products-list">
+            <section class="products-list productos">
                 {% for item in lista_productos_totales %}
-                <div class="product-item">
+                <div class="product-item ">
                     <div class="contenedorindividual">
-                        <a href="{{url_for('productoind')}}">
+                        <a href="{{url_for('productoind', referencia=item.referencia)}}">
                             <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
                                 alt="producto_{{item.referencia}}">
                             <h4>{{ item.nombre }}</h4>

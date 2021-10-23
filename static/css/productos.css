@@ -31,68 +31,36 @@
 
 /* Sección del filtrado */
 
-/* Título Filtro */
-
-.titulo_1 h4 {
-    margin-left: 5%;
-    text-decoration: none;
-    margin-top: 75px;
-    color: black;
-    font-size: large;
-    text-align: center!important;
-}
-
 /* Títulos: color, talla, refinar por, ordenar */
-
-.titulo h4 {
-    margin-left: 5%;
-    text-align: none;
+.titulos h4 {
     margin-top: 30px;
     color: black;
-    font-size: small;
-    text-align: center !important;
+    font-size: medium;
+    text-align: justify!important;
 }
 
 /* Formato de las casillas del check box */
 
 .form {
     display: block;
-    margin-left: 10%;
+    margin-left: 5%;
     width: 100%;
     padding-left: 10px;
 }
 
-/* Formato de la selección del orden */
+/* Formato de las selecciones: más popular, talla, color */
 
-.orden {
+.casillas {
     display: block;
-    margin-left: 1%;
-    width: 80%;
-    padding-left: 10px;
+    width: 100%;
+    text-align: left;
 }
 
-/* Formato de la selección de la talla */
-
-.talla {
-    display: block;
-    margin-left: 1%;
-    width: 80%;
-    padding-left: 10px;
-}
-
-/* Formato de la selección del color */
-
-.color {
-    display: block;
-    margin-left: 1%;
-    width: 80%;
-    padding-left: 10px;
-}
-
-/* NUEVO CSS Prueba producots */
+/* NUEVO CSS Prueba productos */
 .wrap{
     width: 95%;
     margin: auto;
+    min-height: 600px;
 }
 
 .store-wrapper{
@@ -135,12 +103,12 @@
 	flex-direction: column;
 	align-items: center;
 	align-self: flex-start;
-	transition: all .4s;
+	transition: all .1s;
 }
 
 .products-list .product-item img{
 	width: 100%;
-	height: 140px;
+	height: 100%;
 }
 
 .products-list .product-item a{
@@ -182,4 +150,12 @@
     border-style: solid;
     border-width: 0.0001px;
     border-color: black;
+}
+
+.contenedorindividual h4:hover {
+    color:#f44336;
+}
+
+.productos{
+    padding-left: 5%;
 }
