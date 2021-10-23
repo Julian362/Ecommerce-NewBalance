@@ -21,6 +21,7 @@ class FormGestionar(FlaskForm):
     registro = SubmitField('Registro')
     guardarCambios = SubmitField('Guardar cambios')
     editar = SubmitField('Editar')
+    crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
 
 class FormBuscar(FlaskForm):

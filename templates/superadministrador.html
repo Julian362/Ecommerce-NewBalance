@@ -38,7 +38,7 @@
                                 {{ form.nombre(class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
                             </div>
                             <div class="col">
-                                {{ form.apellido(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
+                                {{ form.apellidos(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
                             </div>
                         </div>
                         <div class="row">
@@ -121,7 +121,7 @@
                                 {{ form.contrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña") }}                            
                             </div>
                             <div class="col"> 
-                                {{ form.confirmarContrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
+                                {{ form.confirmarcontrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
                             </div>
                         </div> 
                         <div class="row">
@@ -191,7 +191,8 @@
                                     </a>
                                 </div>
                                 <div class="icon-centro">
-                                    <a href="{{ url_for('block_usuario', nickname = item.nickname, estado = item.estado) }}">
+                                    <!--  url_for('block_usuario', nickname = item.nickname, estado = item.estado) -->
+                                    <a href="#">
                                         <span class="material-icons-outlined iconoPosicion" id="icon_block">
                                             <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
                                             {% if item.estado == 'F' %}
@@ -203,8 +204,9 @@
                                         </span>
                                     </a>
                                 </div>
+                                <!-- url_for('delete_usuario', nickname = item.nickname) -->
                                 <div class="icon-izquierda">
-                                    <a href="{{ url_for('delete_usuario', nickname = item.nickname) }}">
+                                    <a href="#">
                                         <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
                                 </div> 
