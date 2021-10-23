@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template,  request, redirect, url_for
+from flask.wrappers import Request
 from models import *
 from forms import *
 from werkzeug.utils import redirect
@@ -237,7 +238,62 @@ def gestion_micuenta():
 """Ruta para la gestión de Superadministrador"""
 @app.route('/superadministrador/')
 def superadministrador():
-    return render_template('superadministrador.html', form=FormGestionar(), formBuscar=FormBuscarAdministrador())
+    return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
+
+@app.route('/superadministrador/gestionar/<documento>',  methods=["GET", "POST"])
+def edit_administrador(documento):
+    if request.method == "GET":
+        formulario = FormGestionar()
+        obj_admin = gestionAdministrador.cargar_datos(documento)
+        if obj_admin:
+            formulario.nombre.data = obj_admin.nombre
+            formulario.apellidos.data = obj_admin.apellido
+            formulario.documento.data = obj_admin.documento
+            formulario.sexo.data = obj_admin.sexo
+            formulario.nickname.data = obj_admin.nickname
+            formulario.telefono.data = obj_admin.telefono
+            formulario.correo.data = obj_admin.correo
+            formulario.pais.data = obj_admin.pais
+            formulario.departamento.data = obj_admin.departamento
+            formulario.ciudad.data = obj_admin.ciudad
+            formulario.direccion.data = obj_admin.direccion
+            formulario.contrasena.data = obj_admin.contrasena
+            return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
+        return render_template('superadministrador.html', error="No existe el usuario", formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
+    else:
+        formulario = FormGestionar(request.form)
+        if formulario.validate_on_submit():
+            obj_admin = gestionAdministrador.cargar_datos(documento)
+            if obj_admin:
+                obj_admin.nombre = formulario.nombre.data
+                obj_admin.apellido = formulario.apellidos.data
+                obj_admin.documento = formulario.documento.data
+                obj_admin.sexo = formulario.sexo.data
+                obj_admin.nickname = formulario.nickname.data
+                obj_admin.telefono = formulario.telefono.data
+                obj_admin.correo = formulario.correo.data
+                obj_admin.pais = formulario.pais.data
+                obj_admin.departamento = formulario.departamento.data
+                obj_admin.ciudad = formulario.ciudad.data
+                obj_admin.direccion = formulario.direccion.data 
+                obj_admin.contrasena = formulario.contrasena.data
+                obj_admin.editar_datos()
+                return render_template('superadministrador.html', datosAdministrador=obj_admin, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), mensaje = "Se han editados los datos del administrador {0} correctamente".format(formulario.documento.data), opcion="Editar")
+        return render_template('superadministrador.html', form=FormGestionar(), formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), error="Error en el proceso de editar usuario")
+
+@app.route('/superadministrador/crear/', methods=["GET", "POST"])
+def crear_administrador():
+    if request.method == "GET":
+        formulario = FormGestionar()
+        return render_template('superadministrador.html', form = formulario, listaAdmin=gestionAdministrador.listado_administrador(), formBuscar=FormBuscarAdministrador(), opcion="Crear")
+    else:
+        formulario = FormGestionar(request.form)
+        if formulario.validate_on_submit():
+            obj_admin = gestionAdministrador(formulario.nombre.data, formulario.apellido.data, formulario.documento.data, formulario.sexo.data, formulario.nickname.data, formulario.telefono.data, formulario.correo.data, formulario.pais.data, formulario.departamento.data, formulario.ciudad.data, formulario.direccion.data, formulario.contrasena.data, "admin", "T")
+            if (obj_admin.crear_admin()):
+                return render_template('superadministrador.html', mensaje="Se ha creado correctamente el administrador {0}".format(formulario.documento.data), listaAdmin=gestionAdministrador.listado_administrador(), formBuscar=FormBuscarAdministrador(), opcion="Crear")
+        return render_template('superadministrador.html', error="Error en el proceso de creación de administración",form=FormGestionar(), listaAdmin=gestionAdministrador.listado_administrador(), formBuscar=FormBuscarAdministrador(), opcion="Crear")
+    
 
 """Ruta para todos los comentarios de un producto"""
 @app.route('/comentarios/')

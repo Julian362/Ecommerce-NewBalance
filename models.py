@@ -56,32 +56,32 @@ class persona():
 
         return None
 
-    #Función para eliminar
+    # Función para eliminar
     @classmethod
     def delete(cls, p_rol, p_documento):
         sql = 'DELETE FROM persona WHERE tipo_rol = ? and documento=?;'
         obj = db.ejecutar_insert(sql,[ p_rol, p_documento ])
         if obj:
-            if obj>0:
+            if obj > 0:
                 return "Borrado corectamente el usuario "
 
         return None
 
-    #Función para el bloquear o desbloquear al usuario
+    # Función para el bloquear o desbloquear al usuario
     @classmethod
     def block(cls, p_documento, p_estado):
         if p_estado == "T":
             sql = 'UPDATE persona set estado = "F" Where documento = ?;'
         elif p_estado == "F":
             sql = 'UPDATE persona set estado = "T" Where documento = ?;'
-        obj = db.ejecutar_insert(sql,[ p_documento ])
+        obj = db.ejecutar_insert(sql, [p_documento])
         if obj:
             if obj > 0:
                 return True
 
         return False
 
-    #Función para editar los datos de usuario
+    # Función para editar los datos de usuario
     @classmethod
     def editar(cls,documento,nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,rol):
         sql="UPDATE persona set nickname=?,nombre=?,apellidos=?,correo=?,telefono=?,sexo=?,direccion=?,pais=?,departamento=?,ciudad=?,contrasena=?,tipo_rol=? WHERE documento=?"
@@ -100,12 +100,13 @@ class persona():
 
         return False
 
-    #Función para obtener el listado de los usuarios
+    # Función para obtener el listado de los usuarios
     @staticmethod
     def listado(rol):
         sql = 'SELECT * FROM persona WHERE tipo_rol = ? ORDER BY documento;'
 
         return db.ejecutar_select(sql, [rol])
+
 
 class calificacion:
     id = 0
@@ -123,7 +124,7 @@ class calificacion:
         self.nickname = p_nickname
         self.documento = p_documento
 
-    @classmethod
+    @classmethod   
     def cargar(cls, p_documento,p_referencia_producto):
         sql = 'SELECT persona.documento, persona.nickname, calificacion.*  FROM calificacion inner join producto on producto.referencia = calificacion.referencia_producto inner join inventario on inventario.referencia_producto = producto.referencia inner join carrito_inventario on carrito_inventario.id_inventario = inventario.id inner join carrito on carrito.id = carrito_inventario.id_carrito inner join persona on persona.documento = carrito.documento_persona where persona.documento = ? and producto.referencia=?;'
         obj = db.ejecutar_select(sql,[ p_documento, p_referencia_producto ])
@@ -157,6 +158,71 @@ class calificacion:
                 return "Borrado corectamente el comentario "
 
         return None
+
+
+class gestionAdministrador():
+    nombre = ''
+    apellido = ''
+    documento = ''
+    nickname = ''
+    telefono = 0
+    correo = ''
+    sexo = ''
+    pais = ''
+    departamento = ''
+    ciudad = ''
+    direccion = ''
+    contrasena = ''
+    tipo_rol = ''
+    estado = ''
+
+    def __init__(self, p_nombre, p_apellido, p_documento, p_sexo,  p_nickname, p_telefono, p_correo, p_pais, p_departamento, p_ciudad, p_direccion, p_contrasena, p_tipo_rol, p_estado):
+        self.nombre = p_nombre
+        self.apellido = p_apellido
+        self.documento = p_documento
+        self.nickname = p_nickname
+        self.telefono = p_telefono
+        self.correo = p_correo
+        self.sexo = p_sexo
+        self.pais = p_pais
+        self.departamento = p_departamento
+        self.ciudad = p_ciudad
+        self.direccion = p_direccion
+        self.contrasena = p_contrasena
+        self.tipo_rol = p_tipo_rol
+        self.estado = p_estado
+
+    @classmethod
+    def cargar_datos(cls, p_documento):
+        sql = "SELECT documento, nickname, nombre, apellidos, correo, telefono, sexo, direccion, pais, departamento, ciudad, contrasena, tipo_rol, estado FROM persona WHERE tipo_rol='admin' and documento=?;"
+        obj = db.ejecutar_select(sql, [p_documento])
+        if obj:
+            if len(obj) > 0:
+                return cls(obj[0]["nombre"], obj[0]["apellidos"], obj[0]["documento"], obj[0]["sexo"], obj[0]["nickname"], obj[0]["telefono"], obj[0]["correo"], obj[0]["pais"], obj[0]["departamento"], obj[0]["ciudad"], obj[0]["direccion"], obj[0]["contrasena"], obj[0]["tipo_rol"], obj[0]["estado"])
+        return None
+    
+    def editar_datos(self):
+        sql = "UPDATE persona SET nickname = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, sexo = ?, direccion = ?, pais = ?, departamento = ?, ciudad = ?, contrasena = ?, tipo_rol = ?, estado = ? WHERE documento = ? AND tipo_rol = 'admin';"
+        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado, self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    def crear_admin(self):
+        sql="INSERT INTO persona (documento, nickname, nombre, apellidos, correo, telefono, sexo, direccion, pais, departamento, ciudad, contrasena, tipo_rol, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        obj = db.ejecutar_insert(sql, [self.documento, self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+
+    @staticmethod
+    def listado_administrador():
+        sql = "SELECT estado, documento, nombre, apellidos, correo FROM persona WHERE tipo_rol='admin';"
+        return db.ejecutar_select(sql, None)
+
 
 class producto():
     nombre = ""
@@ -210,6 +276,7 @@ class producto():
         sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
 
+    @staticmethod
     def listado_referencia():
         sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  group by referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
