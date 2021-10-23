@@ -10,7 +10,7 @@
 }
 
 .pantalla{
-margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .encabezado h1 {
@@ -22,11 +22,11 @@ margin-bottom: 25px;
 }
 
 .icon {
-font-size: 35px;
-text-align: center;
-padding-left: 15px;
-padding-top: 5px;
-padding-bottom: 5px;
+    font-size: 35px;
+    text-align: center;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /* Sección del filtrado */
@@ -89,69 +89,97 @@ padding-bottom: 5px;
     padding-left: 10px;
 }
 
-/* Para centrar las imágenes */
-
-.filas a img {
-    display: block;
+/* NUEVO CSS Prueba producots */
+.wrap{
+    width: 95%;
     margin: auto;
-    width: 100%;
 }
 
-/* Características a las filas */
+.store-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
 
-.filas {
+.category_list{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+
+.category_list .category_item{
+    display: block;
+    width: 90%;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    background: #363636;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+}
+
+.category_list .ct_item-active{
+    background: #f44336;
+}
+
+.products-list{
+	width: 82%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.products-list .product-item{
+	width: 22%;
+	margin-left: 3%;
+	margin-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: flex-start;
+	transition: all .4s;
+}
+
+.products-list .product-item img{
+	width: 100%;
+	height: 140px;
+}
+
+.products-list .product-item a{
+	display: block;
+	width: 100%;
+	text-align: center;
+	text-decoration: none;
+}
+.contenedorindividual{
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 100%;
-    padding-top: 30px;
-    padding-bottom: 30px;
     border-radius: 3px;
     border-style: solid;
-    border-width: 0.01px;
-    border-color: rgba(255, 255, 255, 0);
+    border-width: 0.0001px;
+    border-color: rgb(255, 255, 255);
 }
 
-.row {
-    margin-left: 0%!important;
-    margin-right: 0%!important;
-}
-
-/* Propiedades de las "a" de las filas */
-
-.filas a {
-    text-decoration: none;
-    color: black;
-}
-
-/* Propiedades de las "h4" de las "a" de las filas */
-
-.filas a h4 {
+.contenedorindividual h4 {
     width: 100%;
     margin: auto;
     font-size: medium;
     text-align: center;
+    color: black;
 }
-
-/* Propiedades de las "p" de las "a" de las filas */
-
-.filas a p {
+.contenedorindividual p{
     width: 100%;
     margin: auto;
-    font-size: small;
+    font-size: medium;
     text-align: center;
+    color: black;
+
 }
-
-/* Para que se ilumine de tojo los títulos de los productos */
-
-.filas a h4:hover {
-    color: #b80a2e;
-    text-shadow: 2px 2px 15px white;
-}
-
-/* Para que salga el recuadro negro de los productos al pasar el mouse por encima de ellos */
-
-.filas:hover {
+.contenedorindividual:hover {
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 100%;
     border-radius: 3px;
     border-style: solid;
-    border-width: 0.01px;
+    border-width: 0.0001px;
     border-color: black;
 }
