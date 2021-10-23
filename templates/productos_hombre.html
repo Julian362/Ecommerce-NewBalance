@@ -20,6 +20,7 @@
 </div>
 
 <!-- Se agrega el cuerpo de la pantalla -->
+<!-- wrap es propiedad para "mejorar" el contenedor -->
 <div class="wrap">
     <div class="store-wrapper">
         <div class="category_list">
@@ -40,6 +41,7 @@
                 Con descuento
             </label>
         </div>
+        <!-- Filtro de talla -->
         <h4>TALLA</h4>
         <select class="form-control mb-1 ">
             <option selected>Seleccionar talla</option>
@@ -56,6 +58,7 @@
             <option value="11">42</option>
             <option value="12">42 ½</option>
         </select>
+        <!-- Filtro de color -->
         <h4>COLOR</h4>
         <select class="form-control mb-1">
             <option selected>Seleccionar color</option>
@@ -71,13 +74,14 @@
             <option value="10">Blanco</option>
             <option value="11">Multicolor</option>
         </select>
+    <!--Todos los productos  -->
     </div>
         {% if lista_productos_totales %}
             <section class="products-list">
                 {% for item in lista_productos_totales %}
                 <div class="product-item">
                     <div class="contenedorindividual">
-                        <a href="{{url_for('productoind')}}">
+                        <a href="{{url_for('productoind', referencia=item.referencia)}}">
                             <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
                                 alt="producto_{{item.referencia}}">
                             <h4>{{ item.nombre }}</h4>

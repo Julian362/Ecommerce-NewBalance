@@ -145,6 +145,8 @@ def block_usuario(documento, estado):
 
 """-----------------------------FIN ADMINISTRADOR-----------------------------"""
 
+""" -----------------------------INICIO PRODUCTOS-----------------------------"""
+
 """Ruta para llamar a los productos de hombre"""
 @app.route('/productos/hombre/')
 def lista_de_productos_hombre():
