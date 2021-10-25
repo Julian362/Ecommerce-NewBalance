@@ -341,3 +341,24 @@ class producto():
         sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia  order by nombre asc;'
         return db.ejecutar_select(sql, sexo)
 
+    @staticmethod
+    def filtrar(sexo, orden, talla, color):
+
+        # if orden=="0":
+        #     sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia order by producto.nombre;'
+        #     return db.ejecutar_select(sql,[sexo,talla, color])
+
+        if orden=="asc":
+            sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? and (inventario.color="" or inventario.talla=? order by producto.precio asc;'
+        
+                
+        elif orden=="desc":
+            sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? and (inventario.color=?) or 1=1 and (inventario.talla=?) or 1=1 order by producto.precio desc;'
+        
+
+        else:
+            sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia order by producto.nombre;'
+            return db.ejecutar_select(sql,[sexo])
+        
+        return db.ejecutar_select(sql,[sexo, color, talla])
+ 

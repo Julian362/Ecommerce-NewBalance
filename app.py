@@ -1,3 +1,4 @@
+from itertools import product
 import os
 from flask import Flask, render_template,  request, redirect, url_for
 from flask.wrappers import Request
@@ -34,17 +35,6 @@ def registro():
                 return redirect(url_for('login'))
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
         return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
-
-
-
-
-@app.route('/producto/')
-def productoind():
-    return render_template('Producto_individual.html')
-
-@app.route('/carrito/')
-def carrito():
-    return render_template('Carrito.html')
 
 """-----------------------------INICIO COMENTARIO-----------------------------"""
 
@@ -89,6 +79,12 @@ def delete_comentario(id):
         obj_calificacion+= id
         return render_template('gestion_comentario.html', opcion="Crear", mensaje="Borrado correctamente")
     return render_template('gestion_comentario.html', form=FormGestionarComentario(), opcion="Crear", error="No se pudo editar el comentario")
+
+    
+"""Ruta para todos los comentarios de un producto"""
+@app.route('/comentarios/')
+def todos_los_comentarios():
+    return render_template('todos_los_comentarios.html')
 
 """-----------------------------FIN COMENTARIO-----------------------------"""
 
@@ -192,7 +188,7 @@ def block_usuario(documento, estado):
 
 """ -----------------------------INICIO PRODUCTOS-----------------------------"""
 
-"""Ruta para llamar a los productos de hombre"""
+"""Ruta para llamar a los productos"""
 @app.route('/productos/<sexo>/')
 def lista_de_productos(sexo):
     #Variable para obtener el sexo de la base de datos por la letra M = Masculino y F = Femenino 
@@ -201,12 +197,36 @@ def lista_de_productos(sexo):
         s="M"
     if sexo=="MUJER":
         s="F"
-    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
 
+@app.route('/productos/<sexo>/filtros/', methods=["GET", "POST"])
+def filtros_producto(sexo):
+    s=""
+    if sexo=="HOMBRE":
+        s="M"
+    if sexo=="MUJER":
+        s="F"
+    if request.method=="GET":
+        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
+        #Método POST
+    else:
+        formulario=FormFiltrarProducto(request.form)
+        if formulario.validate_on_submit():
+            return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
+        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
+
+
+@app.route('/producto/')
+def productoind():
+    return render_template('Producto_individual.html')
+
+@app.route('/carrito/')
+def carrito():
+    return render_template('Carrito.html')
 
 # ----------------------------------------------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
-@app.route('/productos/gestion/', methods=['GET', 'POST'])
+@app.route('/productos/gestion/', methods=["GET", "POST"])
 def gestion_productos():
     return render_template('gestion_productos.html', lista_productos=producto.listado())
 
@@ -278,7 +298,7 @@ def delete_producto(id):
     return render_template('gestion_productos.html',error="No se pudo eliminar al usuario "+id,lista_productos=producto.listado())
 # ------------------------------------------------------------------------------------------------------
 
-
+"""-----------------------------FIN PRODUCTOS-----------------------------"""
 
 """Ruta para la gestión de perfil (Mi Cuenta)"""
 @app.route('/gestion/micuenta/')
@@ -386,13 +406,6 @@ def Buscar_administrador():
                 return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
             return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "No exite el administrador {o}, puede crearlo".format(formBuscar.buscar.data))
         return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "Error en el proceso de busqueda")
-
-
-
-"""Ruta para todos los comentarios de un producto"""
-@app.route('/comentarios/')
-def todos_los_comentarios():
-    return render_template('todos_los_comentarios.html')
 
 @app.route('/contactos/')
 def contactos():
