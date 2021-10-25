@@ -9,7 +9,7 @@ class persona():
     nombre =''
     apellidos=''
     correo=''
-    telefono =0
+    telefono = 0
     sexo=''
     direccion=''
     pais=''
@@ -287,6 +287,7 @@ class producto():
         return None
 
 
+
     #Función para editar los datos de usuario
     @classmethod
     def editar(cls,id,nombre,referencia,talla,precio,cantidad,descuento,color,descripcion,sexo):
@@ -304,18 +305,18 @@ class producto():
         obj = db.ejecutar_insert(sql,[ id ])
         if obj:
             if obj>0:
-                return "Borrado corectamente el comentario "
+                return "Borrado corectamente el producto "
 
         return None
 
     # Metodo de estatico para llamar la lista
     @staticmethod
     def listado():
-        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
+        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia order by id asc;'
         return db.ejecutar_select(sql, None)
 
     @staticmethod
     def listado_referencia():
-        sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  group by referencia  order by nombre asc;'
+        sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia group by referencia order by nombre asc;'
         return db.ejecutar_select(sql, None)
 

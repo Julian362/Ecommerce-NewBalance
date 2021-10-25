@@ -29,7 +29,7 @@ def registro():
         #Para validad los campos del formulario con el wtf
         if form_ingreso.validate_on_submit:
             #Se crea el objeto registro y se instancia en el orden del constructor, pero con el nombre del forms.py
-            obj_registro=persona(form_ingreso.documento.data,form_ingreso.nickname.data,form_ingreso.nombre.data,form_ingreso.apellido.data,form_ingreso.correo.data,form_ingreso.telefono.data,form_ingreso.sexo.data,form_ingreso.direccion.data,form_ingreso.pais.data,form_ingreso.departamento.data,form_ingreso.ciudad.data,form_ingreso.contrasena.data,"user","T")
+            obj_registro=persona(form_ingreso.documento.data,form_ingreso.nickname.data,form_ingreso.nombre.data,form_ingreso.apellidos.data,form_ingreso.correo.data,form_ingreso.telefono.data,form_ingreso.sexo.data,form_ingreso.direccion.data,form_ingreso.pais.data,form_ingreso.departamento.data,form_ingreso.ciudad.data,form_ingreso.contrasena.data,"user","T")
             if obj_registro.insertar_registro():
                 return redirect(url_for('login'))
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
@@ -205,7 +205,31 @@ def lista_de_productos_mujer():
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
-    return render_template('gestion_productos.html', lista_productos=producto.listado())
+    return render_template('gestion_productos.html', lista_productos=producto.listado(),formBuscar=FormBuscar())
+
+@app.route('/productos/gestion/buscar', methods=["GET", "POST"])
+def buscar_gestionproductos():
+    if request.method == "GET":
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), opcion="Editar", form=FormGestionProducto(), formBuscar=FormBuscar())
+    else:
+        form = FormBuscar(request.form)
+        formulario = FormGestionProducto()
+        if form.validate_on_submit() or formulario.validate_on_submit():
+            obj_producto = producto.cargar(form.buscar.data)
+            if obj_producto:
+                formulario.nombre.data = obj_producto.nombre
+                formulario.referencia.data = obj_producto.referencia
+                formulario.talla.data = obj_producto.talla
+                formulario.precio.data = obj_producto.precio
+                formulario.cantidad.data = obj_producto.cantidad
+                formulario.descuento.data = obj_producto.descuento
+                formulario.color.data = obj_producto.color
+                formulario.descripcion.data = obj_producto.descripcion
+                formulario.sexo.data = obj_producto.sexo
+                return render_template('gestion_productos.html',producto=obj_producto,lista_productos=producto.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="No existe el producto, puede crearlo",opcion="crear",form=FormGestionProducto(), formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de buscar producto",opcion="Crear",form=FormGestionProducto(), formBuscar=FormBuscar())
+
 
 
 # Cambia de estado bloqueo STIVEN
@@ -217,8 +241,8 @@ def block_producto(referencia, estado):
             obj_proEstado="Producto con "+ referencia+" bloqueado "
         elif estado == "F":
             obj_proEstado="Producto con "+ referencia+" desbloqueado "
-        return render_template('gestion_productos.html',mensaje=obj_proEstado,lista_productos=producto.listado(), block=estado)
-    return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado())
+        return render_template('gestion_productos.html',mensaje=obj_proEstado,lista_productos=producto.listado(), block=estado,formBuscar=FormBuscar())
+    return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado(),formBuscar=FormBuscar())
 
 # Medtodo de actualizar datos STIVEN
 @app.route('/productos/gestion/<id>', methods=["GET", "POST"])
@@ -236,16 +260,16 @@ def editar_producto(id):
             formulario.color.data = obj_mensaje.color
             formulario.descripcion.data = obj_mensaje.descripcion
             formulario.sexo.data = obj_mensaje.sexo
-            return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar", form=formulario)
-        return render_template('gestion_productos.html',error="No existe el usuario",lista_productos=producto.listado())
+            return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar", form=formulario,formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',error="No existe el producto",lista_productos=producto.listado(),formBuscar=FormBuscar())
     else:
         formulario = FormGestionProducto(request.form)
         if formulario.validate_on_submit():
             obj_usuario = producto.editar(id,formulario.nombre.data,formulario.referencia.data,formulario.talla.data,formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data,formulario.descripcion.data,formulario.sexo.data)
             if obj_usuario:
                 obj_usuario =producto.cargar(id)
-                return render_template('gestion_productos.html',producto=obj_usuario,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente")
-        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Verifique los datos ingresados",form=FormGestionProducto())
+                return render_template('gestion_productos.html',producto=obj_usuario,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente",formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Verifique los datos ingresados",form=FormGestionProducto(),formBuscar=FormBuscar())
 
 # Crear productos, plantilla gestion STIVEN
 @app.route('/productos/gestion/crear', methods=["GET", "POST"])
@@ -258,18 +282,18 @@ def crear_producto():
         if formulario.validate_on_submit():
             obj_crearProducto = producto('',formulario.nombre.data, formulario.referencia.data, formulario.talla.data, formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data, formulario.descripcion.data, formulario.sexo.data)
             if (obj_crearProducto.crear()):
-                return render_template('gestion_productos.html',producto=obj_crearProducto,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Creado correctamente el producto "+ formulario.nombre.data)
+                return render_template('gestion_productos.html',producto=obj_crearProducto,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Creado correctamente el producto "+ formulario.nombre.data,formBuscar=FormBuscar())
 
-            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto())
-        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear usuario",opcion="Crear",form=FormGestionProducto())
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto(),formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto(),formBuscar=FormBuscar())
 
 @app.route('/productos/gestion/Delete/<id>')
 def delete_producto(id):
     obj_usuario =producto.delete(id)
     if obj_usuario:
         obj_usuario+= id
-        return render_template('gestion_productos.html',mensaje=obj_usuario,lista_productos=producto.listado())
-    return render_template('gestion_productos.html',error="No se pudo eliminar al usuario "+id,lista_productos=producto.listado())
+        return render_template('gestion_productos.html',mensaje=obj_usuario,lista_productos=producto.listado(),formBuscar=FormBuscar())
+    return render_template('gestion_productos.html',error="No se pudo eliminar al producto "+id,lista_productos=producto.listado(),formBuscar=FormBuscar())
 # ------------------------------------------------------------------------------------------------------
 
 

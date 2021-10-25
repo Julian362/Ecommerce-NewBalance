@@ -19,10 +19,10 @@
 </div>
 {% if formBuscar %}
 <div style="width:65%; margin:auto;">
-    <form action="{{ url_for('buscar_productos') }}" method="POST" class="form-inline">
+    <form action="{{ url_for('buscar_gestionproductos') }}" method="POST" class="form-inline">
         {{ formBuscar.hidden_tag() }}
         <!-- <input style="width: 91%;" class="form-control " type="submit" placeholder="Buscar usuario" aria-label="Search"> -->
-        {{ formBuscar.buscar(style="width: 90%;", class="form-control ", placeholder="Buscar usuario") }}
+        {{ formBuscar.buscar(style="width: 90%;", class="form-control ", placeholder="Buscar producto") }}
         <button class="btn btn-outline-one" style="width: 10%;" type="submit">Buscar</button>
     </form>
 </div>
@@ -149,6 +149,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Nombre/Producto</th>
+                <th scope="col">Id</th>
                 <th scope="col">Referencia</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Talla</th>
@@ -170,6 +171,7 @@
                     {% endif %}
                 </td>
                 <td>{{ item.nombre}}</td>
+                <td>{{ item.id}}</td>
                 <td>{{ item.referencia}}</td>
                 <td>{{ item.cantidad}}</td>
                 <td>{{ item.talla}}</td>
