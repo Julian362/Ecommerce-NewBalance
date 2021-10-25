@@ -40,7 +40,7 @@ def registro():
 
 @app.route('/producto/')
 def productoind():
-    return render_template('ProductoIndividual.html')
+    return render_template('Producto_individual.html')
 
 @app.route('/carrito/')
 def carrito():
@@ -152,7 +152,7 @@ def buscar_usuario():
                 formulario.ciudad.data = obj_usuario.ciudad
                 formulario.contrasena.data = obj_usuario.contrasena
                 return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=formulario, formBuscar=FormBuscar())
-            return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="No existe el usuario, puede crearlo",opcion="crear",form=FormGestionar(), formBuscar=FormBuscar())
+            return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="No existe el usuario, puede crearlo", opcion="crear",form=FormGestionar(), formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Error en el proceso de buscar usuario",opcion="Crear",form=FormGestionar(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/crear', methods=["GET", "POST"])
@@ -190,15 +190,18 @@ def block_usuario(documento, estado):
 
 """-----------------------------FIN ADMINISTRADOR-----------------------------"""
 
-"""Ruta para llamar a los productos de hombre"""
-@app.route('/productos/hombre/')
-def lista_de_productos_hombre():
-    return render_template('productos_hombre.html', lista_productos_totales=producto.listado_referencia())
+""" -----------------------------INICIO PRODUCTOS-----------------------------"""
 
-"""Ruta para llamar a los productos de mujer"""
-@app.route('/productos/mujer/')
-def lista_de_productos_mujer():
-    return render_template('productos_mujer.html')
+"""Ruta para llamar a los productos de hombre"""
+@app.route('/productos/<sexo>/')
+def lista_de_productos(sexo):
+    #Variable para obtener el sexo de la base de datos por la letra M = Masculino y F = Femenino 
+    s=""
+    if sexo=="HOMBRE":
+        s="M"
+    if sexo=="MUJER":
+        s="F"
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -308,7 +311,7 @@ def gestion_micuenta():
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
 
-@app.route('/superadministrador/gestionar/<documento>',  methods=["GET", "POST"])
+@app.route('/superadministrador/gestionar/<documento>',  methods = ["GET", "POST"])
 def edit_administrador(documento):
     if request.method == "GET":
         formulario = FormGestionar()
@@ -326,8 +329,8 @@ def edit_administrador(documento):
             formulario.ciudad.data = obj_admin.ciudad
             formulario.direccion.data = obj_admin.direccion
             formulario.contrasena.data = obj_admin.contrasena
-            return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
-        return render_template('superadministrador.html', error="No existe el usuario", formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
+            return render_template('superadministrador.html', datosAdministrador = obj_admin, form = formulario, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), opcion = "Editar")
+        return render_template('superadministrador.html', error = "No existe el usuario", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
     else:
         formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
@@ -346,22 +349,66 @@ def edit_administrador(documento):
                 obj_admin.direccion = formulario.direccion.data 
                 obj_admin.contrasena = formulario.contrasena.data
                 obj_admin.editar_datos()
-                return render_template('superadministrador.html', datosAdministrador=obj_admin, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), mensaje = "Se han editados los datos del administrador {0} correctamente".format(formulario.documento.data), opcion="Editar")
-        return render_template('superadministrador.html', form=FormGestionar(), formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), error="Error en el proceso de editar usuario")
+                return render_template('superadministrador.html', datosAdministrador = obj_admin, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), mensaje = "Se han editado los datos del administrador {0} correctamente".format(formulario.documento.data), opcion = "Editar")
+        return render_template('superadministrador.html', form = FormGestionar(), formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), error = "Error en el proceso de editar usuario")
 
-@app.route('/superadministrador/crear/', methods=["GET", "POST"])
+@app.route('/superadministrador/crear/', methods = ["GET", "POST"])
 def crear_administrador():
     if request.method == "GET":
         formulario = FormGestionar()
-        return render_template('superadministrador.html', form = formulario, listaAdmin=gestionAdministrador.listado_administrador(), formBuscar=FormBuscarAdministrador(), opcion="Crear")
+        return render_template('superadministrador.html', form = formulario, listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador(), opcion="Crear")
     else:
         formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
-            obj_admin = gestionAdministrador(formulario.nombre.data, formulario.apellido.data, formulario.documento.data, formulario.sexo.data, formulario.nickname.data, formulario.telefono.data, formulario.correo.data, formulario.pais.data, formulario.departamento.data, formulario.ciudad.data, formulario.direccion.data, formulario.contrasena.data, "admin", "T")
+            obj_admin = gestionAdministrador(formulario.nombre.data, formulario.apellidos.data, formulario.documento.data, formulario.sexo.data, formulario.nickname.data, formulario.telefono.data, formulario.correo.data, formulario.pais.data, formulario.departamento.data, formulario.ciudad.data, formulario.direccion.data, formulario.contrasena.data, "admin", "T")
             if (obj_admin.crear_admin()):
-                return render_template('superadministrador.html', mensaje="Se ha creado correctamente el administrador {0}".format(formulario.documento.data), listaAdmin=gestionAdministrador.listado_administrador(), formBuscar=FormBuscarAdministrador(), opcion="Crear")
-        return render_template('superadministrador.html', error="Error en el proceso de creación de administración",form=FormGestionar(), listaAdmin=gestionAdministrador.listado_administrador(), formBuscar=FormBuscarAdministrador(), opcion="Crear")
+                return render_template('superadministrador.html', mensaje = "Se ha creado correctamente el administrador {0}".format(formulario.documento.data), listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador(), opcion="Editar", datosAdministrador = obj_admin, form = FormGestionar())
+        return render_template('superadministrador.html', error = "Error en el proceso de creación del administrador",form = FormGestionar(), listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador(), opcion = "Crear")
+
+@app.route('/superadministrador/eliminar/<documento>')
+def eliminar_administrador(documento):
+    obj_admin = gestionAdministrador.cargar_datos(documento)
+    if obj_admin.eliminar_admin():
+        return render_template('superadministrador.html', mensaje = "Se ha eliminado correctamente el administrador {0}".format(documento), listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador())
+    return render_template('superadministrador.html', error = "Error en la eliminación del administrador", listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador())
     
+@app.route('/superadministrador/bloquear/<documento>')
+def bloquear_administrador(documento):
+    obj_admin = gestionAdministrador.cargar_datos(documento)
+    obj_admin.bloquear_admin()
+    if obj_admin.estado == "F":
+        return render_template('superadministrador.html', mensaje = "Se ha desbloqueado el administrador {0}".format(documento), listaAdmin = gestionAdministrador.listado_administrador(),formBuscar=FormBuscarAdministrador())
+    elif obj_admin.estado == "T":
+        return render_template('superadministrador.html', mensaje = "Se ha bloqueado el administrador {0}".format(documento), listaAdmin = gestionAdministrador.listado_administrador(),formBuscar = FormBuscarAdministrador())
+    return render_template('superadministrador.html', mensaje = "No se ha podido cambiar el estado del administrador {0}".format(documento), listaAdmin=gestionAdministrador.listado_administrador(),formBuscar=FormBuscarAdministrador())
+
+@app.route('/superadministrador/buscar/', methods=["GET", "POST"])
+def Buscar_administrador():
+    if request.method == "GET":
+        return render_template('superadministrador.html',listaAdmin = gestionAdministrador.listado_administrador(),formBuscar = FormBuscarAdministrador(), form = FormGestionar())
+    else:
+        formBuscar = FormBuscarAdministrador(request.form)
+        formulario = FormGestionar()
+        if formBuscar.validate_on_submit():
+            obj_admin = gestionAdministrador.cargar_datos(formBuscar.buscar.data)
+            if obj_admin:
+                formulario.nombre.data = obj_admin.nombre
+                formulario.apellidos.data = obj_admin.apellido
+                formulario.documento.data = obj_admin.documento
+                formulario.sexo.data = obj_admin.sexo
+                formulario.nickname.data = obj_admin.nickname
+                formulario.telefono.data = obj_admin.telefono
+                formulario.correo.data = obj_admin.correo
+                formulario.pais.data = obj_admin.pais
+                formulario.departamento.data = obj_admin.departamento
+                formulario.ciudad.data = obj_admin.ciudad
+                formulario.direccion.data = obj_admin.direccion
+                formulario.contrasena.data = obj_admin.contrasena
+                return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
+            return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "No exite el administrador {o}, puede crearlo".format(formBuscar.buscar.data))
+        return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "Error en el proceso de busqueda")
+
+
 
 """Ruta para todos los comentarios de un producto"""
 @app.route('/comentarios/')

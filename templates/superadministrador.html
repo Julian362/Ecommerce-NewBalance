@@ -2,12 +2,13 @@
 {% block head %}
 <title>New Balance | Superadministrador</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/superadministrador.css') }}">
+<script src="{{ url_for ('static', filename='Js/administrador.js') }}"></script>
 {% endblock %}
 
 {% block contenido %} 
     <h1 style="text-align: center; margin-top: 10px; margin-bottom: 20px;">GESTIÓN ADMINISTRATIVA</h1>
     {% if formBuscar %}
-    <form class="form-inline" style="margin: auto; width: 65%;">
+    <form action="{{ url_for('Buscar_administrador') }}" method="POST" class="form-inline" style="margin: auto; width: 65%;">
         {{ formBuscar.hidden_tag() }}
         {{ formBuscar.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
         <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
@@ -24,7 +25,11 @@
     {% if form %}
     <div class="ContenedorFomulario">
         <form class="FormularioRegistro" 
-        
+        {% if datosAdministrador %}
+                action="{{ url_for('edit_administrador', documento = datosAdministrador.documento) }}"
+            {% else %}
+                action="{{ url_for('crear_administrador') }}"
+            {% endif %}
         method="POST">
             {{ form.hidden_tag() }}
             <div>
@@ -43,7 +48,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                {{ form.documento(class="form-control mr-sm-1 form-DatosP", placeholder="CC/CE/NIT") }}
+                                    {{ form.documento(class="form-control mr-sm-1 form-DatosP", placeholder="CC/CE/NIT") }}
                             </div>
                             <div class="col">
                                 <div class="form-check form-check-inline">
@@ -123,7 +128,19 @@
                             <div class="col"> 
                                 {{ form.confirmarcontrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
                             </div>
-                        </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="checkbox" onclick="mostrarContrasena()"> Mostrar contraseña
+                            </div>
+                            {% if opcion %}
+                                {% if opcion == "Editar" %}
+                                    <div class="col">
+                                        <p style="color: #970c02;">Para editar el documento contacte a soporte</p>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
                         <div class="row">
                             {% if opcion == "Editar"%}
                             {{form.editar(class="btn btn-outline-registro", style="margin: auto;")}}
@@ -191,8 +208,7 @@
                                     </a>
                                 </div>
                                 <div class="icon-centro">
-                                    <!--  url_for('block_usuario', nickname = item.nickname, estado = item.estado) -->
-                                    <a href="#">
+                                    <a href="{{url_for('bloquear_administrador', documento = item.documento)}}">
                                         <span class="material-icons-outlined iconoPosicion" id="icon_block">
                                             <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
                                             {% if item.estado == 'F' %}
@@ -204,9 +220,8 @@
                                         </span>
                                     </a>
                                 </div>
-                                <!-- url_for('delete_usuario', nickname = item.nickname) -->
                                 <div class="icon-izquierda">
-                                    <a href="#">
+                                    <a href="{{url_for('eliminar_administrador', documento=item.documento)}}">
                                         <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
                                 </div> 

@@ -217,6 +217,28 @@ class gestionAdministrador():
                 return True
         return False
 
+    def eliminar_admin(self):
+        sql="DELETE FROM persona WHERE documento = ? AND tipo_rol = 'admin';"
+        obj = db.ejecutar_insert(sql, [self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    def bloquear_admin(self):
+        if self.estado=="T":
+            sql="UPDATE persona set estado = 'F' Where documento = ? AND tipo_rol = 'admin';"
+        elif self.estado=="F":
+            sql="UPDATE persona set estado = 'T' Where documento = ? AND tipo_rol = 'admin';"
+        obj=db.ejecutar_insert(sql, [self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
+
+    
+
+        
 
     @staticmethod
     def listado_administrador():
@@ -309,14 +331,14 @@ class producto():
 
         return None
 
-    # Metodo de estatico para llamar la lista
+    # Metodo de estatico para llamar la lista de productos
     @staticmethod
     def listado():
         sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia order by id asc;'
         return db.ejecutar_select(sql, None)
 
     @staticmethod
-    def listado_referencia():
-        sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia group by referencia order by nombre asc;'
-        return db.ejecutar_select(sql, None)
+    def listado_referencia(sexo):
+        sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia  order by nombre asc;'
+        return db.ejecutar_select(sql, sexo)
 
