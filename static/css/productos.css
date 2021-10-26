@@ -33,19 +33,14 @@
 
 /* Títulos: color, talla, refinar por, ordenar */
 .titulos h4 {
-    margin-top: 30px;
+    margin-top: 45PX;
     color: black;
-    font-size: medium;
-    text-align: justify!important;
+    font-size: large;
+    text-align: center!important;
 }
 
-/* Formato de las casillas del check box */
-
-.form {
-    display: block;
-    margin-left: 5%;
+.titulos {
     width: 100%;
-    padding-left: 10px;
 }
 
 /* Formato de las selecciones: más popular, talla, color */
@@ -54,7 +49,7 @@
     display: block;
     width: 100%;
     text-align: left;
-}
+    }
 
 /* NUEVO CSS Prueba productos */
 .wrap{
@@ -154,8 +149,15 @@
 
 .contenedorindividual h4:hover {
     color:#f44336;
+    text-decoration: underline;
 }
 
 .productos{
     padding-left: 5%;
+}
+
+.boton_filtrar{
+    margin-top: 45px!important;
+    border: 1 px  solid #ced4da;
+    width: 100%;
 }

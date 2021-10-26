@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms.fields.core import StringField
+from wtforms.fields.core import SelectField, StringField
 from wtforms.fields.simple import PasswordField, SubmitField, TextAreaField
 from wtforms import validators
 
@@ -46,4 +46,11 @@ class FormGestionarComentario(FlaskForm):
 
 class FormBuscarAdministrador(FlaskForm):
     buscar = StringField('Buscar')
+
+class FormFiltrarProducto(FlaskForm):
+    orden = SelectField(u'orden', choices=[('0','Seleccionar orden'),('asc','Menor precio'), ( 'desc','Mayor precio')])
+
+    talla = SelectField(u'talla', choices=[('0','Seleccionar talla'),('35', '35'), ('35.5', '35.5'),('36', '36'),('36.5', '36.5'),('37', '37'),('37.5', '37.5'),('38', '38'),('38.5', '38.5'),('39', '39'),('39.5', '39.5'),('40', '40'),('40.5', '40.5'),('41', '41'),('41.5', '41.5')])
+    
+    color = SelectField(u'color', choices=[('0', 'Seleccionar color'),('negro', 'Negro'), ('naranja', 'Naranja'),('amarillo', 'Amarillo'),('azul', 'Azul'),('rojo', 'Rojo'),('café', 'Café'),('gris', 'Gris'),('rosa', 'Rosa'),('verde', 'Verde'),('blanco', 'Blanco'),('multicolor', 'Multicolor')])
 

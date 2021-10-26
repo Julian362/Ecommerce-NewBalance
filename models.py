@@ -9,7 +9,7 @@ class persona():
     nombre =''
     apellidos=''
     correo=''
-    telefono =0
+    telefono = 0
     sexo=''
     direccion=''
     pais=''
@@ -160,6 +160,12 @@ class calificacion:
         return None
 
 
+    @staticmethod
+    def todos_los_comentarios(id,  nickname, puntuacion, cometario, referencia):
+        sql='select calificacionx.id, calificacionx.nickname, calificacionx.puntuacion, calificacionx.comentario, calificacionx.referencia_producto as referencia FROM calificacionx order by referencia asc;'
+        return db.ejecutar_select(sql,[id,  nickname, puntuacion, cometario, referencia])
+
+
 class gestionAdministrador():
     nombre = ''
     apellido = ''
@@ -305,6 +311,7 @@ class producto():
         return None
 
 
+
     #Función para editar los datos de usuario
     @classmethod
     def editar(cls,id,nombre,referencia,talla,precio,cantidad,descuento,color,descripcion,sexo):
@@ -322,20 +329,37 @@ class producto():
         obj = db.ejecutar_insert(sql,[ id ])
         if obj:
             if obj>0:
-                return "Borrado corectamente el comentario "
+                return "Borrado corectamente el producto "
 
         return None
 
     # Metodo de estatico para llamar la lista de productos
     @staticmethod
     def listado():
-        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
+        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia order by id asc;'
         return db.ejecutar_select(sql, None)
 
     @staticmethod
     def listado_referencia(sexo):
         sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia  order by nombre asc;'
         return db.ejecutar_select(sql, sexo)
+
+    @staticmethod
+    def filtrar(sexo, orden, talla, color):
+
+        if orden=="asc":
+            sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.precio asc;'
+            return db.ejecutar_select(sql,[sexo, color,color, talla, talla])
+
+                        
+        elif orden=="desc":
+            sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.precio desc;'
+            return db.ejecutar_select(sql,[sexo, color,color, talla, talla])
+        
+
+        else:
+            sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.nombre;'
+            return db.ejecutar_select(sql,[sexo, color ,color,talla,talla])
 
 class gestionMiCuenta():
     nombre = ''
@@ -385,3 +409,4 @@ class gestionMiCuenta():
             if obj > 0:
                 return True
         return False
+ 
