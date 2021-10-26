@@ -23,6 +23,8 @@ class FormGestionar(FlaskForm):
     editar = SubmitField('Editar')
     crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
+    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)])
 
 class FormBuscar(FlaskForm):
     buscar = StringField('buscar')

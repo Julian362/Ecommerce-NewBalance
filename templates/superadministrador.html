@@ -2,7 +2,7 @@
 {% block head %}
 <title>New Balance | Superadministrador</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/superadministrador.css') }}">
-<script src="{{ url_for ('static', filename='Js/administrador.js') }}"></script>
+<script src="{{ url_for ('static', filename='Js/contrasena.js') }}"></script>
 {% endblock %}
 
 {% block contenido %} 
@@ -123,10 +123,10 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                {{ form.contrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña") }}                            
+                                {{ form.contrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña", id="contrasena") }}                            
                             </div>
                             <div class="col"> 
-                                {{ form.confirmarcontrasena(class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña") }}
+                                {{ form.confirmarcontrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña", id="confirmarContrasena") }}
                             </div>
                         </div>
                         <div class="row">

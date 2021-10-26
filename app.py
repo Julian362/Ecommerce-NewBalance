@@ -281,8 +281,50 @@ def delete_producto(id):
 
 
 """Ruta para la gestión de perfil (Mi Cuenta)"""
-@app.route('/gestion/micuenta/')
-def gestion_micuenta():
+@app.route('/gestion/micuenta/<documento>', methods = ["GET", "POST"])
+def gestion_micuenta(documento):
+    if request.method == "GET":
+        formulario = FormGestionar()
+        obj_usuario = gestionMiCuenta.cargar_datos(documento)
+        if obj_usuario:
+            formulario.nombre.data = obj_usuario.nombre
+            formulario.apellidos.data = obj_usuario.apellido
+            formulario.documento.data = obj_usuario.documento
+            formulario.sexo.data = obj_usuario.sexo
+            formulario.nickname.data = obj_usuario.nickname
+            formulario.telefono.data = obj_usuario.telefono
+            formulario.correo.data = obj_usuario.correo
+            formulario.pais.data = obj_usuario.pais
+            formulario.departamento.data = obj_usuario.departamento
+            formulario.ciudad.data = obj_usuario.ciudad
+            formulario.direccion.data = obj_usuario.direccion
+            formulario.contrasena.data = obj_usuario.contrasena
+            formulario.contrasenaNueva.data = ""
+            formulario.confirmarContrasenaNueva.data = ""
+            return render_template('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario)
+        return render_template('gestion_micuenta.html', error= "No existe el usuario" , form = formulario)
+    else:
+        formulario = FormGestionar (request.form)
+        if formulario.validate_on_submit:
+            obj_usuario = gestionMiCuenta.cargar_datos(documento)
+            if obj_usuario:
+                obj_usuario.nombre = formulario.nombre.data
+                obj_usuario.apellido = formulario.apellidos.data
+                obj_usuario.documento = formulario.documento.data
+                obj_usuario.sexo = formulario.sexo.data
+                obj_usuario.nickname = formulario.nickname.data
+                obj_usuario.telefono = formulario.telefono.data
+                obj_usuario.correo = formulario.correo.data
+                obj_usuario.pais = formulario.pais.data
+                obj_usuario.departamento = formulario.departamento.data
+                obj_usuario.ciudad = formulario.ciudad.data
+                obj_usuario.direccion = formulario.direccion.data
+                obj_usuario.contrasena = formulario.contrasenaNueva.data
+                obj_usuario.editar_datos()
+                return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, mensaje = "Se han editado correctamente los datos")
+            return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
+
+
     return render_template('gestion_micuenta.html', form=FormGestionar())
 
 """Ruta para la gestión de Superadministrador"""
@@ -309,7 +351,7 @@ def edit_administrador(documento):
             formulario.direccion.data = obj_admin.direccion
             formulario.contrasena.data = obj_admin.contrasena
             return render_template('superadministrador.html', datosAdministrador = obj_admin, form = formulario, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), opcion = "Editar")
-        return render_template('superadministrador.html', error = "No existe el usuario", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
+        return render_template('superadministrador.html', error = "No existe el administrador", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
     else:
         formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
