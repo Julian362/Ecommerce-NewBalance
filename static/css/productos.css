@@ -33,7 +33,7 @@
 
 /* Títulos: color, talla, refinar por, ordenar */
 .titulos h4 {
-    margin-top: 55PX;
+    margin-top: 45PX;
     color: black;
     font-size: large;
     text-align: center!important;
@@ -157,6 +157,7 @@
 }
 
 .boton_filtrar{
-    margin-top: 60px!important;
+    margin-top: 45px!important;
     border: 1 px  solid #ced4da;
+    width: 100%;
 }

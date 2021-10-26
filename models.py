@@ -160,6 +160,12 @@ class calificacion:
         return None
 
 
+    @staticmethod
+    def todos_los_comentarios(id,  nickname, puntuacion, cometario, referencia):
+        sql='select calificacionx.id, calificacionx.nickname, calificacionx.puntuacion, calificacionx.comentario, calificacionx.referencia_producto as referencia FROM calificacionx order by referencia asc;'
+        return db.ejecutar_select(sql,[id,  nickname, puntuacion, cometario, referencia])
+
+
 class gestionAdministrador():
     nombre = ''
     apellido = ''
@@ -345,21 +351,19 @@ class producto():
     @staticmethod
     def filtrar(sexo, orden, talla, color):
 
-        # if orden=="0":
-        #     sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia order by producto.nombre;'
-        #     return db.ejecutar_select(sql,[sexo,talla, color])
-
         if orden=="asc":
-            sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? and (inventario.color="" or inventario.talla=? order by producto.precio asc;'
-        
-                
+            sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.precio asc;'
+            return db.ejecutar_select(sql,[sexo, color,color, talla, talla])
+
+                        
         elif orden=="desc":
-            sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? and (inventario.color=?) or 1=1 and (inventario.talla=?) or 1=1 order by producto.precio desc;'
+            sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.precio desc;'
+            return db.ejecutar_select(sql,[sexo, color,color, talla, talla])
         
 
         else:
-            sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia order by producto.nombre;'
-            return db.ejecutar_select(sql,[sexo])
-        
-        return db.ejecutar_select(sql,[sexo, color, talla])
+            sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.nombre;'
+            return db.ejecutar_select(sql,[sexo, color ,color,talla,talla])
+
+
  

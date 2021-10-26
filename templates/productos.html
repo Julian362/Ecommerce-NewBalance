@@ -24,8 +24,9 @@
 {% if mensaje %}
 <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
 {% endif %}
+<!-- Mensaje de error en el caso de que no encuentre los filtros requeridos -->
 {% if error %}
-<h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
+<h5 style="text-align: center; color: #970c02; margin-top: 10px; padding-left: 15px;">{{ error }}</h5>
 {% endif %}
 
 <!-- Se agrega el cuerpo de la pantalla -->
