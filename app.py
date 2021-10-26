@@ -303,7 +303,8 @@ def delete_producto(id):
 
 """-----------------------------FIN PRODUCTOS-----------------------------"""
 
-"""Ruta para la gestión de perfil (Mi Cuenta)"""
+
+"""-----------------INICIO GESTIÓN DE PERFIL (MI CUENTA)------------------"""
 @app.route('/gestion/micuenta/<documento>', methods = ["GET", "POST"])
 def gestion_micuenta(documento):
     if request.method == "GET":
@@ -346,11 +347,12 @@ def gestion_micuenta(documento):
                 obj_usuario.editar_datos()
                 return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, mensaje = "Se han editado correctamente los datos")
             return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
-
-
     return render_template('gestion_micuenta.html', form=FormGestionar())
 
-"""Ruta para la gestión de Superadministrador"""
+""" ------------------FIN GESTIÓN DE PERFIL (MI CUENTA)-------------------"""
+
+"""-----------------------INICIO SUPERADMINISTRADOR-----------------------"""
+
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
@@ -451,6 +453,7 @@ def Buscar_administrador():
                 return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
             return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "No exite el administrador {o}, puede crearlo".format(formBuscar.buscar.data))
         return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "Error en el proceso de busqueda")
+"""------------------------FIN SUPERADMINISTRADOR-------------------------"""
 
 @app.route('/contactos/')
 def contactos():
