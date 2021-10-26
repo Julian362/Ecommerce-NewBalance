@@ -34,9 +34,9 @@
     </div>
 
   </div>
-
+  {% if Producto_Referencia %}
     <div class="barrainformacion">
-        <h4 style="color:#E74236"><strong> Tennis Crossover </strong> </h4>
+        <h4 style="color:#E74236"><strong>{{ nombre }}</strong> </h4>
         <span class="estrella"> ★★★★☆</span>
         <s><p style="color:#E74236"> $ 84.000 </p></s>
         <p>Precio con descuento:</p>
@@ -86,7 +86,7 @@
         <p style="color:#E74236"> Garantia del vendedor: 90 días </p>
         <a href="" > Conocer más Sobre la garantía </a>
     </div>
-
+  
     <div class="infomodelos">
       <div class="card text-center">
         <div class="card-header">
@@ -210,7 +210,7 @@
 
     </div>
 
-
+    {% endif %}
 
 
     <div class="Comentarios">

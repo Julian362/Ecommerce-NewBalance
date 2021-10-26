@@ -38,9 +38,9 @@ def registro():
 
 
 
-@app.route('/producto/')
-def productoind():
-    return render_template('Producto_individual.html')
+@app.route('/producto/<referencia>')
+def productoind(referencia):
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia))
 
 @app.route('/carrito/')
 def carrito():

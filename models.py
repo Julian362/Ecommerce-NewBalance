@@ -332,6 +332,11 @@ class producto():
 
     # Metodo de estatico para llamar la lista de productos
     @staticmethod
+    def productoindividual(ref):
+        sql= 'select producto.nombre, producto.precio, producto.descripcion, producto.referencia from producto where referencia= ? ;'
+        return db.ejecutar_select(sql,ref)
+
+    @staticmethod
     def listado():
         sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
@@ -341,3 +346,4 @@ class producto():
         sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia  order by nombre asc;'
         return db.ejecutar_select(sql, sexo)
 
+    
