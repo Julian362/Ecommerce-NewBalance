@@ -160,9 +160,9 @@ class calificacion:
         return None
 
     @staticmethod
-    def todos_los_comentarios():
-        sql=' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto ="ML515SM3" ORDER BY id desc;'
-        return db.ejecutar_select(sql,None)
+    def todos_los_comentarios(referencia):
+        sql=' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto = ? ORDER BY id desc;'
+        return db.ejecutar_select(sql,[referencia])
 
 
 class gestionAdministrador():

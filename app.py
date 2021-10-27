@@ -41,7 +41,7 @@ def registro():
 
 @app.route('/producto/<referencia>')
 def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual())
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
 
 @app.route('/carrito/')
 def carrito():
@@ -229,15 +229,6 @@ def filtros_producto(sexo):
             return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
             
         return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
-
-
-@app.route('/producto/')
-def productoind():
-    return render_template('Producto_individual.html')
-
-@app.route('/carrito/')
-def carrito():
-    return render_template('Carrito.html')
 
 # ----------------------------------------------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
