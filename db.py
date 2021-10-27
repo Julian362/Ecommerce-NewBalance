@@ -5,7 +5,7 @@ from sqlite3 import Error
 #Se establece la conexión con la base de datos
 def conectar():
     try:
-        conexion =sqlite3.connect('database/dataOficial.db')
+        conexion =sqlite3.connect('database/data.db')
         return conexion
     except Error as err:
         print(err)

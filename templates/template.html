@@ -47,20 +47,25 @@
         <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
       </form>
       {% if g.user %}
-      <a class="cuenta" href="{{url_for ('gestion_micuenta')}}">
+      <a class="cuenta" href="{{url_for ('gestion_micuenta',documento=g.user.documento)}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
-        <span>{{form.nombre}}</span>
+        <span>{{g.user.nickname}}</span>
       </a>
-      {%else%}
+      <a class="cuenta" href="{{url_for ('logout')}}">
+        <span class="material-icons-outlined icono-cuenta">logout</span>
+        <span>Salir</span>
+      </a>
+      {% else %}
       <a class="cuenta" href="{{url_for ('login')}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
         <span>Mi cuenta</span>
       </a>
+      {% endif %}
       <a href="{{url_for('carrito') }}" style="padding-top: 6px;"><span
           class="material-icons-outlined">shopping_cart</span></a>
     </div>
   </nav>
-  {% endif %}
+
   {% endblock %}
   <div>
     {% block contenido %}
