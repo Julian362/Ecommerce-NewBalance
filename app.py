@@ -77,28 +77,7 @@ def registro():
 # ----------------------------------------------------------------------------
 
 
-# ------------------------------PRODUCTO INDIVIDUAL----------------------------------------------
-@app.route('/producto/')
-def productoind():
-    return render_template('Producto_individual.html')
-
-
-@app.route('/producto/<referencia>')
-def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual())
-
-# ----------------------------------------------------------------------------
-
-# -----------------------------------CARRITO-----------------------------------------
-@app.route('/carrito/')
-def carrito():
-    return render_template('Carrito.html')
-
-# ----------------------------------------------------------------------------
-
-
-
-
+#codigo David
 @app.route('/producto/<referencia>')
 def productoind(referencia):
     return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
