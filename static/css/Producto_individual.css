@@ -98,9 +98,12 @@
     border-color: rgb(0, 0, 0);
     color:white
 }
-
+h4{
+    text-align: center;
+}
 h5{
-    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 h6{
