@@ -1,6 +1,7 @@
 from itertools import product
 import os
-from flask import Flask, render_template,  request, redirect, url_for
+import functools
+from flask import Flask, render_template,  request, redirect, url_for, request,g,url_for,session
 from flask.wrappers import Request
 from models import *
 from forms import *
@@ -15,9 +16,47 @@ app.config['SECRET_KEY'] = SECRET_KEY
 def index():
     return render_template('index.html')
 
-@app.route('/login/')
+
+# --------------------LOGIN-----------------------------
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.usuario is None:
+            return redirect(url_for('login'))
+        return view(**kwargs)
+    return wrapped_view
+
+@app.before_request
+def cargar_usuario_autenticado():
+    user_correo=session.get('user_correo')
+    if user_correo is None:
+        g.user=None
+    else:
+        g.user=usuario.cargar(user_correo)
+
+
+@app.route('/login/', methods=("GET", "POST"))
 def login():
-    return render_template('login.html', form=FormGestionar())
+    if request.method == "GET":
+        return render_template("login.html",form=FormGestionar())
+    else:
+        formulario=FormGestionar(request.form)
+        # obj_usuario = persona(formulario.correo.data,formulario.contrasena.data)
+        # obj_usuario = persona('','','','',request.form['correo'],'','','','','','',request.form['contrasena'],'','',)
+        obj_usuario = usuario(formulario.correo.data, formulario.contrasena.data)
+        if not obj_usuario.correo.__contains__("'") and not obj_usuario.contrasena.__contains__("'"):
+            if obj_usuario.logear():
+                session.clear()
+                session['user_correo']=obj_usuario.correo
+                return redirect('/')
+        return render_template('login.html', error="Usuario o contraseña invalido",form=FormGestionar())
+
+
+
+# ----------------------------------------------------------------------------
+
+
+# -------------------------REGISTRO-------------------------------------------------
 
 @app.route('/registro/', methods=['GET', 'POST'])
 def registro():
@@ -35,6 +74,27 @@ def registro():
                 return redirect(url_for('login'))
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
         return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
+# ----------------------------------------------------------------------------
+
+
+# ------------------------------PRODUCTO INDIVIDUAL----------------------------------------------
+@app.route('/producto/')
+def productoind():
+    return render_template('Producto_individual.html')
+
+
+@app.route('/producto/<referencia>')
+def productoind(referencia):
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual())
+
+# ----------------------------------------------------------------------------
+
+# -----------------------------------CARRITO-----------------------------------------
+@app.route('/carrito/')
+def carrito():
+    return render_template('Carrito.html')
+
+# ----------------------------------------------------------------------------
 
 
 
@@ -239,11 +299,36 @@ def productoind():
 def carrito():
     return render_template('Carrito.html')
 
-# ----------------------------------------------------------------------------------------------
+# -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=["GET", "POST"])
 def gestion_productos():
-    return render_template('gestion_productos.html', lista_productos=producto.listado())
+    return render_template('gestion_productos.html', lista_productos=producto.listado(),formBuscar=FormBuscar())
+
+# Busca el id del producto en lista
+@app.route('/productos/gestion/buscar', methods=["GET", "POST"])
+def buscar_gestionproductos():
+    if request.method == "GET":
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), opcion="Editar", form=FormGestionProducto(), formBuscar=FormBuscar())
+    else:
+        form = FormBuscar(request.form)
+        formulario = FormGestionProducto()
+        if form.validate_on_submit() or formulario.validate_on_submit():
+            obj_producto = producto.cargar(form.buscar.data)
+            if obj_producto:
+                formulario.nombre.data = obj_producto.nombre
+                formulario.referencia.data = obj_producto.referencia
+                formulario.talla.data = obj_producto.talla
+                formulario.precio.data = obj_producto.precio
+                formulario.cantidad.data = obj_producto.cantidad
+                formulario.descuento.data = obj_producto.descuento
+                formulario.color.data = obj_producto.color
+                formulario.descripcion.data = obj_producto.descripcion
+                formulario.sexo.data = obj_producto.sexo
+                return render_template('gestion_productos.html',producto=obj_producto,lista_productos=producto.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="No existe el producto, puede crearlo",opcion="crear",form=FormGestionProducto(), formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de buscar producto",opcion="Crear",form=FormGestionProducto(), formBuscar=FormBuscar())
+
 
 
 # Cambia de estado bloqueo STIVEN
@@ -470,6 +555,9 @@ def Buscar_administrador():
 @app.route('/contactos/')
 def contactos():
     return render_template('contactos.html')
+
+
+#---------------Direccion de linkedi----------------------
 
 @app.route('/linkedinInri')
 def linkedinInri():
