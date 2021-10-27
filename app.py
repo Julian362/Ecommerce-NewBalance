@@ -89,11 +89,15 @@ def productoind(referencia):
     for i in lista_califiacion:
         acumulador+=i['puntuacion']
     promedio=acumulador/len(lista_califiacion)
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia))
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia), filtro=FormFiltrarProducto())
 
-@app.route('/carrito/')
-def carrito():
-    return render_template('Carrito.html')
+@app.route('/carrito/<documento>')
+def carrito(documento):
+    Lista_Carrito=producto.cargar_carrito(documento)
+    total = 0
+    for i in Lista_Carrito:
+        total += i["precio"]
+    return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
 
 """-----------------------------INICIO COMENTARIO-----------------------------"""
 

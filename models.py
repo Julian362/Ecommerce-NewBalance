@@ -404,7 +404,7 @@ class producto():
     def listado():
         sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
-
+    
     @staticmethod
     def listado_referencia(sexo):
         sql = 'select producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia where inventario.sexo = ? group by referencia  order by nombre asc;'
@@ -426,6 +426,11 @@ class producto():
         else:
             sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.nombre;'
             return db.ejecutar_select(sql,[sexo, color ,color,talla,talla])
+    
+    @staticmethod
+    def cargar_carrito(id):
+        sql = ' SELECT producto.nombre, producto.precio, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from persona inner join carrito on carrito.documento_persona = persona.documento inner join carrito_inventario on carrito_inventario.id_carrito = carrito.id inner join inventario on inventario.id = carrito_inventario.id_inventario inner join producto on inventario.referencia_producto = producto.referencia where persona.documento = ? ;'
+        return db.ejecutar_select(sql, [id])
 
 class gestionMiCuenta():
     nombre = ''

@@ -61,7 +61,7 @@
         <span>Mi cuenta</span>
       </a>
       {% endif %}
-      <a href="{{url_for('carrito') }}" style="padding-top: 6px;"><span
+      <a href="{{url_for('carrito',documento=g.user.documento) }}" style="padding-top: 6px;"><span
           class="material-icons-outlined">shopping_cart</span></a>
     </div>
   </nav>

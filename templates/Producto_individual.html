@@ -52,41 +52,20 @@
 
     <h5> Seleccionar talla </h5>
     <div class="Talla">
-      {{ form.talla(class="custom-select custom-select-sm")}}
-
-      <!-- <select class="custom-select custom-select-sm">
-            <option selected>Seleccionar talla</option>
-            <option value="1">37</option>
-            <option value="2">38</option>
-            <option value="3">39</option>
-            <option value="4">40</option>
-            <option value="5">41</option>
-          </select>           -->
+      {{ filtro.talla(class="form-control mb-1 casillas")}}
     </div>
     <h5> Seleccionar color </h5>
     <div class="Color">
-      <select class="custom-select custom-select-sm">
-        <option selected>Seleccionar color</option>
-        <option value="1">Rojo</option>
-        <option value="2">Negro</option>
-        <option value="3">Azul</option>
-        <option value="4">Blanco</option>
-      </select>
+      {{ filtro.color(class="form-control mb-1 casillas")}}
     </div>
     <h5> Cantidad</h5>
     <div class="Color">
-      <select class="custom-select custom-select-sm">
-        <option selected>Seleccionar unidades</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+      {{ filtro.unidad(class="form-control mb-1 casillas")}}
     </div>
     <br><br>
 
     <a href="" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Comprar Ahora </a>
-    <a href="{{url_for('carrito') }}" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
+    <a href="" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
 
     <br><br>
 
@@ -134,8 +113,8 @@
     {% for item in tres_registros %}
     <div class="item-comentario ">
       <div class="datos">
-        <h4>{{ item.nickname}}</h4>
-        <div class="rating" style="color:#E74236; font-size: 20px;">
+        <h4 style="color: #E74236;">{{ item.nickname}}</h4>
+        <div class="rating" style="font-size: 20px;">
           <span class="estrella" id="estrella5" >
             {% if item.puntuacion < 5 %}☆
             {% else %}★
@@ -211,8 +190,8 @@
               {% for item in lista_comentarios %}
               <div class="item-comentario ">
                 <div class="datos">
-                  <h4>{{ item.nickname}}</h4>
-                  <div class="rating" style="color:#E74236; font-size: 20px;">
+                  <h4 style="color:#E74236">{{ item.nickname}}</h4>
+                  <div class="rating" style="font-size: 20px;">
                     <span class="estrella" id="estrella5" >
                       {% if item.puntuacion < 5 %}☆
                       {% else %}★
