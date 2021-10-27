@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template,  request, redirect, url_for
+import functools
+from flask import Flask, render_template,  request, redirect, url_for, request,g,url_for,session
 from flask.wrappers import Request
 from models import *
 from forms import *
@@ -14,9 +15,47 @@ app.config['SECRET_KEY'] = SECRET_KEY
 def index():
     return render_template('index.html')
 
-@app.route('/login/')
+
+# --------------------LOGIN-----------------------------
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.usuario is None:
+            return redirect(url_for('login'))
+        return view(**kwargs)
+    return wrapped_view
+
+@app.before_request
+def cargar_usuario_autenticado():
+    user_correo=session.get('user_correo')
+    if user_correo is None:
+        g.user=None
+    else:
+        g.user=usuario.cargar(user_correo)
+
+
+@app.route('/login/', methods=("GET", "POST"))
 def login():
-    return render_template('login.html', form=FormGestionar())
+    if request.method == "GET":
+        return render_template("login.html",form=FormGestionar())
+    else:
+        formulario=FormGestionar(request.form)
+        # obj_usuario = persona(formulario.correo.data,formulario.contrasena.data)
+        # obj_usuario = persona('','','','',request.form['correo'],'','','','','','',request.form['contrasena'],'','',)
+        obj_usuario = usuario(formulario.correo.data, formulario.contrasena.data)
+        if not obj_usuario.correo.__contains__("'") and not obj_usuario.contrasena.__contains__("'"):
+            if obj_usuario.logear():
+                session.clear()
+                session['user_correo']=obj_usuario.correo
+                return redirect('/')
+        return render_template('login.html', error="Usuario o contraseña invalido",form=FormGestionar())
+
+
+
+# ----------------------------------------------------------------------------
+
+
+# -------------------------REGISTRO-------------------------------------------------
 
 @app.route('/registro/', methods=['GET', 'POST'])
 def registro():
@@ -34,17 +73,22 @@ def registro():
                 return redirect(url_for('login'))
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
         return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
+# ----------------------------------------------------------------------------
 
 
-
-
+# ------------------------------PRODUCTO INDIVIDUAL----------------------------------------------
 @app.route('/producto/')
 def productoind():
     return render_template('Producto_individual.html')
 
+# ----------------------------------------------------------------------------
+
+# -----------------------------------CARRITO-----------------------------------------
 @app.route('/carrito/')
 def carrito():
     return render_template('Carrito.html')
+
+# ----------------------------------------------------------------------------
 
 """-----------------------------INICIO COMENTARIO-----------------------------"""
 
@@ -204,12 +248,13 @@ def lista_de_productos(sexo):
     return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
 
 
-# ----------------------------------------------------------------------------------------------
+# -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
     return render_template('gestion_productos.html', lista_productos=producto.listado(),formBuscar=FormBuscar())
 
+# Busca el id del producto en lista
 @app.route('/productos/gestion/buscar', methods=["GET", "POST"])
 def buscar_gestionproductos():
     if request.method == "GET":
@@ -418,6 +463,9 @@ def todos_los_comentarios():
 @app.route('/contactos/')
 def contactos():
     return render_template('contactos.html')
+
+
+#---------------Direccion de linkedi----------------------
 
 @app.route('/linkedinInri')
 def linkedinInri():
