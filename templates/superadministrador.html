@@ -48,7 +48,15 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                    {{ form.documento(class="form-control mr-sm-1 form-DatosP", placeholder="CC/CE/NIT") }}
+                                {% if opcion %}
+                                        {% if opcion == "Editar" %}
+                                        {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT", disabled=True) }}
+                                        {% else %}
+                                            {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                        {% endif %}
+                                    {%else %}
+                                        {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                    {% endif %}
                             </div>
                             <div class="col">
                                 <div class="form-check form-check-inline">
