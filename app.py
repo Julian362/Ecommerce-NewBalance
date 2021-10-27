@@ -76,9 +76,11 @@ def registro():
         return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
 # ----------------------------------------------------------------------------
 
+
+#codigo David
 @app.route('/producto/<referencia>')
 def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual())
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
 
 @app.route('/carrito/')
 def carrito():
