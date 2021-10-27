@@ -371,6 +371,7 @@ def delete_producto(id):
 """-----------------------------FIN PRODUCTOS-----------------------------"""
 
 
+
 """-----------------INICIO GESTIÓN DE PERFIL (MI CUENTA)------------------"""
 @app.route('/gestion/micuenta/<documento>', methods = ["GET", "POST"])
 def gestion_micuenta(documento):
@@ -417,6 +418,7 @@ def gestion_micuenta(documento):
     return render_template('gestion_micuenta.html', form=FormGestionar())
 
 """ ------------------FIN GESTIÓN DE PERFIL (MI CUENTA)-------------------"""
+
 
 """-----------------------INICIO SUPERADMINISTRADOR-----------------------"""
 
