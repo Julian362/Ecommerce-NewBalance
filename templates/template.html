@@ -19,6 +19,7 @@
 
 <body>
   {% block header %}
+
   <nav class="navbar navbar-expand-lg BarraNav">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
       aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +46,12 @@
           aria-label="Search">
         <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
       </form>
+      {% if g.user %}
+      <a class="cuenta" href="{{url_for ('gestion_micuenta')}}">
+        <span class="material-icons-outlined icono-cuenta">account_circle</span>
+        <span>{{form.nombre}}</span>
+      </a>
+      {%else%}
       <a class="cuenta" href="{{url_for ('login')}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
         <span>Mi cuenta</span>
@@ -53,12 +60,14 @@
           class="material-icons-outlined">shopping_cart</span></a>
     </div>
   </nav>
+  {% endif %}
   {% endblock %}
   <div>
     {% block contenido %}
     <div class="ContainerCentral">
 
     </div>
+
     {% endblock %}
   </div>
   {% block footer %}

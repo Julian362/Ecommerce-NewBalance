@@ -15,7 +15,7 @@
 
 <div class="ContenedorFormulario">
     {% if form %}
-    <form class="formulario-login">
+    <form class="formulario-login" action="{{ url_for('login') }}" method="POST" >
         {{form.hidden_tag()}}
         <div>
             <h1 style="text-align: center;">Iniciar sesión</h1>
