@@ -80,7 +80,14 @@ def registro():
 #codigo David
 @app.route('/producto/<referencia>')
 def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
+    
+    promedio=0
+    acumulador=0
+    lista_califiacion=calificacion.todos_los_comentarios(referencia)
+    for i in lista_califiacion:
+        acumulador+=i['puntuacion']
+    promedio=acumulador/len(lista_califiacion)
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio)
 
 @app.route('/carrito/')
 def carrito():
@@ -259,7 +266,7 @@ def filtros_producto(sexo):
             if len(producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data))>0:
                 return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
             return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
-            
+
         return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
 
 # ----------------------------------------------------------------------------------------------
