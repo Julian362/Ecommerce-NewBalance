@@ -42,16 +42,19 @@ def login():
         formulario=FormGestionar(request.form)
         # obj_usuario = persona(formulario.correo.data,formulario.contrasena.data)
         # obj_usuario = persona('','','','',request.form['correo'],'','','','','','',request.form['contrasena'],'','',)
-        obj_usuario = usuario(formulario.correo.data, formulario.contrasena.data)
+        obj_usuario = usuario('','',formulario.correo.data, formulario.contrasena.data)
         if not obj_usuario.correo.__contains__("'") and not obj_usuario.contrasena.__contains__("'"):
             if obj_usuario.logear():
                 session.clear()
-                session['user_correo']=obj_usuario.correo
+                session['user_correo'] = obj_usuario.correo
                 return redirect('/')
                 # return redirect(url_for('get_/'))
         return render_template('login.html', error="Usuario o contraseña invalido",form=FormGestionar())
 
-
+@app.route('/logout/')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 # ----------------------------------------------------------------------------
 
