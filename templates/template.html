@@ -49,10 +49,10 @@
       {% if g.user %}
       <a class="cuenta" href="{{url_for ('gestion_micuenta',documento=g.user.documento)}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
-        <span>{{g.user.nombre}}</span>
+        <span>{{g.user.nickname}}</span>
       </a>
       <a class="cuenta" href="{{url_for ('logout')}}">
-        <span class="material-icons-outlined icono-cuenta">account_circle</span>
+        <span class="material-icons-outlined icono-cuenta">logout</span>
         <span>Salir</span>
       </a>
       {% else %}
