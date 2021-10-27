@@ -36,6 +36,17 @@ def registro():
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
         return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
 
+
+
+
+@app.route('/producto/<referencia>')
+def productoind(referencia):
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual())
+
+@app.route('/carrito/')
+def carrito():
+    return render_template('Carrito.html')
+
 """-----------------------------INICIO COMENTARIO-----------------------------"""
 
 
@@ -82,9 +93,10 @@ def delete_comentario(id):
 
     
 """Ruta para todos los comentarios de un producto"""
-@app.route('/comentarios/')
+@app.route('/comentarios/', methods=["GET", "POST"])
 def todos_los_comentarios():
-    return render_template('todos_los_comentarios.html')
+    
+    return render_template('todos_los_comentarios.html', lista_comentarios=calificacion.todos_los_comentarios())
 
 """-----------------------------FIN COMENTARIO-----------------------------"""
 

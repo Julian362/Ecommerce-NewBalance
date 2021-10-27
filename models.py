@@ -9,7 +9,7 @@ class persona():
     nombre =''
     apellidos=''
     correo=''
-    telefono = 0
+    telefono =0
     sexo=''
     direccion=''
     pais=''
@@ -159,11 +159,10 @@ class calificacion:
 
         return None
 
-
     @staticmethod
-    def todos_los_comentarios(id,  nickname, puntuacion, cometario, referencia):
-        sql='select calificacionx.id, calificacionx.nickname, calificacionx.puntuacion, calificacionx.comentario, calificacionx.referencia_producto as referencia FROM calificacionx order by referencia asc;'
-        return db.ejecutar_select(sql,[id,  nickname, puntuacion, cometario, referencia])
+    def todos_los_comentarios():
+        sql=' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto ="ML515SM3" ORDER BY id desc;'
+        return db.ejecutar_select(sql,None)
 
 
 class gestionAdministrador():
@@ -309,6 +308,16 @@ class producto():
                 # orden del constructor
                 return cls(id,obj[0]["nombre"],obj[0]["referencia"],obj[0]["talla"], obj[0]["precio"], obj[0]["cantidad"], obj[0]["descuento"], obj[0]["color"], obj[0]["descripcion"], obj[0]["sexo"])
         return None
+    
+    @classmethod
+    def cargarProducto(cls,id):
+        sql = 'select producto.nombre, producto.referencia, inventario.talla, producto.precio, inventario.cantidad, producto.descuento, inventario.color, producto.descripcion, inventario.sexo from producto inner join inventario on inventario.referencia_producto=producto.referencia where referencia = ?;'
+        obj = db.ejecutar_select(sql,[id])
+        if obj:
+            if len(obj)>0:
+                # orden del constructor
+                return cls(id,obj[0]["nombre"],obj[0]["referencia"],obj[0]["talla"], obj[0]["precio"], obj[0]["cantidad"], obj[0]["descuento"], obj[0]["color"], obj[0]["descripcion"], obj[0]["sexo"])
+        return None
 
 
 
@@ -329,14 +338,21 @@ class producto():
         obj = db.ejecutar_insert(sql,[ id ])
         if obj:
             if obj>0:
-                return "Borrado corectamente el producto "
+                return "Borrado corectamente el comentario "
 
         return None
 
     # Metodo de estatico para llamar la lista de productos
     @staticmethod
+    def productoindividual(ref):
+        sql= 'select producto.nombre, producto.precio, producto.descripcion, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from producto inner join inventario on inventario.referencia_producto = producto.referencia where producto.referencia = ? ;'
+        return db.ejecutar_select(sql,[ref])
+
+    
+
+    @staticmethod
     def listado():
-        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia order by id asc;'
+        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
 
     @staticmethod

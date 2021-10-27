@@ -1,7 +1,9 @@
+from models import *
 from flask_wtf import FlaskForm
 from wtforms.fields.core import SelectField, StringField
 from wtforms.fields.simple import PasswordField, SubmitField, TextAreaField
 from wtforms import validators
+
 
 class FormGestionar(FlaskForm):
     nombre = StringField('Nombre',validators=[validators.required()])
@@ -47,6 +49,11 @@ class FormGestionarComentario(FlaskForm):
 class FormBuscarAdministrador(FlaskForm):
     buscar = StringField('Buscar')
 
+class FormFiltrarProductoIndividual(FlaskForm):
+    talla = SelectField(u'talla', choices=[
+        ('0','Seleccionar talla'),
+        ##(lista.talla,lista.talla) for lista in producto.productoindividual("ML515SM3")
+        ])
 class FormFiltrarProducto(FlaskForm):
     orden = SelectField(u'orden', choices=[('0','Seleccionar orden'),('asc','Menor precio'), ( 'desc','Mayor precio')])
 
