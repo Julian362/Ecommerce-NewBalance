@@ -25,6 +25,8 @@ class FormGestionar(FlaskForm):
     editar = SubmitField('Editar')
     crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
+    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)])
 
 class FormBuscar(FlaskForm):
     buscar = StringField('buscar')
@@ -52,3 +54,10 @@ class FormFiltrarProductoIndividual(FlaskForm):
         ('0','Seleccionar talla'),
         ##(lista.talla,lista.talla) for lista in producto.productoindividual("ML515SM3")
         ])
+class FormFiltrarProducto(FlaskForm):
+    orden = SelectField(u'orden', choices=[('0','Seleccionar orden'),('asc','Menor precio'), ( 'desc','Mayor precio')])
+
+    talla = SelectField(u'talla', choices=[('0','Seleccionar talla'),('35', '35'), ('35.5', '35.5'),('36', '36'),('36.5', '36.5'),('37', '37'),('37.5', '37.5'),('38', '38'),('38.5', '38.5'),('39', '39'),('39.5', '39.5'),('40', '40'),('40.5', '40.5'),('41', '41'),('41.5', '41.5')])
+    
+    color = SelectField(u'color', choices=[('0', 'Seleccionar color'),('negro', 'Negro'), ('naranja', 'Naranja'),('amarillo', 'Amarillo'),('azul', 'Azul'),('rojo', 'Rojo'),('café', 'Café'),('gris', 'Gris'),('rosa', 'Rosa'),('verde', 'Verde'),('blanco', 'Blanco'),('multicolor', 'Multicolor')])
+

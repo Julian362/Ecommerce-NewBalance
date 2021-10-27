@@ -3,7 +3,9 @@
 <!-- Se hereda el head de template.html -->
 {% block head %}
 <title>New Balance | {{ sexo }}</title>
+<!-- CSS -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
+
 <!-- Finaliza el bloque head -->
 {% endblock %}
 
@@ -19,82 +21,61 @@
     <h1 class="subtituloTexto"> ZAPATOS PARA {{ sexo }}</h1>
 </div>
 
+{% if mensaje %}
+<h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
+{% endif %}
+<!-- Mensaje de error en el caso de que no encuentre los filtros requeridos -->
+{% if error %}
+<h5 style="text-align: center; color: #970c02; margin-top: 10px; padding-left: 15px;">{{ error }}</h5>
+{% endif %}
+
 <!-- Se agrega el cuerpo de la pantalla -->
 <!-- wrap es propiedad para "mejorar" el contenedor -->
 <div class="wrap">
     <div class="store-wrapper">
         <div class="category_list titulos">
-        <h4>FILTROS</h4>
-        <h4>ORDENAR POR</h4>
-        <select class="form-control mb-1 casillas">
-            <option selected>Alfabético A-Z</option>
-            <option value="1">Alfabético Z-A</option>
-            <option value="2">Menor precio</option>
-            <option value="3">Mayor precio</option>
-        </select>
-        <h4>REFINAR POR</h4>
-        <div class="form-check form">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Con descuento
-            </label>
+
+            <form action="{{ url_for('filtros_producto', sexo=sexo) }}" method="POST">
+                {{ filtro.hidden_tag() }}
+                {% if filtro %}
+                <!-- Ordenar por precio -->
+                <h4>ORDEN</h4>
+                {{ filtro.orden(class="form-control mb-1 casillas") }}
+
+                <!-- Ordenar por talla -->
+                <h4>FILTRAR POR TALLA</h4>
+                {{ filtro.talla(class="form-control mb-1 casillas") }}
+
+                <!-- Ordenar por color -->
+                <h4>FILTRAR POR COLOR</h4>
+                {{ filtro.color(class="form-control mb-1 casillas") }}
+
+                {% endif %}
+
+                <button class="btn btn-outline-one my-2 my-sm-0 boton_filtrar" type="submit">Filtrar</button>
+            </form>
+
+            <!--Todos los productos  -->
         </div>
-        <!-- Filtro de talla -->
-        <h4>TALLA</h4>
-        <select class="form-control mb-1 casillas">
-            <option selected>Seleccionar talla</option>
-            <option value="1">37</option>
-            <option value="2">37 ½</option>
-            <option value="3">38</option>
-            <option value="4">38 ½</option>
-            <option value="5">39</option>
-            <option value="6">39 ½</option>
-            <option value="7">40</option>
-            <option value="8">40 ½</option>
-            <option value="9">41</option>
-            <option value="10">41 ½</option>
-            <option value="11">42</option>
-            <option value="12">42 ½</option>
-        </select>
-        <!-- Filtro de color -->
-        <h4>COLOR</h4>
-        <select class="form-control mb-1 casillas">
-            <option selected>Seleccionar color</option>
-            <option value="1">Negro</option>
-            <option value="2">Naranja</option>
-            <option value="3">Amarillo</option>
-            <option value="4">Azul</option>
-            <option value="5">Rojo</option>
-            <option value="6">Café</option>
-            <option value="7">Gris</option>
-            <option value="8">Rosa</option>
-            <option value="9">Verde</option>
-            <option value="10">Blanco</option>
-            <option value="11">Multicolor</option>
-        </select>
-    <!--Todos los productos  -->
-    </div>
         {% if lista_productos_totales %}
-            <section class="products-list productos">
-                {% for item in lista_productos_totales %}
-                <div class="product-item ">
-                    <div class="contenedorindividual">
-                        <a href="{{url_for('productoind', referencia=item.referencia)}}">
-                            <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
-                                alt="producto_{{item.referencia}}">
-                            <h4>{{ item.nombre }}</h4>
-                            <p>$ {{ item.precio }}</p>
-                        </a>
-                    </div>
+        <section class="products-list productos">
+            {% for item in lista_productos_totales %}
+            <div class="product-item ">
+                <div class="contenedorindividual">
+                    <a href="{{url_for('productoind', referencia=item.referencia)}}">
+                        <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
+                            alt="producto_{{item.referencia}}">
+                        <h4>{{ item.nombre }}</h4>
+                        <p>$ {{ item.precio }}</p>
+                    </a>
                 </div>
-                {% endfor %}
-            </section>
+            </div>
+            {% endfor %}
+        </section>
         {% endif %}
+
     </div>
 </div>
-
-
-
 
 <!-- Finaliza el bloque -->
 {% endblock %}
