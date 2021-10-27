@@ -1,6 +1,39 @@
 import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 #Clase usuario, para la respectiva pantalla.
+class usuario():
+    #Se crean las variables de la clase
+    correo=''
+    contrasena=''
+
+    #Se establece el método constructor
+    def __init__(self,p_correo, p_contrasena):
+
+        self.correo = p_correo
+        self.contrasena =p_contrasena
+
+    @classmethod
+    def cargar(cls,p_correo):
+        sql="SELECT * FROM persona HWERE correo=?"
+        obj=db.ejecutar_select(sql,[p_correo])
+        if obj:
+            if len(obj)>0:
+                return cls(obj[0]["correo"],obj[0]["contasena"])
+        return 
+
+
+    def logear(self):
+        # sql="SELECT * FROM usuarios WHERE usuario='"+ self.usuario + "' and password='"+ self.password + "'"
+        sql="SELECT * FROM persona WHERE correo=?"
+        obj_usuario=db.ejecutar_select(sql,[self.correo])
+        if obj_usuario:
+            if len(obj_usuario) >0:
+                if check_password_hash(obj_usuario[0]["contrasena"],self.contrasena):
+                    return True
+        return False
+
+
 class persona():
 
     #Se crean las variables de la clase
@@ -36,15 +69,22 @@ class persona():
         self.contrasena =p_contrasena
         self.tipo_rol =p_tipo_rol
         self.estado =p_estado
-
+    
     #Se crea la función para insertar los datos del registro
     def insertar_registro(self):
-        #Se hace la consulta con la base de datos.
+
         sql='INSERT INTO persona (documento, nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,tipo_rol,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);'
-        #Ejecuta el SQL que está arriba (insert en este caso)
-        obj=db.ejecutar_insert(sql,[self.documento,self.nickname,self.nombre,self.apellidos,self.correo,self.telefono,self.sexo,self.direccion,self.pais,self.departamento,self.ciudad,self.contrasena,self.tipo_rol,self.estado])
-        #Validación de la existencia del objeto
+        hashed_contrena=generate_password_hash(self.contrasena, method='pbkdf2:sha256',salt_length=40)
+        obj=db.ejecutar_insert(sql,[self.documento,self.nickname,self.nombre,self.apellidos,self.correo,self.telefono,self.sexo,self.direccion,self.pais,self.departamento,self.ciudad,hashed_contrena,self.tipo_rol,self.estado])
         return (obj>0)
+
+    # def insertar_registro(self):
+    #     #Se hace la consulta con la base de datos.
+    #     sql='INSERT INTO persona (documento, nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,tipo_rol,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);'
+    #     #Ejecuta el SQL que está arriba (insert en este caso)
+    #     obj=db.ejecutar_insert(sql,[self.documento,self.nickname,self.nombre,self.apellidos,self.correo,self.telefono,self.sexo,self.direccion,self.pais,self.departamento,self.ciudad,self.contrasena,self.tipo_rol,self.estado])
+    #     #Validación de la existencia del objeto
+    #     return (obj>0)
 
     @classmethod
     def cargar(cls, p_rol, p_documento):
