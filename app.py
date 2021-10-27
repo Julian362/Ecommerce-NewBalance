@@ -82,8 +82,14 @@ def registro():
 
 #codigo David
 @app.route('/producto/<referencia>')
-def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
+def productoind(referencia):    
+    promedio=0
+    acumulador=0
+    lista_califiacion=calificacion.todos_los_comentarios(referencia)
+    for i in lista_califiacion:
+        acumulador+=i['puntuacion']
+    promedio=acumulador/len(lista_califiacion)
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia))
 
 @app.route('/carrito/')
 def carrito():
@@ -166,7 +172,7 @@ def edit_usuario(documento):
     else:
         formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
-            obj_usuario = persona.editar(formulario.documento.data,formulario.nickname.data,formulario.nombre.data,formulario.apellidos.data,formulario.correo.data,formulario.telefono.data,formulario.sexo.data,formulario.direccion.data,formulario.pais.data,formulario.departamento.data,formulario.ciudad.data,formulario.contrasena.data,"user")
+            obj_usuario = persona.editar(documento,formulario.nickname.data,formulario.nombre.data,formulario.apellidos.data,formulario.correo.data,formulario.telefono.data,formulario.sexo.data,formulario.direccion.data,formulario.pais.data,formulario.departamento.data,formulario.ciudad.data,formulario.contrasena.data,"user")
             if obj_usuario:
                 obj_usuario= obj_usuario =persona.cargar("user",documento)
                 return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Editado correctamente", formBuscar=FormBuscar())
@@ -245,7 +251,7 @@ def lista_de_productos(sexo):
     if sexo=="MUJER":
         s="F"
     return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
-
+    
 @app.route('/productos/<sexo>/filtros/', methods=["GET", "POST"])
 def filtros_producto(sexo):
     s=""
@@ -262,10 +268,10 @@ def filtros_producto(sexo):
             if len(producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data))>0:
                 return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
             return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
-            
+
         return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
 
-# ----------------------------------------------------------------------------------------------
+# -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
@@ -365,10 +371,12 @@ def delete_producto(id):
 
 
 """-----------------INICIO GESTIÓN DE PERFIL (MI CUENTA)------------------"""
+
+
 @app.route('/gestion/micuenta/<documento>', methods = ["GET", "POST"])
 def gestion_micuenta(documento):
     if request.method == "GET":
-        formulario = FormGestionar()
+        formulario = FormMiCuenta()
         obj_usuario = gestionMiCuenta.cargar_datos(documento)
         if obj_usuario:
             formulario.nombre.data = obj_usuario.nombre
@@ -385,10 +393,10 @@ def gestion_micuenta(documento):
             formulario.contrasena.data = obj_usuario.contrasena
             formulario.contrasenaNueva.data = ""
             formulario.confirmarContrasenaNueva.data = ""
-            return render_template('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario)
+            return render_template('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, documento=documento)
         return render_template('gestion_micuenta.html', error= "No existe el usuario" , form = formulario)
     else:
-        formulario = FormGestionar (request.form)
+        formulario = FormMiCuenta (request.form)
         if formulario.validate_on_submit:
             obj_usuario = gestionMiCuenta.cargar_datos(documento)
             if obj_usuario:
@@ -407,13 +415,9 @@ def gestion_micuenta(documento):
                 obj_usuario.editar_datos()
                 return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, mensaje = "Se han editado correctamente los datos")
             return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
-    return render_template('gestion_micuenta.html', form=FormGestionar())
+    return render_template('gestion_micuenta.html', form=FormMiCuenta())
 
-""" ------------------FIN GESTIÓN DE PERFIL (MI CUENTA)-------------------"""
-
-
-"""-----------------------INICIO SUPERADMINISTRADOR-----------------------"""
-
+"""Ruta para la gestión de Superadministrador"""
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
@@ -436,6 +440,8 @@ def edit_administrador(documento):
             formulario.ciudad.data = obj_admin.ciudad
             formulario.direccion.data = obj_admin.direccion
             formulario.contrasena.data = obj_admin.contrasena
+            formulario.confirmarcontrasena.data = obj_admin.contrasena
+            
             return render_template('superadministrador.html', datosAdministrador = obj_admin, form = formulario, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), opcion = "Editar")
         return render_template('superadministrador.html', error = "No existe el usuario", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
     else:
@@ -445,7 +451,6 @@ def edit_administrador(documento):
             if obj_admin:
                 obj_admin.nombre = formulario.nombre.data
                 obj_admin.apellido = formulario.apellidos.data
-                obj_admin.documento = formulario.documento.data
                 obj_admin.sexo = formulario.sexo.data
                 obj_admin.nickname = formulario.nickname.data
                 obj_admin.telefono = formulario.telefono.data
@@ -455,8 +460,9 @@ def edit_administrador(documento):
                 obj_admin.ciudad = formulario.ciudad.data
                 obj_admin.direccion = formulario.direccion.data 
                 obj_admin.contrasena = formulario.contrasena.data
+                
                 obj_admin.editar_datos()
-                return render_template('superadministrador.html', datosAdministrador = obj_admin, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), mensaje = "Se han editado los datos del administrador {0} correctamente".format(formulario.documento.data), opcion = "Editar")
+                return render_template('superadministrador.html', datosAdministrador = obj_admin, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), mensaje = "Se han editado los datos del administrador {0} correctamente".format(documento), opcion = "Editar")
         return render_template('superadministrador.html', form = FormGestionar(), formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), error = "Error en el proceso de editar usuario")
 
 @app.route('/superadministrador/crear/', methods = ["GET", "POST"])

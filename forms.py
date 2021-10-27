@@ -8,13 +8,13 @@ from wtforms import validators
 class FormGestionar(FlaskForm):
     nombre = StringField('Nombre',validators=[validators.required()])
     apellidos = StringField('Apellidos', validators=[validators.required()])
-    documento = StringField('Documento', validators=[validators.required()])
+    documento = StringField('Documento')
     sexo = StringField('Sexo', validators=[validators.required()])
     correo = StringField('Correo', validators=[validators.required()])
     nickname = StringField('Nickname', validators=[validators.required()])
     telefono = StringField('Celular', validators=[validators.required()])
-    contrasena = PasswordField('Contraseña', validators=[validators.required(),validators.length(max=150)])
-    confirmarcontrasena = PasswordField('Confirmar contraseña', validators=[validators.required(),validators.length(max=150)])
+    contrasena = StringField('Contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarcontrasena = StringField('Confirmar contraseña', validators=[validators.required(),validators.length(max=150)])
     pais = StringField('País', validators=[validators.required(),validators.length(max=50)])
     departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
     ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
@@ -25,8 +25,8 @@ class FormGestionar(FlaskForm):
     editar = SubmitField('Editar')
     crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
-    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
-    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)])
+    """ contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)]) """
 
 class FormBuscar(FlaskForm):
     buscar = StringField('buscar')
@@ -61,3 +61,20 @@ class FormFiltrarProducto(FlaskForm):
     
     color = SelectField(u'color', choices=[('0', 'Seleccionar color'),('negro', 'Negro'), ('naranja', 'Naranja'),('amarillo', 'Amarillo'),('azul', 'Azul'),('rojo', 'Rojo'),('café', 'Café'),('gris', 'Gris'),('rosa', 'Rosa'),('verde', 'Verde'),('blanco', 'Blanco'),('multicolor', 'Multicolor')])
 
+class FormMiCuenta(FlaskForm):
+    nombre = StringField('Nombre',validators=[validators.required()])
+    apellidos = StringField('Apellidos', validators=[validators.required()])
+    documento = StringField('Documento', validators=[validators.required()])
+    sexo = StringField('Sexo', validators=[validators.required()])
+    correo = StringField('Correo', validators=[validators.required()])
+    nickname = StringField('Nickname', validators=[validators.required()])
+    telefono = StringField('Celular', validators=[validators.required()])
+    contrasena = StringField('Contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarcontrasena = StringField('Confirmar contraseña', validators=[validators.required(),validators.length(max=150)])
+    pais = StringField('País', validators=[validators.required(),validators.length(max=50)])
+    departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
+    ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
+    direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
+    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
+    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)])
+    guardarCambios = SubmitField('Guardar cambios')

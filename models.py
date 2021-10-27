@@ -207,7 +207,15 @@ class calificacion:
         sql=' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto = ? ORDER BY id desc;'
         return db.ejecutar_select(sql,[referencia])
 
-
+    @staticmethod
+    def tres_comentarios(referencia):
+        sql= ' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto = ? ORDER BY id desc LIMIT 3;'
+        return db.ejecutar_select(sql,[referencia])
+    
+    @staticmethod
+    def promedio_comentarios(referencia):
+        sql='SELECT ROUND(AVG(puntuacion),2) as promedio FROM calificacion where referencia_producto = ? ;'
+        return db.ejecutar_select(sql,[referencia])
 class gestionAdministrador():
     nombre = ''
     apellido = ''
