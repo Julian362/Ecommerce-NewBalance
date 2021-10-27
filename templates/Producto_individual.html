@@ -11,16 +11,17 @@
 
   <div class="vistageneral">
 
+    {% if Producto_Referencia %}
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active " data-interval="10000">
-          <img src="{{url_for('static',filename='imagenes/Producto_Zapatillas/M680LR7_1.jpg') }}" class="d-block w-100" alt="...">
+          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-interval="2000">
-          <img src="{{url_for('static',filename='imagenes/Producto_Zapatillas/ML574PU2_1.jpg') }}" class="d-block w-100" alt="...">
+          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item ">
-          <img src="{{url_for('static',filename='imagenes/Producto_Zapatillas/ML574PU2_1.jpg') }}" class="d-block w-100" alt="...">
+          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}" class="d-block w-100" alt="...">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
@@ -32,25 +33,28 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+  
 
   </div>
-  {% if Producto_Referencia %}
+
     <div class="barrainformacion">
-        <h4 style="color:#E74236"><strong>{{ nombre }}</strong> </h4>
+        <h4 style="color:#E74236"><strong>{{ item.nombre }}</strong> </h4>
+        <h4 style="color:#E74236"><strong>{{ item.referencia }}</strong> </h4>
         <span class="estrella"> ★★★★☆</span>
-        <s><p style="color:#E74236"> $ 84.000 </p></s>
+        <s><p style="color:#E74236"> $ {{item.precio}} </p></s>
         <p>Precio con descuento:</p>
-        <h5> $60.000 </h5>
+        <h5> $ {{item.precio}} </h5>
         <h6> Talla: </h6>
-        <div class="Talla">           
-          <select class="custom-select custom-select-sm">
+        <div class="Talla">     
+          {{ form.talla(class="custom-select custom-select-sm")}}      
+          <!-- <select class="custom-select custom-select-sm">
             <option selected>Seleccionar talla</option>
             <option value="1">37</option>
             <option value="2">38</option>
             <option value="3">39</option>
             <option value="4">40</option>
             <option value="5">41</option>
-          </select>          
+          </select>           -->
         </div>
         <h6> Color: </h6>
         <div class="Color">           
@@ -102,20 +106,12 @@
         <div class="card-body">
           <article id="tab1">
             <div class="row">
-              <div class="col" style="text-align: left;">
-                <p class="card-text">Tipo de calzado: Tennis.</p>
-                <p class="card-text">Año de lanzamiento: 2020.</p>
-              </div>
-              <div class="col" style="text-align: left;">
-                <p class="card-text">Estilo: Crossover.</p>
-                <p class="card-text">Material de la suela: Goma.</p>
-              </div>
+              {{item.descripcion}}
             </div>            
             
           </article>          
           <article id="tab2" >            
-            <p class="card-text">Azul - Negro - Rojo</p>   
-            <p class="card-text">gris - verde - morado</p>        
+            {{item.color}}      
           </article>          
         </div>
       </div>     
@@ -200,17 +196,12 @@
               <div class="col-2">
                 <p style="color: #E74236;"> <strong> 1 </strong></p>
               </div>
-            </div> 
-            
-          
-        
-          
+            </div>          
         </div>
       </div>
-
     </div>
 
-    {% endif %}
+  
 
 
     <div class="Comentarios">
@@ -396,7 +387,7 @@
 
     </div>
 </div>
-
+{% endif %}
 
 
 
