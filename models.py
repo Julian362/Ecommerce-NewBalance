@@ -9,7 +9,7 @@ class persona():
     nombre =''
     apellidos=''
     correo=''
-    telefono = 0
+    telefono =0
     sexo=''
     direccion=''
     pais=''
@@ -241,10 +241,6 @@ class gestionAdministrador():
                 return True
         return False
 
-    
-
-        
-
     @staticmethod
     def listado_administrador():
         sql = "SELECT estado, documento, nombre, apellidos, correo FROM persona WHERE tipo_rol='admin';"
@@ -312,6 +308,16 @@ class producto():
                 # orden del constructor
                 return cls(id,obj[0]["nombre"],obj[0]["referencia"],obj[0]["talla"], obj[0]["precio"], obj[0]["cantidad"], obj[0]["descuento"], obj[0]["color"], obj[0]["descripcion"], obj[0]["sexo"])
         return None
+    
+    @classmethod
+    def cargarProducto(cls,id):
+        sql = 'select producto.nombre, producto.referencia, inventario.talla, producto.precio, inventario.cantidad, producto.descuento, inventario.color, producto.descripcion, inventario.sexo from producto inner join inventario on inventario.referencia_producto=producto.referencia where referencia = ?;'
+        obj = db.ejecutar_select(sql,[id])
+        if obj:
+            if len(obj)>0:
+                # orden del constructor
+                return cls(id,obj[0]["nombre"],obj[0]["referencia"],obj[0]["talla"], obj[0]["precio"], obj[0]["cantidad"], obj[0]["descuento"], obj[0]["color"], obj[0]["descripcion"], obj[0]["sexo"])
+        return None
 
 
 
@@ -332,14 +338,21 @@ class producto():
         obj = db.ejecutar_insert(sql,[ id ])
         if obj:
             if obj>0:
-                return "Borrado corectamente el producto "
+                return "Borrado corectamente el comentario "
 
         return None
 
     # Metodo de estatico para llamar la lista de productos
     @staticmethod
+    def productoindividual(ref):
+        sql= 'select producto.nombre, producto.precio, producto.descripcion, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from producto inner join inventario on inventario.referencia_producto = producto.referencia where producto.referencia = ? ;'
+        return db.ejecutar_select(sql,[ref])
+
+    
+
+    @staticmethod
     def listado():
-        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla, inventario.color  from producto inner join inventario on inventario.referencia_producto=producto.referencia order by id asc;'
+        sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla  from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
 
     @staticmethod
@@ -364,5 +377,52 @@ class producto():
             sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.nombre;'
             return db.ejecutar_select(sql,[sexo, color ,color,talla,talla])
 
+class gestionMiCuenta():
+    nombre = ''
+    apellido = ''
+    documento = ''
+    nickname = ''
+    telefono = 0
+    correo = ''
+    sexo = ''
+    pais = ''
+    departamento = ''
+    ciudad = ''
+    direccion = ''
+    contrasena = ''
+    tipo_rol = ''
+    estado = ''
 
+    def __init__(self, p_nombre, p_apellido, p_documento, p_sexo,  p_nickname, p_telefono, p_correo, p_pais, p_departamento, p_ciudad, p_direccion, p_contrasena, p_tipo_rol, p_estado):
+        self.nombre = p_nombre
+        self.apellido = p_apellido
+        self.documento = p_documento
+        self.nickname = p_nickname
+        self.telefono = p_telefono
+        self.correo = p_correo
+        self.sexo = p_sexo
+        self.pais = p_pais
+        self.departamento = p_departamento
+        self.ciudad = p_ciudad
+        self.direccion = p_direccion
+        self.contrasena = p_contrasena
+        self.tipo_rol = p_tipo_rol
+        self.estado = p_estado
+
+    @classmethod
+    def cargar_datos(cls, p_documento):
+        sql = "SELECT documento, nickname, nombre, apellidos, correo, telefono, sexo, direccion, pais, departamento, ciudad, contrasena, tipo_rol, estado FROM persona WHERE tipo_rol='user' and documento=?;"
+        obj = db.ejecutar_select(sql, [p_documento])
+        if obj:
+            if len(obj) > 0:
+                return cls(obj[0]["nombre"], obj[0]["apellidos"], obj[0]["documento"], obj[0]["sexo"], obj[0]["nickname"], obj[0]["telefono"], obj[0]["correo"], obj[0]["pais"], obj[0]["departamento"], obj[0]["ciudad"], obj[0]["direccion"], obj[0]["contrasena"], obj[0]["tipo_rol"], obj[0]["estado"])
+        return None
+    
+    def editar_datos(self):
+        sql = "UPDATE persona SET nickname = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, sexo = ?, direccion = ?, pais = ?, departamento = ?, ciudad = ?, contrasena = ?, tipo_rol = ?, estado = ? WHERE documento = ? AND tipo_rol = 'user';"
+        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado, self.documento])
+        if obj:
+            if obj > 0:
+                return True
+        return False
  
