@@ -1,4 +1,5 @@
 /* Título de la sección que se despliega*/
+
 .modal-header h1 {
     margin: auto;
     text-align: center;
@@ -8,22 +9,25 @@
 }
 
 /* Calificación */
+
 .puntuacion_promedio h4 {
     margin: auto;
     padding-top: 50px;
     width: 150;
     text-align: center;
     font-size: 65px;
-    color:#E74236;
+    color: #E74236;
 }
 
 /* Sombra de la calificación */
+
 .puntuacion_promedio h4:hover {
     color: #E74236;
     text-shadow: 2px 2px 15px white;
 }
 
 /* Estrellas de la calificación */
+
 .estrellas_calificacion p {
     margin: auto;
     width: 150;
@@ -33,6 +37,7 @@
 }
 
 /* Mensaje del promedio de la calificación */
+
 .puntuacion_promedio h5 {
     width: 150;
     font-size: medium;
@@ -41,6 +46,7 @@
 }
 
 /* Columna de los detalles de la puntuación */
+
 .puntuacion_detallada {
     margin-top: 30px;
     width: 800px;
@@ -48,6 +54,7 @@
 }
 
 /* Puntuación cantidad de estrellas /lado izquierdo */
+
 .las_estrellas h4 {
     padding-right: 25px;
     font-size: medium;
@@ -56,17 +63,19 @@
 }
 
 /* Ancho de las barras de progreso */
+
 .progress {
     width: 100px;
     height: 5px;
     margin-top: 20px;
 }
 
-.barras{
+.barras {
     background-color: #242942;
 }
 
 /* Puntuación cantidad de estrellas /lado derecho */
+
 .las_estrellas p {
     padding-left: 25px;
     font-size: small;
@@ -78,44 +87,30 @@
 
 /* Propiedades de la primera calificación */
 
-.estrellas p {
-    padding-left: 40px!important;
+.datos h4 {
     padding-top: 30px;
-    font-size: 30px;
     text-align: left;
     color: #242942;
 }
 
-/* Título de los comentarios */
-.estrellas h4 {
+.datos p {
+    padding-bottom: 20px;
     text-align: left;
-    padding-top: 37.5px;
-    padding-left: 10px;
+    color: #242942;
+    display: inline;
+    color: #E74236;
 }
 
 /* Contenido de los comentarios */
-.estrella p {
-    padding-left: 40px!important;
+
+.comentario p {
     padding-top: 15px;
-    font-size: 30px;
-    text-align: left;
+    text-align: justify;
     color: #242942;
 }
 
-/* Estrellas de las demás */
-.estrella h4 {
-    text-align: left;
-    padding-top: 25px;
-    padding-left: 10px;
-    color:#E74236;
-}
-
 .comentarios{
-    text-align: justify;
-    padding-top: 0px;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-.h4{
-    color:#E74236;
+    padding-left: 40px;
+    padding-right: 40px;
+
 }
