@@ -82,9 +82,10 @@ def delete_comentario(id):
 
     
 """Ruta para todos los comentarios de un producto"""
-@app.route('/comentarios/')
+@app.route('/comentarios/', methods=["GET", "POST"])
 def todos_los_comentarios():
-    return render_template('todos_los_comentarios.html')
+    
+    return render_template('todos_los_comentarios.html', lista_comentarios=calificacion.todos_los_comentarios())
 
 """-----------------------------FIN COMENTARIO-----------------------------"""
 

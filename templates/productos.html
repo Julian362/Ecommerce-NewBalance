@@ -63,8 +63,7 @@
             <div class="product-item ">
                 <div class="contenedorindividual">
                     <a href="{{url_for('productoind', referencia=item.referencia)}}">
-                        <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
-                            alt="producto_{{item.referencia}}">
+                        <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}" alt="producto_{{item.referencia}}">
                         <h4>{{ item.nombre }}</h4>
                         <p>$ {{ item.precio }}</p>
                     </a>

@@ -12,18 +12,20 @@
 
 <!-- Se agrega el cuerpo de la pantalla -->
 
-<!-- Bottón para todos los comentarios (aunque debe ir en el producto individual) -->
+<!-- Bottón para todos los comentarios -->
 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
     Ver todos los comentarios
 </button>
 
 <!-- Modal -->
+
 <div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title" id="exampleModalLabel">Comentarios sobre el producto</h1>
+                {% if lista_comentarios %}
+                <h1 class="modal-title" id="exampleModalLabel">Opiniones sobre el producto</h1>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,14 +38,7 @@
                         <div class="col puntuacion_promedio">
                             <!-- Puntuación promedio -->
                             <h4>4.0</h4>
-                            <!-- Cantidad de estrellas -->
-                            <div class="estrellas_calificacion">
-                                <p>★★★★☆</p>
-                            </div>
                             <!-- Total de comentarios -->
-
-                            <!--Ícono para la personita 
-                                <span class="material-icons-outlined md-48">person</span> -->
                             <h5>Promedio entre 5 opiniones</h5>
                         </div>
 
@@ -110,76 +105,21 @@
                     </div>
                 </a>
 
-                <!--Algunos comentarios  -->
-                <!-- Comentario_1 -->
-                <div class="calificacion">
-                    <div class="row estrellas">
-                        <p>★★★★★</p>
-                        <h4>Muy bueno</h4>
+                <!-- Aquí van los comentarios -->
+                <section class="lista-comentarios comentarios">
+                    {% for item in lista_comentarios %}
+                    <div class="item-comentario ">
+                        <div class="datos">
+                            <h4>{{ item.nickname}}</h4>
+                            <p>Puntuación: {{ item.puntuacion }}</p>
+                        </div>
+                        <div class="comentario">
+                            <p>{{ item.comentario }}</p>
+                        </div>
                     </div>
-                    <div class="comentarios">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel minus libero, laborum
-                            reprehenderit
-                            porro explicabo culpa optio eligendi voluptas aspernatur molestias incidunt architecto.
-                            Blanditiis tempora sint nam dolor fuga quae!</p>
-                    </div>
-                </div>
-
-                <!--Comentario_2  -->
-                <div class="calificacion">
-                    <div class="row estrella">
-                        <p>★★★★★</p>
-                        <h4>Excelente</h4>
-                    </div>
-                    <div class="comentarios">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel minus libero, laborum
-                            reprehenderit
-                            porro explicabo culpa optio eligendi voluptas aspernatur molestias incidunt architecto.
-                            Blanditiis tempora sint nam dolor fuga quae!</p>
-                    </div>
-                </div>
-
-                <!--Comentario_3  -->
-                <div class="calificacion">
-                    <div class="row estrella">
-                        <p>★★★★☆</p>
-                        <h4>Pueden mejorar</h4>
-                    </div>
-                    <div class="comentarios">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel minus libero, laborum
-                            reprehenderit
-                            porro explicabo culpa optio eligendi voluptas aspernatur molestias incidunt architecto.
-                            Blanditiis tempora sint nam dolor fuga quae!</p>
-                    </div>
-                </div>
-
-                <!--Comentario_4  -->
-                <div class="calificacion">
-                    <div class="row estrella">
-                        <p>★★★★★</p>
-                        <h4>Increíbles</h4>
-                    </div>
-                    <div class="comentarios">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel minus libero, laborum
-                            reprehenderit
-                            porro explicabo culpa optio eligendi voluptas aspernatur molestias incidunt architecto.
-                            Blanditiis tempora sint nam dolor fuga quae!</p>
-                    </div>
-                </div>
-
-                <!--Comentario_5  -->
-                <div class="calificacion">
-                    <div class="row estrella">
-                        <p>★☆☆☆☆</p>
-                        <h4>No era lo que esperaba</h4>
-                    </div>
-                    <div class="comentarios">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel minus libero, laborum
-                            reprehenderit
-                            porro explicabo culpa optio eligendi voluptas aspernatur molestias incidunt architecto.
-                            Blanditiis tempora sint nam dolor fuga quae!</p>
-                    </div>
-                </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
             </div>
         </div>
     </div>
