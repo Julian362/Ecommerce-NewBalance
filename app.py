@@ -79,8 +79,14 @@ def registro():
 
 #codigo David
 @app.route('/producto/<referencia>')
-def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
+def productoind(referencia):    
+    promedio=0
+    acumulador=0
+    lista_califiacion=calificacion.todos_los_comentarios(referencia)
+    for i in lista_califiacion:
+        acumulador+=i['puntuacion']
+    promedio=acumulador/len(lista_califiacion)
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia))
 
 @app.route('/carrito/')
 def carrito():
@@ -242,7 +248,7 @@ def lista_de_productos(sexo):
     if sexo=="MUJER":
         s="F"
     return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
-
+    
 @app.route('/productos/<sexo>/filtros/', methods=["GET", "POST"])
 def filtros_producto(sexo):
     s=""
@@ -259,10 +265,10 @@ def filtros_producto(sexo):
             if len(producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data))>0:
                 return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
             return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
-            
+
         return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
 
-# ----------------------------------------------------------------------------------------------
+# -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
@@ -408,11 +414,7 @@ def gestion_micuenta(documento):
             return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
     return render_template('gestion_micuenta.html', form=FormMiCuenta())
 
-""" ------------------FIN GESTIÓN DE PERFIL (MI CUENTA)-------------------"""
-
-
-"""-----------------------INICIO SUPERADMINISTRADOR-----------------------"""
-
+"""Ruta para la gestión de Superadministrador"""
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
