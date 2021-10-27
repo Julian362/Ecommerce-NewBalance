@@ -241,10 +241,28 @@ def lista_de_productos(sexo):
         s="M"
     if sexo=="MUJER":
         s="F"
-    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
 
+@app.route('/productos/<sexo>/filtros/', methods=["GET", "POST"])
+def filtros_producto(sexo):
+    s=""
+    if sexo=="HOMBRE":
+        s="M"
+    if sexo=="MUJER":
+        s="F"
+    if request.method=="GET":
+        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
+        #Método POST
+    else:
+        formulario=FormFiltrarProducto(request.form)
+        if formulario.validate_on_submit():
+            if len(producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data))>0:
+                return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
+            return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
+            
+        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
 
-# -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
 @app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
@@ -342,12 +360,57 @@ def delete_producto(id):
 
 
 
-"""Ruta para la gestión de perfil (Mi Cuenta)"""
-@app.route('/gestion/micuenta/')
-def gestion_micuenta():
+
+"""-----------------INICIO GESTIÓN DE PERFIL (MI CUENTA)------------------"""
+@app.route('/gestion/micuenta/<documento>', methods = ["GET", "POST"])
+def gestion_micuenta(documento):
+    if request.method == "GET":
+        formulario = FormGestionar()
+        obj_usuario = gestionMiCuenta.cargar_datos(documento)
+        if obj_usuario:
+            formulario.nombre.data = obj_usuario.nombre
+            formulario.apellidos.data = obj_usuario.apellido
+            formulario.documento.data = obj_usuario.documento
+            formulario.sexo.data = obj_usuario.sexo
+            formulario.nickname.data = obj_usuario.nickname
+            formulario.telefono.data = obj_usuario.telefono
+            formulario.correo.data = obj_usuario.correo
+            formulario.pais.data = obj_usuario.pais
+            formulario.departamento.data = obj_usuario.departamento
+            formulario.ciudad.data = obj_usuario.ciudad
+            formulario.direccion.data = obj_usuario.direccion
+            formulario.contrasena.data = obj_usuario.contrasena
+            formulario.contrasenaNueva.data = ""
+            formulario.confirmarContrasenaNueva.data = ""
+            return render_template('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario)
+        return render_template('gestion_micuenta.html', error= "No existe el usuario" , form = formulario)
+    else:
+        formulario = FormGestionar (request.form)
+        if formulario.validate_on_submit:
+            obj_usuario = gestionMiCuenta.cargar_datos(documento)
+            if obj_usuario:
+                obj_usuario.nombre = formulario.nombre.data
+                obj_usuario.apellido = formulario.apellidos.data
+                obj_usuario.documento = formulario.documento.data
+                obj_usuario.sexo = formulario.sexo.data
+                obj_usuario.nickname = formulario.nickname.data
+                obj_usuario.telefono = formulario.telefono.data
+                obj_usuario.correo = formulario.correo.data
+                obj_usuario.pais = formulario.pais.data
+                obj_usuario.departamento = formulario.departamento.data
+                obj_usuario.ciudad = formulario.ciudad.data
+                obj_usuario.direccion = formulario.direccion.data
+                obj_usuario.contrasena = formulario.contrasenaNueva.data
+                obj_usuario.editar_datos()
+                return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, mensaje = "Se han editado correctamente los datos")
+            return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
     return render_template('gestion_micuenta.html', form=FormGestionar())
 
-"""Ruta para la gestión de Superadministrador"""
+""" ------------------FIN GESTIÓN DE PERFIL (MI CUENTA)-------------------"""
+
+
+"""-----------------------INICIO SUPERADMINISTRADOR-----------------------"""
+
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
