@@ -1,4 +1,3 @@
-from itertools import product
 import os
 import functools
 from flask import Flask, render_template,  request, redirect, url_for, request,g,url_for,session
@@ -49,6 +48,7 @@ def login():
                 session.clear()
                 session['user_correo']=obj_usuario.correo
                 return redirect('/')
+                # return redirect(url_for('get_/'))
         return render_template('login.html', error="Usuario o contraseña invalido",form=FormGestionar())
 
 
@@ -69,7 +69,7 @@ def registro():
         #Para validad los campos del formulario con el wtf
         if form_ingreso.validate_on_submit:
             #Se crea el objeto registro y se instancia en el orden del constructor, pero con el nombre del forms.py
-            obj_registro=persona(form_ingreso.documento.data,form_ingreso.nickname.data,form_ingreso.nombre.data,form_ingreso.apellido.data,form_ingreso.correo.data,form_ingreso.telefono.data,form_ingreso.sexo.data,form_ingreso.direccion.data,form_ingreso.pais.data,form_ingreso.departamento.data,form_ingreso.ciudad.data,form_ingreso.contrasena.data,"user","T")
+            obj_registro=persona(form_ingreso.documento.data,form_ingreso.nickname.data,form_ingreso.nombre.data,form_ingreso.apellidos.data,form_ingreso.correo.data,form_ingreso.telefono.data,form_ingreso.sexo.data,form_ingreso.direccion.data,form_ingreso.pais.data,form_ingreso.departamento.data,form_ingreso.ciudad.data,form_ingreso.contrasena.data,"user","T")
             if obj_registro.insertar_registro():
                 return redirect(url_for('login'))
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
@@ -129,13 +129,6 @@ def delete_comentario(id):
         obj_calificacion+= id
         return render_template('gestion_comentario.html', opcion="Crear", mensaje="Borrado correctamente")
     return render_template('gestion_comentario.html', form=FormGestionarComentario(), opcion="Crear", error="No se pudo editar el comentario")
-
-    
-"""Ruta para todos los comentarios de un producto"""
-@app.route('/comentarios/', methods=["GET", "POST"])
-def todos_los_comentarios():
-    
-    return render_template('todos_los_comentarios.html', lista_comentarios=calificacion.todos_los_comentarios())
 
 """-----------------------------FIN COMENTARIO-----------------------------"""
 
@@ -239,7 +232,7 @@ def block_usuario(documento, estado):
 
 """ -----------------------------INICIO PRODUCTOS-----------------------------"""
 
-"""Ruta para llamar a los productos"""
+"""Ruta para llamar a los productos de hombre"""
 @app.route('/productos/<sexo>/')
 def lista_de_productos(sexo):
     #Variable para obtener el sexo de la base de datos por la letra M = Masculino y F = Femenino 
@@ -248,30 +241,12 @@ def lista_de_productos(sexo):
         s="M"
     if sexo=="MUJER":
         s="F"
-    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
 
-@app.route('/productos/<sexo>/filtros/', methods=["GET", "POST"])
-def filtros_producto(sexo):
-    s=""
-    if sexo=="HOMBRE":
-        s="M"
-    if sexo=="MUJER":
-        s="F"
-    if request.method=="GET":
-        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
-        #Método POST
-    else:
-        formulario=FormFiltrarProducto(request.form)
-        if formulario.validate_on_submit():
-            if len(producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data))>0:
-                return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
-            return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
-            
-        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
 
-# ----------------------------------------------------------------------------------------------
+# -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
-@app.route('/productos/gestion/', methods=["GET", "POST"])
+@app.route('/productos/gestion/', methods=['GET', 'POST'])
 def gestion_productos():
     return render_template('gestion_productos.html', lista_productos=producto.listado(),formBuscar=FormBuscar())
 
@@ -310,8 +285,8 @@ def block_producto(referencia, estado):
             obj_proEstado="Producto con "+ referencia+" bloqueado "
         elif estado == "F":
             obj_proEstado="Producto con "+ referencia+" desbloqueado "
-        return render_template('gestion_productos.html',mensaje=obj_proEstado,lista_productos=producto.listado(), block=estado)
-    return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado())
+        return render_template('gestion_productos.html',mensaje=obj_proEstado,lista_productos=producto.listado(), block=estado,formBuscar=FormBuscar())
+    return render_template('gestion_productos.html',error="No se pudo bloquear al producto",lista_productos=producto.listado(),formBuscar=FormBuscar())
 
 # Medtodo de actualizar datos STIVEN
 @app.route('/productos/gestion/<id>', methods=["GET", "POST"])
@@ -329,16 +304,16 @@ def editar_producto(id):
             formulario.color.data = obj_mensaje.color
             formulario.descripcion.data = obj_mensaje.descripcion
             formulario.sexo.data = obj_mensaje.sexo
-            return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar", form=formulario)
-        return render_template('gestion_productos.html',error="No existe el usuario",lista_productos=producto.listado())
+            return render_template('gestion_productos.html',producto=obj_mensaje,lista_productos=producto.listado(), opcion="Editar", form=formulario,formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',error="No existe el producto",lista_productos=producto.listado(),formBuscar=FormBuscar())
     else:
         formulario = FormGestionProducto(request.form)
         if formulario.validate_on_submit():
             obj_usuario = producto.editar(id,formulario.nombre.data,formulario.referencia.data,formulario.talla.data,formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data,formulario.descripcion.data,formulario.sexo.data)
             if obj_usuario:
                 obj_usuario =producto.cargar(id)
-                return render_template('gestion_productos.html',producto=obj_usuario,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente")
-        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Verifique los datos ingresados",form=FormGestionProducto())
+                return render_template('gestion_productos.html',producto=obj_usuario,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Editado correctamente",formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Verifique los datos ingresados",form=FormGestionProducto(),formBuscar=FormBuscar())
 
 # Crear productos, plantilla gestion STIVEN
 @app.route('/productos/gestion/crear', methods=["GET", "POST"])
@@ -351,24 +326,20 @@ def crear_producto():
         if formulario.validate_on_submit():
             obj_crearProducto = producto('',formulario.nombre.data, formulario.referencia.data, formulario.talla.data, formulario.precio.data,formulario.cantidad.data,formulario.descuento.data,formulario.color.data, formulario.descripcion.data, formulario.sexo.data)
             if (obj_crearProducto.crear()):
-                return render_template('gestion_productos.html',producto=obj_crearProducto,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Creado correctamente el producto "+ formulario.nombre.data)
+                return render_template('gestion_productos.html',producto=obj_crearProducto,lista_productos=producto.listado(), opcion="Editar",form=FormGestionProducto(), mensaje="Creado correctamente el producto "+ formulario.nombre.data,formBuscar=FormBuscar())
 
-            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto())
-        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear usuario",opcion="Crear",form=FormGestionProducto())
-# ------------------------------------------------------------------------------------------------------
-
-
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto(),formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de crear producto",opcion="Crear",form=FormGestionProducto(),formBuscar=FormBuscar())
 
 @app.route('/productos/gestion/Delete/<id>')
 def delete_producto(id):
     obj_usuario =producto.delete(id)
     if obj_usuario:
         obj_usuario+= id
-        return render_template('gestion_productos.html',mensaje=obj_usuario,lista_productos=producto.listado())
-    return render_template('gestion_productos.html',error="No se pudo eliminar al usuario "+id,lista_productos=producto.listado())
+        return render_template('gestion_productos.html',mensaje=obj_usuario,lista_productos=producto.listado(),formBuscar=FormBuscar())
+    return render_template('gestion_productos.html',error="No se pudo eliminar al producto "+id,lista_productos=producto.listado(),formBuscar=FormBuscar())
 # ------------------------------------------------------------------------------------------------------
 
-"""-----------------------------FIN PRODUCTOS-----------------------------"""
 
 
 
@@ -445,7 +416,7 @@ def edit_administrador(documento):
             formulario.direccion.data = obj_admin.direccion
             formulario.contrasena.data = obj_admin.contrasena
             return render_template('superadministrador.html', datosAdministrador = obj_admin, form = formulario, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), opcion = "Editar")
-        return render_template('superadministrador.html', error = "No existe el administrador", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
+        return render_template('superadministrador.html', error = "No existe el usuario", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
     else:
         formulario = FormGestionar(request.form)
         if formulario.validate_on_submit():
@@ -522,7 +493,13 @@ def Buscar_administrador():
                 return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
             return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "No exite el administrador {o}, puede crearlo".format(formBuscar.buscar.data))
         return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "Error en el proceso de busqueda")
-"""------------------------FIN SUPERADMINISTRADOR-------------------------"""
+
+
+
+"""Ruta para todos los comentarios de un producto"""
+@app.route('/comentarios/')
+def todos_los_comentarios():
+    return render_template('todos_los_comentarios.html')
 
 @app.route('/contactos/')
 def contactos():
