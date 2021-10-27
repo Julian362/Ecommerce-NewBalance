@@ -47,8 +47,8 @@ def login():
             if obj_usuario.logear():
                 session.clear()
                 session['user_correo']=obj_usuario.correo
-                # return redirect('/')
-                return redirect(url_for('get_/'))
+                return redirect('/')
+                # return redirect(url_for('get_/'))
         return render_template('login.html', error="Usuario o contraseña invalido",form=FormGestionar())
 
 
@@ -75,24 +75,6 @@ def registro():
             return render_template('registro.html', form=FormGestionar(), error="Algo falló al intentar registrar sus datos, intente nuevamente")
         return render_template('registro.html', form=FormGestionar(), error="Todos los campos son requeridos, verifique los campos e intente nuevamente")
 # ----------------------------------------------------------------------------
-
-
-# ------------------------------PRODUCTO INDIVIDUAL----------------------------------------------
-@app.route('/producto/')
-def productoind():
-    return render_template('Producto_individual.html')
-
-# ----------------------------------------------------------------------------
-
-# -----------------------------------CARRITO-----------------------------------------
-@app.route('/carrito/')
-def carrito():
-    return render_template('Carrito.html')
-
-# ----------------------------------------------------------------------------
-
-
-
 
 @app.route('/producto/<referencia>')
 def productoind(referencia):
