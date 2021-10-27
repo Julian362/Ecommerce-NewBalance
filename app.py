@@ -80,7 +80,7 @@ def registro():
 #codigo David
 @app.route('/producto/<referencia>')
 def productoind(referencia):
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia))
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),tres_registros=calificacion.Tres_comentarios(referencia))
 
 @app.route('/carrito/')
 def carrito():

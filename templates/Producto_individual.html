@@ -129,13 +129,17 @@
   </div>
 
   <div class="Comentarios">
-
-      <h6 style="color: #E74236;"> Opinión </h6>
-    </label>
-    <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lectus
-      eu elit sagittis lobortis. Cras venenatis nisi ac iaculis ultricies. Proin ac orci et augue vestibulum pulvinar
-      nec id justo. Sed lobortis lectus a nibh venenatis sollicitudin. Donec vel lacus sapien. In hac habitasse platea
-      dictumst.</p>
+      {% for item in tres_registros %}
+      <div class="item-comentario ">
+        <div class="datos">
+          <h4>{{ item.nickname}}</h4>
+          <p>Puntuación: {{ item.puntuacion }}</p>
+        </div>
+        <div class="comentario">
+          <p>{{ item.comentario }}</p>
+        </div>
+      </div> 
+      {% endfor %}
     
 
     <button type="button" class="btn btn-outline-one" data-toggle="modal" data-target="#exampleModal"

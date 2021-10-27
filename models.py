@@ -204,7 +204,10 @@ class calificacion:
         sql=' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto = ? ORDER BY id desc;'
         return db.ejecutar_select(sql,[referencia])
 
-
+    @staticmethod
+    def Tres_comentarios(referencia):
+        sql= ' SELECT calificacion.nickname, calificacion.comentario, calificacion.puntuacion, calificacion.referencia_producto FROM calificacion WHERE referencia_producto = "WL574BP2" ORDER BY id desc LIMIT 3;'
+        return db.ejecutar_select(sql,[referencia])
 class gestionAdministrador():
     nombre = ''
     apellido = ''
