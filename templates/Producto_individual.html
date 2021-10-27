@@ -124,42 +124,10 @@
     <br>
     <h2 style="text-align: center;">Opiniones sobre el producto</h2>
     <br>
-<<<<<<< HEAD
-    {% for item in promedio_comentario %}
+    {% for item in promedio_comentarios %}
     <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.promedio }}</h1>
     <h6 style="text-align: center;">Promedio entre {{ lista_comentarios|length }} opiniones</h6>
     {% endfor %}
-=======
-    <h1 style="font-size: 65px; color:#E74236; text-align: center;"> {{promedio}} </h1>
-    <div class="rating">
-      <span class="estrella" id="estrella5">
-        {% if promedio < 5 %}☆
-        {% else %}★
-        {% endif %}
-    </span>
-    <span class="estrella" id="estrella4">
-        {% if promedio  < 4 %}☆
-        {% else %}★
-        {% endif %}
-    </span>
-    <span class="estrella" id="estrella3">
-        {% if promedio < 3 %}☆
-        {% else %}★
-        {% endif %}
-    </span>
-    <span class="estrella" id="estrella2">
-        {% if promedio  < 2 %}☆
-        {% else %}★
-        {% endif %}
-    </span>
-    <span class="estrella" id="estrella1">
-        {% if promedio  < 1 %}☆
-        {% else %}★
-        {% endif %}
-    </span>
-    </div>
-    <h6 style="text-align: center;">Promedio entre {{lista_comentarios|length}} opiniones</h6>
->>>>>>> 7df47317d356dd5093b4359406e89bd7a12f1e88
   </div>
 
   <div class="Comentarios">
@@ -167,7 +135,33 @@
     <div class="item-comentario ">
       <div class="datos">
         <h4>{{ item.nickname}}</h4>
-        <p>Puntuación: {{ item.puntuacion }}</p>
+        <div class="rating" style="color:#E74236; font-size: 20px;">
+          <span class="estrella" id="estrella5" >
+            {% if item.puntuacion < 5 %}☆
+            {% else %}★
+            {% endif %}
+        </span>
+        <span class="estrella" id="estrella4">
+            {% if item.puntuacion < 4 %}☆
+            {% else %}★
+            {% endif %}
+        </span>
+        <span class="estrella" id="estrella3">
+            {% if item.puntuacion < 3 %}☆
+            {% else %}★
+            {% endif %}
+        </span>
+        <span class="estrella" id="estrella2">
+            {% if item.puntuacion < 2 %}☆
+            {% else %}★
+            {% endif %}
+        </span>
+        <span class="estrella" id="estrella1">
+            {% if item.puntuacion < 1 %}☆
+            {% else %}★
+            {% endif %}
+        </span>
+        </div>
       </div>
       <div class="comentario">
         <p>{{ item.comentario }}</p>
@@ -205,34 +199,7 @@
                     <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.promedio }}</h1>
                     <h6 style="text-align: center;">Promedio entre {{ lista_comentarios|length }} opiniones</h6>
                     {% endfor %}
-                  <h4>{{promedio}}</h4>
-                  <div class="rating">
-                    <span class="estrella" id="estrella5">
-                      {% if promedio  < 5 %}☆
-                      {% else %}★
-                      {% endif %}
-                  </span>
-                  <span class="estrella" id="estrella4">
-                      {% if promedio < 4 %}☆
-                      {% else %}★
-                      {% endif %}
-                  </span>
-                  <span class="estrella" id="estrella3">
-                      {% if promedio < 3 %}☆
-                      {% else %}★
-                      {% endif %}
-                  </span>
-                  <span class="estrella" id="estrella2">
-                      {% if promedio < 2 %}☆
-                      {% else %}★
-                      {% endif %}
-                  </span>
-                  <span class="estrella" id="estrella1">
-                      {% if promedio < 1 %}☆
-                      {% else %}★
-                      {% endif %}
-                  </span>
-                  </div>
+                  <h4>{{promedio}}</h4>                  
                   <!-- Total de comentarios -->
                   <h5>Promedio entre {{lista_comentarios|length}} opiniones</h5>
                 </div>
@@ -245,8 +212,8 @@
               <div class="item-comentario ">
                 <div class="datos">
                   <h4>{{ item.nickname}}</h4>
-                  <div class="rating">
-                    <span class="estrella" id="estrella5">
+                  <div class="rating" style="color:#E74236; font-size: 20px;">
+                    <span class="estrella" id="estrella5" >
                       {% if item.puntuacion < 5 %}☆
                       {% else %}★
                       {% endif %}
