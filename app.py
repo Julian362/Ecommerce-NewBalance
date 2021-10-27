@@ -367,9 +367,6 @@ def delete_producto(id):
     return render_template('gestion_productos.html',error="No se pudo eliminar al producto "+id,lista_productos=producto.listado(),formBuscar=FormBuscar())
 # ------------------------------------------------------------------------------------------------------
 
-
-
-
 """-----------------INICIO GESTIÓN DE PERFIL (MI CUENTA)------------------"""
 
 
@@ -390,7 +387,7 @@ def gestion_micuenta(documento):
             formulario.departamento.data = obj_usuario.departamento
             formulario.ciudad.data = obj_usuario.ciudad
             formulario.direccion.data = obj_usuario.direccion
-            formulario.contrasena.data = obj_usuario.contrasena
+            formulario.contrasena.data = ""
             formulario.contrasenaNueva.data = ""
             formulario.confirmarContrasenaNueva.data = ""
             return render_template('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, documento=documento)
@@ -417,7 +414,7 @@ def gestion_micuenta(documento):
             return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
     return render_template('gestion_micuenta.html', form=FormMiCuenta())
 
-"""Ruta para la gestión de Superadministrador"""
+"""-----------------INICIO GESTIÓN SUPERADMINISTRADIR------------------"""
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
