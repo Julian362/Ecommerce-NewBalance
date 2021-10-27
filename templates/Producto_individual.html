@@ -169,9 +169,10 @@
               <div class="row resumen">
                 <div class="col puntuacion_promedio">
                   <!-- Puntuación promedio -->
-                  <h4>4.0</h4>
-                  <!-- Total de comentarios -->
-                  <h5>Promedio entre {{ lista_comentarios|length }} opiniones</h5>
+                  {% for item in promedio_comentario %}
+                    <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.promedio }}</h1>
+                    <h6 style="text-align: center;">Promedio entre {{ lista_comentarios|length }} opiniones</h6>
+                    {% endfor %}
                 </div>
               </div>
             </a>

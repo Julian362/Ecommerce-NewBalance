@@ -241,8 +241,26 @@ def lista_de_productos(sexo):
         s="M"
     if sexo=="MUJER":
         s="F"
-    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo)
-
+    return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
+    
+@app.route('/productos/<sexo>/filtros/', methods=["GET", "POST"])
+def filtros_producto(sexo):
+    s=""
+    if sexo=="HOMBRE":
+        s="M"
+    if sexo=="MUJER":
+        s="F"
+    if request.method=="GET":
+        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto())
+        #Método POST
+    else:
+        formulario=FormFiltrarProducto(request.form)
+        if formulario.validate_on_submit():
+            if len(producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data))>0:
+                return render_template('productos.html', lista_productos_totales=producto.filtrar(s, formulario.orden.data, formulario.talla.data, formulario.color.data),sexo=sexo,filtro=FormFiltrarProducto())
+            return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
+            
+        return render_template('productos.html', lista_productos_totales=producto.listado_referencia(s),sexo=sexo,filtro=FormFiltrarProducto(),  error="No hay productos asociados a los filtros requeridos")
 
 # -------------------------------------GESTION PRODUCTOS---------------------------------------------------------
 # Cambia de estado bloqueo STIVEN
