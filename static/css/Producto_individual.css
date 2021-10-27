@@ -15,6 +15,11 @@
     position: absolute;
 }
 
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+
 .vistaspequeñas2{
     height: 120px;
     width: 190px;
