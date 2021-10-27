@@ -25,7 +25,7 @@
                     <!-- <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresa tu email"> -->
                 </div>
                 <div class="mb-3">
-                    {{form.contrasena(class="form-control", id="exampleInputPassword1", placeholder="Ingresa tu contraseña")}}
+                    {{form.contrasena(type="password",class="form-control", id="exampleInputPassword1", placeholder="Ingresa tu contraseña")}}
                     <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu contraseña"> -->
                 </div>
                 <!-- <div class="mb-3 form-check">
@@ -35,7 +35,7 @@
                 <div class="btn-login">
                     {{form.login(id="iniciar", class="btn btn-outline-login")}}
                     <!-- <button id="iniciar" type="submit" class="btn btn-outline-login">Iniciar Sesión</button> -->
-                    <a href="{{url_for('registro')}}" id="registrarse" class="btn btn-outline-login"> Registrate </a>
+                    <a href="{{url_for('registro')}}" id="registrarse" class="btn btn-outline-login"> Regístrate </a>
                 </div>
                 <p><a href="">¿olvidaste tu contraseña?</a></p>
     </form>
