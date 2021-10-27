@@ -4,22 +4,25 @@ from werkzeug.security import generate_password_hash, check_password_hash
 #Clase usuario, para la respectiva pantalla.
 class usuario():
     #Se crean las variables de la clase
+    nombre=''
+    documento=''
     correo=''
     contrasena=''
 
     #Se establece el método constructor
-    def __init__(self,p_correo, p_contrasena):
-
+    def __init__(self,p_nombre,p_documento,p_correo, p_contrasena):
+        self.nombre=p_nombre
+        self.documento=p_documento
         self.correo = p_correo
         self.contrasena =p_contrasena
 
     @classmethod
     def cargar(cls,p_correo):
-        sql="SELECT * FROM persona HWERE correo=?"
+        sql="SELECT * FROM persona WHERE correo=?"
         obj=db.ejecutar_select(sql,[p_correo])
         if obj:
             if len(obj)>0:
-                return cls(obj[0]["correo"],obj[0]["contasena"])
+                return cls(obj[0]["nombre"],obj[0]["documento"],obj[0]["correo"],obj[0]["contrasena"])
         return 
 
 
