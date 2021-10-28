@@ -381,6 +381,23 @@ class producto():
         if obj and obj2:
             if obj > 0 and obj2>0:
                 return True
+    @classmethod
+    def crear_carrito(cls,referencia,documento,talla,color):
+        if not producto.cargar_carrito(documento):
+            create_carrito="INSERT INTO carrito (documento_persona) VALUES ( ? );"
+            obj_create_carrito = db.ejecutar_insert(create_carrito,[documento])
+        select_id="SELECT persona.nombre,carrito.id FROM persona INNER JOIN carrito ON carrito.documento_persona = persona.documento WHERE persona.documento = ?;"
+        obj_select_id= db.ejecutar_select(select_id,[documento])
+        select_producto="SELECT inventario.id,producto.nombre FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE producto.referencia = ? AND inventario.color = ? AND inventario.talla = ?;"
+        obj_select_producto= db.ejecutar_select(select_producto,[referencia, color, talla])
+        if obj_select_producto:
+            insert_producto="INSERT INTO carrito_inventario (id_carrito, id_inventario, cantidad ) VALUES ( ?, ?, ? );"
+            obj_select_producto= db.ejecutar_insert(insert_producto,[obj_select_id[0]["id"],obj_select_producto[0]["id"],1])
+        if obj_select_producto:
+            return True
+        else:
+            return False
+
 
     @classmethod
     def delete(cls,id):
@@ -397,8 +414,6 @@ class producto():
     def productoindividual(ref):
         sql= 'select producto.nombre, producto.precio, producto.descripcion, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from producto inner join inventario on inventario.referencia_producto = producto.referencia where producto.referencia = ? ;'
         return db.ejecutar_select(sql,[ref])
-
-    
 
     @staticmethod
     def listado():
@@ -429,8 +444,13 @@ class producto():
     
     @staticmethod
     def cargar_carrito(id):
-        sql = ' SELECT producto.nombre, producto.precio, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from persona inner join carrito on carrito.documento_persona = persona.documento inner join carrito_inventario on carrito_inventario.id_carrito = carrito.id inner join inventario on inventario.id = carrito_inventario.id_inventario inner join producto on inventario.referencia_producto = producto.referencia where persona.documento = ? ;'
+        sql = ' SELECT inventario.id as idv ,carrito.id,producto.nombre, producto.precio, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from persona inner join carrito on carrito.documento_persona = persona.documento inner join carrito_inventario on carrito_inventario.id_carrito = carrito.id inner join inventario on inventario.id = carrito_inventario.id_inventario inner join producto on inventario.referencia_producto = producto.referencia where persona.documento = ? ;'
         return db.ejecutar_select(sql, [id])
+    @staticmethod
+    def borrar_carrito(id):
+        sql = 'delete from carrito_inventario where id_inventario = ? ;'
+        return db.ejecutar_insert(sql, [id])
+
 
 class gestionMiCuenta():
     nombre = ''
