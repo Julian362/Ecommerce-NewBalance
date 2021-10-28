@@ -42,7 +42,7 @@ def login():
         formulario=FormGestionar(request.form)
         # obj_usuario = persona(formulario.correo.data,formulario.contrasena.data)
         # obj_usuario = persona('','','','',request.form['correo'],'','','','','','',request.form['contrasena'],'','',)
-        obj_usuario = usuario('','',formulario.correo.data, formulario.contrasena.data)
+        obj_usuario = usuario('','',formulario.correo.data, formulario.contrasena.data,'')
         if not obj_usuario.correo.__contains__("'") and not obj_usuario.contrasena.__contains__("'"):
             if obj_usuario.logear():
                 session.clear()
@@ -88,7 +88,8 @@ def productoind(referencia):
     lista_califiacion=calificacion.todos_los_comentarios(referencia)
     for i in lista_califiacion:
         acumulador+=i['puntuacion']
-    promedio=acumulador/len(lista_califiacion)
+    if len(lista_califiacion)>0:
+        promedio=acumulador/len(lista_califiacion)
     return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia), filtro=FormFiltrarProducto())
 
 @app.route('/carrito/<documento>')
@@ -99,19 +100,21 @@ def carrito(documento):
         total += i["precio"]
     return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
 
-# @app.route('',methods="POST")
-# def agregar_carrito(documento):
-#     if request.method == "POST":
-#         Lista_Carrito=producto.cargar_carrito(documento)
-#         total = 0
-#         if Lista_Carrito:
-            
-#         for i in Lista_Carrito:
-#             total += i["precio"]
-#         return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
+@app.route('/<documento>-<referencia>',methods=["POST"])
+def agregar_carrito(documento,referencia):
+    if request.method == "POST":
+        form = FormFiltrarProducto(request.form)
+        if producto.crear_carrito(referencia,documento,form.talla.data,form.color.data):
+            return redirect(url_for('productoind',referencia=referencia))
+        return redirect(url_for('productoind',referencia=referencia))
+
+@app.route('/<id>--<documento>',methods=["POST"])
+def borrar_producto_carrito(id,documento):
+    if request.method == "POST":
+        producto.borrar_carrito(id)
+        return redirect(url_for('carrito',documento=documento))
 
 """-----------------------------INICIO COMENTARIO-----------------------------"""
-
 
 @app.route('/comentario/gestionar/crear/<referencia>-<puntuacion>-<documento>', methods=["GET", "POST"])
 def crear_comentario(referencia,puntuacion,documento):
@@ -124,7 +127,7 @@ def crear_comentario(referencia,puntuacion,documento):
         obj_calificacion = calificacion("",puntuacion,form.comentario.data,referencia,persona.cargar("user",documento).nickname,documento)
         if form.validate_on_submit():
             if obj_calificacion.crear():
-                return redirect(url_for('editar_comentario',referencia=referencia,puntuacion=puntuacion,documento=documento))
+                return redirect(url_for('productoind',referencia=referencia))
             return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo crear el comentario ")
         return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo validar el crear el comentario ")
 
@@ -181,7 +184,7 @@ def edit_usuario(documento):
             formulario.pais.data = obj_usuario.pais
             formulario.departamento.data = obj_usuario.departamento
             formulario.ciudad.data = obj_usuario.ciudad
-            formulario.contrasena.data = obj_usuario.contrasena
+            formulario.contrasena.data = ""
             return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar", form=formulario, formBuscar=FormBuscar())
         return render_template('administrador.html',error="No existe el usuario",lista_usuarios=persona.listado("user"), formBuscar=FormBuscar())
     else:
@@ -190,7 +193,7 @@ def edit_usuario(documento):
             obj_usuario = persona.editar(documento,formulario.nickname.data,formulario.nombre.data,formulario.apellidos.data,formulario.correo.data,formulario.telefono.data,formulario.sexo.data,formulario.direccion.data,formulario.pais.data,formulario.departamento.data,formulario.ciudad.data,formulario.contrasena.data,"user")
             if obj_usuario:
                 obj_usuario= obj_usuario =persona.cargar("user",documento)
-                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Editado correctamente", formBuscar=FormBuscar())
+                return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Se han editado los datos del ususario {0} {1} correctamente".format(formulario.nombre.data, formulario.apellidos.data), formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Verifique los datos ingresados",form=FormGestionar(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/buscar', methods=["GET", "POST"])
@@ -229,7 +232,7 @@ def crear_usuario():
             obj_usuario = persona(formulario.documento.data, formulario.nickname.data,formulario.nombre.data, formulario.apellidos.data, formulario.correo.data, formulario.telefono.data, formulario.sexo.data, formulario.direccion.data, formulario.pais.data, formulario.departamento.data, formulario.ciudad.data, formulario.contrasena.data, "user", "T")
             if obj_usuario.crear():
                 return render_template('administrador.html',usuario=obj_usuario,lista_usuarios=persona.listado("user"), opcion="Editar",form=FormGestionar(), mensaje="Creado correctamente el usuario "+ formulario.nickname.data, formBuscar=FormBuscar())
-            return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="El usuario on documento "+formulario.documento.data +" ya existe, o ingreso un campo erroneo",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
+            return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="El usuario con documento "+formulario.documento.data +" ya existe, o ingresó un campo erroneo",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
         return render_template('administrador.html',lista_usuarios=persona.listado("user"), error="Error en el proceso de crear usuario, valide los campos ingresados",opcion="Editar",form=FormGestionar(), formBuscar=FormBuscar())
 
 @app.route('/administrador/gestionar/Delete/<documento>')
@@ -299,22 +302,13 @@ def buscar_gestionproductos():
         return render_template('gestion_productos.html',lista_productos=producto.listado(), opcion="Editar", form=FormGestionProducto(), formBuscar=FormBuscar())
     else:
         form = FormBuscar(request.form)
-        formulario = FormGestionProducto()
-        if form.validate_on_submit() or formulario.validate_on_submit():
-            obj_producto = producto.cargar(form.buscar.data)
+        if form.validate_on_submit():
+            obj_producto = producto.listado_buscarp(form.buscar.data)
             if obj_producto:
-                formulario.nombre.data = obj_producto.nombre
-                formulario.referencia.data = obj_producto.referencia
-                formulario.talla.data = obj_producto.talla
-                formulario.precio.data = obj_producto.precio
-                formulario.cantidad.data = obj_producto.cantidad
-                formulario.descuento.data = obj_producto.descuento
-                formulario.color.data = obj_producto.color
-                formulario.descripcion.data = obj_producto.descripcion
-                formulario.sexo.data = obj_producto.sexo
-                return render_template('gestion_productos.html',producto=obj_producto,lista_productos=producto.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
-            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="No existe el producto, puede crearlo",opcion="crear",form=FormGestionProducto(), formBuscar=FormBuscar())
-        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de buscar producto",opcion="Crear",form=FormGestionProducto(), formBuscar=FormBuscar())
+                return render_template('gestion_productos.html',lista_productos=obj_producto,  formBuscar=FormBuscar())
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="No existe el producto, puede crearlo", formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de buscar producto", formBuscar=FormBuscar())
+
 
 
 
@@ -383,8 +377,6 @@ def delete_producto(id):
 # ------------------------------------------------------------------------------------------------------
 
 """-----------------INICIO GESTIÓN DE PERFIL (MI CUENTA)------------------"""
-
-
 @app.route('/gestion/micuenta/<documento>', methods = ["GET", "POST"])
 def gestion_micuenta(documento):
     if request.method == "GET":
@@ -411,25 +403,35 @@ def gestion_micuenta(documento):
         formulario = FormMiCuenta (request.form)
         if formulario.validate_on_submit:
             obj_usuario = gestionMiCuenta.cargar_datos(documento)
+            
             if obj_usuario:
-                obj_usuario.nombre = formulario.nombre.data
-                obj_usuario.apellido = formulario.apellidos.data
-                obj_usuario.documento = formulario.documento.data
-                obj_usuario.sexo = formulario.sexo.data
-                obj_usuario.nickname = formulario.nickname.data
-                obj_usuario.telefono = formulario.telefono.data
-                obj_usuario.correo = formulario.correo.data
-                obj_usuario.pais = formulario.pais.data
-                obj_usuario.departamento = formulario.departamento.data
-                obj_usuario.ciudad = formulario.ciudad.data
-                obj_usuario.direccion = formulario.direccion.data
-                obj_usuario.contrasena = formulario.contrasenaNueva.data
-                obj_usuario.editar_datos()
-                return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, mensaje = "Se han editado correctamente los datos")
+
+                obj_logear= usuario(formulario.nickname.data, formulario.documento.data, formulario.correo.data, formulario.contrasena.data)
+                if obj_logear.logear():
+
+                    obj_usuario.nombre = formulario.nombre.data
+                    obj_usuario.apellido = formulario.apellidos.data
+                    obj_usuario.documento = formulario.documento.data
+                    obj_usuario.sexo = formulario.sexo.data
+                    obj_usuario.nickname = formulario.nickname.data
+                    obj_usuario.telefono = formulario.telefono.data
+                    obj_usuario.correo = formulario.correo.data
+                    obj_usuario.pais = formulario.pais.data
+                    obj_usuario.departamento = formulario.departamento.data
+                    obj_usuario.ciudad = formulario.ciudad.data
+                    obj_usuario.direccion = formulario.direccion.data
+                    if len(formulario.contrasenaNueva.data)>0:
+                        obj_usuario.contrasena = formulario.contrasenaNueva.data
+                    else:
+                        obj_usuario.contrasena = formulario.contrasena.data
+                    obj_usuario.editar_datos()
+                    return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, mensaje = "Se han editado correctamente los datos")
+
             return render_template ('gestion_micuenta.html', datosUsuario = obj_usuario, form = formulario, error = "Error en el proceso de edición de los datos")
+
     return render_template('gestion_micuenta.html', form=FormMiCuenta())
 
-"""-----------------INICIO GESTIÓN SUPERADMINISTRADIR------------------"""
+"""-----------------INICIO GESTIÓN SUPERADMINISTRADOR------------------"""
 @app.route('/superadministrador/')
 def superadministrador():
     return render_template('superadministrador.html', formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador())
@@ -451,9 +453,8 @@ def edit_administrador(documento):
             formulario.departamento.data = obj_admin.departamento
             formulario.ciudad.data = obj_admin.ciudad
             formulario.direccion.data = obj_admin.direccion
-            formulario.contrasena.data = obj_admin.contrasena
-            formulario.confirmarcontrasena.data = obj_admin.contrasena
-            
+            formulario.contrasena.data = ""
+            formulario.confirmarcontrasena.data = ""
             return render_template('superadministrador.html', datosAdministrador = obj_admin, form = formulario, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), opcion = "Editar")
         return render_template('superadministrador.html', error = "No existe el usuario", formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador())
     else:
@@ -472,10 +473,9 @@ def edit_administrador(documento):
                 obj_admin.ciudad = formulario.ciudad.data
                 obj_admin.direccion = formulario.direccion.data 
                 obj_admin.contrasena = formulario.contrasena.data
-                
                 obj_admin.editar_datos()
-                return render_template('superadministrador.html', datosAdministrador = obj_admin, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), mensaje = "Se han editado los datos del administrador {0} correctamente".format(documento), opcion = "Editar")
-        return render_template('superadministrador.html', form = FormGestionar(), formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), error = "Error en el proceso de editar usuario")
+                return render_template('superadministrador.html', datosAdministrador = obj_admin, formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), mensaje = "Se han editado los datos del administrador {0} {1} correctamente".format(formulario.nombre.data, formulario.apellidos.data), opcion = "Editar")
+        return render_template('superadministrador.html', form = FormGestionar(), formBuscar = FormBuscarAdministrador(), listaAdmin = gestionAdministrador.listado_administrador(), error = "Verifique los datos ingresados")
 
 @app.route('/superadministrador/crear/', methods = ["GET", "POST"])
 def crear_administrador():
@@ -487,7 +487,7 @@ def crear_administrador():
         if formulario.validate_on_submit():
             obj_admin = gestionAdministrador(formulario.nombre.data, formulario.apellidos.data, formulario.documento.data, formulario.sexo.data, formulario.nickname.data, formulario.telefono.data, formulario.correo.data, formulario.pais.data, formulario.departamento.data, formulario.ciudad.data, formulario.direccion.data, formulario.contrasena.data, "admin", "T")
             if (obj_admin.crear_admin()):
-                return render_template('superadministrador.html', mensaje = "Se ha creado correctamente el administrador {0}".format(formulario.documento.data), listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador(), opcion="Editar", datosAdministrador = obj_admin, form = FormGestionar())
+                return render_template('superadministrador.html', mensaje = "Se ha creado correctamente el administrador {0} {1} correctamente".format(formulario.nombre.data, formulario.apellidos.data), listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador(), opcion="Editar", datosAdministrador = obj_admin, form = FormGestionar())
         return render_template('superadministrador.html', error = "Error en el proceso de creación del administrador",form = FormGestionar(), listaAdmin = gestionAdministrador.listado_administrador(), formBuscar = FormBuscarAdministrador(), opcion = "Crear")
 
 @app.route('/superadministrador/eliminar/<documento>')
@@ -528,7 +528,7 @@ def Buscar_administrador():
                 formulario.departamento.data = obj_admin.departamento
                 formulario.ciudad.data = obj_admin.ciudad
                 formulario.direccion.data = obj_admin.direccion
-                formulario.contrasena.data = obj_admin.contrasena
+                formulario.contrasena.data = ""
                 return render_template('superadministrador.html', datosAdministrador=obj_admin, form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Editar")
             return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "No exite el administrador {o}, puede crearlo".format(formBuscar.buscar.data))
         return render_template('superadministrador.html', form=formulario, formBuscar=FormBuscarAdministrador(), listaAdmin=gestionAdministrador.listado_administrador(), opcion="Crear", error = "Error en el proceso de busqueda")
