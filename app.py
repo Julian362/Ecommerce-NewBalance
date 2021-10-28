@@ -88,7 +88,8 @@ def productoind(referencia):
     lista_califiacion=calificacion.todos_los_comentarios(referencia)
     for i in lista_califiacion:
         acumulador+=i['puntuacion']
-    promedio=acumulador/len(lista_califiacion)
+    if len(lista_califiacion)>0:
+        promedio=acumulador/len(lista_califiacion)
     return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia))
 
 @app.route('/carrito/')
@@ -284,22 +285,13 @@ def buscar_gestionproductos():
         return render_template('gestion_productos.html',lista_productos=producto.listado(), opcion="Editar", form=FormGestionProducto(), formBuscar=FormBuscar())
     else:
         form = FormBuscar(request.form)
-        formulario = FormGestionProducto()
-        if form.validate_on_submit() or formulario.validate_on_submit():
-            obj_producto = producto.cargar(form.buscar.data)
+        if form.validate_on_submit():
+            obj_producto = producto.listado_buscarp(form.buscar.data)
             if obj_producto:
-                formulario.nombre.data = obj_producto.nombre
-                formulario.referencia.data = obj_producto.referencia
-                formulario.talla.data = obj_producto.talla
-                formulario.precio.data = obj_producto.precio
-                formulario.cantidad.data = obj_producto.cantidad
-                formulario.descuento.data = obj_producto.descuento
-                formulario.color.data = obj_producto.color
-                formulario.descripcion.data = obj_producto.descripcion
-                formulario.sexo.data = obj_producto.sexo
-                return render_template('gestion_productos.html',producto=obj_producto,lista_productos=producto.listado(), opcion="Editar",form=formulario, formBuscar=FormBuscar())
-            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="No existe el producto, puede crearlo",opcion="crear",form=FormGestionProducto(), formBuscar=FormBuscar())
-        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de buscar producto",opcion="Crear",form=FormGestionProducto(), formBuscar=FormBuscar())
+                return render_template('gestion_productos.html',lista_productos=obj_producto,  formBuscar=FormBuscar())
+            return render_template('gestion_productos.html',lista_productos=producto.listado(), error="No existe el producto, puede crearlo", formBuscar=FormBuscar())
+        return render_template('gestion_productos.html',lista_productos=producto.listado(), error="Error en el proceso de buscar producto", formBuscar=FormBuscar())
+
 
 
 
