@@ -25,8 +25,7 @@ class FormGestionar(FlaskForm):
     editar = SubmitField('Editar')
     crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
-    """ contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
-    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)]) """
+    
 
 class FormBuscar(FlaskForm):
     buscar = StringField('buscar')
@@ -60,6 +59,8 @@ class FormFiltrarProducto(FlaskForm):
     talla = SelectField(u'talla', choices=[('0','Seleccionar talla'),('35', '35'), ('35.5', '35.5'),('36', '36'),('36.5', '36.5'),('37', '37'),('37.5', '37.5'),('38', '38'),('38.5', '38.5'),('39', '39'),('39.5', '39.5'),('40', '40'),('40.5', '40.5'),('41', '41'),('41.5', '41.5')])
     
     color = SelectField(u'color', choices=[('0', 'Seleccionar color'),('negro', 'Negro'), ('naranja', 'Naranja'),('amarillo', 'Amarillo'),('azul', 'Azul'),('rojo', 'Rojo'),('café', 'Café'),('gris', 'Gris'),('rosa', 'Rosa'),('verde', 'Verde'),('blanco', 'Blanco'),('multicolor', 'Multicolor')])
+    
+    unidad = SelectField(u'unidad', choices=[('0','Seleccionar unidad'),('1','1'), ( '2','2'), ( '3','3'), ( '4','4')])
 
 class FormMiCuenta(FlaskForm):
     nombre = StringField('Nombre',validators=[validators.required()])
@@ -75,6 +76,6 @@ class FormMiCuenta(FlaskForm):
     departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
     ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
     direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
-    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
-    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)])
+    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.length(max=150)])
+    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.length(max=150)])
     guardarCambios = SubmitField('Guardar cambios')

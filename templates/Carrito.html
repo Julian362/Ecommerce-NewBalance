@@ -11,78 +11,38 @@
         <span class="material-icons-outlined" id="IconoCarrito">shopping_cart</span> <h2> CARRITO DE COMPRA </h2>
     </div>
     <div class="ContenedorProductos">
+        {% if Lista_Carrito %}
+        {% for item in Lista_Carrito %}
         <div class="ProductoSeleccionado">
             <div class="row">
                 <div class="col-3">
-                    <img src="{{ url_for('static',filename='imagenes/Producto_Zapatillas/M680LR7_1.jpg') }}">
+                    <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}">
                 </div>
                 <div class="col-9">
                     <br>
                     <ul>
-                        <li><strong> Nombre del producto: </strong></li>
-                        <li><strong> Detalles: </strong></li>
-                        <li><strong> Talla: </strong></li>
-                        <li><strong>  Precio: </strong></li>
+                        <li><strong> Nombre del producto: {{ item.nombre }} </strong></li>
+                        <li><strong> Color: {{ item.color }}</strong></li>
+                        <li><strong> Talla: {{ item.talla }}</strong></li>
+                        <li><strong>  Precio: $ {{ item.precio }}</strong></li>
                     </ul>
                     <div class="row">
                         <div class="col">
-                            <select class="custom-select custom-select-sm Numero">
-                                <option selected>Seleccionar unidades</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>    
+                            {{ filtro.unidad(class="form-control mb-1 casillas") }}
                         </div>
                         <div class="col">
-                            <button class="eliminar">Quitar</button> 
+                            <button class="btn btn-outline-one">Quitar</button> 
                         </div>
                         <div class="col">
-                            <h6 class="valor">Subtotal=$60.000</h6>
+                            <h6 class="valor">Subtotal=$ {{item.precio}}</h6>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div> 
         <br><br>
-
-        <div class="ProductoSeleccionado">
-            <div class="row">
-                <div class="col-3">
-                    <img src="{{ url_for('static',filename='imagenes/Producto_Zapatillas/ML574PU2_1.jpg') }}">
-                </div>
-                <div class="col-9">
-                    <br>
-                    <ul>
-                        <li><strong> Nombre del producto: </strong></li>
-                        <li><strong> Detalles: </strong></li>
-                        <li><strong> Talla: </strong></li>
-                        <li><strong>  Precio: </strong></li>
-                    </ul>
-                    <div class="row">
-                        <div class="col">
-                            <select class="custom-select custom-select-sm Numero">
-                                <option selected>Seleccionar unidades</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>    
-                        </div>
-                        <div class="col">
-                            <button class="eliminar">Quitar</button> 
-                        </div>
-                        <div class="col">
-                            <h6 class="valor">Subtotal=$80.000</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br><br>      
-
+        {% endfor %}
+        {% endif %}
     </div>
 
     <div class="Titulo2">
@@ -90,12 +50,10 @@
     </div>
 
     <div class="Pagototal">
-        <h6 class="valortotal">Total=$140.000</h6>
-        <button class="btnvtotal" id="CtnCompra"><strong> CONTINUAR </strong></button>
-        <button class="btnvtotal" id="SgrComprando"><strong> SEGUIR COMPRANDO </strong></button>
-        
+        <h6 class="valortotal">Total=$ {{ total }}</h6>
+        <button class="btn btn-outline-one btnvtotal"><strong> CONTINUAR </strong></button>
+        <button class="btn btn-outline-one btnvtotal"><strong> SEGUIR COMPRANDO </strong></button>        
     </div>
-
 </div>
 
 {% endblock %}

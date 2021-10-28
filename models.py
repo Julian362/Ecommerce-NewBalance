@@ -8,13 +8,15 @@ class usuario():
     documento=''
     correo=''
     contrasena=''
+    tipo_rol=''
 
     #Se establece el método constructor
-    def __init__(self,p_nickname,p_documento,p_correo, p_contrasena):
+    def __init__(self,p_nickname,p_documento,p_correo, p_contrasena, p_tipo_rol):
         self.nickname=p_nickname
         self.documento=p_documento
         self.correo = p_correo
         self.contrasena =p_contrasena
+        self.tipo_rol= p_tipo_rol
 
     @classmethod
     def cargar(cls,p_correo):
@@ -22,8 +24,8 @@ class usuario():
         obj=db.ejecutar_select(sql,[p_correo])
         if obj:
             if len(obj)>0:
-                return cls(obj[0]["nickname"],obj[0]["documento"],obj[0]["correo"],obj[0]["contrasena"])
-        return 
+                return cls(obj[0]["nickname"], obj[0]["documento"], obj[0]["correo"], obj[0]["contrasena"], obj[0]["tipo_rol"]) 
+        return None
 
 
     def logear(self):
@@ -127,7 +129,8 @@ class persona():
     @classmethod
     def editar(cls,documento,nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,rol):
         sql="UPDATE persona set nickname=?,nombre=?,apellidos=?,correo=?,telefono=?,sexo=?,direccion=?,pais=?,departamento=?,ciudad=?,contrasena=?,tipo_rol=? WHERE documento=?"
-        obj = db.ejecutar_insert(sql,[nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,rol,documento])
+        hashed_contrena=generate_password_hash(contrasena, method='pbkdf2:sha256',salt_length=40)
+        obj = db.ejecutar_insert(sql,[nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,hashed_contrena,rol,documento])
         if obj:
             if obj > 0:
                 return True
@@ -135,7 +138,8 @@ class persona():
     #Función para crear al usuario
     def crear(self):
         sql="INSERT INTO persona (documento,nickname,nombre,apellidos,correo,telefono,sexo,direccion,pais,departamento,ciudad,contrasena,tipo_rol,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
-        obj = db.ejecutar_insert(sql,[self.documento,self.nickname,self.nombre,self.apellidos,self.correo,self.telefono,self.sexo,self.direccion,self.pais,self.departamento,self.ciudad,self.contrasena,self.estado])
+        hashed_contrena=generate_password_hash(self.contrasena, method='pbkdf2:sha256',salt_length=40)
+        obj = db.ejecutar_insert(sql,[self.documento,self.nickname,self.nombre,self.apellidos,self.correo,self.telefono,self.sexo,self.direccion,self.pais,self.departamento,self.ciudad,hashed_contrena,self.tipo_rol,self.estado])
         if obj:
             if obj > 0:
                 return True
@@ -258,7 +262,8 @@ class gestionAdministrador():
     
     def editar_datos(self):
         sql = "UPDATE persona SET nickname = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, sexo = ?, direccion = ?, pais = ?, departamento = ?, ciudad = ?, contrasena = ?, tipo_rol = ?, estado = ? WHERE documento = ? AND tipo_rol = 'admin';"
-        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado, self.documento])
+        hashed_contrena=generate_password_hash(self.contrasena, method='pbkdf2:sha256',salt_length=40)
+        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, hashed_contrena, self.tipo_rol, self.estado, self.documento])
         if obj:
             if obj > 0:
                 return True
@@ -266,7 +271,8 @@ class gestionAdministrador():
 
     def crear_admin(self):
         sql="INSERT INTO persona (documento, nickname, nombre, apellidos, correo, telefono, sexo, direccion, pais, departamento, ciudad, contrasena, tipo_rol, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-        obj = db.ejecutar_insert(sql, [self.documento, self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado])
+        hashed_contrena=generate_password_hash(self.contrasena, method='pbkdf2:sha256',salt_length=40)
+        obj = db.ejecutar_insert(sql, [self.documento, self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, hashed_contrena, self.tipo_rol, self.estado])
         if obj:
             if obj > 0:
                 return True
@@ -406,7 +412,7 @@ class producto():
     def listado():
         sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla,inventario.color   from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
         return db.ejecutar_select(sql, None)
-
+    
     @staticmethod
     def listado_buscarp(referencia):
         sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla,inventario.color   from producto inner join inventario on inventario.referencia_producto=producto.referencia where producto.referencia=? order by nombre asc;'
@@ -435,6 +441,11 @@ class producto():
         else:
             sql = 'SELECT inventario.id,producto.estado, producto.nombre,  producto.precio, inventario.referencia_producto AS referencia, inventario.cantidad, inventario.talla, inventario.color FROM producto INNER JOIN inventario ON inventario.referencia_producto = producto.referencia WHERE inventario.sexo = ? AND CASE WHEN "0" = ? then 1=1 else inventario.color = ? END AND CASE  WHEN "0" = ? then 1=1 else inventario.talla = ? END group by referencia ORDER BY producto.nombre;'
             return db.ejecutar_select(sql,[sexo, color ,color,talla,talla])
+    
+    @staticmethod
+    def cargar_carrito(id):
+        sql = ' SELECT producto.nombre, producto.precio, producto.referencia, inventario.talla, inventario.color, inventario.cantidad from persona inner join carrito on carrito.documento_persona = persona.documento inner join carrito_inventario on carrito_inventario.id_carrito = carrito.id inner join inventario on inventario.id = carrito_inventario.id_inventario inner join producto on inventario.referencia_producto = producto.referencia where persona.documento = ? ;'
+        return db.ejecutar_select(sql, [id])
 
 class gestionMiCuenta():
     nombre = ''
@@ -479,9 +490,9 @@ class gestionMiCuenta():
     
     def editar_datos(self):
         sql = "UPDATE persona SET nickname = ?, nombre = ?, apellidos = ?, correo = ?, telefono = ?, sexo = ?, direccion = ?, pais = ?, departamento = ?, ciudad = ?, contrasena = ?, tipo_rol = ?, estado = ? WHERE documento = ? AND tipo_rol = 'user';"
-        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, self.contrasena, self.tipo_rol, self.estado, self.documento])
+        hashed_contrena=generate_password_hash(self.contrasena, method='pbkdf2:sha256',salt_length=40)
+        obj = db.ejecutar_insert(sql, [self.nickname, self.nombre, self.apellido, self.correo, self.telefono, self.sexo, self.direccion, self.pais, self.departamento, self.ciudad, hashed_contrena, self.tipo_rol, self.estado, self.documento])
         if obj:
             if obj > 0:
                 return True
         return False
- 

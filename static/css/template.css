@@ -192,4 +192,13 @@ input:focus {
     margin: auto;
 }
 
+.menudes{
+    padding: 0px 15px;
+    text-decoration: none !important;
+    text-align: center;
+    justify-content: center;
+}
 
+.dropdown-menu a {
+    font-size: 15px !important;
+}

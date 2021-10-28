@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block contenido %} 
-    <h1 style="text-align: center; margin-top: 10px; margin-bottom: 20px;">GESTIÓN ADMINISTRATIVA</h1>
+    <div class="titulo-gestionar-usuario">
+        <span class="material-icons-outlined md-40">account_circle</span>
+        <h1 style="text-align: center;">GESTIÓN ADMINISTRATIVA</h1>
+    </div>
+
     {% if formBuscar %}
     <form action="{{ url_for('Buscar_administrador') }}" method="POST" class="form-inline" style="margin: auto; width: 65%;">
         {{ formBuscar.hidden_tag() }}
