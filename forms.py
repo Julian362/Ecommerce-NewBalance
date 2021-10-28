@@ -25,8 +25,7 @@ class FormGestionar(FlaskForm):
     editar = SubmitField('Editar')
     crear = SubmitField ('Crear')
     login = SubmitField('Iniciar sesión')
-    """ contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
-    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)]) """
+    
 
 class FormBuscar(FlaskForm):
     buscar = StringField('buscar')
@@ -75,6 +74,6 @@ class FormMiCuenta(FlaskForm):
     departamento = StringField('Departamento', validators=[validators.required(),validators.length(max=50)])
     ciudad = StringField('Ciudad', validators=[validators.required(),validators.length(max=50)])
     direccion = StringField('Dirección', validators=[validators.required(),validators.length(max=200)])
-    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.required(),validators.length(max=150)])
-    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.required(),validators.length(max=150)])
+    contrasenaNueva = StringField('Nueva contraseña', validators=[validators.length(max=150)])
+    confirmarContrasenaNueva = StringField('Confirmar contraseña"', validators=[validators.length(max=150)])
     guardarCambios = SubmitField('Guardar cambios')

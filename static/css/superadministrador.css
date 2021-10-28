@@ -121,3 +121,14 @@
     background: #a90b0b;
     margin: auto;
 }
+
+.titulo-gestionar-usuario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
