@@ -366,14 +366,15 @@ class producto():
         return None
     
     @classmethod
-    def cargar(cls,id):
-        sql = 'select producto.nombre, producto.referencia, inventario.talla, producto.precio, inventario.cantidad, producto.descuento, inventario.color, producto.descripcion, inventario.sexo from producto inner join inventario on inventario.referencia_producto=producto.referencia WHERE id= ?;'
+    def cargarProducto(cls,id):
+        sql = 'select producto.nombre, producto.referencia, inventario.talla, producto.precio, inventario.cantidad, producto.descuento, inventario.color, producto.descripcion, inventario.sexo from producto inner join inventario on inventario.referencia_producto=producto.referencia where referencia = ?;'
         obj = db.ejecutar_select(sql,[id])
         if obj:
             if len(obj)>0:
                 # orden del constructor
                 return cls(id,obj[0]["nombre"],obj[0]["referencia"],obj[0]["talla"], obj[0]["precio"], obj[0]["cantidad"], obj[0]["descuento"], obj[0]["color"], obj[0]["descripcion"], obj[0]["sexo"])
         return None
+
 
 
 
@@ -411,6 +412,11 @@ class producto():
     @staticmethod
     def listado():
         sql = 'select inventario.id, producto.estado, producto.nombre, producto.precio, inventario.referencia_producto as referencia, inventario.cantidad, inventario.talla,inventario.color   from producto inner join inventario on inventario.referencia_producto=producto.referencia  order by nombre asc;'
+        return db.ejecutar_select(sql, None)
+           
+    @staticmethod
+    def listado_searchs():
+        sql = 'select  producto.referencia from producto order by nombre desc;'
         return db.ejecutar_select(sql, None)
     
     @staticmethod

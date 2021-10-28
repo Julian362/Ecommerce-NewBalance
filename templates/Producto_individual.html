@@ -61,7 +61,7 @@
     <br><br>
 
     {% if g.user %}
-    <a href="{{ url_for('agregar_carrito', documento=g.documento) }}" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
+    <a href="{{ url_for('agregar_carrito', documento=g.user.documento) }}" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
     {% else %}
     <a href="{{ url_for('login') }}" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
     {% endif %}

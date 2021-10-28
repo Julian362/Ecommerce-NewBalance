@@ -41,11 +41,29 @@
           <strong><a class="nav-link" href="{{url_for('contactos') }}">CONTACTOS</a></strong>
         </li>
       </ul>
-      <form id=" " class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" style="width: 20rem;" type="search" placeholder="Buscar"
-          aria-label="Search">
-        <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
-      </form>
+
+
+
+      <div class="dropdown show">
+        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Buscar Productos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <p><label><input type="text" name="nombremascota" list="listamascotas"></label></p>
+          <datalist id="listamascotas">
+            <select name="nombremascota">
+              {% for item in lista_productosSer %}
+              <option>{{ item.referencia}}</option>
+              {% endfor %}
+            </select>
+            </label>
+          </datalist>
+        </div>
+      </div>
+
+
+
       {% if g.user.tipo_rol == 'user'%}
       <a class="cuenta" href="{{url_for ('gestion_micuenta',documento=g.user.documento)}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
@@ -55,12 +73,13 @@
         <span class="material-icons-outlined icono-cuenta">logout</span>
         <span>Salir</span>
       </a>
-      <a href="{{url_for('carrito') }}" style="padding-top: 6px;"><span
-        class="material-icons-outlined">shopping_cart</span>
+      <a href="{{url_for('carrito',documento=g.user.documento) }}" style="padding-top: 6px;"><span
+          class="material-icons-outlined">shopping_cart</span>
       </a>
       {% elif g.user.tipo_rol == 'admin' %}
       <div class="dropdown show">
-        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Administrador
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -74,7 +93,8 @@
       </a>
       {% elif g.user.tipo_rol == 'super' %}
       <div class="dropdown show">
-        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Superadministrador
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -92,7 +112,7 @@
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
         <span>Mi cuenta</span>
       </a>
-      {% endif %}    
+      {% endif %}
     </div>
   </nav>
 
