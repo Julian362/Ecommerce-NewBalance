@@ -46,11 +46,43 @@
           aria-label="Search">
         <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
       </form>
-      {% if g.user %}
+      {% if g.user.tipo_rol == 'user'%}
       <a class="cuenta" href="{{url_for ('gestion_micuenta',documento=g.user.documento)}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
         <span>{{g.user.nickname}}</span>
       </a>
+      <a class="cuenta" href="{{url_for ('logout')}}">
+        <span class="material-icons-outlined icono-cuenta">logout</span>
+        <span>Salir</span>
+      </a>
+      <a href="{{url_for('carrito') }}" style="padding-top: 6px;"><span
+        class="material-icons-outlined">shopping_cart</span>
+      </a>
+      {% elif g.user.tipo_rol == 'admin' %}
+      <div class="dropdown show">
+        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Administrador
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{{url_for ('administrador')}}">Gestión Usuarios</a>
+          <a class="dropdown-item" href="{{url_for ('gestion_productos')}}">Gestión Productos</a>
+        </div>
+      </div>
+      <a class="cuenta" href="{{url_for ('logout')}}">
+        <span class="material-icons-outlined icono-cuenta">logout</span>
+        <span>Salir</span>
+      </a>
+      {% elif g.user.tipo_rol == 'super' %}
+      <div class="dropdown show">
+        <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Superadministrador
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{{url_for ('administrador')}}">Gestión Usuarios</a>
+          <a class="dropdown-item" href="{{url_for ('superadministrador')}}">Gestión Administradores</a>
+          <a class="dropdown-item" href="{{url_for ('gestion_productos')}}">Gestión Productos</a>
+        </div>
+      </div>
       <a class="cuenta" href="{{url_for ('logout')}}">
         <span class="material-icons-outlined icono-cuenta">logout</span>
         <span>Salir</span>
@@ -60,9 +92,7 @@
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
         <span>Mi cuenta</span>
       </a>
-      {% endif %}
-      <a href="{{url_for('carrito',documento=g.user.documento) }}" style="padding-top: 6px;"><span
-          class="material-icons-outlined">shopping_cart</span></a>
+      {% endif %}    
     </div>
   </nav>
 
