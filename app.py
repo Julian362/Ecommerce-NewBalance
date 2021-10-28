@@ -99,6 +99,17 @@ def carrito(documento):
         total += i["precio"]
     return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
 
+# @app.route('',methods="POST")
+# def agregar_carrito(documento):
+#     if request.method == "POST":
+#         Lista_Carrito=producto.cargar_carrito(documento)
+#         total = 0
+#         if Lista_Carrito:
+            
+#         for i in Lista_Carrito:
+#             total += i["precio"]
+#         return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
+
 """-----------------------------INICIO COMENTARIO-----------------------------"""
 
 

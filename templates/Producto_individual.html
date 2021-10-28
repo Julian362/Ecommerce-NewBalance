@@ -58,14 +58,13 @@
     <div class="Color">
       {{ filtro.color(class="form-control mb-1 casillas")}}
     </div>
-    <h5> Cantidad</h5>
-    <div class="Color">
-      {{ filtro.unidad(class="form-control mb-1 casillas")}}
-    </div>
     <br><br>
 
-    <a href="" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Comprar Ahora </a>
-    <a href="" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
+    {% if g.user %}
+    <a href="{{ url_for('agregar_carrito', documento=g.documento) }}" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
+    {% else %}
+    <a href="{{ url_for('login') }}" class="btn btn-outline-one" style="width: 100%; margin-bottom: 20px;"> Agregar al carrito </a>
+    {% endif %}
 
     <br><br>
 
