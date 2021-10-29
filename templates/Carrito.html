@@ -28,7 +28,6 @@
                     </ul>
                     <div class="row">
                         <div class="col">
-                            {{ filtro.unidad(class="form-control mb-1 casillas") }}
                         </div>
                         <div class="col">
                             <form action="{{ url_for('borrar_producto_carrito',id=item.idv, documento = g.user.documento)}}" method="POST">

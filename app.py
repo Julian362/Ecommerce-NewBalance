@@ -408,7 +408,7 @@ def gestion_micuenta(documento):
             
             if obj_usuario:
 
-                obj_logear= usuario(formulario.nickname.data, formulario.documento.data, formulario.correo.data, formulario.contrasena.data)
+                obj_logear= usuario(formulario.nickname.data, formulario.documento.data, formulario.correo.data, formulario.contrasena.data,'')
                 if obj_logear.logear():
 
                     obj_usuario.nombre = formulario.nombre.data

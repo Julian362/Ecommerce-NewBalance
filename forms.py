@@ -1,3 +1,4 @@
+from os import read, readlink
 from models import *
 from flask_wtf import FlaskForm
 from wtforms.fields.core import SelectField, StringField
@@ -60,7 +61,7 @@ class FormFiltrarProducto(FlaskForm):
     
     color = SelectField(u'color', choices=[('0', 'Seleccionar color'),('negro', 'Negro'), ('naranja', 'Naranja'),('amarillo', 'Amarillo'),('azul', 'Azul'),('rojo', 'Rojo'),('café', 'Café'),('gris', 'Gris'),('rosa', 'Rosa'),('verde', 'Verde'),('blanco', 'Blanco'),('multicolor', 'Multicolor')])
     
-    unidad = SelectField(u'unidad', choices=[('0','Seleccionar unidad'),('1','1'), ( '2','2'), ( '3','3'), ( '4','4')])
+    # unidad = SelectField(u'unidad', choices=[('0','Seleccionar unidad'),('1','1'), ( '2','2'), ( '3','3'), ( '4','4')])
 
 class FormMiCuenta(FlaskForm):
     nombre = StringField('Nombre',validators=[validators.required()])

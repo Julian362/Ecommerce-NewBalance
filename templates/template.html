@@ -54,7 +54,9 @@
           <datalist id="listamascotas">
             <select name="nombremascota">
               {% for item in lista_productosSer %}
-              <option>{{ item.referencia}}</option>
+              
+                <a href="{{url_for('productoind', referencia=item.referencia)}}"><option>{{ item.referencia}}</option></a>
+              
               {% endfor %}
             </select>
             </label>
