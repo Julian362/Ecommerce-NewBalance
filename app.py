@@ -92,11 +92,7 @@ def productoind(referencia):
         acumulador+=i['puntuacion']
     if len(lista_califiacion)>0:
         promedio=acumulador/len(lista_califiacion)
-    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia),filtro=FormFiltrarProducto())
-
-# @app.route('/carrito/')
-# def carrito():
-#     return render_template('Carrito.html')
+    return render_template('Producto_individual.html', Producto_Referencia=producto.productoindividual(referencia), item=producto.cargarProducto(referencia), form=FormFiltrarProductoIndividual(),lista_comentarios=calificacion.todos_los_comentarios(referencia),promedio=promedio, promedio_comentarios=calificacion.promedio_comentarios(referencia), tres_registros=calificacion.tres_comentarios(referencia), filtro=FormFiltrarProducto())
 
 @app.route('/carrito/<documento>')
 def carrito(documento):
@@ -104,21 +100,23 @@ def carrito(documento):
     total = 0
     for i in Lista_Carrito:
         total += i["precio"]
-    return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto(), lista_productosSer=producto.listado_searchs())
+    return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
 
-@app.route('',methods="POST")
-def agregar_carrito(documento):
+@app.route('/<documento>-<referencia>',methods=["POST"])
+def agregar_carrito(documento,referencia):
     if request.method == "POST":
-        Lista_Carrito=producto.cargar_carrito(documento)
-        total = 0
-        if Lista_Carrito:
-            
-            for i in Lista_Carrito:
-                total += i["precio"]
-        return render_template('Carrito.html', Lista_Carrito=Lista_Carrito, total=total, filtro=FormFiltrarProducto())
+        form = FormFiltrarProducto(request.form)
+        if producto.crear_carrito(referencia,documento,form.talla.data,form.color.data):
+            return redirect(url_for('productoind',referencia=referencia))
+        return redirect(url_for('productoind',referencia=referencia))
+
+@app.route('/<id>--<documento>',methods=["POST"])
+def borrar_producto_carrito(id,documento):
+    if request.method == "POST":
+        producto.borrar_carrito(id)
+        return redirect(url_for('carrito',documento=documento))
 
 """-----------------------------INICIO COMENTARIO-----------------------------"""
-
 
 @app.route('/comentario/gestionar/crear/<referencia>-<puntuacion>-<documento>', methods=["GET", "POST"])
 def crear_comentario(referencia,puntuacion,documento):
@@ -131,9 +129,9 @@ def crear_comentario(referencia,puntuacion,documento):
         obj_calificacion = calificacion("",puntuacion,form.comentario.data,referencia,persona.cargar("user",documento).nickname,documento)
         if form.validate_on_submit():
             if obj_calificacion.crear():
-                return redirect(url_for('editar_comentario',referencia=referencia,puntuacion=puntuacion,documento=documento), lista_productos=producto.listado_searchs())
-            return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo crear el comentario ", lista_productosSer=producto.listado_searchs())
-        return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo validar el crear el comentario ", lista_productosSer=producto.listado_searchs())
+                return redirect(url_for('productoind',referencia=referencia))
+            return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo crear el comentario ")
+        return render_template('gestion_comentario.html', opcion="Crear", form=form, calificacionCrear = obj_calificacion,error="No se pudo validar el crear el comentario ")
 
 
 @app.route('/comentario/gestionar/editar/<referencia>-<puntuacion>-<documento>', methods=["GET", "POST"])
