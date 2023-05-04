@@ -1,40 +1,49 @@
-{% extends 'template.html' %}
-{% block head %}
+{% extends 'template.html' %} {% block head %}
 <title>New Balance</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-{% endblock %}
-
-{% block contenido %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/index.css') }}"
+/>
+{% endblock %} {% block contenido %}
 <div class="contenedor-inicio">
-    <div class="imgSuperior">
-        <a href="#"><img src="{{ url_for('static', filename='imagenes/inicio/imgSuperior.jpg') }}"
-                alt="ImgSuperior"></a>
-    </div>
+  <div class="imgSuperior">
+    <a href="#"
+      ><img
+        src="{{ url_for('static', filename='imagenes/inicio/imgSuperior.jpg') }}"
+        alt="ImgSuperior"
+    /></a>
+  </div>
 
-    <div class="row imgBarra">
-        <div class="col selecHombre">
-            <a href="{{url_for('lista_de_productos', sexo='HOMBRE') }}">
-                <h4>Compra para</h4>
-                <p>HOMBRE</p>
-            </a>
-        </div>
-        <div class="col selecMujer">
-            <a href="{{url_for('lista_de_productos', sexo='MUJER') }}">
-                <h4>Compra para</h4>
-                <p>MUJER</p>
-            </a>
-        </div>
+  <div class="row imgBarra">
+    <div class="col selecHombre">
+      <a href="{{url_for('list_products', gender='HOMBRE') }}">
+        <h4>Compra para</h4>
+        <p>HOMBRE</p>
+      </a>
     </div>
+    <div class="col selecMujer">
+      <a href="{{url_for('list_products', gender='MUJER') }}">
+        <h4>Compra para</h4>
+        <p>MUJER</p>
+      </a>
+    </div>
+  </div>
 
-    <div class="imgCentral">
-        <a href="#"><img src="{{ url_for('static', filename='imagenes/inicio/imgCentral.jpg') }}" alt="ImgCentral"></a>
-    </div>
+  <div class="imgCentral">
+    <a href="#"
+      ><img
+        src="{{ url_for('static', filename='imagenes/inicio/imgCentral.jpg') }}"
+        alt="ImgCentral"
+    /></a>
+  </div>
 
-    <div class="imgInferior">
-        <a href="#"><img src="{{ url_for('static', filename='imagenes/inicio/imgInferior.jpg') }}"
-                alt="ImgInferior"></a>
-    </div>
+  <div class="imgInferior">
+    <a href="#"
+      ><img
+        src="{{ url_for('static', filename='imagenes/inicio/imgInferior.jpg') }}"
+        alt="ImgInferior"
+    /></a>
+  </div>
 </div>
-
 
 {% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'template.html' %} {% block head %}
+<title>New Balance | Mi Cuenta</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/account.css') }}"
+/>
+<script src="{{ url_for ('static', filename='Js/contrasena.js') }}"></script>
+{% endblock %} {% block contenido %}
+
+<div class="ContenedorPrincipal">
+  <div class="subtitulo">
+    <span class="material-icons-outlined iconoSubtitulo">account_circle</span>
+    <h1 class="subtituloTexto">DATOS DE MI CUENTA</h1>
+  </div>
+
+  <div class="ContenedorMiCuenta">
+    <div class="SubtituloMiCuenta">
+      <span class="material-icons-outlined Icono">person</span>
+      <h2 class="SubtituloTexto2">Mi cuenta</h2>
+    </div>
+
+    {% if message %}
+    <h2 style="text-align: center; color: #058714; margin-top: 10px">
+      {{ message }}
+    </h2>
+    {% endif %} {% if error %}
+    <h2 style="text-align: center; color: #970c02; margin-top: 10px">
+      {{ error }}
+    </h2>
+    {% endif %} {% if form %}
+    <form
+      class="FormularioMiCuenta"
+      {%
+      if
+      data_user
+      %}
+      action="{{ url_for('management_account', document = data_user.document) }}"
+      {%
+      else
+      %}
+      action="{{ url_for('management_account', document = document) }}"
+      {%
+      endif
+      %}
+      method="POST"
+    >
+      {{ form.hidden_tag() }}
+      <div class="ContenedorForm">
+        <h4 class="SubtituloTexto3">Datos personales</h4>
+        <hr />
+        <div class="row">
+          <div class="col">
+            {{form.name(class="inputform form-control mr-sm-1",
+            placeholder="Nombre")}}
+          </div>
+          <div class="col">
+            {{form.last_name(class="inputform form-control mr-sm-1",
+            placeholder="Apellidos")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{form.document(class="inputform form-control mr-sm-1",
+            placeholder="CC/CE/NIT")}}
+          </div>
+          <div class="col">
+            {{form.nickname(class="inputform form-control mr-sm-1",
+            placeholder="Nickname")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{form.phone(class="inputform form-control mr-sm-1", type="number",
+            placeholder="Teléfono")}}
+          </div>
+          <div class="col">
+            {{form.correo(class="inputform form-control mr-sm-1", type="email",
+            placeholder="Correo",readonly="")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" style="margin-left: 35%">
+            <div class="form-check form-check-inline">
+              {% if data_user %} {% if data_user.gender == "M" %} {{
+              form.gender(class="form-check-input", type="radio", value="M",
+              checked="true")}} {% else %} {{
+              form.gender(class="form-check-input", type="radio", value="M")}}
+              {% endif %} {% else %} {{ form.gender(class="form-check-input",
+              type="radio", value="M")}} {% endif %}
+              <label class="form-check-label" for="inlineRadio1"
+                >Masculino</label
+              >
+            </div>
+            <div class="form-check form-check-inline">
+              {% if data_user %} {% if data_user.gender == "F" %} {{
+              form.gender(class="form-check-input", type="radio", value="F",
+              checked="true")}} {% else %} {{
+              form.gender(class="form-check-input", type="radio", value="F")}}
+              {% endif %} {% else %} {{ form.gender(class="form-check-input",
+              type="radio", value="F")}} {% endif %}
+              <label class="form-check-label" for="inlineRadio2"
+                >Femenino</label
+              >
+            </div>
+            <div class="form-check form-check-inline">
+              {% if datosUsuario %} {% if datosUsuario.gender == "O" %} {{
+              form.gender(class="form-check-input", type="radio", value="O",
+              checked="true")}} {% else %} {{
+              form.gender(class="form-check-input", type="radio", value="O")}}
+              {% endif %} {% else %} {{ form.gender(class="form-check-input",
+              type="radio", value="O")}} {% endif %}
+              <label class="form-check-label" for="inlineRadio3">Otro</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ContenedorForm">
+        <h4 class="SubtituloTexto3">Detalles de la dirección de entrega</h4>
+        <hr />
+        <div class="row">
+          <div class="col">
+            {{form.country(class="inputform form-control mr-sm-1",
+            placeholder="País")}}
+          </div>
+          <div class="col">
+            {{form.department(class="inputform form-control mr-sm-1",
+            placeholder="Departamento")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{form.city(class="inputform form-control mr-sm-1",
+            placeholder="Ciudad")}}
+          </div>
+          <div class="col">
+            {{form.address(class="inputform form-control mr-sm-1",
+            placeholder="Dirección")}}
+          </div>
+        </div>
+      </div>
+
+      <div class="ContenedorForm">
+        <h4 class="SubtituloTexto3">Actualización contraseña</h4>
+        <hr />
+        <div class="row">
+          <div class="col">
+            {{form.password (type="password", class="inputform form-control
+            mr-sm-1 ContrasenaActual", placeholder="Contraseña actual (requerida
+            para realizar los cambios)", id="contrasena")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{form.new_password(type="password", class="inputform form-control
+            mr-sm-1", placeholder="Nueva contraseña (optional)",
+            id="contrasenaNueva")}}
+          </div>
+          <div class="col">
+            {{form.confirm_new_password(type="password", class="inputform
+            form-control mr-sm-1", placeholder="Confirmar contraseña
+            (optional)", id="confirmarContrasena")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="checkbox" onclick="show_password()" /> Mostrar
+            contraseña
+          </div>
+          <p></p>
+        </div>
+        <div class>{{form.save(class="btn btn-primary btn-miCuenta")}}</div>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

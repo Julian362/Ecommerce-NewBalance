@@ -1,11 +1,11 @@
 {% extends 'template.html' %}
 {% block head %}
 <title>Producto Individual</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/Producto_individual.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/todos_los_comentarios.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/gestion_comentario.css') }}">
-<script src="{{ url_for ('static', filename='Js/gestion_comentario.js') }}"></script>
-<script src="{{ url_for ('static', filename='Js/Producto_individual.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/all_comments.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comments.css') }}">
+<script src="{{ url_for ('static', filename='Js/comments.js') }}"></script>
+<script src="{{ url_for ('static', filename='Js/product.js') }}"></script>
 {% endblock %}
 
 {% block contenido %}
@@ -13,19 +13,19 @@
 
   <div class="vistageneral">
 
-    {% if Producto_Referencia %}
+    {% if Product_reference %}
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active " data-interval="10000">
-          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
+          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['reference']+'.jpg') }}"
             class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-interval="2000">
-          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
+          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['reference']+'.jpg') }}"
             class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item ">
-          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['referencia']+'.jpg') }}"
+          <img src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['reference']+'.jpg') }}"
             class="d-block w-100" alt="...">
         </div>
       </div>
@@ -46,26 +46,26 @@
 
   <div class="barrainformacion">
     <h4 style="color:#E74236; margin-bottom: 15px;"><strong>{{ item.nombre }}</strong> </h4>
-    <h4 style="color:#242942; margin-bottom: 15px; "><strong>{{ item.referencia }}</strong> </h4>
+    <h4 style="color:#242942; margin-bottom: 15px; "><strong>{{ item.reference }}</strong> </h4>
     <span>
-      <p style="color:#E74236; font-size: 20px; text-align: center;"> <strong>${{item.precio}}</strong>
+      <p style="color:#E74236; font-size: 20px; text-align: center;"> <strong>${{item.price}}</strong>
       </p>
     </span>
 
     <form
     {% if g.user %}
-    action="{{ url_for('agregar_carrito', documento=g.user.documento, referencia=item.referencia ) }}"
+    action="{{ url_for('agregar_carrito', document=g.user.document, reference=item.reference ) }}"
     {% else %}
     action="{{ url_for('login') }}"
     {% endif %}
     method="post">
       <h5> Seleccionar talla </h5>
     <div class="Talla">
-      {{ filtro.talla(class="form-control mb-1 casillas")}}
+      {{ filter.size(class="form-control mb-1 casillas")}}
     </div>
     <h5> Seleccionar color </h5>
     <div class="Color">
-      {{ filtro.color(class="form-control mb-1 casillas")}}
+      {{ filter.color(class="form-control mb-1 casillas")}}
     </div>
     <br><br>
     <button class="btn btn-outline-one"> Agregar al carrito </button>
@@ -94,7 +94,7 @@
       <div class="card-body">
         <article id="tab1">
           <div class="row" style="text-align: justify; padding: 0px 10px;">
-            {{item.descripcion}}
+            {{item.description}}
           </div>
 
         </article>
@@ -107,9 +107,9 @@
     <br>
     <h2 style="text-align: center;">Opiniones sobre el producto</h2>
     <br>
-    {% for item in promedio_comentarios %}
-    <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.promedio }}</h1>
-    <h6 style="text-align: center;">Promedio entre {{ lista_comentarios|length }} opiniones</h6>
+    {% for item in average_comments %}
+    <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.average }}</h1>
+    <h6 style="text-align: center;">average entre {{ list_comments|length }} opiniones</h6>
     {% endfor %}
   </div>
 
@@ -120,34 +120,34 @@
         <h4 style="color: #E74236;">{{ item.nickname}}</h4>
         <div class="rating" style="font-size: 20px;">
           <span class="estrella" id="estrella5" >
-            {% if item.puntuacion < 5 %}☆
+            {% if item.rating < 5 %}☆
             {% else %}★
             {% endif %}
         </span>
         <span class="estrella" id="estrella4">
-            {% if item.puntuacion < 4 %}☆
+            {% if item.rating < 4 %}☆
             {% else %}★
             {% endif %}
         </span>
         <span class="estrella" id="estrella3">
-            {% if item.puntuacion < 3 %}☆
+            {% if item.rating < 3 %}☆
             {% else %}★
             {% endif %}
         </span>
         <span class="estrella" id="estrella2">
-            {% if item.puntuacion < 2 %}☆
+            {% if item.rating < 2 %}☆
             {% else %}★
             {% endif %}
         </span>
         <span class="estrella" id="estrella1">
-            {% if item.puntuacion < 1 %}☆
+            {% if item.rating < 1 %}☆
             {% else %}★
             {% endif %}
         </span>
         </div>
       </div>
       <div class="comentario">
-        <p>{{ item.comentario }}</p>
+        <p>{{ item.comment }}</p>
       </div>
     </div>
     {% endfor %}
@@ -157,8 +157,8 @@
       Ver todas las calificaciones
     </button>
 --
-{% if mensaje %}
-<h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
+{% if message %}
+<h2 style="text-align: center; color: #058714; margin-top: 10px">{{ message }}</h2>
 {% endif %}
 {% if error %}
 <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
@@ -167,8 +167,6 @@
 <a data-toggle="modal" href="#exampleModal">
     crear comentario
 </a>
-
-<!-- Modal -->
 
 <div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
@@ -180,10 +178,10 @@
                 </button>
             </div>
             <form
-            {% if opcion=="Editar" %}
-                action="{{ url_for('editar_comentario', referencia=item.referencia ,puntuacion=0,documento=g.user.documento) }}"
+            {% if option=="Editar" %}
+                action="{{ url_for('edit_comment', reference=item.reference ,rating=0,document=g.user.document) }}"
             {% else %}
-                action="{{ url_for('crear_comentario', referencia=item.referencia ,puntuacion = 0, documento=g.user.documento) }}"
+                action="{{ url_for('create_comment', reference=item.reference ,rating = 0, document=g.user.document) }}"
             {% endif %}
             id="gestionarComentario" method="POST">
             {{ formG.hidden_tag() }}
@@ -192,59 +190,59 @@
                         <span class="material-icons-outlined md-48">person</span>
                         <p style="margin-top: 1rem;">Los comentarios son públicos y contienen información de tu cuenta y el producto comprado.</p>
                     </a>
-                    {% if calificacion %}
+                    {% if calification %}
                         <div class="rating">
-                            <span class="estrella" id="estrella5" onclick="puntuacionEstrella(5,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
-                                {% if calificacion.puntuacion < 5 %}☆
+                            <span class="estrella" id="estrella5" onclick="ratingEstrella(5,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                                {% if calification.rating < 5 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella4" onclick="puntuacionEstrella(4,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
-                                {% if calificacion.puntuacion < 4 %}☆
+                            <span class="estrella" id="estrella4" onclick="ratingEstrella(4,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                                {% if calification.rating < 4 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella3" onclick="puntuacionEstrella(3,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
-                                {% if calificacion.puntuacion < 3 %}☆
+                            <span class="estrella" id="estrella3" onclick="ratingEstrella(3,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                                {% if calification.rating < 3 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella2" onclick="puntuacionEstrella(2,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
-                                {% if calificacion.puntuacion < 2 %}☆
+                            <span class="estrella" id="estrella2" onclick="ratingEstrella(2,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                                {% if calification.rating < 2 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella1" onclick="puntuacionEstrella(1,'{{opcion}}','{{calificacion.referencia_producto}}','{{calificacion.documento}}')">
-                                {% if calificacion.puntuacion < 1 %}☆
+                            <span class="estrella" id="estrella1" onclick="ratingEstrella(1,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                                {% if calification.rating < 1 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
                         </div>
                     {% else %}
-                        {% if calificacionCrear %}
+                        {% if calificationCreate %}
                             <div class="rating">
-                                <span class="estrella" id="estrella5" onclick="puntuacionEstrella(5,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
-                                <span class="estrella" id="estrella4" onclick="puntuacionEstrella(4,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
-                                <span class="estrella" id="estrella3" onclick="puntuacionEstrella(3,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
-                                <span class="estrella" id="estrella2" onclick="puntuacionEstrella(2,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
-                                <span class="estrella" id="estrella1" onclick="puntuacionEstrella(1,'{{opcion}}','{{calificacionCrear.referencia_producto}}','{{calificacionCrear.documento}}')">☆</span>
+                                <span class="estrella" id="estrella5" onclick="ratingEstrella(5,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
+                                <span class="estrella" id="estrella4" onclick="ratingEstrella(4,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
+                                <span class="estrella" id="estrella3" onclick="ratingEstrella(3,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
+                                <span class="estrella" id="estrella2" onclick="ratingEstrella(2,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
+                                <span class="estrella" id="estrella1" onclick="ratingEstrella(1,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
                             </div>
-                            <h3 style="padding: 0%;">{{calificacionCrear.nickname}}</h3>
+                            <h3 style="padding: 0%;">{{calificationCreate.nickname}}</h3>
                         {% endif %}
-                        {% if calificacion %}
-                            <h3 style="padding: 0%;">{{calificacion.nickname}}</h3>
+                        {% if calification %}
+                            <h3 style="padding: 0%;">{{calification.nickname}}</h3>
                         {% endif %}
                         <h3 style="padding: 0%;">Opinión</h3>
                         {{ formG.comentario(class="form-control") }}
                     {% endif %}
                 </div>
                 <div class="modal-footer">
-                    {% if calificacion %}
-                    <a href="{{ url_for('delete_comentario', id=calificacion.id) }}">
+                    {% if calification %}
+                    <a href="{{ url_for('delete_comentario', id=calification.id) }}">
                         <button type="button" class="btn btn-outline-one">Eliminar</button>
                     </a>
                     {% endif %}
-                    <button type="submit" class="btn btn-outline-one">{{opcion}}</button>
+                    <button type="submit" class="btn btn-outline-one">{{option}}</button>
                 </div>
             </form>
         </div>
@@ -252,14 +250,13 @@
 </div>
 {% endif %}
 
-    <!-- Modal -->
 
     <div class="modal fade modal-comentario" id="exampleModal" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            {% if lista_comentarios %}
+            {% if list_comments %}
             <h1 class="modal-title" id="exampleModalLabel">Opiniones sobre el producto</h1>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -268,57 +265,53 @@
           <div class="modal-body">
             <a class="cuenta-modal">
 
-              <!-- división para hacer un resumen de los comentarios  -->
               <div class="row resumen">
-                <div class="col puntuacion_promedio">
-                  <!-- Puntuación promedio -->
-                  {% for item in promedio_comentario %}
-                    <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.promedio }}</h1>
-                    <h6 style="text-align: center;">Promedio entre {{ lista_comentarios|length }} opiniones</h6>
+                <div class="col rating_average">
+                  {% for item in average_comentario %}
+                    <h1 style="font-size: 65px; color:#E74236; text-align: center;">{{ item.average }}</h1>
+                    <h6 style="text-align: center;">average entre {{ list_comments|length }} opiniones</h6>
                     {% endfor %}
-                  <h4>{{promedio}}</h4>
-                  <!-- Total de comentarios -->
-                  <h5>Promedio entre {{lista_comentarios|length}} opiniones</h5>
+                  <h4>{{average}}</h4>
+                  <h5>average entre {{list_comments|length}} opiniones</h5>
                 </div>
               </div>
             </a>
 
-            <!-- Aquí van los comentarios -->
             <section class="lista-comentarios comentarios">
-              {% for item in lista_comentarios %}
+              {% for item in list_comments %}
               <div class="item-comentario ">
                 <div class="datos">
                   <h4 style="color:#E74236">{{ item.nickname}}</h4>
                   <div class="rating" style="font-size: 20px;">
                     <span class="estrella" id="estrella5" >
-                      {% if item.puntuacion < 5 %}☆
+                      {% if item.rating < 5 %}☆
                       {% else %}★
                       {% endif %}
                   </span>
                   <span class="estrella" id="estrella4">
-                      {% if item.puntuacion < 4 %}☆
+                      {% if item.rating < 4 %}☆
                       {% else %}★
                       {% endif %}
                   </span>
                   <span class="estrella" id="estrella3">
-                      {% if item.puntuacion < 3 %}☆
+                      {% if item.rating < 3 %}☆
                       {% else %}★
                       {% endif %}
                   </span>
                   <span class="estrella" id="estrella2">
-                      {% if item.puntuacion < 2 %}☆
+                      {% if item.rating < 2 %}☆
                       {% else %}★
                       {% endif %}
                   </span>
                   <span class="estrella" id="estrella1">
-                      {% if item.puntuacion < 1 %}☆
+                      {% if item.rating < 1 %}☆
                       {% else %}★
                       {% endif %}
                   </span>
                   </div>
                 </div>
                 <div class="comentario">
-                  <p>{{ item.comentario }}</p>
+                  <p>{{ item.comment }}</p>
                 </div>
               </div>
               {% endfor %}

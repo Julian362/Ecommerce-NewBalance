@@ -1,0 +1,70 @@
+{% extends 'template.html' %} {% block head %}
+<title>Carrito</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/cart.css') }}"
+/>
+
+{% endblock %} {% block contenido %}
+<div class="ContenedorGlobal">
+  <div class="Titulo">
+    <span class="material-icons-outlined" id="IconoCarrito">shopping_cart</span>
+    <h2>CARRITO DE COMPRA</h2>
+  </div>
+  <div class="ContenedorProductos">
+    {% if list_cart %} {% for item in list_cart %}
+    <div class="ProductoSeleccionado">
+      <div class="row">
+        <div class="col-3">
+          <img
+            alt="Imagen del producto"
+            src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['reference']+'.jpg') }}"
+          />
+        </div>
+        <div class="col-9">
+          <br />
+          <ul>
+            <li><strong> Nombre del producto: {{ item.name }} </strong></li>
+            <li><strong> Color: {{ item.color }}</strong></li>
+            <li><strong> Talla: {{ item.size }}</strong></li>
+            <li><strong> Precio: $ {{ item.price }}</strong></li>
+          </ul>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <form
+                action="{{ url_for('borrar_producto_carrito',id=item.idv, documento = g.user.documento)}}"
+                method="POST"
+              >
+                <button class="btn btn-outline-one" type="submit">
+                  Quitar
+                </button>
+              </form>
+            </div>
+            <div class="col">
+              <h6 class="valor">Subtotal=$ {{item.price}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    {% endfor %} {% endif %}
+  </div>
+
+  <div class="Titulo2">
+    <h2>Total de su pedido</h2>
+  </div>
+
+  <div class="Pagototal">
+    <h6 class="valortotal">Total=$ {{ total }}</h6>
+    <button class="btn btn-outline-one btnvtotal">
+      <strong> CONTINUAR </strong>
+    </button>
+    <button class="btn btn-outline-one btnvtotal">
+      <strong> SEGUIR COMPRANDO </strong>
+    </button>
+  </div>
+</div>
+
+{% endblock %}

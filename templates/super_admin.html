@@ -1,26 +1,26 @@
 {% extends 'index.html' %}
 {% block head %}
 <title>New Balance | Superadministrador</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/superadministrador.css') }}">
-<script src="{{ url_for ('static', filename='Js/contrasena.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/super_admin.css') }}">
+<script src="{{ url_for ('static', filename='Js/password.js') }}"></script>
 {% endblock %}
 
-{% block contenido %} 
+{% block contenido %}
     <div class="titulo-gestionar-usuario">
         <span class="material-icons-outlined md-40">account_circle</span>
         <h1 style="text-align: center;">GESTIÓN ADMINISTRATIVA</h1>
     </div>
 
-    {% if formBuscar %}
-    <form action="{{ url_for('Buscar_administrador') }}" method="POST" class="form-inline" style="margin: auto; width: 65%;">
-        {{ formBuscar.hidden_tag() }}
-        {{ formBuscar.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
+    {% if formSearch %}
+    <form action="{{ url_for('search_admin') }}" method="POST" class="form-inline" style="margin: auto; width: 65%;">
+        {{ formSearch.hidden_tag() }}
+        {{ formSearch.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
         <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
     </form>
     {% endif %}
 
-    {% if mensaje %}
-        <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
+    {% if message %}
+        <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ message }}</h2>
     {% endif %}
     {% if error %}
         <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
@@ -28,11 +28,11 @@
 
     {% if form %}
     <div class="ContenedorFomulario">
-        <form class="FormularioRegistro" 
-        {% if datosAdministrador %}
-                action="{{ url_for('edit_administrador', documento = datosAdministrador.documento) }}"
+        <form class="FormularioRegistro"
+        {% if data_admin %}
+                action="{{ url_for('edit_admin', document = data_admin.document) }}"
             {% else %}
-                action="{{ url_for('crear_administrador') }}"
+                action="{{ url_for('create_admin') }}"
             {% endif %}
         method="POST">
             {{ form.hidden_tag() }}
@@ -44,61 +44,61 @@
                         <hr class="hr-form">
                         <div class="row">
                             <div class="col">
-                                {{ form.nombre(class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
+                                {{ form.name(class="form-control mr-sm-1 form-DatosP", placeholder="Nombre") }}
                             </div>
                             <div class="col">
-                                {{ form.apellidos(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
+                                {{ form.last_name(class="form-control mr-sm-1 form-DatosP", placeholder="Apellidos") }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                {% if opcion %}
-                                        {% if opcion == "Editar" %}
-                                        {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT", disabled=True) }}
+                                {% if option %}
+                                        {% if option == "Editar" %}
+                                        {{ form.document(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT", disabled=True) }}
                                         {% else %}
-                                            {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                            {{ form.document(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
                                         {% endif %}
                                     {%else %}
-                                        {{ form.documento(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
+                                        {{ form.document(type="text", class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT") }}
                                     {% endif %}
                             </div>
                             <div class="col">
                                 <div class="form-check form-check-inline">
-                                    <strong>Sexo:</strong>
+                                    <strong>gender:</strong>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    {% if datosAdministrador %}
-                                        {% if datosAdministrador.sexo == "M" %}
-                                            {{ form.sexo(class="form-check-input", type="radio", value="M", checked="true")}}
+                                    {% if data_admin %}
+                                        {% if data_admin.gender == "M" %}
+                                            {{ form.gender(class="form-check-input", type="radio", value="M", checked="true")}}
                                         {% else %}
-                                            {{ form.sexo(class="form-check-input", type="radio", value="M")}}
+                                            {{ form.gender(class="form-check-input", type="radio", value="M")}}
                                         {% endif %}
                                     {% else %}
-                                        {{ form.sexo(class="form-check-input", type="radio", value="M")}}
+                                        {{ form.gender(class="form-check-input", type="radio", value="M")}}
                                     {% endif %}
                                     <label class="form-check-label" for="inlineRadio1">Masculino</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    {% if datosAdministrador %}
-                                        {% if datosAdministrador.sexo == "F" %}
-                                            {{ form.sexo(class="form-check-input", type="radio", value="F", checked="true")}}
+                                    {% if data_admin %}
+                                        {% if data_admin.gender == "F" %}
+                                            {{ form.gender(class="form-check-input", type="radio", value="F", checked="true")}}
                                         {% else %}
-                                            {{ form.sexo(class="form-check-input", type="radio", value="F")}}
+                                            {{ form.gender(class="form-check-input", type="radio", value="F")}}
                                         {% endif %}
                                     {% else %}
-                                        {{ form.sexo(class="form-check-input", type="radio", value="F")}}
+                                        {{ form.gender(class="form-check-input", type="radio", value="F")}}
                                     {% endif %}
                                     <label class="form-check-label" for="inlineRadio2">Femenino</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    {% if datosAdministrador %}
-                                        {% if datosAdministrador.sexo == "O" %}
-                                            {{ form.sexo(class="form-check-input", type="radio", value="O", checked="true")}}
+                                    {% if data_admin %}
+                                        {% if data_admin.gender == "O" %}
+                                            {{ form.gender(class="form-check-input", type="radio", value="O", checked="true")}}
                                         {% else %}
-                                            {{ form.sexo(class="form-check-input", type="radio", value="O")}}
+                                            {{ form.gender(class="form-check-input", type="radio", value="O")}}
                                         {% endif %}
                                     {% else %}
-                                        {{ form.sexo(class="form-check-input", type="radio", value="O")}}
+                                        {{ form.gender(class="form-check-input", type="radio", value="O")}}
                                     {% endif %}
                                     <label class="form-check-label" for="inlineRadio2">Otro</label>
                                 </div>
@@ -109,44 +109,44 @@
                                 {{ form.nickname(class="form-control mr-sm-1 form-DatosP", placeholder="Nickname") }}                 
                             </div>
                             <div class="col">
-                                {{ form.telefono(type="number", class="form-control mr-sm-1 form-DatosP", placeholder="Teléfono") }}
+                                {{ form.phone(type="number", class="form-control mr-sm-1 form-DatosP", placeholder="Teléfono") }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                {{ form.correo(type="email", class="form-control mr-sm-1 form-DatosP", placeholder="Correo") }}
+                                {{ form.email(type="email", class="form-control mr-sm-1 form-DatosP", placeholder="Correo") }}
                             </div>
                             <div class="col">
-                                {{ form.pais(class="form-control mr-sm-1 form-DatosP", placeholder="País") }}
+                                {{ form.country(class="form-control mr-sm-1 form-DatosP", placeholder="País") }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                {{ form.departamento(class="form-control mr-sm-1 form-DatosP", placeholder="Departamento") }}
+                                {{ form.department(class="form-control mr-sm-1 form-DatosP", placeholder="Departamento") }}
                             </div>
                             <div class="col">
-                                {{ form.ciudad(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
-                            </div>
-                        </div>                    
-                        <div class="row">
-                            <div class="col">
-                                {{ form.direccion(class="form-control mr-sm-1 form-DatosP", placeholder="Dirección") }}
-                            </div>                        
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                {{ form.contrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña", id="contrasena") }}                            
-                            </div>
-                            <div class="col"> 
-                                {{ form.confirmarcontrasena(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña", id="confirmarContrasena") }}
+                                {{ form.country(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="checkbox" onclick="mostrarContrasena()"> Mostrar contraseña
+                                {{ form.address(class="form-control mr-sm-1 form-DatosP", placeholder="Dirección") }}
                             </div>
-                            {% if opcion %}
-                                {% if opcion == "Editar" %}
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.password(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Contraseña", id="contrasena") }}                            
+                            </div>
+                            <div class="col">
+                                {{ form.confirm_password(type="password", class="form-control mr-sm-1 form-DatosP", placeholder="Confirmar Contraseña", id="confirmarContrasena") }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="checkbox" onclick="show_password()"> Mostrar contraseña
+                            </div>
+                            {% if option %}
+                                {% if option == "Editar" %}
                                     <div class="col">
                                         <p style="color: #970c02;">Para editar el documento contacte a soporte</p>
                                     </div>
@@ -154,20 +154,19 @@
                             {% endif %}
                         </div>
                         <div class="row">
-                            {% if opcion == "Editar"%}
-                            {{form.editar(class="btn btn-outline-registro", style="margin: auto;")}}
+                            {% if option == "Editar"%}
+                            {{form.edit(class="btn btn-outline-registro", style="margin: auto;")}}
                             {% else %}
-                            {{form.crear(class="btn btn-outline-registro", style="margin: auto;")}}
+                            {{form.create(class="btn btn-outline-registro", style="margin: auto;")}}
                             {% endif %}
                         </div>
-                                            
                     </div>
                 </div>
         </form>
     {% endif %}
     </div>
 
-    {% if listaAdmin %}
+    {% if list_admin %}
         <div class="contenedor-todos-administradores">
             <div class="titulo-tabla" style="width: 90%; margin: auto;">
                 <div class="row">
@@ -181,9 +180,9 @@
                     </div>
                 </div>
             </div>
-            <hr style="border-color:#e74236; width: 90%;">    
+            <hr style="border-color:#e74236; width: 90%;">
             <div class="tabla" style="width: 90%; margin: auto;">
-                <table class="table table-striped table-hover tNuevoProducto">
+                <table class="table table-striped table-hover tNuevoProducto" aria-label="desc">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -196,33 +195,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for item in listaAdmin %}
+                    {% for item in list_admin %}
                         <tr>
                             <th scope="row">
                                 {{ loop.index }}
                             </th>
                             <td class="conEstado">
-                                    {% if item.estado == 'T' %}
+                                    {% if item.state == 'T' %}
                                     <div class="circulo-green"></div>
                                     {% endif %}
-                                    {% if item.estado == 'F' %}
+                                    {% if item.state == 'F' %}
                                     <div class="circulo-red"></div>
                                     {% endif %}
                             </td>
-                            <td>{{ item.documento}}</td>
-                            <td>{{ item.nombre}}</td>
-                            <td>{{ item.apellidos}}</td>
-                            <td>{{ item.correo}}</td>
+                            <td>{{ item.document}}</td>
+                            <td>{{ item.name}}</td>
+                            <td>{{ item.last_name}}</td>
+                            <td>{{ item.email}}</td>
                             <td>
                                 <div class="icon-derecha">
-                                    <a  href="{{ url_for('edit_administrador', documento = item.documento) }} ">
+                                    <a  href="{{ url_for('edit_admin', documento = item.documento) }} ">
                                         <span class="material-icons-outlined iconoPosicion" >edit</span>
                                     </a>
                                 </div>
                                 <div class="icon-centro">
-                                    <a href="{{url_for('bloquear_administrador', documento = item.documento)}}">
+                                    <a href="{{url_for('block_admin', documento = item.documento)}}">
                                         <span class="material-icons-outlined iconoPosicion" id="icon_block">
-                                            <!-- si el usuario esta o no bloqueado muestra el candado abierto o cerrado -->
                                             {% if item.estado == 'F' %}
                                                 lock_open
                                             {% endif %}
@@ -233,13 +231,13 @@
                                     </a>
                                 </div>
                                 <div class="icon-izquierda">
-                                    <a href="{{url_for('eliminar_administrador', documento=item.documento)}}">
+                                    <a href="{{url_for('delete_admin', documento=item.documento)}}">
                                         <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
-                                </div> 
+                                </div>
                             </td>
                         </tr>
-                    {% endfor %}    
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

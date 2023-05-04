@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
+  <title>
+    new balance
+  </title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +11,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined">
-  <!-- https://logodownload.org/wp-content/uploads/2017/07/new-balance-logo-16.png -->
   <link rel="shortcut icon" href="{{ url_for('static', filename='imagenes/New Balance-Favicon.png') }}"
     type="image/x-icon">
   {% block head %}
@@ -26,19 +27,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a href="{{url_for ('index')}}"><img id="LogoPrincipal"
+      alt="Logo New Balance"
         src="{{ url_for('static', filename='imagenes/New Balance-Logo.png') }}"> </a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <strong><a class="nav-link" href="{{url_for('lista_de_productos', sexo='HOMBRE') }}"> HOMBRE <span
+          <strong><a class="nav-link" href="{{url_for('list_products', gender='HOMBRE') }}"> HOMBRE <span
                 class="sr-only">(current)</span></a></strong>
         </li>
         <li class="nav-item">
-          <strong><a class="nav-link" href="{{url_for('lista_de_productos', sexo='MUJER') }}">MUJER</a></strong>
+          <strong><a class="nav-link" href="{{url_for('list_products', gender='MUJER') }}">MUJER</a></strong>
         </li>
         <li class="nav-item">
-          <strong><a class="nav-link" href="{{url_for('contactos') }}">CONTACTOS</a></strong>
+          <strong><a class="nav-link" href="{{url_for('contacts') }}">CONTACTOS</a></strong>
         </li>
       </ul>
 
@@ -53,10 +55,10 @@
           <p><label><input type="text" name="nombremascota" list="listamascotas"></label></p>
           <datalist id="listamascotas">
             <select name="nombremascota">
-              {% for item in lista_productosSer %}
-              
-                <a href="{{url_for('productoind', referencia=item.referencia)}}"><option>{{ item.referencia}}</option></a>
-              
+              {% for item in list_product_ser %}
+
+              <a href="{{url_for('product', reference=item.reference)}}"><option>{{ item.reference}}</option></a>
+
               {% endfor %}
             </select>
             </label>
@@ -66,8 +68,8 @@
 
 
 
-      {% if g.user.tipo_rol == 'user'%}
-      <a class="cuenta" href="{{url_for ('gestion_micuenta',documento=g.user.documento)}}">
+      {% if g.user.rol == 'user'%}
+      <a class="cuenta" href="{{url_for ('account',documento=g.user.documento)}}">
         <span class="material-icons-outlined icono-cuenta">account_circle</span>
         <span>{{g.user.nickname}}</span>
       </a>
@@ -75,34 +77,34 @@
         <span class="material-icons-outlined icono-cuenta">logout</span>
         <span>Salir</span>
       </a>
-      <a href="{{url_for('carrito',documento=g.user.documento) }}" style="padding-top: 6px;"><span
+      <a href="{{url_for('cart',documento=g.user.documento) }}" style="padding-top: 6px;"><span
           class="material-icons-outlined">shopping_cart</span>
       </a>
-      {% elif g.user.tipo_rol == 'admin' %}
+      {% elif g.user.rol == 'admin' %}
       <div class="dropdown show">
         <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Administrador
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="{{url_for ('administrador')}}">Gestión Usuarios</a>
-          <a class="dropdown-item" href="{{url_for ('gestion_productos')}}">Gestión Productos</a>
+          <a class="dropdown-item" href="{{url_for ('admin')}}">Gestión Usuarios</a>
+          <a class="dropdown-item" href="{{url_for ('list_products')}}">Gestión Productos</a>
         </div>
       </div>
       <a class="cuenta" href="{{url_for ('logout')}}">
         <span class="material-icons-outlined icono-cuenta">logout</span>
         <span>Salir</span>
       </a>
-      {% elif g.user.tipo_rol == 'super' %}
+      {% elif g.user.rol == 'super' %}
       <div class="dropdown show">
         <a class="dropdown-toggle menudes" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Superadministrador
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="{{url_for ('administrador')}}">Gestión Usuarios</a>
-          <a class="dropdown-item" href="{{url_for ('superadministrador')}}">Gestión Administradores</a>
-          <a class="dropdown-item" href="{{url_for ('gestion_productos')}}">Gestión Productos</a>
+          <a class="dropdown-item" href="{{url_for ('admin')}}">Gestión Usuarios</a>
+          <a class="dropdown-item" href="{{url_for ('super_admin')}}">Gestión Administradores</a>
+          <a class="dropdown-item" href="{{url_for ('list_products')}}">Gestión Productos</a>
         </div>
       </div>
       <a class="cuenta" href="{{url_for ('logout')}}">
@@ -131,13 +133,13 @@
   <div class="footer">
     <div class="row">
       <div class="ContenedorSuperior">
-        <img src="{{ url_for('static', filename='imagenes/newbalancecofacebook.png') }}" href="#">
-        <img src="{{ url_for('static', filename='imagenes/newbalancecoig.png') }}" href="#">
-        <img src="{{ url_for('static', filename='imagenes/newbalancecotwitter.png') }}" href="#">
+        <img src="{{ url_for('static', filename='imagenes/newbalancecofacebook.png') }}" alt="">
+        <img src="{{ url_for('static', filename='imagenes/newbalancecoig.png') }}" alt="">
+        <img src="{{ url_for('static', filename='imagenes/newbalancecotwitter.png') }}" alt="">
       </div>
     </div>
     <div class="row">
-      <table class="table table-striped tFooter">
+      <table class="table table-striped tFooter" aria-label="">
         <thead>
           <tr>
             <th style="width:calc(100%/3);" scope="col">ATENCIÓN AL CLIENTE</th>
@@ -174,7 +176,6 @@
     </div>
   </div>
   {% endblock %}
-  <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

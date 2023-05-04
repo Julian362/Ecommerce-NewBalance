@@ -1,0 +1,160 @@
+.ContenedorFomulario {
+  min-height: 60vh;
+  margin-top: 15;
+}
+
+.FormularioRegistro {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #eeeeee;
+  padding-bottom: 20px;
+}
+
+.FormularioRegistro h1 {
+  padding-top: 15px;
+}
+
+.ContenedorDP {
+  margin-top: 25px;
+  margin-left: 20px;
+  margin-right: 25px;
+}
+.form-DatosP {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn-outline-registro {
+  color: #0a0a0a;
+  background-color: transparent;
+  background-image: none;
+  border-width: 1px !important;
+  border-color: #e74236 !important;
+}
+
+.btn-outline-registro:hover {
+  color: #222;
+  background-color: #e74236;
+  border-color: rgb(0, 0, 0);
+  color: white;
+}
+
+hr {
+  border-color: #e74236;
+  border-width: 90%;
+}
+
+.titulo-gestionar-usuario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.contenedor-todos-usuarios {
+  width: 90%;
+  margin: auto;
+  background-color: #eeeeee;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.contenedor-todos-usuarios th,
+td {
+  margin: auto;
+  text-align: center;
+}
+
+.nuevo-usuario {
+  width: 95%;
+  margin: auto;
+}
+
+.conEstado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circulo-green {
+  width: 17px;
+  height: 17px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border-color: #3f3f3f;
+  border-style: solid;
+  border-width: 1px;
+  background: #0ba913;
+  margin: auto;
+}
+
+.circulo-red {
+  width: 17px;
+  height: 17px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border-color: #3f3f3f;
+  border-style: solid;
+  border-width: 1px;
+  background: #a90b0b;
+  margin: auto;
+}
+
+.conEstado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-izquierda,
+.icon-centro,
+.icon-derecha {
+  display: inline;
+  margin: 5px 0px 5px 0px;
+}
+
+.icon-izquierda a,
+.icon-centro a,
+.icon-derecha a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.icon-izquierda a:hover,
+.icon-centro a:hover,
+.icon-derecha a:hover {
+  color: #e74236;
+  margin: 5px 0px 5px 0px;
+}
+
+.iconoPosicion {
+  margin: 0px 5px 0px 5px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.titulo-boton-usuarios {
+  align-items: center;
+  width: 95%;
+  margin-left: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.titulo-boton-usuarios h2,
+.titulo-boton-usuarios button {
+  margin-left: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}

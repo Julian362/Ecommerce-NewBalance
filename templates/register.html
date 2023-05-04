@@ -2,15 +2,15 @@
 
 {% block head %}
 <title>Registro</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
-<script src="{{ url_for('static', filename='js/validacionform.js')}}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+<script src="{{ url_for('static', filename='js/validation_form.js')}}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {% endblock %}
 
 {% block contenido %}
-{% if mensaje %}
-    <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ mensaje }}</h2>
+{% if message %}
+    <h2 style="text-align: center; color: #058714; margin-top: 10px">{{ message }}</h2>
 {% endif %}
 {% if error %}
     <h2 style="text-align: center; color: #970c02; margin-top: 10px">{{ error }}</h2>
@@ -18,7 +18,7 @@
 
 <div class="ContenedorFomulario">
     {% if form %}
-    <form class="FormularioRegistro" action="{{url_for('registro')}}" method="POST">
+    <form class="FormularioRegistro" action="{{url_for('register')}}" method="POST">
         {{form.hidden_tag()}}
         <div>
             <h1 style="text-align: center;">Registro de nuevo usuario</h1>
@@ -28,36 +28,36 @@
                     <hr>
                     <div class="row">
                         <div class="col">
-                            {{form.nombre(class="form-DatosP form-control mr-sm-1", placeholder="Nombre", id="nombre")}}
+                            {{form.name(class="form-DatosP form-control mr-sm-1", placeholder="Nombre", id="nombre")}}
                         </div>
                         <div class="col">
-                            {{form.apellidos(class="form-DatosP form-control mr-sm-1", placeholder="Apellidos", id="apellido")}}
+                            {{form.last_name(class="form-DatosP form-control mr-sm-1", placeholder="Apellidos", id="apellido")}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            {{form.correo(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo", id="email")}}
+                            {{form.email(type="email", class="form-DatosP form-control mr-sm-1", placeholder="Correo", id="email")}}
                         </div>
                         <div class="col">
                             {{form.nickname(class="form-DatosP form-control mr-sm-1", placeholder="Nickname", id="nickname")}}
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col">
-                            {{form.documento(class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT" , id="documento" )}}
+                            {{form.document(class="form-DatosP form-control mr-sm-1", placeholder="CC/CE/NIT" , id="documento" )}}
                         </div>
                         <div class="col">
-                            {{form.telefono(type="number", class="form-DatosP form-control mr-sm-1",
+                            {{form.phone(type="number", class="form-DatosP form-control mr-sm-1",
                             placeholder="Teléfono celular", id="telefono")}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            {{form.contrasena(type="password",class="form-DatosP form-control mr-sm-1", placeholder="Contraseña", id="contraseña_original")}}
+                            {{form.password(type="password",class="form-DatosP form-control mr-sm-1", placeholder="Contraseña", id="contraseña_original")}}
                         </div>
                         <div class="col">
-                            {{form.confirmarcontrasena(type="password",class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña", id="contraseña_repetida" )}}
+                            {{form.confirm_password(type="password",class="form-DatosP form-control mr-sm-1", placeholder="Confirmar contraseña", id="contraseña_repetida" )}}
                         </div>
                     </div>
                     <div class="row">
@@ -67,17 +67,17 @@
                         </div>
                         <div class="col" style="margin-top: 5px;">
                             <div class="form-check form-check-inline">
-                                {{form.sexo(class="form-check-input", type="radio", id="inlineRadio1",
+                                {{form.gender(class="form-check-input", type="radio", id="inlineRadio1",
                                 value="M")}}
                                 <label class="form-check-label" for="inlineRadio1">Masculino</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                {{form.sexo(class="form-check-input", type="radio", id="inlineRadio2",
+                                {{form.gender(class="form-check-input", type="radio", id="inlineRadio2",
                                 value="F")}}
                                 <label class="form-check-label" for="inlineRadio2">Femenino</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                {{form.sexo(class="form-check-input", type="radio", id="inlineRadio2",
+                                {{form.gender(class="form-check-input", type="radio", id="inlineRadio2",
                                 value="O")}}
                                 <label class="form-check-label" for="inlineRadio2">Otro</label>
                             </div>
@@ -87,29 +87,29 @@
                     <hr>
                     <div class="row">
                         <div class="col">
-                            {{form.pais(class="form-DatosP form-control mr-sm-1", placeholder="País", id="pais")}}
+                            {{form.country(class="form-DatosP form-control mr-sm-1", placeholder="País", id="pais")}}
                         </div>
                         <div class="col">
-                            {{form.departamento(class="form-DatosP form-control mr-sm-1", placeholder="Departamento", id="departamento")}}
+                            {{form.department(class="form-DatosP form-control mr-sm-1", placeholder="Departamento", id="departamento")}}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            {{form.ciudad(class="form-DatosP form-control mr-sm-1", placeholder="ciudad", id="ciudad")}}
+                            {{form.country(class="form-DatosP form-control mr-sm-1", placeholder="ciudad", id="ciudad")}}
                         </div>
                         <div class="col">
-                            {{form.direccion(class="form-DatosP form-control mr-sm-1", placeholder="Dirección", id="direccion")}}
+                            {{form.address(class="form-DatosP form-control mr-sm-1", placeholder="Dirección", id="direccion")}}
                         </div>
                     </div>
                     <div class="terminos2">
-                        {{form.registro(id="registrarse", class="btn btn-outline-registro")}}
+                        {{form.register(id="registrarse", class="btn btn-outline-registro")}}
                     </div>
                     <div class="terminos2">
                         <a href="{{url_for('login')}}" id="registrarse" class="registro"> Ya tengo cuenta </a>
                     </div>
                 </div>
                 <div id="errores">
-                    
+
                 </div>
                 <script src="{{ url_for('static', filename='js/form.js')}}"></script>
     </form>

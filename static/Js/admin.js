@@ -1,4 +1,4 @@
-function mostrarContrasena() {
+function show_password() {
     var con = document.getElementById("contrasena");
     if (con.type === "password") {
         con.type = "text";

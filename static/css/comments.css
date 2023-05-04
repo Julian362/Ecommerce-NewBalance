@@ -1,6 +1,6 @@
 .estrella {
   font-size: 40px;
-  color: #B0BFB2
+  color: #b0bfb2;
 }
 
 .rating {
@@ -21,11 +21,11 @@
   color: #242942;
 }
 
-.estrella{
+.estrella {
   color: #242942;
 }
 
-.cuenta-modal{
+.cuenta-modal {
   font-size: 15px;
   text-decoration: none;
   display: flex;
@@ -33,6 +33,6 @@
 }
 
 textarea:focus {
-  border-color:#cccccc!important ;
-  box-shadow:0 0 0 1px #6c6c6c64!important
+  border-color: #cccccc !important ;
+  box-shadow: 0 0 0 1px #6c6c6c64 !important;
 }

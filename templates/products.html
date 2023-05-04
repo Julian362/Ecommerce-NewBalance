@@ -1,0 +1,78 @@
+{% extends 'template.html' %} {% block head %}
+<title>New Balance | {{ gender }}</title>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/products.css') }}"
+/>
+
+{% endblock %} {% block contenido %}
+
+<div class="row encabezado">
+  <span class="material-icons-outlined icon"> storefront </span>
+  <h1 class="subtituloTexto">ZAPATOS PARA {{ gender }}</h1>
+</div>
+
+{% if message %}
+<h2 style="text-align: center; color: #058714; margin-top: 10px">
+  {{ message }}
+</h2>
+{% endif %} {% if error %}
+<h5
+  style="
+    text-align: center;
+    color: #970c02;
+    margin-top: 10px;
+    padding-left: 15px;
+  "
+>
+  {{ error }}
+</h5>
+{% endif %}
+
+<div class="wrap">
+  <div class="store-wrapper">
+    <div class="category_list titulos">
+      <form
+        action="{{ url_for('list_products', gender=gender) }}"
+        method="POST"
+      >
+        {{ filter.hidden_tag() }} {% if filter %}
+        <h4>ORDEN</h4>
+        {{ filter.orden(class="form-control mb-1 casillas") }}
+
+        <h4>FILTRAR POR TALLA</h4>
+        {{ filter.size(class="form-control mb-1 casillas") }}
+
+        <h4>FILTRAR POR COLOR</h4>
+        {{ filter.color(class="form-control mb-1 casillas") }} {% endif %}
+
+        <button
+          class="btn btn-outline-one my-2 my-sm-0 boton_filtrar"
+          type="submit"
+        >
+          Filtrar
+        </button>
+      </form>
+    </div>
+    {% if list_products_total %}
+    <section class="products-list productos">
+      {% for item in list_products_total %}
+      <div class="product-item">
+        <div class="contenedorindividual">
+          <a href="{{url_for('product', reference=item.reference)}}">
+            <img
+              src="{{ url_for('static', filename='imagenes/lista_de_productos/'+item['reference']+'.jpg') }}"
+              alt="producto_{{item.reference}}"
+            />
+            <h4>{{ item.name }}</h4>
+            <p>$ {{ item.price }}</p>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
