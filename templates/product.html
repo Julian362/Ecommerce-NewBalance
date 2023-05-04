@@ -54,7 +54,7 @@
 
     <form
     {% if g.user %}
-    action="{{ url_for('agregar_carrito', document=g.user.document, reference=item.reference ) }}"
+    action="{{ url_for('add_cart', document=g.user.document, reference=item.reference ) }}"
     {% else %}
     action="{{ url_for('login') }}"
     {% endif %}

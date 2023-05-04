@@ -7,7 +7,7 @@
 {% endblock %} {% block contenido %}
 <div class="contenedor-inicio">
   <div class="imgSuperior">
-    <a href="#"
+    <a href="{{url_for('list_products', gender='HOMBRE') }}"
       ><img
         src="{{ url_for('static', filename='imagenes/inicio/imgSuperior.jpg') }}"
         alt="ImgSuperior"
@@ -30,7 +30,7 @@
   </div>
 
   <div class="imgCentral">
-    <a href="#"
+    <a href="{{url_for('list_products', gender='MUJER') }}"
       ><img
         src="{{ url_for('static', filename='imagenes/inicio/imgCentral.jpg') }}"
         alt="ImgCentral"
@@ -38,7 +38,7 @@
   </div>
 
   <div class="imgInferior">
-    <a href="#"
+    <a href="{{url_for('list_products', gender='MUJER') }}"
       ><img
         src="{{ url_for('static', filename='imagenes/inicio/imgInferior.jpg') }}"
         alt="ImgInferior"

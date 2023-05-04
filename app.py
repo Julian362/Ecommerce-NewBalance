@@ -262,7 +262,7 @@ def edit_comment(reference, rating, document):
 
 
 @app.route("/comentario/gestionar/eliminar/<id>")
-def delete_comentario(id):
+def delete_comment(id):
     obj_calification = Calification.delete(id)
     if obj_calification:
         obj_calification += id
@@ -563,7 +563,7 @@ def filter_product(gender):
     if request.method == "GET":
         return render_template(
             "products.html",
-            list_products_total=Product.listado_reference(s),
+            list_products_total=Product.list_reference(s),
             gender=gender,
             filter=FormFilterProduct(),
             list_product_ser=Product.list_search(),
@@ -573,7 +573,7 @@ def filter_product(gender):
         if form.validate_on_submit():
             if (
                 len(
-                    Product.filtrar(
+                    Product.filter(
                         s,
                         form.orden.data,
                         form.size.data,
@@ -584,7 +584,7 @@ def filter_product(gender):
             ):
                 return render_template(
                     "products.html",
-                    list_products_total=Product.filtrar(
+                    list_products_total=Product.filter(
                         s,
                         form.orden.data,
                         form.size.data,
@@ -596,19 +596,19 @@ def filter_product(gender):
                 )
             return render_template(
                 "products.html",
-                list_products_total=Product.listado_reference(s),
+                list_products_total=Product.list_reference(s),
                 gender=gender,
                 filter=FormFilterProduct(),
-                error="No hay Products asociados a los filters requeridos",
+                error="No hay Products asociados a los filtros requeridos",
                 list_product_ser=Product.list_search(),
             )
 
         return render_template(
             "products.html",
-            list_products_total=Product.listado_reference(s),
+            list_products_total=Product.list_reference(s),
             gender=gender,
             filter=FormFilterProduct(),
-            error="No hay Products asociados a los filters requeridos",
+            error="No hay Products asociados a los filtros requeridos",
             list_product_ser=Product.list_search(),
         )
 

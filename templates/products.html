@@ -33,7 +33,7 @@
   <div class="store-wrapper">
     <div class="category_list titulos">
       <form
-        action="{{ url_for('list_products', gender=gender) }}"
+        action="{{ url_for('filter_product', gender=gender) }}"
         method="POST"
       >
         {{ filter.hidden_tag() }} {% if filter %}
