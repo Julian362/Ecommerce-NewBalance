@@ -106,7 +106,7 @@ def register():
                 "user",
                 "T",
             )
-            if obj_register.insertar_registro():
+            if obj_register.create():
                 return redirect(url_for("login"))
             return render_template(
                 "register.html",
@@ -287,7 +287,7 @@ def admin():
         create_user()
     return render_template(
         "admin.html",
-        list_users=Person.listado("user"),
+        list_users=Person.list("user"),
         formSearch=FormSearch(),
         list_product_ser=Product.list_search(),
     )
@@ -313,8 +313,8 @@ def edit_user(document):
             formulario.password.data = ""
             return render_template(
                 "admin.html",
-                User=obj_user,
-                list_users=Person.listado("user"),
+                user=obj_user,
+                list_users=Person.list("user"),
                 option="Editar",
                 form=formulario,
                 formSearch=FormSearch(),
@@ -323,14 +323,14 @@ def edit_user(document):
         return render_template(
             "admin.html",
             error="No existe el User",
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
     else:
         formulario = FormManage(request.form)
         if formulario.validate_on_submit():
-            obj_user = Person.editar(
+            obj_user = Person.edit(
                 document,
                 formulario.nickname.data,
                 formulario.name.data,
@@ -349,8 +349,8 @@ def edit_user(document):
                 obj_user = obj_user = Person.load("user", document)
                 return render_template(
                     "admin.html",
-                    User=obj_user,
-                    list_users=Person.listado("user"),
+                    user=obj_user,
+                    list_users=Person.list("user"),
                     option="Editar",
                     form=FormManage(),
                     message="Se han editado los datos del usuario {0} {1} correctamente".format(
@@ -361,7 +361,7 @@ def edit_user(document):
                 )
         return render_template(
             "admin.html",
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             error="Verifique los datos ingresados",
             form=FormManage(),
             formSearch=FormSearch(),
@@ -374,7 +374,7 @@ def search_user():
     if request.method == "GET":
         return render_template(
             "admin.html",
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             option="Editar",
             form=FormManage(),
             formSearch=FormSearch(),
@@ -401,7 +401,7 @@ def search_user():
                 return render_template(
                     "admin.html",
                     User=obj_user,
-                    list_users=Person.listado("user"),
+                    list_users=Person.list("user"),
                     option="Editar",
                     form=formulario,
                     formSearch=FormSearch(),
@@ -409,7 +409,7 @@ def search_user():
                 )
             return render_template(
                 "admin.html",
-                list_users=Person.listado("user"),
+                list_users=Person.list("user"),
                 error="No existe el User, puede crearlo",
                 option="crear",
                 form=FormManage(),
@@ -418,7 +418,7 @@ def search_user():
             )
         return render_template(
             "admin.html",
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             error="Error en el proceso de buscar User",
             option="Crear",
             form=FormManage(),
@@ -432,7 +432,7 @@ def create_user():
     if request.method == "GET":
         return render_template(
             "admin.html",
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             option="Crear",
             form=FormManage(),
             formSearch=FormSearch(),
@@ -457,11 +457,11 @@ def create_user():
                 "user",
                 "T",
             )
-            if obj_user.crear():
+            if obj_user.create():
                 return render_template(
                     "admin.html",
                     User=obj_user,
-                    list_users=Person.listado("user"),
+                    list_users=Person.list("user"),
                     option="Editar",
                     form=FormManage(),
                     message="Creado correctamente el User " + formulario.nickname.data,
@@ -470,7 +470,7 @@ def create_user():
                 )
             return render_template(
                 "admin.html",
-                list_users=Person.listado("user"),
+                list_users=Person.list("user"),
                 error="El User con document "
                 + formulario.document.data
                 + " ya existe, o ingresó un campo erróneo",
@@ -481,7 +481,7 @@ def create_user():
             )
         return render_template(
             "admin.html",
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             error="Error en el proceso de crear User, valide los campos ingresados",
             option="Editar",
             form=FormManage(),
@@ -498,39 +498,39 @@ def delete_user(document):
         return render_template(
             "admin.html",
             message=obj_user,
-            list_users=Person.listado("user"),
+            list_users=Person.list("user"),
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
     return render_template(
         "admin.html",
         error="No se pudo eliminar al User " + document,
-        list_users=Person.listado("user"),
+        list_users=Person.list("user"),
         formSearch=FormSearch(),
         list_product_ser=Product.list_search(),
     )
 
 
-@app.route("/administrador/gestionar/Block/<document><estado>")
-def block_user(document, estado):
-    obj_user = Person.block(document, estado)
+@app.route("/administrador/gestionar/Block/<document><state>")
+def block_user(document, state):
+    obj_user = Person.block(document, state)
     if obj_user:
-        if estado == "T":
+        if state == "T":
             obj_user = "Usuario " + document + " bloqueado "
-        elif estado == "F":
+        elif state == "F":
             obj_user = "Usuario " + document + " desbloqueado "
         return render_template(
             "admin.html",
             message=obj_user,
-            list_users=Person.listado("user"),
-            block=estado,
+            list_users=Person.list("user"),
+            block=state,
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
     return render_template(
         "admin.html",
         error="No se pudo bloquear al User",
-        list_users=Person.listado("user"),
+        list_users=Person.list("user"),
         formSearch=FormSearch(),
         list_product_ser=Product.list_search(),
     )
@@ -617,7 +617,7 @@ def filter_product(gender):
 def management_products():
     return render_template(
         "management_products.html",
-        list_products=Product.listado(),
+        list_products=Product.list(),
         formSearch=FormSearch(),
         list_product_ser=Product.list_search(),
     )
@@ -628,7 +628,7 @@ def search_management_products():
     if request.method == "GET":
         return render_template(
             "management_products.html",
-            list_products=Product.listado(),
+            list_products=Product.list(),
             option="Editar",
             form=FormManagementProduct(),
             formSearch=FormSearch(),
@@ -647,40 +647,40 @@ def search_management_products():
                 )
             return render_template(
                 "management_products.html",
-                list_products=Product.listado(),
+                list_products=Product.list(),
                 error="No existe el Product, puede crearlo",
                 formSearch=FormSearch(),
                 list_product_ser=Product.list_search(),
             )
         return render_template(
             "management_products.html",
-            list_products=Product.listado(),
+            list_products=Product.list(),
             error="Error en el proceso de buscar Product",
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
 
 
-@app.route("/Products/gestion/edit/BlockProducto=<reference><estado>")
-def block_product(reference, estado):
-    obj_state = Product.block(reference, estado)
+@app.route("/Products/gestion/edit/BlockProducto/<reference>-<state>")
+def block_product(reference, state):
+    obj_state = Product.block(reference, state)
     if obj_state:
-        if estado == "T":
+        if state == "T":
             obj_state = "Producto con " + reference + " bloqueado "
-        elif estado == "F":
+        elif state == "F":
             obj_state = "Producto con " + reference + " desbloqueado "
         return render_template(
             "management_products.html",
             message=obj_state,
-            list_products=Product.listado(),
-            block=estado,
+            list_products=Product.list(),
+            block=state,
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
     return render_template(
         "management_products.html",
         error="No se pudo bloquear al Product",
-        list_products=Product.listado(),
+        list_products=Product.list(),
         formSearch=FormSearch(),
         list_product_ser=Product.list_search(),
     )
@@ -704,7 +704,7 @@ def edit_product(id):
             return render_template(
                 "management_products.html",
                 Product=obj_mensaje,
-                list_products=Product.listado(),
+                list_products=Product.list(),
                 option="Editar",
                 form=formulario,
                 formSearch=FormSearch(),
@@ -713,14 +713,14 @@ def edit_product(id):
         return render_template(
             "management_products.html",
             error="No existe el Product",
-            list_products=Product.listado(),
+            list_products=Product.list(),
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
     else:
         formulario = FormManagementProduct(request.form)
         if formulario.validate_on_submit():
-            obj_user = Product.editar(
+            obj_user = Product.edit(
                 id,
                 formulario.name.data,
                 formulario.reference.data,
@@ -737,7 +737,7 @@ def edit_product(id):
                 return render_template(
                     "management_products.html",
                     Product=obj_user,
-                    list_products=Product.listado(),
+                    list_products=Product.list(),
                     option="Editar",
                     form=FormManagementProduct(),
                     message="Editado correctamente",
@@ -746,7 +746,7 @@ def edit_product(id):
                 )
         return render_template(
             "management_products.html",
-            list_products=Product.listado(),
+            list_products=Product.list(),
             error="Verifique los datos ingresados",
             form=FormManagementProduct(),
             formSearch=FormSearch(),
@@ -760,7 +760,7 @@ def create_product():
         formulario = FormManagementProduct()
         return render_template(
             "management_products.html",
-            list_products=Product.listado(),
+            list_products=Product.list(),
             option="Crear",
             form=formulario,
             list_product_ser=Product.list_search(),
@@ -795,7 +795,7 @@ def create_product():
 
             return render_template(
                 "management_products.html",
-                list_products=Product.listado(),
+                list_products=Product.list(),
                 error="Error en el proceso de crear Product",
                 option="Crear",
                 form=FormManagementProduct(),
@@ -804,7 +804,7 @@ def create_product():
             )
         return render_template(
             "management_products.html",
-            list_products=Product.listado(),
+            list_products=Product.list(),
             error="Error en el proceso de crear Product",
             option="Crear",
             form=FormManagementProduct(),
@@ -821,14 +821,14 @@ def delete_product(id):
         return render_template(
             "management_products.html",
             message=obj_user,
-            list_products=Product.listado(),
+            list_products=Product.list(),
             formSearch=FormSearch(),
             list_product_ser=Product.list_search(),
         )
     return render_template(
         "management_products.html",
         error="No se pudo eliminar al Product " + id,
-        list_products=Product.listado(),
+        list_products=Product.list(),
         formSearch=FormSearch(),
         list_product_ser=Product.list_search(),
     )
@@ -856,7 +856,7 @@ def management_my_account(document):
             formulario.confirm_new_password.data = ""
             return render_template(
                 "account.html",
-                datosUsuario=obj_user,
+                data_user=obj_user,
                 form=formulario,
                 document=document,
                 list_product_ser=Product.list_search(),
@@ -896,10 +896,10 @@ def management_my_account(document):
                         obj_user.password = formulario.new_password.data
                     else:
                         obj_user.password = formulario.password.data
-                    obj_user.editar_datos()
+                    obj_user.edit()
                     return render_template(
                         "account.html",
-                        datosUsuario=obj_user,
+                        data_user=obj_user,
                         form=formulario,
                         message="Se han editado correctamente los datos",
                         list_product_ser=Product.list_search(),
@@ -907,7 +907,7 @@ def management_my_account(document):
 
             return render_template(
                 "account.html",
-                datosUsuario=obj_user,
+                data_user=obj_user,
                 form=formulario,
                 error="Error en el proceso de edición de los datos",
             )
@@ -935,8 +935,8 @@ def edit_admin(document):
         form = FormManage()
         obj_admin = Admin.load(document)
         if obj_admin:
-            form.name.data = obj_admin.nombre
-            form.last_name.data = obj_admin.apellido
+            form.name.data = obj_admin.name
+            form.last_name.data = obj_admin.last_name
             form.document.data = obj_admin.document
             form.gender.data = obj_admin.gender
             form.nickname.data = obj_admin.nickname
@@ -979,7 +979,9 @@ def edit_admin(document):
                 obj_admin.department = form.department.data
                 obj_admin.city = form.city.data
                 obj_admin.address = form.address.data
+                obj_admin.gender = form.gender.data
                 obj_admin.password = form.password.data
+                print(obj_admin.document)
                 obj_admin.edit()
                 return render_template(
                     "super_admin.html",
@@ -992,6 +994,7 @@ def edit_admin(document):
                     option="Editar",
                     list_product_ser=Product.list_search(),
                 )
+        print(form.errors)
         return render_template(
             "super_admin.html",
             form=FormManage(),
@@ -1059,7 +1062,7 @@ def create_admin():
 
 @app.route("/superadministrador/eliminar/<document>")
 def delete_admin(document):
-    obj_admin = Admin.load
+    obj_admin = Admin.load(document)
     if obj_admin.delete():
         return render_template(
             "super_admin.html",
@@ -1083,7 +1086,7 @@ def delete_admin(document):
 def block_admin(document):
     obj_admin = Admin.load(document)
     obj_admin.block()
-    if obj_admin.estado == "F":
+    if obj_admin.state == "F":
         return render_template(
             "super_admin.html",
             message="Se ha desbloqueado el administrador {0}".format(document),
@@ -1091,7 +1094,7 @@ def block_admin(document):
             formSearch=FormSearchAdmin(),
             list_product_ser=Product.list_search(),
         )
-    elif obj_admin.estado == "T":
+    elif obj_admin.state == "T":
         return render_template(
             "super_admin.html",
             message="Se ha bloqueado el administrador {0}".format(document),

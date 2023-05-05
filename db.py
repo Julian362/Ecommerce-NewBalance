@@ -9,6 +9,7 @@ def conectar():
         return connection
     except Error as err:
         print(err)
+        connection.close()
         return None
 
 
@@ -35,6 +36,7 @@ def execute_select(_sql, list_parameters):
             return None
     except Error as err:
         print("Error al ejecutar Sentencia SELECT SQL:" + str(err))
+        connection.close()
         return None
 
 
@@ -63,4 +65,5 @@ def execute_sql(_sql, list_parameters):
             return -1
     except Error as err:
         print("Error al ejecutar Sentencia SQL:" + str(err))
+        connection.close()
         return -1

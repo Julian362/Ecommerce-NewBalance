@@ -116,7 +116,7 @@ class Person:
         return obj > 0
 
     @classmethod
-    def cargar(cls, p_rol, p_document):
+    def load(cls, p_rol, p_document):
         sql = "SELECT * FROM person WHERE rol = ? and document=?;"
         obj = db.execute_select(sql, [p_rol, p_document])
         if obj and len(obj) > 0:
@@ -144,7 +144,7 @@ class Person:
         sql = "DELETE FROM person WHERE rol = ? and document=?;"
         obj = db.execute_sql(sql, [p_rol, p_document])
         if obj and obj > 0:
-            return "Borrado correctamente el user "
+            return "Borrado correctamente el usuario "
 
         return None
 
@@ -298,7 +298,7 @@ class Calification:
         sql = "DELETE FROM calification WHERE id = ? ;"
         obj = db.execute_sql(sql, [id])
         if obj and obj > 0:
-            return "Borrado correctamente el comment "
+            return "Borrado correctamente el comentario "
 
         return None
 
@@ -413,6 +413,7 @@ class Admin:
                 self.document,
             ],
         )
+        print(obj)
         if obj and obj > 0:
             return True
         return False

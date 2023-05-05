@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'template.html' %}
 {% block head %}
 <title>New Balance | Gestión Productos</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/management_products.css') }}">
@@ -12,16 +12,16 @@
 {% endif %}
 {% endblock %}
 
-{% block content %}
+{% block contenido %}
 <div class="baPrincipal">
     <span class="material-icons-outlined iconBarra">inventory</span>
     <h1 style="text-align: center;" class="">GESTIONAR PRODUCTOS</h1>
 </div>
 {% if formSearch %}
 <div style="width:65%; margin:auto;">
-    <form action="{{ url_for('search_management_product') }}" method="POST" class="form-inline">
+    <form action="{{ url_for('search_management_products') }}" method="POST" class="form-inline">
         {{ formSearch.hidden_tag() }}
-        {{ formSearch.buscar(style="width: 90%;", class="form-control ", placeholder="Buscar producto") }}
+        {{ formSearch.search(style="width: 90%;", class="form-control ", placeholder="Buscar producto") }}
         <button class="btn btn-outline-one" style="width: 10%;" type="submit">Buscar</button>
     </form>
 </div>
@@ -37,10 +37,10 @@
     {% if form %}
 
     <form class="FormularioProducto"
-    {% if producto%}
-    action="{{url_for('editar_producto', id = producto.id )}}"
+    {% if product %}
+    action="{{url_for('edit_product', id = product.id )}}"
     {% else %}
-    action="{{url_for('crear_producto')}}"
+    action="{{url_for('create_product')}}"
     {% endif %}
     method="POST">
         {{form.hidden_tag()}}
@@ -148,7 +148,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in list_product %}
+            {% for item in list_products %}
             <tr>
                 <th scope="row">
                     {{ loop.index }}
@@ -170,10 +170,10 @@
                 <td>
                     <div class="">
                         <div class="icon-derecha">
-                            <a href="{{ url_for('editar_producto',id = item.id ) }}"><span class="material-icons-outlined iconoPosicion">edit</span></a>
+                            <a href="{{ url_for('edit_product',id = item.id ) }}"><span class="material-icons-outlined iconoPosicion">edit</span></a>
                         </div>
                         <div class="icon-centro">
-                            <a href="{{ url_for('block_producto', reference = item.reference, estado = item.estado) }}">
+                            <a href="{{ url_for('block_product', reference = item.reference, state = item.state) }}">
                                 <span class="material-icons-outlined iconoPosicion" id="icon_block">
                                     {% if item.state == 'F' %}
                                     lock_open

@@ -34,11 +34,11 @@
       if
       data_user
       %}
-      action="{{ url_for('management_account', document = data_user.document) }}"
+      action="{{ url_for('management_my_account', document = data_user.document) }}"
       {%
       else
       %}
-      action="{{ url_for('management_account', document = document) }}"
+      action="{{ url_for('management_my_account', document = document) }}"
       {%
       endif
       %}
@@ -74,7 +74,7 @@
             placeholder="Teléfono")}}
           </div>
           <div class="col">
-            {{form.correo(class="inputform form-control mr-sm-1", type="email",
+            {{form.email(class="inputform form-control mr-sm-1", type="email",
             placeholder="Correo",readonly="")}}
           </div>
         </div>
@@ -103,7 +103,7 @@
               >
             </div>
             <div class="form-check form-check-inline">
-              {% if datosUsuario %} {% if datosUsuario.gender == "O" %} {{
+              {% if data_user %} {% if data_user.gender == "O" %} {{
               form.gender(class="form-check-input", type="radio", value="O",
               checked="true")}} {% else %} {{
               form.gender(class="form-check-input", type="radio", value="O")}}

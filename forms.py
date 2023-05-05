@@ -10,7 +10,7 @@ class FormManage(FlaskForm):
     name = StringField("Nombre", validators=[validators.required()])
     last_name = StringField("Apellidos", validators=[validators.required()])
     document = StringField("Documento")
-    gender = StringField("gender", validators=[validators.required()])
+    gender = StringField("Genero", validators=[validators.required()])
     email = StringField("Correo", validators=[validators.required()])
     nickname = StringField("Nickname", validators=[validators.required()])
     phone = StringField("Celular", validators=[validators.required()])
@@ -71,7 +71,7 @@ class FormManagementProduct(FlaskForm):
         "Descripción", validators=[validators.required(), validators.length(max=1000)]
     )
     gender = StringField(
-        "gender", validators=[validators.required(), validators.length(max=1)]
+        "Genero", validators=[validators.required(), validators.length(max=1)]
     )
     add = SubmitField("Agregar")
 
@@ -148,7 +148,7 @@ class FormMyAccount(FlaskForm):
     name = StringField("Nombre", validators=[validators.required()])
     last_name = StringField("Apellidos", validators=[validators.required()])
     document = StringField("Documento", validators=[validators.required()])
-    gender = StringField("gender", validators=[validators.required()])
+    gender = StringField("Genero", validators=[validators.required()])
     email = StringField("Correo", validators=[validators.required()])
     nickname = StringField("Nickname", validators=[validators.required()])
     phone = StringField("Celular", validators=[validators.required()])

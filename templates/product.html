@@ -192,27 +192,27 @@
                     </a>
                     {% if calification %}
                         <div class="rating">
-                            <span class="estrella" id="estrella5" onclick="ratingEstrella(5,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                            <span class="estrella" id="estrella5" onclick="ratingEstrella(5,'{{option}}','{{calification.reference_producto}}','{{calification.document}}')">
                                 {% if calification.rating < 5 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella4" onclick="ratingEstrella(4,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                            <span class="estrella" id="estrella4" onclick="ratingEstrella(4,'{{option}}','{{calification.reference_producto}}','{{calification.document}}')">
                                 {% if calification.rating < 4 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella3" onclick="ratingEstrella(3,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                            <span class="estrella" id="estrella3" onclick="ratingEstrella(3,'{{option}}','{{calification.reference_producto}}','{{calification.document}}')">
                                 {% if calification.rating < 3 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella2" onclick="ratingEstrella(2,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                            <span class="estrella" id="estrella2" onclick="ratingEstrella(2,'{{option}}','{{calification.reference_producto}}','{{calification.document}}')">
                                 {% if calification.rating < 2 %}☆
                                 {% else %}★
                                 {% endif %}
                             </span>
-                            <span class="estrella" id="estrella1" onclick="ratingEstrella(1,'{{option}}','{{calification.reference_producto}}','{{calification.documento}}')">
+                            <span class="estrella" id="estrella1" onclick="ratingEstrella(1,'{{option}}','{{calification.reference_producto}}','{{calification.document}}')">
                                 {% if calification.rating < 1 %}☆
                                 {% else %}★
                                 {% endif %}
@@ -221,11 +221,11 @@
                     {% else %}
                         {% if calificationCreate %}
                             <div class="rating">
-                                <span class="estrella" id="estrella5" onclick="ratingEstrella(5,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
-                                <span class="estrella" id="estrella4" onclick="ratingEstrella(4,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
-                                <span class="estrella" id="estrella3" onclick="ratingEstrella(3,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
-                                <span class="estrella" id="estrella2" onclick="ratingEstrella(2,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
-                                <span class="estrella" id="estrella1" onclick="ratingEstrella(1,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.documento}}')">☆</span>
+                                <span class="estrella" id="estrella5" onclick="ratingEstrella(5,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.document}}')">☆</span>
+                                <span class="estrella" id="estrella4" onclick="ratingEstrella(4,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.document}}')">☆</span>
+                                <span class="estrella" id="estrella3" onclick="ratingEstrella(3,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.document}}')">☆</span>
+                                <span class="estrella" id="estrella2" onclick="ratingEstrella(2,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.document}}')">☆</span>
+                                <span class="estrella" id="estrella1" onclick="ratingEstrella(1,'{{option}}','{{calificationCreate.reference_producto}}','{{calificationCreate.document}}')">☆</span>
                             </div>
                             <h3 style="padding: 0%;">{{calificationCreate.nickname}}</h3>
                         {% endif %}

@@ -14,7 +14,7 @@
     {% if formSearch %}
     <form action="{{ url_for('search_admin') }}" method="POST" class="form-inline" style="margin: auto; width: 65%;">
         {{ formSearch.hidden_tag() }}
-        {{ formSearch.buscar(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
+        {{ formSearch.search(style="width: 90%;", class="form-control mr-sm-2", type="search", placeholder="Buscar Administrador") }}
         <button class="btn btn-outline-one my-2 my-sm-0" submit>Buscar</button>
     </form>
     {% endif %}
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-check form-check-inline">
-                                    <strong>gender:</strong>
+                                    <strong>Genero:</strong>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     {% if data_admin %}
@@ -106,7 +106,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                {{ form.nickname(class="form-control mr-sm-1 form-DatosP", placeholder="Nickname") }}                 
+                                {{ form.nickname(class="form-control mr-sm-1 form-DatosP", placeholder="Nickname") }}
                             </div>
                             <div class="col">
                                 {{ form.phone(type="number", class="form-control mr-sm-1 form-DatosP", placeholder="Teléfono") }}
@@ -125,7 +125,7 @@
                                 {{ form.department(class="form-control mr-sm-1 form-DatosP", placeholder="Departamento") }}
                             </div>
                             <div class="col">
-                                {{ form.country(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
+                                {{ form.city(class="form-control mr-sm-1 form-DatosP", placeholder="Ciudad") }}
                             </div>
                         </div>
                         <div class="row">
@@ -154,7 +154,7 @@
                             {% endif %}
                         </div>
                         <div class="row">
-                            {% if option == "Editar"%}
+                            {% if option == "Editar" %}
                             {{form.edit(class="btn btn-outline-registro", style="margin: auto;")}}
                             {% else %}
                             {{form.create(class="btn btn-outline-registro", style="margin: auto;")}}
@@ -174,7 +174,7 @@
                         <h4 style="text-align: left; padding: 0px; margin: 0px;">Todos los Administradores</h4>
                     </div>
                     <div class="col"style="padding: 0%;">
-                        <a href="{{url_for('crear_administrador')}}">
+                        <a href="{{url_for('create_admin')}}">
                             <button style="width: 40%; margin-left: 60%;" class="btn btn-outline-one my-2 my-sm-0" submit>Crear Nuevo Administrador</button>
                         </a>
                     </div>
@@ -214,24 +214,24 @@
                             <td>{{ item.email}}</td>
                             <td>
                                 <div class="icon-derecha">
-                                    <a  href="{{ url_for('edit_admin', documento = item.documento) }} ">
+                                    <a  href="{{ url_for('edit_admin', document = item.document) }} ">
                                         <span class="material-icons-outlined iconoPosicion" >edit</span>
                                     </a>
                                 </div>
                                 <div class="icon-centro">
-                                    <a href="{{url_for('block_admin', documento = item.documento)}}">
+                                    <a href="{{url_for('block_admin', document = item.document)}}">
                                         <span class="material-icons-outlined iconoPosicion" id="icon_block">
-                                            {% if item.estado == 'F' %}
+                                            {% if item.state == 'F' %}
                                                 lock_open
                                             {% endif %}
-                                            {% if item.estado == 'T' %}
+                                            {% if item.state == 'T' %}
                                                 lock
                                             {% endif %}
                                         </span>
                                     </a>
                                 </div>
                                 <div class="icon-izquierda">
-                                    <a href="{{url_for('delete_admin', documento=item.documento)}}">
+                                    <a href="{{url_for('delete_admin', document=item.document)}}">
                                         <span class="material-icons-outlined iconoPosicion">cancel</span>
                                     </a>
                                 </div>
